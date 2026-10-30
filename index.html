@@ -996,15 +996,12 @@
                 }
             });
         }
-
-        // ==========================================
-        // УЛУЧШЕННАЯ ЛОГИКА ЧАТ-БОТА (Вариант 2)
-        // ==========================================
-        
         let chatInitialized = false;
-        let chatStep = 0; 
-        let userIntent = ''; // Переменная для запоминания темы разговора
-        
+        let chatHistory = [];
+
+        // АДРЕС ВАШЕГО БОТА В CLOUDFLARE
+        const WORKER_URL = "https://galanova-ai-bot.galanovr.workers.dev/";
+
         function toggleChat() {
             const chatWindow = document.getElementById('chatWindow');
             const chatBody = document.getElementById('chatBody');
@@ -1020,9 +1017,7 @@
             const chatBody = document.getElementById('chatBody');
             const chatInput = document.getElementById('chatInput');
             if (!chatBody) return;
-            
-            chatStep = 0; 
-            userIntent = ''; 
+            chatHistory = [];
             chatBody.innerHTML = `
                 <div class="chat-msg msg-bot">Здравствуйте! Я ассистент Елены. Опишите вашу задачу (например: проверка кандидата, расследование кражи, аудит команды), и я подскажу, чем мы можем помочь.</div>
                 <div class="typing-indicator" id="typingIndicator">
@@ -1033,98 +1028,44 @@
             chatBody.scrollTop = chatBody.scrollHeight;
         }
 
-        function sendManualMessage() {
+        async function sendManualMessage() {
             const chatInput = document.getElementById('chatInput');
             const chatBody = document.getElementById('chatBody');
-            const typingIndicator = document.getElementById('typingIndicator');
-            
             if (!chatInput) return;
             const message = chatInput.value.trim();
             if (message === '') return;
-            
-            const oldOptions = document.querySelectorAll('.chat-options');
-            oldOptions.forEach(opt => opt.style.display = 'none');
-            
+
             appendMessage(message, 'user');
             chatInput.value = '';
             showTypingIndicator();
-            
-            setTimeout(() => {
+
+            try {
+                const response = await fetch(WORKER_URL, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        message: message,
+                        history: chatHistory
+                    })
+                });
+
+                const data = await response.json();
                 hideTypingIndicator();
-                let botReply = '';
-                const msgLower = message.toLowerCase();
-                
-                // Проверяем на приветствие
-                const isGreeting = /привет|здравствуй|добрый (день|вечер)|доброе утро|добрый день|хай/i.test(msgLower);
-                
-                // --- ШАГ 0: Определяем тему ---
-                if (chatStep === 0) {
-                    if (isGreeting && msgLower.length < 30) {
-                        botReply = 'Здравствуйте! Чем я могу вам помочь? Опишите вашу задачу, и я сориентирую вас по форматам работы.';
-                    }
-                    // Ищем корни слов для Найма/Проверки (расширенный список)
-                    else if (/найм|кандидат|собесед|скрининг|прием|работ|вакансия|подбор|hr|персонал|проверк|тест|полиграф|детектор|лож|сотрудник/i.test(msgLower)) {
-                        userIntent = 'hiring';
-                        botReply = 'Скрининг кандидатов — отличный инструмент превентивной безопасности. Подскажите, на какую должность вы рассматриваете человека? Это топ-менеджер, или специалист с материальной ответственностью?';
-                        chatStep = 1;
-                    } 
-                    // Ищем корни слов для Расследований/Краж/Проблем
-                    else if (/краж|вор|хищен|инсайд|расследован|утечк|чп|мошеннич|откат|ущерб|пропаж|проблема с сотрудник|конфликт|деньг|финанс/i.test(msgLower)) {
-                        userIntent = 'investigation';
-                        botReply = 'Ситуация ясна. В случае инцидентов время играет решающую роль. Уточните, пожалуйста, сколько человек находится под подозрением и как давно это происходит?';
-                        chatStep = 1;
-                    } 
-                    // Ищем корни слов для Аудита/Обучения/Консалтинга
-                    else if (/аудит|команд|обучени|семинар|партнер|топ|руководител|совместимост|профайлинг|консалтинг|оценк|бизнес/i.test(msgLower)) {
-                        userIntent = 'audit';
-                        botReply = 'Отличная задача. Подскажите, какая у вас цель — оценить лояльность текущей команды, проверить партнеров перед сделкой или провести обучение для HR и СБ?';
-                        chatStep = 1;
-                    } 
-                    // Если непонятно, о чем речь
-                    else {
-                        botReply = 'Я вас услышала. Чтобы я могла подсказать точнее, уточните, пожалуйста: ваша задача связана с проверкой нового сотрудника, расследованием инцидента в компании или аудитом текущей команды?';
-                        chatStep = 1;
-                    }
-                    appendMessage(botReply, 'bot');
-                } 
-                // --- ШАГ 1: Уточняющие вопросы в зависимости от темы ---
-                else if (chatStep === 1) {
-                    if (msgLower.length < 5 && /да|нет|ок|понял|хорошо/i.test(msgLower)) {
-                        botReply = 'Понятно. Чтобы не гадать, давайте перейдем к делу. Оставьте ваши контакты, и Елена лично обсудит с вами детали.';
-                    } else {
-                        if (userIntent === 'hiring') {
-                            botReply = 'Принято. А есть ли какие-то жесткие сроки по этой вакансии, к какому числу нужно получить результат по кандидату?';
-                        } else if (userIntent === 'investigation') {
-                            botReply = 'Поняла вас. Есть ли у вас уже собранные документы или факты, или требуется полное сопровождение расследования с нуля?';
-                        } else {
-                            botReply = 'Спасибо за детали. А сколько примерно человек в команде, которую планируется проверить или обучить?';
-                        }
-                    }
-                    chatStep = 2;
-                    appendMessage(botReply, 'bot');
+
+                if (data.reply) {
+                    appendMessage(data.reply, 'bot');
+                    chatHistory.push({ role: "user", content: message });
+                    chatHistory.push({ role: "assistant", content: data.reply });
+                    if (chatHistory.length > 20) chatHistory = chatHistory.slice(-20);
+                } else {
+                    appendMessage('Извините, произошла ошибка. Попробуйте позже.', 'bot');
                 }
-                // --- ШАГ 2: Сбор контактов ---
-                else if (chatStep === 2) {
-                    botReply = 'Спасибо за подробности! Я зафиксировала всю информацию. Чтобы Елена связалась с вами для детальной консультации, пожалуйста, оставьте ваши контактные данные.';
-                    appendMessage(botReply, 'bot');
-                    
-                    const actionDiv = document.createElement('div');
-                    actionDiv.className = 'chat-options';
-                    actionDiv.style.marginTop = '10px';
-                    actionDiv.innerHTML = `<button class="chat-option-btn" onclick="this.disabled=true; toggleChat(); setTimeout(openModal, 50);">Оставить контакты</button>`;
-                    if(chatBody && typingIndicator) {
-                        chatBody.insertBefore(actionDiv, typingIndicator);
-                    }
-                    chatStep = 3; 
-                } 
-                // --- ШАГ 3: Финальная стадия ---
-                else {
-                    botReply = 'Информация сохранена. Пожалуйста, заполните форму по кнопке выше, чтобы Елена могла с вами связаться.';
-                    appendMessage(botReply, 'bot');
-                }
-                
-                if(chatBody) chatBody.scrollTop = chatBody.scrollHeight;
-            }, 1200);
+            } catch (error) {
+                hideTypingIndicator();
+                appendMessage('Ошибка сети. Проверьте подключение к интернету.', 'bot');
+            }
+
+            if(chatBody) chatBody.scrollTop = chatBody.scrollHeight;
         }
 
         function handleEnter(event) {
@@ -1153,6 +1094,7 @@
             const typingIndicator = document.getElementById('typingIndicator');
             if(typingIndicator) typingIndicator.classList.remove('active');
         }
+        
     </script>
 </body>
 </html>
