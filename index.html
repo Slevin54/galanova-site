@@ -415,7 +415,7 @@
                 <a href="#formats">Форматы и цены</a>
             </nav>
             <div class="header-messengers">
-                <a href="https://web.max.ru/145461114" target="_blank" class="header-messenger-btn btn-max" title="Написать в MAX" onclick="openMessenger(event, 'max')">
+                <a href="https://max.ru/u/145461114" target="_blank" class="header-messenger-btn btn-max" title="Написать в MAX" onclick="openMessenger(event, 'max')">
                     <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12c0 1.7.45 3.31 1.23 4.7L2 22l5.48-1.15C8.89 21.57 10.41 22 12 22c5.52 0 10-4.48 10-10S17.52 2 12 2z"/></svg>
                     MAX
                 </a>
@@ -908,30 +908,27 @@
 
         // УМНЫЙ РОУТИНГ ДЛЯ МЕССЕНДЖЕРОВ (ПК vs ТЕЛЕФОН)
         function openMessenger(e, type) {
-            e.preventDefault(); // Отменяем стандартный переход по ссылке
+            e.preventDefault(); 
             
-            // Определяем, мобильное ли это устройство
             const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) || 
                              (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
             
             if (type === 'tg') {
                 if (isMobile) {
-                    // Пытаемся открыть приложение Telegram
                     window.location.href = 'tg://resolve?domain=ElenaProprofiler';
-                    // Страховка: если приложение не открылось за 2 секунды, перекидываем в веб-версию
                     setTimeout(() => {
                         window.location.href = 'https://t.me/ElenaProprofiler';
-                    }, 2000);
+                    }, 1500);
                 } else {
-                    // На компьютере открываем веб-версию в новой вкладке
                     window.open('https://t.me/ElenaProprofiler', '_blank');
                 }
             } else if (type === 'max') {
                 if (isMobile) {
-                    // На телефоне открываем в том же окне. MAX сам поймет: открыть приложение или сайт.
-                    window.location.href = 'https://max.ru/145461114';
+                    window.location.href = 'https://max.ru/u/145461114';
+                    setTimeout(() => {
+                        window.location.href = 'https://web.max.ru/145461114';
+                    }, 1500);
                 } else {
-                    // На компьютере открываем веб-версию в новой вкладке
                     window.open('https://web.max.ru/145461114', '_blank');
                 }
             }
@@ -1005,7 +1002,7 @@
             if(chatWindow.style.display === 'flex' && !chatInitialized && chatBody) {
                 chatBody.scrollTop = chatBody.scrollHeight;
                 chatInitialized = true;
-                resetChat(); // Запускаем сценарий при первом открытии
+                resetChat(); 
             }
         }
 
@@ -1037,7 +1034,6 @@
             chatInput.value = '';
             showTypingIndicator();
             
-            // Если клиент пишет текст вручную, бот предлагает выбрать из кнопок
             setTimeout(() => {
                 hideTypingIndicator();
                 appendMessage('Чтобы я мог помочь вам быстро, пожалуйста, выберите один из вариантов ниже:', 'bot');
@@ -1054,7 +1050,6 @@
             const typingIndicator = document.getElementById('typingIndicator');
             if (!chatBody) return;
 
-            // Удаляем старые кнопки, если есть
             const oldOptions = document.querySelectorAll('.chat-options');
             oldOptions.forEach(opt => opt.remove());
 
@@ -1091,7 +1086,6 @@
         }
 
         function handleOptionClick(action, text) {
-            // Удаляем кнопки после выбора
             const oldOptions = document.querySelectorAll('.chat-options');
             oldOptions.forEach(opt => opt.remove());
 
