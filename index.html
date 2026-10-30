@@ -870,7 +870,6 @@
         <div class="chat-window" id="chatWindow">
             <div class="chat-header">
                 <div class="chat-header-info">
-                    <!-- Заменили фото на стильную аватарку с буквой И -->
                     <div class="eg-avatar">И</div>
                     <div class="chat-header-text">
                         <h4>Консультант Ирина</h4>
@@ -886,7 +885,7 @@
             </div>
             
             <div class="chat-body" id="chatBody">
-               <div class="chat-msg msg-bot">Здравствуйте! Меня зовут Ирина, я консультант Елены. Опишите вашу задачу или задайте вопрос, и я подскажу оптимальный формат сотрудничества.</div>
+               <div class="chat-msg msg-bot">Здравствуйте! Меня зовут Ирина, я консультант Елены. Выберите, какая задача вас интересует:</div>
                 
                 <div class="typing-indicator" id="typingIndicator">
                     <div class="typing-dot"></div><div class="typing-dot"></div><div class="typing-dot"></div>
@@ -907,28 +906,21 @@
     <script>
         try { document.getElementById('currentYear').textContent = new Date().getFullYear(); } catch(e) {}
 
-        // УМНЫЙ РОУТИНГ ДЛЯ МЕССЕНДЖЕРОВ (ПК vs ТЕЛЕФОН)
+        // УМНЫЙ РОУТИНГ ДЛЯ МЕССЕНДЖЕРОВ
         function openMessenger(e, type) {
             e.preventDefault();
             const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) || 
                              (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
-            
             if (type === 'tg') {
-                if (isMobile) {
-                    window.location.href = 'tg://resolve?domain=ElenaProprofiler';
-                } else {
-                    window.open('https://t.me/ElenaProprofiler', '_blank');
-                }
+                if (isMobile) { window.location.href = 'tg://resolve?domain=ElenaProprofiler'; } 
+                else { window.open('https://t.me/ElenaProprofiler', '_blank'); }
             } else if (type === 'max') {
-                if (isMobile) {
-                    window.location.href = 'https://max.ru/145461114';
-                } else {
-                    window.open('https://web.max.ru/145461114', '_blank');
-                }
+                if (isMobile) { window.location.href = 'https://max.ru/145461114'; } 
+                else { window.open('https://web.max.ru/145461114', '_blank'); }
             }
         }
 
-        // ЛОГИКА МОДАЛЬНОГО ОКНА
+        // МОДАЛЬНОЕ ОКНО
         function openModal() {
             const modal = document.getElementById('leadModal');
             if (modal) {
@@ -942,7 +934,6 @@
             const formContent = document.getElementById('formContent');
             const formSuccess = document.getElementById('formSuccess');
             const contactForm = document.getElementById('contactForm');
-            
             if (modal) {
                 modal.classList.remove('active');
                 setTimeout(() => { 
@@ -950,26 +941,18 @@
                     if(formContent) formContent.style.display = 'block';
                     if(formSuccess) formSuccess.style.display = 'none';
                     if(contactForm) contactForm.reset();
-                    const honeypot = document.getElementById('bot-check');
-                    if(honeypot) honeypot.value = '';
                 }, 300);
             }
         }
 
-        // ОТПРАВКА ФОРМЫ (Formspree)
+        // ОТПРАВКА ФОРМЫ
         const contactForm = document.getElementById('contactForm');
         if (contactForm) {
             contactForm.addEventListener("submit", async function(event) {
                 event.preventDefault();
-                const honeypot = document.getElementById('bot-check');
-                if (honeypot && honeypot.value !== '') {
-                    closeModal(); 
-                    return;
-                }
                 const formData = new FormData(contactForm);
                 const formContent = document.getElementById('formContent');
                 const formSuccess = document.getElementById('formSuccess');
-                
                 try {
                     const response = await fetch(contactForm.action, {
                         method: contactForm.method,
@@ -981,10 +964,6 @@
                         if(formSuccess) {
                             formSuccess.style.display = 'block';
                             document.activeElement.blur();
-                            const modalBox = document.querySelector('.modal-box');
-                            if(modalBox) {
-                                modalBox.scrollTo({ top: 0, behavior: 'smooth' });
-                            }
                         }
                         contactForm.reset();
                     } else {
@@ -997,13 +976,9 @@
         }
 
         // ==========================================
-        // ЛОГИКА ЧАТ-БОТА
+        // ЛОГИКА СКРИПТОВОГО ЧАТ-БОТА (БЕЗ ИИ)
         // ==========================================
         let chatInitialized = false;
-        let chatHistory = [];
-
-        // АДРЕС ВАШЕГО БОТА В CLOUDFLARE
-        const WORKER_URL = "https://galanova-ai-bot.galanovr.workers.dev/";
 
         function toggleChat() {
             const chatWindow = document.getElementById('chatWindow');
@@ -1013,86 +988,154 @@
             if(chatWindow.style.display === 'flex' && !chatInitialized && chatBody) {
                 chatBody.scrollTop = chatBody.scrollHeight;
                 chatInitialized = true;
+                resetChat(); // Запускаем сценарий при первом открытии
             }
         }
 
         function resetChat() {
             const chatBody = document.getElementById('chatBody');
-            const chatInput = document.getElementById('chatInput');
             if (!chatBody) return;
-            chatHistory = [];
             chatBody.innerHTML = `
-                <div class="chat-msg msg-bot">Здравствуйте! Меня зовут Ирина, я консультант Елены. Опишите вашу задачу (например: проверка кандидата, расследование кражи, аудит команды), и я подскажу, чем мы можем помочь.</div>
+                <div class="chat-msg msg-bot">Здравствуйте! Меня зовут Ирина, я консультант Елены. Выберите, какая задача вас интересует:</div>
                 <div class="typing-indicator" id="typingIndicator">
                     <div class="typing-dot"></div><div class="typing-dot"></div><div class="typing-dot"></div>
                 </div>
             `;
-            if (chatInput) chatInput.value = '';
-            chatBody.scrollTop = chatBody.scrollHeight;
+            setTimeout(() => {
+                showOptions([
+                    { text: "Проверка кандидата", action: "hiring" },
+                    { text: "Расследование", action: "investigation" },
+                    { text: "Аудит команды", action: "audit" }
+                ]);
+            }, 500);
         }
 
-        async function sendManualMessage() {
+        function sendManualMessage() {
             const chatInput = document.getElementById('chatInput');
-            const chatBody = document.getElementById('chatBody');
             if (!chatInput) return;
             const message = chatInput.value.trim();
             if (message === '') return;
-
+            
             appendMessage(message, 'user');
             chatInput.value = '';
             showTypingIndicator();
-
-            // ТАЙМ-АУТ НА 20 СЕКУНД
-            const controller = new AbortController();
-            const timeoutId = setTimeout(() => controller.abort(), 60000);
-
-            try {
-                const response = await fetch(WORKER_URL, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({
-                        message: message,
-                        history: chatHistory
-                    }),
-                    signal: controller.signal
-                });
-
-                clearTimeout(timeoutId);
-                const data = await response.json();
+            
+            // Если клиент пишет текст вручную, бот предлагает выбрать из кнопок
+            setTimeout(() => {
                 hideTypingIndicator();
-
-                if (data.reply) {
-                    appendMessage(data.reply, 'bot');
-                    chatHistory.push({ role: "user", content: message });
-                    chatHistory.push({ role: "assistant", content: data.reply });
-                    if (chatHistory.length > 20) chatHistory = chatHistory.slice(-20);
-                } else {
-                    showBotError();
-                }
-            } catch (error) {
-                clearTimeout(timeoutId);
-                hideTypingIndicator();
-                showBotError();
-            }
-
-            if(chatBody) chatBody.scrollTop = chatBody.scrollHeight;
+                appendMessage('Чтобы я мог помочь вам быстро, пожалуйста, выберите один из вариантов ниже:', 'bot');
+                showOptions([
+                    { text: "Проверка кандидата", action: "hiring" },
+                    { text: "Расследование", action: "investigation" },
+                    { text: "Аудит команды", action: "audit" }
+                ]);
+            }, 1000);
         }
 
-        function showBotError() {
-            appendMessage('Извините, произошел технический сбой. Чтобы вы не ждали, оставьте ваши контакты, и Елена свяжется с вами напрямую.', 'bot');
-            
+        function showOptions(options) {
             const chatBody = document.getElementById('chatBody');
             const typingIndicator = document.getElementById('typingIndicator');
-            
-            const actionDiv = document.createElement('div');
-            actionDiv.className = 'chat-options';
-            actionDiv.style.marginTop = '10px';
-            actionDiv.innerHTML = `<button style="background: #d35400; color: white; border: none; padding: 10px 15px; border-radius: 20px; cursor: pointer; font-weight: bold; font-size: 0.9rem;" onclick="openModal()">Оставить контакты</button>`;
-            
-            if(chatBody && typingIndicator) {
-                chatBody.insertBefore(actionDiv, typingIndicator);
+            if (!chatBody) return;
+
+            // Удаляем старые кнопки, если есть
+            const oldOptions = document.querySelectorAll('.chat-options');
+            oldOptions.forEach(opt => opt.remove());
+
+            const optionsDiv = document.createElement('div');
+            optionsDiv.className = 'chat-options';
+            optionsDiv.style.marginTop = '10px';
+            optionsDiv.style.display = 'flex';
+            optionsDiv.style.flexDirection = 'column';
+            optionsDiv.style.gap = '8px';
+
+            options.forEach(opt => {
+                const btn = document.createElement('button');
+                btn.className = 'chat-options-btn';
+                btn.textContent = opt.text;
+                btn.style.background = '#fff';
+                btn.style.color = '#0077ff';
+                btn.style.border = '1px solid #0077ff';
+                btn.style.padding = '10px 15px';
+                btn.style.borderRadius = '20px';
+                btn.style.cursor = 'pointer';
+                btn.style.fontWeight = '600';
+                btn.style.fontSize = '0.9rem';
+                btn.style.textAlign = 'left';
+                btn.onclick = () => handleOptionClick(opt.action, opt.text);
+                optionsDiv.appendChild(btn);
+            });
+
+            if(typingIndicator) {
+                chatBody.insertBefore(optionsDiv, typingIndicator);
+            } else {
+                chatBody.appendChild(optionsDiv);
             }
-            if(chatBody) chatBody.scrollTop = chatBody.scrollHeight;
+            chatBody.scrollTop = chatBody.scrollHeight;
+        }
+
+        function handleOptionClick(action, text) {
+            // Удаляем кнопки после выбора
+            const oldOptions = document.querySelectorAll('.chat-options');
+            oldOptions.forEach(opt => opt.remove());
+
+            appendMessage(text, 'user');
+            showTypingIndicator();
+
+            setTimeout(() => {
+                hideTypingIndicator();
+                let botReply = '';
+                let nextOptions = [];
+
+                if (action === 'hiring') {
+                    botReply = 'Скрининг кандидатов (включая проверку на полиграфе) помогает избежать найма нелояльных сотрудников. Подскажите, на какую должность вы рассматриваете кандидата?';
+                    nextOptions = [
+                        { text: "Топ-менеджер", action: "hiring_top" },
+                        { text: "Специалист с матответственностью", action: "hiring_material" },
+                        { text: "Другое", action: "contacts" }
+                    ];
+                } else if (action === 'hiring_top' || action === 'hiring_material') {
+                    botReply = 'Понятно. Для таких позиций мы рекомендуем комплексную проверку. Елена может провести анализ и дать рекомендации. Оставите контакты для связи?';
+                    nextOptions = [{ text: "Оставить контакты", action: "contacts" }];
+                } else if (action === 'investigation') {
+                    botReply = 'Служебные расследования помогают выявить инсайдеров и утечки. Подскажите, что именно произошло?';
+                    nextOptions = [
+                        { text: "Утечка информации", action: "invest_leak" },
+                        { text: "Хищение / недостача", action: "invest_theft" },
+                        { text: "Другое", action: "contacts" }
+                    ];
+                } else if (action === 'invest_leak' || action === 'invest_theft') {
+                    botReply = 'Ситуация ясна. Елена специализируется на таких расследованиях и работает конфиденциально. Оставите контакты, чтобы она могла обсудить детали?';
+                    nextOptions = [{ text: "Оставить контакты", action: "contacts" }];
+                } else if (action === 'audit') {
+                    botReply = 'Аудит команды помогает оценить лояльность и выявить риски. Какая у вас цель?';
+                    nextOptions = [
+                        { text: "Оценить текущую команду", action: "audit_team" },
+                        { text: "Проверить партнера", action: "audit_partner" },
+                        { text: "Обучение HR и СБ", action: "audit_training" }
+                    ];
+                } else if (action === 'audit_team' || action === 'audit_partner' || action === 'audit_training') {
+                    botReply = 'Отличная задача. Елена разработает программу под ваши цели. Оставьте контакты, и она свяжется с вами.';
+                    nextOptions = [{ text: "Оставить контакты", action: "contacts" }];
+                } else if (action === 'contacts') {
+                    botReply = 'Отлично! Нажмите на кнопку ниже, чтобы заполнить форму, или напишите ваш телефон/email прямо в чат.';
+                    nextOptions = [{ text: "Открыть форму", action: "open_form" }];
+                } else if (action === 'open_form') {
+                    openModal();
+                    botReply = 'Форма открыта. Заполните её, и Елена свяжется с вами.';
+                } else {
+                    botReply = 'Извините, я не совсем поняла. Пожалуйста, выберите вариант из кнопок ниже.';
+                    nextOptions = [
+                        { text: "Проверка кандидата", action: "hiring" },
+                        { text: "Расследование", action: "investigation" },
+                        { text: "Аудит команды", action: "audit" }
+                    ];
+                }
+
+                appendMessage(botReply, 'bot');
+                if (nextOptions.length > 0) {
+                    showOptions(nextOptions);
+                }
+            }, 1000);
         }
 
         function handleEnter(event) {
@@ -1102,11 +1145,15 @@
         function appendMessage(text, sender) {
             const chatBody = document.getElementById('chatBody');
             const typingIndicator = document.getElementById('typingIndicator');
-            if (!chatBody || !typingIndicator) return;
+            if (!chatBody) return;
             const msgDiv = document.createElement('div');
             msgDiv.className = `chat-msg msg-${sender}`;
             msgDiv.textContent = text;
-            chatBody.insertBefore(msgDiv, typingIndicator);
+            if (typingIndicator) {
+                chatBody.insertBefore(msgDiv, typingIndicator);
+            } else {
+                chatBody.appendChild(msgDiv);
+            }
             chatBody.scrollTop = chatBody.scrollHeight;
         }
 
@@ -1121,7 +1168,14 @@
             const typingIndicator = document.getElementById('typingIndicator');
             if(typingIndicator) typingIndicator.classList.remove('active');
         }
+
+        // Инициализация чата при загрузке страницы
+        window.addEventListener('load', () => {
+            const chatBody = document.getElementById('chatBody');
+            if (chatBody && chatBody.children.length <= 2) { 
+                resetChat();
+            }
+        });
     </script>
 </body>
 </html>
-
