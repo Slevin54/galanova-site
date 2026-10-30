@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Елена Галанова — профайлер, полиграфолог. Кадровая безопасность и аудит бизнеса</title>
     
-    <!-- Open Graph разметка для красивых ссылок в Telegram/WhatsApp -->
     <meta property="og:title" content="Елена Галанова — Профайлер-полиграфолог">
     <meta property="og:description" content="Кадровая безопасность и аудит бизнеса. Научный подход к проверке персонала и оценке рисков.">
     <meta property="og:image" content="https://galanova-elena.ru/og-image.jpg">
@@ -14,7 +13,6 @@
 
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
     
-    <!-- SEO Микроразметка Schema.org -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
@@ -25,7 +23,7 @@
           "jobTitle": "Кандидат психологических наук, Профайлер-полиграфолог",
           "url": "https://galanova-elena.ru",
           "image": "https://galanova-elena.ru/profile.jpg",
-          "description": "Превентивная защита бизнеса от кадровых рисков. Помогаю руководителям и HR выявлять скрытые мотивы сотрудников, предотвращать инсайдерские угрозы и прогнозировать поведение команд."
+          "description": "Превентивная защита бизнеса от кадровых рисков."
         },
         {
           "@type": "ProfessionalService",
@@ -67,7 +65,6 @@
             position: relative;
         }
         
-        /* ПЛАВАЮЩАЯ ШАПКА */
         .site-header {
             position: fixed; top: 0; left: 0; width: 100%;
             background-color: rgba(255, 255, 255, 0.95);
@@ -79,17 +76,11 @@
         .header-logo-dot { width: 8px; height: 8px; background-color: var(--accent); border-radius: 50%; }
         
         .header-nav { display: flex; gap: 20px; align-items: center; }
-        .header-nav a { 
-            color: var(--text-dark); font-size: 0.9rem; font-weight: 600; text-decoration: underline;
-            text-decoration-color: rgba(44, 62, 80, 0.15); text-decoration-thickness: 2px; text-underline-offset: 6px; transition: all 0.3s ease; 
-        }
+        .header-nav a { color: var(--text-dark); font-size: 0.9rem; font-weight: 600; text-decoration: underline; text-decoration-color: rgba(44, 62, 80, 0.15); text-decoration-thickness: 2px; text-underline-offset: 6px; transition: all 0.3s ease; }
         .header-nav a:hover { color: var(--accent); text-decoration-color: var(--accent); }
         
         .header-messengers { display: flex; gap: 10px; align-items: center; }
-        .header-messenger-btn {
-            display: flex; align-items: center; gap: 6px; padding: 8px 16px; border-radius: 6px;
-            font-size: 0.85rem; font-weight: 700; text-decoration: none; transition: all 0.2s ease; box-shadow: 0 2px 5px rgba(0,0,0,0.1); cursor: pointer;
-        }
+        .header-messenger-btn { display: flex; align-items: center; gap: 6px; padding: 8px 16px; border-radius: 6px; font-size: 0.85rem; font-weight: 700; text-decoration: none; transition: all 0.2s ease; box-shadow: 0 2px 5px rgba(0,0,0,0.1); cursor: pointer; }
         .header-messenger-btn:hover { transform: translateY(-2px); box-shadow: 0 4px 10px rgba(0,0,0,0.15); }
         .header-messenger-btn svg { width: 15px; height: 15px; fill: #ffffff; }
         .btn-telegram { background-color: #2AABEE; color: #ffffff !important; }
@@ -100,81 +91,24 @@
         .section-title { text-align: center; font-size: 2.2rem; color: var(--primary); margin-bottom: 20px; }
         .section-subtitle { text-align: center; font-size: 1.1rem; color: var(--text-gray); max-width: 700px; margin: 0 auto 50px auto; }
         
-        /* ОБНОВЛЕННЫЙ ГЛАВНЫЙ ЭКРАН С ДИАГОНАЛЬЮ И ТЕГАМИ */
-        .hero-wrapper {
-            position: relative;
-            width: 100%;
-            min-height: 85vh;
-            display: flex;
-            align-items: center;
-            background-color: #ffffff;
-            padding-top: 80px; 
-            overflow: hidden;
-        }
-        .hero-content {
-            width: 50%;
-            padding-left: max(20px, calc((100% - 1100px) / 2));
-            padding-right: 40px;
-            position: relative;
-            z-index: 2;
-            box-sizing: border-box;
-        }
+        .hero-wrapper { position: relative; width: 100%; min-height: 85vh; display: flex; align-items: center; background-color: #ffffff; padding-top: 80px; overflow: hidden; }
+        .hero-content { width: 50%; padding-left: max(20px, calc((100% - 1100px) / 2)); padding-right: 40px; position: relative; z-index: 2; box-sizing: border-box; }
         .hero-content h1 { font-size: 3.2rem; color: var(--primary); margin-bottom: 15px; line-height: 1.1; }
         
         .hero-tags { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 25px; }
-        .hero-tag { 
-            background: rgba(211, 84, 0, 0.08); 
-            color: var(--accent); 
-            padding: 6px 14px; 
-            border-radius: 20px; 
-            font-size: 0.8rem; 
-            font-weight: 700; 
-            text-transform: uppercase; 
-            letter-spacing: 0.5px; 
-            border: 1px solid rgba(211, 84, 0, 0.15);
-        }
+        .hero-tag { background: rgba(211, 84, 0, 0.08); color: var(--accent); padding: 6px 14px; border-radius: 20px; font-size: 0.8rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; border: 1px solid rgba(211, 84, 0, 0.15); }
         
         .hero-content p { font-size: 1.15rem; color: var(--text-gray); margin-bottom: 35px; max-width: 95%; line-height: 1.6; }
         
-        .hero-image-bg {
-            position: absolute;
-            top: 0;
-            right: 0;
-            width: 55%;
-            height: 100%;
-            z-index: 1;
-            clip-path: polygon(15% 0, 100% 0, 100% 100%, 0% 100%);
-        }
-        .hero-image-bg img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            object-position: center top;
-        }
+        .hero-image-bg { position: absolute; top: 0; right: 0; width: 55%; height: 100%; z-index: 1; clip-path: polygon(15% 0, 100% 0, 100% 100%, 0% 100%); }
+        .hero-image-bg img { width: 100%; height: 100%; object-fit: cover; object-position: center top; }
 
-        .contact-btn {
-            display: inline-block; background-color: var(--accent); color: #fff; padding: 16px 35px;
-            text-decoration: none; border-radius: 6px; font-weight: 600; font-size: 1.1rem; transition: background 0.3s, transform 0.2s;
-            cursor: pointer; border: none; font-family: inherit; text-align: center; box-shadow: 0 10px 25px rgba(211, 84, 0, 0.3);
-        }
+        .contact-btn { display: inline-block; background-color: var(--accent); color: #fff; padding: 16px 35px; text-decoration: none; border-radius: 6px; font-weight: 600; font-size: 1.1rem; transition: background 0.3s, transform 0.2s; cursor: pointer; border: none; font-family: inherit; text-align: center; box-shadow: 0 10px 25px rgba(211, 84, 0, 0.3); }
         .contact-btn:hover { background-color: #e67e22; transform: translateY(-2px); box-shadow: 0 12px 30px rgba(211, 84, 0, 0.4); }
         .contact-btn.full-width { width: 100%; }
 
-        /* ПЛАВАЮЩАЯ БОКОВАЯ ПАНЕЛЬ С СОЦСЕТЯМИ */
-        .sticky-socials {
-            position: fixed;
-            top: 50%;
-            right: 20px;
-            transform: translateY(-50%);
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-            z-index: 999;
-        }
-        .sticky-socials .social-link {
-            width: 44px; height: 44px; border-radius: 50%; display: flex; align-items: center; justify-content: center;
-            text-decoration: none; color: #ffffff !important; box-shadow: 0 4px 12px rgba(0,0,0,0.15); transition: transform 0.2s ease, filter 0.2s ease;
-        }
+        .sticky-socials { position: fixed; top: 50%; right: 20px; transform: translateY(-50%); display: flex; flex-direction: column; gap: 12px; z-index: 999; }
+        .sticky-socials .social-link { width: 44px; height: 44px; border-radius: 50%; display: flex; align-items: center; justify-content: center; text-decoration: none; color: #ffffff !important; box-shadow: 0 4px 12px rgba(0,0,0,0.15); transition: transform 0.2s ease, filter 0.2s ease; }
         .sticky-socials .social-link:hover { transform: scale(1.1) translateX(-5px); filter: brightness(1.15); }
         .social-tg { background-color: #229ED9; }
         .social-vk { background-color: #0077FF; }
@@ -184,32 +118,22 @@
         .sticky-socials svg { width: 22px; height: 22px; fill: #ffffff; }
         .social-text-icon { font-weight: 800; font-size: 14px; letter-spacing: 0.5px; color: #ffffff; }
 
-        /* БЛОК ДОВЕРИЯ (СМИ) */
         .hero-trust { margin-top: 50px; display: flex; align-items: center; gap: 20px; flex-wrap: wrap; }
         .hero-trust span { font-size: 0.8rem; font-weight: 700; color: #a0aec0; text-transform: uppercase; letter-spacing: 1px; }
         .hero-trust-logos { display: flex; gap: 12px; align-items: center; flex-wrap: wrap; }
-        .press-link { 
-            font-weight: 600; font-size: 0.85rem; color: var(--secondary); text-decoration: none; 
-            background: var(--bg-light); border: 1px solid #e2e8f0; padding: 8px 16px; border-radius: 8px;
-            transition: all 0.3s ease; display: inline-block;
-        }
+        .press-link { font-weight: 600; font-size: 0.85rem; color: var(--secondary); text-decoration: none; background: var(--bg-light); border: 1px solid #e2e8f0; padding: 8px 16px; border-radius: 8px; transition: all 0.3s ease; display: inline-block; }
         .press-link:hover { color: var(--accent); border-color: var(--accent); background: #fff; transform: translateY(-2px); box-shadow: 0 4px 10px rgba(0,0,0,0.05); }
 
-        /* Принципы */
         .principles { padding: 80px 0; background-color: var(--primary); color: #fff; }
         .principles .section-title { color: #fff; }
         .principles-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 30px; text-align: center; }
         .principle-card h3 { font-size: 1.1rem; margin-bottom: 12px; color: var(--accent); }
         .principle-card p { color: #cbd5e0; font-size: 0.9rem; }
 
-        /* БЛОК ОБО МНЕ */
         .about { padding: 100px 0; background-color: #ffffff; scroll-margin-top: 70px; }
         .about-grid { display: grid; grid-template-columns: 1fr 1.2fr; gap: 50px; align-items: center; }
         .about-image { display: flex; justify-content: center; }
-        .about-image img { 
-            width: 100%; max-width: 380px; aspect-ratio: 1 / 1; object-fit: cover; object-position: center 15%; 
-            border-radius: 50%; box-shadow: 0 20px 40px rgba(0,0,0,0.1); 
-        }
+        .about-image img { width: 100%; max-width: 380px; aspect-ratio: 1 / 1; object-fit: cover; object-position: center 15%; border-radius: 50%; box-shadow: 0 20px 40px rgba(0,0,0,0.1); }
         .about-content h2 { text-align: left; margin-bottom: 15px; }
         .about-desc { font-size: 1.1rem; color: var(--text-gray); margin-bottom: 30px; line-height: 1.6; }
         .stats-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 30px; }
@@ -220,13 +144,9 @@
         .about-list li { position: relative; padding-left: 30px; margin-bottom: 15px; font-size: 1.05rem; color: var(--text-dark); font-weight: 600; }
         .about-list li::before { content: '✓'; position: absolute; left: 0; top: 2px; color: var(--accent); font-weight: 800; font-size: 18px; }
 
-        /* Решения для бизнеса */
         .solutions { padding: 100px 0 60px 0; background-color: var(--bg-light); scroll-margin-top: 70px; }
         .solutions-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 30px; }
-        .solution-card {
-            background: #ffffff; padding: 40px; border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.04);
-            border-top: 4px solid var(--primary); transition: transform 0.3s ease, box-shadow 0.3s ease; display: flex; flex-direction: column;
-        }
+        .solution-card { background: #ffffff; padding: 40px; border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.04); border-top: 4px solid var(--primary); transition: transform 0.3s ease, box-shadow 0.3s ease; display: flex; flex-direction: column; }
         .solution-card:hover { transform: translateY(-8px); box-shadow: 0 20px 40px rgba(0,0,0,0.08); border-top-color: var(--accent); }
         .solution-header { display: flex; align-items: center; gap: 15px; margin-bottom: 20px; }
         .solution-icon { width: 48px; height: 48px; background: rgba(211, 84, 0, 0.1); border-radius: 10px; display: flex; align-items: center; justify-content: center; color: var(--accent); flex-shrink: 0; }
@@ -237,17 +157,13 @@
         .solution-desc { color: var(--text-gray); font-size: 0.95rem; margin-bottom: 25px; line-height: 1.6; }
         .solution-list { list-style: none; padding: 0; margin: 0; flex-grow: 1; }
         .solution-list li { position: relative; padding-left: 32px; margin-bottom: 12px; color: #2d3748; font-size: 0.95rem; font-weight: 600; }
-        .solution-list li::before {
-            content: '✓'; position: absolute; left: 0; top: 2px; width: 20px; height: 20px; background: rgba(211, 84, 0, 0.15);
-            color: var(--accent); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 800;
-        }
+        .solution-list li::before { content: '✓'; position: absolute; left: 0; top: 2px; width: 20px; height: 20px; background: rgba(211, 84, 0, 0.15); color: var(--accent); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 800; }
 
         .legal-note { display: flex; align-items: flex-start; gap: 15px; background: #fff; padding: 25px 30px; border-radius: 8px; margin-top: 40px; border: 1px solid #e2e8f0; box-shadow: 0 5px 15px rgba(0,0,0,0.02); }
         .legal-note svg { width: 30px; height: 30px; fill: var(--text-gray); flex-shrink: 0; margin-top: 3px; }
         .legal-note p { margin: 0; font-size: 0.95rem; color: #4a5568; line-height: 1.5; }
         .legal-note strong { color: var(--primary); }
 
-        /* ЭТАПЫ РАБОТЫ */
         .process { padding: 80px 0; background-color: #ffffff; scroll-margin-top: 70px; }
         .process-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; margin-top: 50px; }
         .process-step { text-align: center; position: relative; }
@@ -257,7 +173,6 @@
         .process-step h3 { font-size: 1.1rem; color: var(--primary); margin-bottom: 10px; }
         .process-step p { font-size: 0.9rem; color: var(--text-gray); line-height: 1.5; padding: 0 10px; }
 
-        /* Практические кейсы */
         .cases { padding: 60px 0 80px 0; background-color: var(--bg-light); scroll-margin-top: 70px; }
         .cases-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); gap: 30px; }
         .case-card { background: #fff; padding: 40px; border-radius: 12px; border-left: 4px solid var(--accent); box-shadow: 0 10px 30px rgba(0,0,0,0.04); }
@@ -268,7 +183,6 @@
         .case-result strong { display: block; color: var(--accent); margin-bottom: 5px; font-size: 0.9rem; text-transform: uppercase; }
         .case-result span { color: var(--text-dark); font-weight: 600; font-size: 1.05rem; }
 
-        /* Форматы работы */
         .formats { padding: 80px 0 100px 0; background-color: #ffffff; scroll-margin-top: 70px; }
         .formats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; margin-top: 40px; }
         .format-card { background: #fff; border: 1px solid #e2e8f0; border-radius: 12px; padding: 40px; display: flex; flex-direction: column; transition: box-shadow 0.3s; }
@@ -281,20 +195,15 @@
         .format-link { color: var(--accent); font-weight: 600; text-decoration: none; font-size: 0.95rem; cursor: pointer; transition: opacity 0.2s; border: none; background: none; padding: 0;}
         .format-link:hover { opacity: 0.7; }
 
-        /* CTA Баннер */
         .cta-banner { background-color: var(--primary); padding: 60px 0; text-align: center; background-image: linear-gradient(to right, #1a252f, #2c3e50); color: #fff; }
         .cta-banner h2 { font-size: 2.2rem; margin: 0 0 15px 0; color: #fff; }
         .cta-banner p { font-size: 1.1rem; color: #cbd5e0; max-width: 800px; margin: 0 auto; line-height: 1.6; }
 
-        /* ПУБЛИКАЦИИ (БЕСКОНЕЧНАЯ АВТОПРОКРУТКА) */
         .publications { padding: 80px 0; background-color: #ffffff; scroll-margin-top: 70px; overflow: hidden; }
         .carousel-wrapper { position: relative; width: 100%; overflow: hidden; padding-bottom: 20px; margin-top: 30px; }
-        
         .pub-track { display: flex; gap: 20px; width: max-content; animation: marquee 30s linear infinite; }
         .pub-track:hover { animation-play-state: paused; }
-
         @keyframes marquee { 0% { transform: translateX(0); } 100% { transform: translateX(-1280px); } }
-
         .pub-card { width: 300px; flex-shrink: 0; background: #fff; border-radius: 8px; overflow: hidden; box-shadow: 0 6px 12px rgba(0,0,0,0.05); display: flex; flex-direction: column; border: 1px solid #e2e8f0; height: 100%; }
         .pub-image { height: 160px; background-color: #e2e8f0; overflow: hidden; position: relative; }
         .pub-image::after { content: ''; position: absolute; top:0; left:0; width: 100%; height: 100%; background: rgba(0,0,0,0.1); }
@@ -305,10 +214,8 @@
         .pub-content p { color: var(--text-gray); font-size: 0.85rem; margin-bottom: 15px; flex-grow: 1; }
         .pub-link { text-decoration: none; color: var(--primary); font-weight: 700; font-size: 0.85rem; border-bottom: 1px solid var(--accent); align-self: flex-start; }
 
-        /* Подвал */
         footer { background-color: var(--primary); color: #fff; }
         
-        /* Модальное окно */
         .modal-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(26, 37, 47, 0.8); z-index: 2000; align-items: center; justify-content: center; opacity: 0; transition: opacity 0.3s ease; }
         .modal-box { background: #fff; width: 100%; max-width: 450px; border-radius: 12px; padding: 40px; position: relative; box-sizing: border-box; transform: translateY(20px); transition: transform 0.3s ease; max-height: 90vh; overflow-y: auto; }
         .modal-overlay.active { opacity: 1; }
@@ -330,7 +237,6 @@
         .form-success { display: none; text-align: center; padding: 30px 0; }
         .form-success h4 { font-size: 1.5rem; margin: 0 0 10px 0; color: #38a169; }
 
-        /* УМНЫЙ ЧАТ-БОТ */
         .chat-widget { position: fixed; bottom: 30px; right: 30px; z-index: 1000; }
         .chat-btn { background-color: var(--chat-blue); color: white; width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; box-shadow: 0 8px 25px rgba(0, 119, 255, 0.4); border: none; transition: transform 0.3s, box-shadow 0.3s; }
         .chat-btn:hover { transform: scale(1.1); box-shadow: 0 10px 30px rgba(0, 119, 255, 0.6); }
@@ -360,33 +266,26 @@
         .chat-legal { text-align: center; font-size: 0.65rem; color: #a0aec0; padding: 0 15px 10px; background: #fff; }
         .chat-legal a { color: var(--chat-blue); text-decoration: none; }
 
-        /* Мобильная адаптация */
         @media (max-width: 900px) {
             .hero-wrapper { flex-direction: column; padding-top: 100px; padding-bottom: 40px; min-height: auto; }
             .hero-content { width: 100%; padding: 0 20px; text-align: center; margin-bottom: 30px; }
             .hero-tags { justify-content: center; } 
             .hero-image-bg { position: relative; width: 100%; height: 400px; clip-path: none; } 
-            
             .header-nav { display: none; }
             .header-messengers { gap: 5px; }
             .header-messenger-btn { padding: 6px 10px; font-size: 0.75rem; }
             .hero-actions { justify-content: center; width: 100%; flex-direction: column; gap: 15px; }
             .contact-btn { width: 100%; box-sizing: border-box; }
-            
             .hero-trust { margin-top: 40px; justify-content: center; flex-direction: column; gap: 15px; border-top: none; padding-top: 0;}
             .hero-trust-logos { justify-content: center; flex-wrap: wrap; }
-            
             .sticky-socials { display: none; }
-
             .about-grid { grid-template-columns: 1fr; }
             .process-grid { grid-template-columns: 1fr; gap: 30px; }
             .process-step::after { display: none; }
             .solutions-grid, .principles-grid, .formats-grid, .cases-grid { grid-template-columns: 1fr; }
-            
             .pub-card { width: 280px; }
             .pub-track { animation-name: marquee-mobile; animation-duration: 25s; }
             @keyframes marquee-mobile { 0% { transform: translateX(0); } 100% { transform: translateX(-1200px); } }
-
             .chat-window { right: -15px; bottom: 75px; width: calc(100vw - 30px); }
             .modal-box { max-width: 95%; padding: 30px 20px; }
         }
@@ -394,7 +293,6 @@
 </head>
 <body>
 
-    <!-- ШАПКА САЙТА -->
     <header class="site-header">
         <div class="container header-container">
             <a href="#" class="header-logo">
@@ -420,7 +318,6 @@
         </div>
     </header>
 
-    <!-- ПЛАВАЮЩАЯ БОКОВАЯ ПАНЕЛЬ С СОЦСЕТЯМИ И ПУБЛИКАЦИЯМИ -->
     <div class="sticky-socials">
         <a href="https://t.me/ElenaProprofiler" target="_blank" class="social-link social-tg" title="Telegram" onclick="openMessenger(event, 'tg')"><svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69.01-.03.01-.14-.06-.2-.07-.06-.17-.04-.25-.02-.11.02-1.78 1.14-5.06 3.34-.48.33-.91.49-1.3.48-.43-.01-1.25-.24-1.87-.44-.75-.24-1.35-.37-1.3-.79.03-.22.33-.44.89-.66 3.5-1.53 5.83-2.53 7-3.02 3.33-1.39 4.02-1.63 4.47-1.64.1 0 .32.02.47.14.12.1.15.25.17.33.02.13.04.28.02.4z"/></svg></a>
         <a href="https://vk.ru/eggroup_consult" target="_blank" class="social-link social-vk" title="ВКонтакте"><svg viewBox="0 0 24 24"><path d="M15.077 15.078h2.383c.792 0 .991-.65.991-.65s1.428-2.316 2.827-2.614c1.077-.23 1.488.948 2.378.948h2.298s1.396-.134.981-1.014c-.958-2.023-2.721-2.924-2.721-2.924s-1.428-1.127.23-3.136c1.238-1.5 2.14-2.673 2.14-2.673s.36-1.298-1.03-1.298H22.95s-.693-.162-1.396.441c-2.455 2.115-4.48 5.626-4.48 5.626s-.361.614-.856.289c-.663-.441-.531-3.953-.531-3.953s.062-1.28-1.127-1.579c-.613-.153-1.109-.234-2.362-.234-1.686 0-3.109.117-3.993.541-.595.289-.316.893 0 .911 1.055.054 1.83.65 1.83 3.031 0 0-.171 4.504-1.272 5.072-.739.387-2.344-1.849-4.228-5.265 0 0-.379-.812-1.172-.812H.99S-.119 5.485.035 6.432C1.56 16.035 7.42 21.035 13.91 21.035c4.717 0 5.483-1.127 5.483-1.127s.541-.605.541-1.706c0-1.83-.857-2.227-.857-3.124z" transform="scale(0.8) translate(3,3)"/></svg></a>
@@ -429,7 +326,6 @@
         <a href="https://www.e-xecutive.ru/users/1916093-elena-galanova" target="_blank" class="social-link social-ex" title="Executive.ru"><span class="social-text-icon">ex</span></a>
     </div>
 
-    <!-- ГЛАВНЫЙ ЭКРАН -->
     <section class="hero-wrapper">
         <div class="hero-content">
             <h1>Елена Галанова</h1>
@@ -461,7 +357,6 @@
         </div>
     </section>
 
-    <!-- Методология -->
     <section class="principles">
         <div class="container">
             <h2 class="section-title">Никакой эзотерики. Только наука.</h2>
@@ -483,7 +378,6 @@
         </div>
     </section>
 
-    <!-- ОБО МНЕ -->
     <section class="about" id="about">
         <div class="container">
             <div class="about-grid">
@@ -516,7 +410,6 @@
         </div>
     </section>
 
-    <!-- Решения для бизнеса -->
     <section class="solutions" id="solutions">
         <div class="container">
             <h2 class="section-title">Компетенции и решения</h2>
@@ -578,7 +471,6 @@
         </div>
     </section>
 
-    <!-- ЭТАПЫ РАБОТЫ -->
     <section class="process" id="process">
         <div class="container">
             <h2 class="section-title">Как проходит проверка</h2>
@@ -609,7 +501,6 @@
         </div>
     </section>
 
-    <!-- Практические кейсы -->
     <section class="cases" id="cases">
         <div class="container">
             <h2 class="section-title">Практические кейсы</h2>
@@ -640,7 +531,6 @@
         </div>
     </section>
 
-    <!-- Форматы работы -->
     <section class="formats" id="formats">
         <div class="container">
             <h2 class="section-title">Форматы сотрудничества</h2>
@@ -677,7 +567,6 @@
         </div>
     </section>
 
-    <!-- CTA Баннер -->
     <section class="cta-banner">
         <div class="container">
             <h2>Не оставляйте риски без внимания</h2>
@@ -685,7 +574,6 @@
         </div>
     </section>
 
-    <!-- ПУБЛИКАЦИИ -->
     <section class="publications" id="publications">
         <div class="container">
             <h2 class="section-title" style="margin-bottom: 20px;">Аналитика, статьи и разборы</h2>
@@ -787,7 +675,6 @@
         </div>
     </section>
 
-    <!-- Подвал -->
     <footer style="padding: 80px 0 40px;">
         <div class="container">
             <div style="max-width: 600px; margin: 0 auto; text-align: center;">
@@ -812,7 +699,6 @@
         </div>
     </footer>
 
-    <!-- МОДАЛЬНОЕ ОКНО -->
     <div class="modal-overlay" id="leadModal">
         <div class="modal-box">
             <button class="modal-close" onclick="closeModal()">&times;</button>
@@ -854,7 +740,6 @@
         </div>
     </div>
 
-    <!-- ЧАТ-БОТ -->
     <div class="chat-widget">
         <button class="chat-btn" onclick="toggleChat()" title="Открыть чат">
             <svg viewBox="0 0 24 24"><path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2z"></path></svg>
@@ -895,11 +780,9 @@
         </div>
     </div>
 
-    <!-- Скрипты -->
     <script>
         try { document.getElementById('currentYear').textContent = new Date().getFullYear(); } catch(e) {}
 
-        // УМНЫЙ РОУТИНГ ДЛЯ МЕССЕНДЖЕРОВ (ПК vs ТЕЛЕФОН)
         function openMessenger(e, type) {
             e.preventDefault();
             const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) || 
@@ -920,7 +803,6 @@
             }
         }
 
-        // ЛОГИКА МОДАЛЬНОГО ОКНА
         function openModal() {
             const modal = document.getElementById('leadModal');
             if (modal) {
@@ -948,7 +830,6 @@
             }
         }
 
-        // ОТПРАВКА ФОРМЫ (Formspree)
         const contactForm = document.getElementById('contactForm');
         if (contactForm) {
             contactForm.addEventListener("submit", async function(event) {
@@ -988,13 +869,9 @@
             });
         }
 
-        // ==========================================
-        // ЛОГИКА ЧАТ-БОТА
-        // ==========================================
         let chatInitialized = false;
         let chatHistory = [];
 
-        // АДРЕС ВАШЕГО БОТА В CLOUDFLARE
         const WORKER_URL = "https://galanova-ai-bot.galanovr.workers.dev/";
 
         function toggleChat() {
@@ -1034,7 +911,6 @@
             chatInput.value = '';
             showTypingIndicator();
 
-            // ТАЙМ-АУТ НА 20 СЕКУНД
             const controller = new AbortController();
             const timeoutId = setTimeout(() => controller.abort(), 20000);
 
