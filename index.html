@@ -383,28 +383,88 @@
         .about-list li { position: relative; padding-left: 30px; margin-bottom: 15px; font-size: 1.05rem; color: var(--text-dark); font-weight: 600; }
         .about-list li::before { content: '✓'; position: absolute; left: 0; top: 2px; color: var(--accent); font-weight: 800; font-size: 18px; }
 
-        /* УСЛУГИ (НОВЫЙ БЛОК) */
-        .solutions { padding: 100px 0 60px 0; background-color: var(--bg-light); scroll-margin-top: 70px; }
-        .solutions-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 30px; }
+        /* УСЛУГИ (КАРУСЕЛЬ) */
+        .solutions { padding: 100px 0 80px 0; background-color: var(--bg-light); scroll-margin-top: 70px; }
+        
+        .carousel-container {
+            position: relative;
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 10px;
+        }
+
+        .solutions-track {
+            display: flex;
+            gap: 20px;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            scrollbar-width: none; /* Firefox */
+            -ms-overflow-style: none;  /* IE and Edge */
+            padding-bottom: 20px; /* Для тени */
+            scroll-behavior: smooth;
+        }
+        .solutions-track::-webkit-scrollbar {
+            display: none; /* Chrome, Safari */
+        }
+
         .solution-card {
-            background: #ffffff; padding: 40px; border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.04);
-            border-top: 4px solid var(--primary); transition: transform 0.3s ease, box-shadow 0.3s ease; display: flex; flex-direction: column;
+            flex: 0 0 calc(33.333% - 14px); /* 3 карточки на экране ПК */
+            min-width: 320px;
+            scroll-snap-align: start;
+            background: #ffffff; padding: 35px; border-radius: 12px; 
+            box-shadow: 0 10px 30px rgba(0,0,0,0.04);
+            border-top: 4px solid var(--primary); 
+            transition: transform 0.3s ease, box-shadow 0.3s ease, border-top-color 0.3s;
+            display: flex; flex-direction: column;
         }
-        .solution-card:hover { transform: translateY(-8px); box-shadow: 0 20px 40px rgba(0,0,0,0.08); border-top-color: var(--accent); }
+        .solution-card:hover { 
+            transform: translateY(-8px); 
+            box-shadow: 0 20px 40px rgba(0,0,0,0.08); 
+            border-top-color: var(--accent); 
+        }
+
         .solution-header { display: flex; align-items: center; gap: 15px; margin-bottom: 20px; }
-        .solution-icon { width: 48px; height: 48px; background: rgba(211, 84, 0, 0.1); border-radius: 10px; display: flex; align-items: center; justify-content: center; color: var(--accent); flex-shrink: 0; }
-        .solution-icon svg { width: 26px; height: 26px; fill: currentColor; }
+        .solution-icon { width: 44px; height: 44px; background: rgba(211, 84, 0, 0.1); border-radius: 10px; display: flex; align-items: center; justify-content: center; color: var(--accent); flex-shrink: 0; }
+        .solution-icon svg { width: 24px; height: 24px; fill: currentColor; }
         .solution-title-wrap { flex: 1; }
-        .solution-card h3 { font-size: 1.25rem; margin: 0 0 5px 0; color: var(--primary); line-height: 1.2; }
+        .solution-card h3 { font-size: 1.15rem; margin: 0 0 5px 0; color: var(--primary); line-height: 1.2; }
         .solution-badge { display: inline-block; background: #e2e8f0; color: #4a5568; font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; padding: 3px 8px; border-radius: 4px; }
-        .solution-desc { color: var(--text-gray); font-size: 0.95rem; margin-bottom: 25px; line-height: 1.6; }
+        .solution-desc { color: var(--text-gray); font-size: 0.9rem; margin-bottom: 20px; line-height: 1.6; }
         .solution-list { list-style: none; padding: 0; margin: 0; flex-grow: 1; }
-        .solution-list li { position: relative; padding-left: 32px; margin-bottom: 12px; color: #2d3748; font-size: 0.95rem; font-weight: 600; }
+        .solution-list li { position: relative; padding-left: 28px; margin-bottom: 10px; color: #2d3748; font-size: 0.9rem; font-weight: 600; }
         .solution-list li::before {
-            content: '✓'; position: absolute; left: 0; top: 2px; width: 20px; height: 20px; background: rgba(211, 84, 0, 0.15);
-            color: var(--accent); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 800;
+            content: '✓'; position: absolute; left: 0; top: 2px; width: 18px; height: 18px; background: rgba(211, 84, 0, 0.15);
+            color: var(--accent); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 10px; font-weight: 800;
         }
-        .solution-price { margin-top: 20px; font-weight: 700; color: var(--accent); font-size: 1.1rem; }
+        .solution-price { margin-top: 20px; font-weight: 800; color: var(--accent); font-size: 1.15rem; }
+
+        /* КНОПКИ-СТРЕЛКИ */
+        .carousel-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 44px;
+            height: 44px;
+            background: #ffffff;
+            border: 1px solid #e2e8f0;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            z-index: 10;
+            font-size: 18px;
+            color: var(--primary);
+            transition: all 0.2s;
+        }
+        .carousel-btn:hover {
+            background: var(--primary);
+            color: #ffffff;
+            border-color: var(--primary);
+        }
+        .carousel-btn.prev { left: -20px; }
+        .carousel-btn.next { right: -20px; }
 
         .legal-note { display: flex; align-items: flex-start; gap: 15px; background: #fff; padding: 25px 30px; border-radius: 8px; margin-top: 40px; border: 1px solid #e2e8f0; box-shadow: 0 5px 15px rgba(0,0,0,0.02); }
         .legal-note svg { width: 30px; height: 30px; fill: var(--text-gray); flex-shrink: 0; margin-top: 3px; }
@@ -452,7 +512,7 @@
 
         /* ПУБЛИКАЦИИ (БЕСКОНЕЧНАЯ АВТОПРОКРУТКА) */
         .publications { padding: 80px 0; background-color: #ffffff; scroll-margin-top: 70px; overflow: hidden; }
-        .carousel-wrapper { position: relative; width: 100%; overflow: hidden; padding-bottom: 20px; margin-top: 30px; }
+        .carousel-wrapper-pub { position: relative; width: 100%; overflow: hidden; padding-bottom: 20px; margin-top: 30px; }
         
         .pub-track { display: flex; gap: 20px; width: max-content; animation: marquee 30s linear infinite; }
         .pub-track:hover { animation-play-state: paused; }
@@ -583,6 +643,9 @@
             .process-step::after { display: none; }
             .solutions-grid, .principles-grid, .formats-grid, .cases-grid { grid-template-columns: 1fr; }
             
+            .solution-card { flex: 0 0 85%; /* На мобильных 1 карточка почти на весь экран */ }
+            .carousel-btn { display: none; /* Скрываем кнопки на мобильных, там свайп */ }
+
             .pub-card { width: 280px; }
             .pub-track { animation-name: marquee-mobile; animation-duration: 25s; }
             @keyframes marquee-mobile { 0% { transform: translateX(0); } 100% { transform: translateX(-1200px); } }
@@ -766,105 +829,112 @@
         </div>
     </section>
 
-    <!-- УСЛУГИ -->
+    <!-- УСЛУГИ (КАРУСЕЛЬ) -->
     <section class="solutions" id="solutions">
         <div class="container">
             <h2 class="section-title">Услуги</h2>
             <p class="section-subtitle">Профессиональные решения для бизнеса и оценки персонала</p>
-            <div class="solutions-grid">
-                
-                <!-- Услуга 1 -->
-                <div class="solution-card">
-                    <div class="solution-header">
-                        <div class="solution-icon"><svg viewBox="0 0 24 24"><path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/></svg></div>
-                        <div class="solution-title-wrap">
-                            <h3>Профайлинг цифрового следа</h3>
-                            <span class="solution-badge">Для бизнеса</span>
-                        </div>
-                    </div>
-                    <p class="solution-desc">Анализ открытых источников и социальных сетей для углубленного разбора личности, скрытых мотивов и факторов риска.</p>
-                    <ul class="solution-list">
-                        <li>Психологический портрет</li>
-                        <li>Оценка факторов риска</li>
-                        <li>Прогноз поведения в бизнесе</li>
-                    </ul>
-                    <div class="solution-price">от 5 000 ₽</div>
-                </div>
-
-                <!-- Услуга 2 -->
-                <div class="solution-card">
-                    <div class="solution-header">
-                        <div class="solution-icon"><svg viewBox="0 0 24 24"><path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2z"/></svg></div>
-                        <div class="solution-title-wrap">
-                            <h3>Экспертная консультация</h3>
-                            <span class="solution-badge">Для руководителей</span>
-                        </div>
-                    </div>
-                    <p class="solution-desc">Разбор сложных ситуаций, где важно понять человека: от оценки кандидатов и партнеров до анализа скрытых мотивов и конфликтов.</p>
-                    <ul class="solution-list">
-                        <li>Разбор конкретного кейса</li>
-                        <li>Трезвый взгляд со стороны</li>
-                        <li>Стратегия дальнейших действий</li>
-                    </ul>
-                    <div class="solution-price">от 5 000 ₽</div>
-                </div>
-
-                <!-- Услуга 3 -->
-                <div class="solution-card">
-                    <div class="solution-header">
-                        <div class="solution-icon"><svg viewBox="0 0 24 24"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm0 10.99h7c-.53 4.12-3.28 7.79-7 8.94V12H5V6.3l7-3.11v8.8z"/></svg></div>
-                        <div class="solution-title-wrap">
-                            <h3>Сопровождение расследований</h3>
-                            <span class="solution-badge">При инцидентах</span>
-                        </div>
-                    </div>
-                    <p class="solution-desc">Помощь в раскрытии сложных инцидентов (хищения, сговоры, утечки данных). Оценка причастности лиц и скрытых мотивов.</p>
-                    <ul class="solution-list">
-                        <li>Анализ поведенческих профилей</li>
-                        <li>Стратегия опроса фигурантов</li>
-                        <li>Оценка искренности показаний</li>
-                    </ul>
-                    <div class="solution-price">от 10 000 ₽</div>
-                </div>
-
-                <!-- Услуга 4 -->
-                <div class="solution-card">
-                    <div class="solution-header">
-                        <div class="solution-icon"><svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg></div>
-                        <div class="solution-title-wrap">
-                            <h3>Анализ анонимных сообщений</h3>
-                            <span class="solution-badge">Для СБ</span>
-                        </div>
-                    </div>
-                    <p class="solution-desc">Помощь в ситуациях, когда поступают анонимные угрозы, жалобы, доносы или компрометирующие материалы.</p>
-                    <ul class="solution-list">
-                        <li>Психолингвистический анализ текста</li>
-                        <li>Анализ корпоративного контекста</li>
-                        <li>Определение профиля автора</li>
-                    </ul>
-                    <div class="solution-price">от 5 000 ₽</div>
-                </div>
-
-                <!-- Услуга 5 -->
-                <div class="solution-card">
-                    <div class="solution-header">
-                        <div class="solution-icon"><svg viewBox="0 0 24 24"><path d="M19 22H5v-2h14v2zm-2.03-4.26c-.53-.88-1.46-1.52-2.58-1.74l-.96-.19c-.31-.06-.52-.36-.45-.68.06-.31.36-.52.68-.45l.97.19c1.92.38 3.51 1.48 4.41 2.98L16.97 17.74zM12 13c-2.21 0-4-1.79-4-4s1.79-4 4-4 4 1.79 4 4-1.79 4-4 4zm0-6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zM5.97 17.74c-.53-.88-1.46-1.52-2.58-1.74l-.96-.19c-.31-.06-.52-.36-.45-.68.06-.31.36-.52.68-.45l.97.19c1.92.38 3.51 1.48 4.41 2.98L5.97 17.74z"/></svg></div>
-                        <div class="solution-title-wrap">
-                            <h3>Медиация конфликтов</h3>
-                            <span class="solution-badge">Для HR</span>
-                        </div>
-                    </div>
-                    <p class="solution-desc">Помогаю сторонам, которые «говорят на разных языках», услышать друг друга и прийти к соглашению в деловых спорах.</p>
-                    <ul class="solution-list">
-                        <li>Работа с корпоративными спорами</li>
-                        <li>Нейтральный посредник</li>
-                        <li>Сохранение деловых отношений</li>
-                    </ul>
-                    <div class="solution-price">от 5 000 ₽</div>
-                </div>
-
-            </div>
             
+            <div class="carousel-container">
+                <button class="carousel-btn prev" onclick="scrollCarousel('left')">&#10094;</button>
+                
+                <div class="solutions-track" id="solutionsTrack">
+                    
+                    <!-- Услуга 1 -->
+                    <div class="solution-card">
+                        <div class="solution-header">
+                            <div class="solution-icon"><svg viewBox="0 0 24 24"><path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/></svg></div>
+                            <div class="solution-title-wrap">
+                                <h3>Профайлинг цифрового следа</h3>
+                                <span class="solution-badge">Для бизнеса</span>
+                            </div>
+                        </div>
+                        <p class="solution-desc">Анализ открытых источников и социальных сетей для углубленного разбора личности, скрытых мотивов и факторов риска.</p>
+                        <ul class="solution-list">
+                            <li>Психологический портрет</li>
+                            <li>Оценка факторов риска</li>
+                            <li>Прогноз поведения в бизнесе</li>
+                        </ul>
+                        <div class="solution-price">от 5 000 ₽</div>
+                    </div>
+
+                    <!-- Услуга 2 -->
+                    <div class="solution-card">
+                        <div class="solution-header">
+                            <div class="solution-icon"><svg viewBox="0 0 24 24"><path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2z"/></svg></div>
+                            <div class="solution-title-wrap">
+                                <h3>Экспертная консультация</h3>
+                                <span class="solution-badge">Для руководителей</span>
+                            </div>
+                        </div>
+                        <p class="solution-desc">Разбор сложных ситуаций, где важно понять человека: от оценки кандидатов и партнеров до анализа скрытых мотивов и конфликтов.</p>
+                        <ul class="solution-list">
+                            <li>Разбор конкретного кейса</li>
+                            <li>Трезвый взгляд со стороны</li>
+                            <li>Стратегия дальнейших действий</li>
+                        </ul>
+                        <div class="solution-price">от 5 000 ₽</div>
+                    </div>
+
+                    <!-- Услуга 3 -->
+                    <div class="solution-card">
+                        <div class="solution-header">
+                            <div class="solution-icon"><svg viewBox="0 0 24 24"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm0 10.99h7c-.53 4.12-3.28 7.79-7 8.94V12H5V6.3l7-3.11v8.8z"/></svg></div>
+                            <div class="solution-title-wrap">
+                                <h3>Сопровождение расследований</h3>
+                                <span class="solution-badge">При инцидентах</span>
+                            </div>
+                        </div>
+                        <p class="solution-desc">Помощь в раскрытии сложных инцидентов (хищения, сговоры, утечки данных). Оценка причастности лиц и скрытых мотивов.</p>
+                        <ul class="solution-list">
+                            <li>Анализ поведенческих профилей</li>
+                            <li>Стратегия опроса фигурантов</li>
+                            <li>Оценка искренности показаний</li>
+                        </ul>
+                        <div class="solution-price">от 10 000 ₽</div>
+                    </div>
+
+                    <!-- Услуга 4 -->
+                    <div class="solution-card">
+                        <div class="solution-header">
+                            <div class="solution-icon"><svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg></div>
+                            <div class="solution-title-wrap">
+                                <h3>Анализ анонимных сообщений</h3>
+                                <span class="solution-badge">Для СБ</span>
+                            </div>
+                        </div>
+                        <p class="solution-desc">Помощь в ситуациях, когда поступают анонимные угрозы, жалобы, доносы или компрометирующие материалы.</p>
+                        <ul class="solution-list">
+                            <li>Психолингвистический анализ текста</li>
+                            <li>Анализ корпоративного контекста</li>
+                            <li>Определение профиля автора</li>
+                        </ul>
+                        <div class="solution-price">от 5 000 ₽</div>
+                    </div>
+
+                    <!-- Услуга 5 -->
+                    <div class="solution-card">
+                        <div class="solution-header">
+                            <div class="solution-icon"><svg viewBox="0 0 24 24"><path d="M19 22H5v-2h14v2zm-2.03-4.26c-.53-.88-1.46-1.52-2.58-1.74l-.96-.19c-.31-.06-.52-.36-.45-.68.06-.31.36-.52.68-.45l.97.19c1.92.38 3.51 1.48 4.41 2.98L16.97 17.74zM12 13c-2.21 0-4-1.79-4-4s1.79-4 4-4 4 1.79 4 4-1.79 4-4 4zm0-6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zM5.97 17.74c-.53-.88-1.46-1.52-2.58-1.74l-.96-.19c-.31-.06-.52-.36-.45-.68.06-.31.36-.52.68-.45l.97.19c1.92.38 3.51 1.48 4.41 2.98L5.97 17.74z"/></svg></div>
+                            <div class="solution-title-wrap">
+                                <h3>Медиация конфликтов</h3>
+                                <span class="solution-badge">Для HR</span>
+                            </div>
+                        </div>
+                        <p class="solution-desc">Помогаю сторонам, которые «говорят на разных языках», услышать друг друга и прийти к соглашению в деловых спорах.</p>
+                        <ul class="solution-list">
+                            <li>Работа с корпоративными спорами</li>
+                            <li>Нейтральный посредник</li>
+                            <li>Сохранение деловых отношений</li>
+                        </ul>
+                        <div class="solution-price">от 5 000 ₽</div>
+                    </div>
+
+                </div>
+                
+                <button class="carousel-btn next" onclick="scrollCarousel('right')">&#10095;</button>
+            </div>
+
             <div class="legal-note">
                 <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 15l-5-5 1.41-1.41L11 14.17l7.59-7.59L20 8l-9 9z"/></svg>
                 <p><strong>Юридическая безопасность бизнеса:</strong> Все мероприятия, включая аппаратные тестирования на полиграфе, проводятся в строгом соответствии с нормами ТК РФ и исключительно при наличии <em>письменного добровольного согласия</em> проверяемого лица.</p>
@@ -1008,7 +1078,7 @@
         <div class="container">
             <h2 class="section-title" style="margin-bottom: 20px;">Аналитика, статьи и разборы</h2>
             
-            <div class="carousel-wrapper">
+            <div class="carousel-wrapper-pub">
                 <div class="pub-track">
                     <div class="pub-card">
                         <div class="pub-image">
@@ -1225,6 +1295,21 @@
         function closeMenu() {
             document.getElementById('sideMenu').classList.remove('active');
             document.getElementById('menuOverlay').classList.remove('active');
+        }
+
+        // КАРУСЕЛЬ УСЛУГ
+        function scrollCarousel(direction) {
+            const track = document.getElementById('solutionsTrack');
+            if (!track) return;
+            // Находим ширину одной карточки + отступ (gap)
+            const card = track.querySelector('.solution-card');
+            const scrollAmount = card.offsetWidth + 20; 
+            
+            if (direction === 'left') {
+                track.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
+            } else {
+                track.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+            }
         }
 
         // УМНЫЙ РОУТИНГ ДЛЯ МЕССЕНДЖЕРОВ (ПК vs ТЕЛЕФОН)
