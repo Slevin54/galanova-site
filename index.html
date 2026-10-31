@@ -196,17 +196,27 @@
         }
         .hero-content h1 { font-size: 3.2rem; color: var(--primary); margin-bottom: 15px; line-height: 1.1; }
         
-        .hero-tags { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 25px; }
-        .hero-tag { 
-            background: rgba(211, 84, 0, 0.08); 
-            color: var(--accent); 
-            padding: 6px 14px; 
-            border-radius: 20px; 
-            font-size: 0.8rem; 
-            font-weight: 700; 
-            text-transform: uppercase; 
-            letter-spacing: 0.5px; 
-            border: 1px solid rgba(211, 84, 0, 0.15);
+        /* НОВЫЙ СТИЛЬ ДЛЯ СПИСКА РЕГАЛИЙ */
+        .hero-credentials {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-bottom: 30px;
+        }
+        .hero-credential-item {
+            font-size: 1rem;
+            color: var(--text-dark);
+            font-weight: 500;
+            line-height: 1.5;
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+        }
+        .hero-credential-item::before {
+            content: '—';
+            color: var(--accent);
+            font-weight: 800;
+            flex-shrink: 0;
         }
         
         .hero-content p { font-size: 1.15rem; color: var(--text-gray); margin-bottom: 35px; max-width: 95%; line-height: 1.6; }
@@ -470,7 +480,7 @@
         @media (max-width: 900px) {
             .hero-wrapper { flex-direction: column; padding-top: 100px; padding-bottom: 40px; min-height: auto; }
             .hero-content { width: 100%; padding: 0 20px; text-align: center; margin-bottom: 30px; }
-            .hero-tags { justify-content: center; } 
+            .hero-credentials { align-items: center; } /* Центрируем список на мобильных */
             .hero-image-bg { position: relative; width: 100%; height: 400px; clip-path: none; } 
             
             .header-nav { display: none; } /* Скрываем горизонтальное меню */
@@ -577,10 +587,14 @@
         <div class="hero-content">
             <h1>Елена Галанова</h1>
             
-            <div class="hero-tags">
-                <span class="hero-tag">Кандидат психологических наук</span>
-                <span class="hero-tag">Профайлер-полиграфолог</span>
-                <span class="hero-tag">Преподаватель ВУЗа</span>
+            <!-- Новый блок регалий -->
+            <div class="hero-credentials">
+                <div class="hero-credential-item">В практическом профайлинге и оперативной психодиагностике более 10 лет</div>
+                <div class="hero-credential-item">Кандидат психологических наук</div>
+                <div class="hero-credential-item">Эксперт в области безинструментальной детекции лжи и прогнозирования поведения</div>
+                <div class="hero-credential-item">Преподаватель ВУЗа: готовит специалистов по управлению персоналом</div>
+                <div class="hero-credential-item">Автор научных трудов в сфере детекции лжи</div>
+                <div class="hero-credential-item">Постоянный эксперт и автор крупнейших деловых изданий: Executive.ru, Psychologies, «Управление персоналом»</div>
             </div>
 
             <p>Превентивная защита бизнеса от кадровых рисков. Помогаю руководителям и HR принимать кадровые решения без риска: выявлять скрытые мотивы сотрудников, предотвращать инсайдерские угрозы и прогнозировать поведение команд.</p>
