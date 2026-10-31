@@ -14,27 +14,91 @@
 
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
     
-    <!-- SEO Микроразметка Schema.org -->
+    <!-- SEO Микроразметка Schema.org (расширенная) -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
       "@graph": [
         {
-          "@type": "Person",
-          "name": "Елена Галанова",
-          "jobTitle": "Кандидат психологических наук, Профайлер-полиграфолог",
+          "@type": "WebSite",
+          "@id": "https://galanova-elena.ru/#website",
           "url": "https://galanova-elena.ru",
-          "image": "https://galanova-elena.ru/profile.jpg",
-          "description": "Превентивная защита бизнеса от кадровых рисков. Помогаю руководителям и HR выявлять скрытые мотивы сотрудников, предотвращать инсайдерские угрозы и прогнозировать поведение команд."
+          "name": "Елена Галанова — Профайлер-полиграфолог",
+          "inLanguage": "ru-RU"
         },
         {
-          "@type": "ProfessionalService",
+          "@type": "WebPage",
+          "@id": "https://galanova-elena.ru/#webpage",
+          "url": "https://galanova-elena.ru",
+          "name": "Елена Галанова — профайлер, полиграфолог. Кадровая безопасность и аудит бизнеса",
+          "isPartOf": { "@id": "https://galanova-elena.ru/#website" },
+          "about": { "@id": "https://galanova-elena.ru/#person" },
+          "inLanguage": "ru-RU"
+        },
+        {
+          "@type": "Person",
+          "@id": "https://galanova-elena.ru/#person",
+          "name": "Елена Галанова",
+          "jobTitle": "Кандидат психологических наук, Профайлер-полиграфолог, Преподаватель ВУЗа",
+          "url": "https://galanova-elena.ru",
+          "image": "https://galanova-elena.ru/profile.jpg",
+          "description": "Превентивная защита бизнеса от кадровых рисков. Помогаю руководителям и HR выявлять скрытые мотивы сотрудников, предотвращать инсайдерские угрозы и прогнозировать поведение команд.",
+          "knowsAbout": [
+            "Профайлинг",
+            "Полиграфология",
+            "Кадровая безопасность",
+            "Служебные расследования",
+            "Аудит руководителей",
+            "Детекция лжи"
+          ],
+          "alumniOf": {
+            "@type": "EducationalOrganization",
+            "name": "Кандидат психологических наук"
+          },
+          "sameAs": [
+            "https://t.me/ElenaProprofiler",
+            "https://vk.ru/eggroup_consult",
+            "https://tenchat.ru/5171503",
+            "https://vc.ru/id5897131",
+            "https://www.e-xecutive.ru/users/1916093-elena-galanova"
+          ]
+        },
+        {
+          "@type": "Organization",
+          "@id": "https://galanova-elena.ru/#organization",
           "name": "Консалтинг и аудит безопасности: Елена Галанова",
           "url": "https://galanova-elena.ru",
           "email": "kombinir@mail.ru",
+          "founder": { "@id": "https://galanova-elena.ru/#person" },
           "address": {
             "@type": "PostalAddress",
             "addressCountry": "RU"
+          },
+          "areaServed": {
+            "@type": "Country",
+            "name": "Россия"
+          }
+        },
+        {
+          "@type": "Service",
+          "name": "Кадровая безопасность и профайлинг",
+          "serviceType": [
+            "Скрининг кандидатов",
+            "Проверка на полиграфе",
+            "Служебные расследования",
+            "Аудит руководителей"
+          ],
+          "provider": { "@id": "https://galanova-elena.ru/#organization" },
+          "areaServed": {
+            "@type": "Country",
+            "name": "Россия"
+          },
+          "offers": {
+            "@type": "Offer",
+            "priceCurrency": "RUB",
+            "price": "7000",
+            "priceValidUntil": "2026-12-31",
+            "description": "Скрининг при найме — от 7 000 ₽ за кандидата"
           }
         }
       ]
@@ -100,6 +164,13 @@
         .btn-max:hover { background: linear-gradient(135deg, #7b27c4, #4000c2); }
         .btn-email { background-color: #4a5568; color: #ffffff !important; }
         .btn-email:hover { background-color: #2d3748; }
+
+        /* Кнопка бургер-меню */
+        .hamburger-btn {
+            background: none; border: none; cursor: pointer; display: none; padding: 5px; margin-left: 10px;
+            flex-direction: column; justify-content: space-between; height: 22px; width: 28px;
+        }
+        .hamburger-btn span { display: block; height: 3px; width: 100%; background-color: var(--primary); border-radius: 2px; transition: 0.3s; }
 
         .section-title { text-align: center; font-size: 2.2rem; color: var(--primary); margin-bottom: 20px; }
         .section-subtitle { text-align: center; font-size: 1.1rem; color: var(--text-gray); max-width: 700px; margin: 0 auto 50px auto; }
@@ -371,6 +442,30 @@
         .chat-legal { text-align: center; font-size: 0.65rem; color: #a0aec0; padding: 0 15px 10px; background: #fff; }
         .chat-legal a { color: var(--chat-blue); text-decoration: none; }
 
+        /* БОКОВОЕ МЕНЮ (ВЫЕЗЖАЮЩЕЕ) */
+        .side-menu-overlay {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.5); z-index: 2001; opacity: 0; visibility: hidden; transition: all 0.3s ease;
+        }
+        .side-menu-overlay.active { opacity: 1; visibility: visible; }
+        .side-menu {
+            position: fixed; top: 0; right: -350px; width: 300px; height: 100%;
+            background: #ffffff; z-index: 2002; box-shadow: -5px 0 25px rgba(0,0,0,0.1);
+            transition: right 0.4s cubic-bezier(0.77, 0, 0.175, 1);
+            display: flex; flex-direction: column; padding: 30px;
+        }
+        .side-menu.active { right: 0; }
+        .side-menu-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 40px; }
+        .side-menu-logo { font-size: 1.2rem; font-weight: 700; color: var(--primary); }
+        .side-menu-close { background: none; border: none; font-size: 32px; line-height: 1; color: var(--primary); cursor: pointer; padding: 0; }
+        .side-menu-nav { display: flex; flex-direction: column; gap: 20px; }
+        .side-menu-nav a { 
+            text-decoration: none; color: var(--primary); font-size: 1.2rem; font-weight: 600; 
+            padding-bottom: 10px; border-bottom: 1px solid #edf2f7; transition: color 0.2s;
+        }
+        .side-menu-nav a:hover { color: var(--accent); }
+        .side-menu-footer { margin-top: auto; text-align: center; font-size: 0.85rem; color: var(--text-gray); }
+
         /* Мобильная адаптация */
         @media (max-width: 900px) {
             .hero-wrapper { flex-direction: column; padding-top: 100px; padding-bottom: 40px; min-height: auto; }
@@ -378,8 +473,9 @@
             .hero-tags { justify-content: center; } 
             .hero-image-bg { position: relative; width: 100%; height: 400px; clip-path: none; } 
             
-            .header-nav { display: none; }
-            .header-messengers { gap: 5px; }
+            .header-nav { display: none; } /* Скрываем горизонтальное меню */
+            .hamburger-btn { display: flex; } /* Показываем бургер */
+            .header-messengers { gap: 5px; margin-right: 10px; }
             .header-messenger-btn { padding: 6px 10px; font-size: 0.75rem; }
             .hero-actions { justify-content: center; width: 100%; flex-direction: column; gap: 15px; }
             .contact-btn { width: 100%; box-sizing: border-box; }
@@ -440,8 +536,32 @@
                     Почта
                 </a>
             </div>
+            
+            <!-- Кнопка мобильного меню (бургер) -->
+            <button class="hamburger-btn" onclick="toggleMenu()" aria-label="Открыть меню">
+                <span></span><span></span><span></span>
+            </button>
         </div>
     </header>
+
+    <!-- БОКОВОЕ МЕНЮ -->
+    <div class="side-menu-overlay" id="menuOverlay" onclick="closeMenu()"></div>
+    <div class="side-menu" id="sideMenu">
+        <div class="side-menu-header">
+            <span class="side-menu-logo">Елена Галанова</span>
+            <button class="side-menu-close" onclick="closeMenu()">&times;</button>
+        </div>
+        <nav class="side-menu-nav">
+            <a href="#about" onclick="closeMenu()">Обо мне</a>
+            <a href="#solutions" onclick="closeMenu()">Компетенции</a>
+            <a href="#process" onclick="closeMenu()">Процесс</a>
+            <a href="#formats" onclick="closeMenu()">Форматы и цены</a>
+            <a href="#publications" onclick="closeMenu()">Публикации</a>
+        </nav>
+        <div class="side-menu-footer">
+            © Елена Галанова<br>Кандидат психологических наук
+        </div>
+    </div>
 
     <!-- ПЛАВАЮЩАЯ БОКОВАЯ ПАНЕЛЬ С СОЦСЕТЯМИ -->
     <div class="sticky-socials">
@@ -921,6 +1041,16 @@
     <!-- Скрипты -->
     <script>
         try { document.getElementById('currentYear').textContent = new Date().getFullYear(); } catch(e) {}
+
+        // БОКОВОЕ МЕНЮ
+        function toggleMenu() {
+            document.getElementById('sideMenu').classList.toggle('active');
+            document.getElementById('menuOverlay').classList.toggle('active');
+        }
+        function closeMenu() {
+            document.getElementById('sideMenu').classList.remove('active');
+            document.getElementById('menuOverlay').classList.remove('active');
+        }
 
         // УМНЫЙ РОУТИНГ ДЛЯ МЕССЕНДЖЕРОВ (ПК vs ТЕЛЕФОН)
         function openMessenger(e, type) {
