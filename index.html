@@ -182,44 +182,75 @@
             display: flex;
             align-items: center;
             background-color: #ffffff;
-            padding-top: 80px; 
+            padding-top: 100px; 
+            padding-bottom: 50px;
             overflow: hidden;
         }
         .hero-content {
-            width: 50%;
+            width: 60%; /* Увеличили ширину текста, так как фото стало меньше */
             padding-left: max(20px, calc((100% - 1100px) / 2));
-            padding-right: 40px;
+            padding-right: 20px;
             position: relative;
             z-index: 2;
             box-sizing: border-box;
         }
-        .hero-content h1 { font-size: 3.2rem; color: var(--primary); margin-bottom: 15px; line-height: 1.1; }
+        .hero-content h1 { font-size: 3.2rem; color: var(--primary); margin-bottom: 20px; line-height: 1.1; }
         
-        /* ТЕГИ (ПРЕЖНИЙ ВАРИАНТ) */
-        .hero-tags { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 25px; }
+        /* ТЕГИ В СТОЛБИК */
+        .hero-tags { 
+            display: flex; 
+            flex-direction: column; /* Выстраиваем в колонку */
+            align-items: flex-start; 
+            gap: 10px; 
+            margin-bottom: 30px; 
+        }
         .hero-tag { 
             background: rgba(211, 84, 0, 0.08); 
             color: var(--accent); 
-            padding: 6px 14px; 
-            border-radius: 20px; 
-            font-size: 0.8rem; 
+            padding: 8px 16px; 
+            border-radius: 6px; 
+            font-size: 0.85rem; 
             font-weight: 700; 
             text-transform: uppercase; 
             letter-spacing: 0.5px; 
             border: 1px solid rgba(211, 84, 0, 0.15);
         }
         
-        .hero-content p { font-size: 1.15rem; color: var(--text-gray); margin-bottom: 35px; max-width: 95%; line-height: 1.6; }
+        /* БЛОК ЦИТАТЫ НА ГЛАВНОМ ЭКРАНЕ */
+        .hero-quote {
+            font-size: 1.05rem;
+            font-style: italic;
+            color: var(--text-dark);
+            border-left: 4px solid var(--accent);
+            padding-left: 20px;
+            margin: 0 0 30px 0;
+            line-height: 1.6;
+            max-width: 95%;
+        }
+        .hero-quote cite {
+            display: block;
+            margin-top: 15px;
+            font-size: 0.85rem;
+            font-style: normal;
+            font-weight: 700;
+            color: var(--accent);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
         
-        /* СКОШЕННОЕ ФОТО (ВОЗВРАЩЕНО) */
+        /* УМЕНЬШЕННОЕ ФОТО В ПОЛНЫЙ РОСТ (КАРТОЧКА) */
         .hero-image-bg {
             position: absolute;
-            top: 0;
-            right: 0;
-            width: 55%;
-            height: 100%;
+            top: 55%;
+            right: 5%;
+            width: 32%; /* Значительно уменьшили ширину */
+            height: 80%; /* Увеличили высоту, чтобы было в полный рост */
+            transform: translateY(-50%);
             z-index: 1;
-            clip-path: polygon(15% 0, 100% 0, 100% 100%, 0% 100%);
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+            background-color: #f8fafc;
         }
         .hero-image-bg img {
             width: 100%;
@@ -261,7 +292,7 @@
         .social-text-icon { font-weight: 800; font-size: 14px; letter-spacing: 0.5px; color: #ffffff; }
 
         /* БЛОК ДОВЕРИЯ (СМИ) */
-        .hero-trust { margin-top: 50px; display: flex; align-items: center; gap: 20px; flex-wrap: wrap; }
+        .hero-trust { margin-top: 40px; display: flex; align-items: center; gap: 20px; flex-wrap: wrap; }
         .hero-trust span { font-size: 0.8rem; font-weight: 700; color: #a0aec0; text-transform: uppercase; letter-spacing: 1px; }
         .hero-trust-logos { display: flex; gap: 12px; align-items: center; flex-wrap: wrap; }
         .press-link { 
@@ -521,11 +552,16 @@
         @media (max-width: 900px) {
             .hero-wrapper { flex-direction: column; padding-top: 100px; padding-bottom: 40px; min-height: auto; }
             .hero-content { width: 100%; padding: 0 20px; text-align: center; margin-bottom: 30px; }
-            .hero-tags { justify-content: center; } 
-            .hero-image-bg { position: relative; width: 100%; height: 400px; clip-path: none; } 
+            .hero-tags { align-items: center; } /* Центрируем теги на мобильных */
+            .hero-quote { text-align: left; }
             
-            .header-nav { display: none; } /* Скрываем горизонтальное меню */
-            .hamburger-btn { display: flex; } /* Показываем бургер */
+            .hero-image-bg { 
+                position: relative; top: 0; right: 0; transform: none; 
+                width: 60%; height: 400px; margin: 0 auto; 
+            } 
+            
+            .header-nav { display: none; } 
+            .hamburger-btn { display: flex; } 
             .header-messengers { gap: 5px; margin-right: 10px; }
             .header-messenger-btn { padding: 6px 10px; font-size: 0.75rem; }
             
@@ -626,16 +662,18 @@
         <div class="hero-content">
             <h1>Елена Галанова</h1>
             
-            <!-- Возвращенные плашки-теги -->
+            <!-- Теги в столбик -->
             <div class="hero-tags">
                 <span class="hero-tag">Кандидат психологических наук</span>
                 <span class="hero-tag">Профайлер-полиграфолог</span>
                 <span class="hero-tag">Преподаватель ВУЗа</span>
             </div>
 
-            <p>Превентивная защита бизнеса от кадровых рисков. Помогаю руководителям и HR принимать кадровые решения без риска: выявлять скрытые мотивы сотрудников, предотвращать инсайдерские угрозы и прогнозировать поведение команд.</p>
-            
-            <!-- Кнопка "Обсудить задачу" убрана, чтобы не торопить клиента -->
+            <!-- Цитата на главном экране -->
+            <blockquote class="hero-quote">
+                «Профайлинг - не про поиск врагов и не про разоблачение. Это про способность видеть мир чуть объемнее, чем он кажется на первый взгляд. И когда такой угол зрения становится привычным, перестаешь делить людей на «честных» и «лжецов». Просто начинаешь замечать, как устроена человеческая природа. Со всеми её противоречиями, страхами и попытками казаться лучше, чем есть. А это, пожалуй, важнее любых разоблачений.»
+                <cite>Из книги «Лидерские психотипы»</cite>
+            </blockquote>
             
             <div class="hero-trust">
                 <span>Эксперт изданий:</span>
@@ -647,7 +685,7 @@
             </div>
         </div>
         
-        <!-- Возвращенное скошенное фото -->
+        <!-- Уменьшенное фото в полный рост -->
         <div class="hero-image-bg">
             <img src="profile.jpg" alt="Елена Галанова" loading="lazy">
         </div>
@@ -656,7 +694,7 @@
     <!-- Методология -->
     <section class="principles">
         <div class="container">
-            <h2 class="section-title">Никакой эзотерики. Только наука.</h2>
+            <h2 class="section-title">Глубокая аналитика, подтвержденные данные и профессиональная интуиция</h2>
             <p class="section-subtitle" style="color:#cbd5e0;">Строгий анализ, базирующийся на академической психологии и инструментальной детекции лжи.</p>
             <div class="principles-grid">
                 <div class="principle-card">
@@ -716,18 +754,6 @@
                         <li>Постоянный эксперт изданий Executive.ru и Psychologies</li>
                     </ul>
                 </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- ЦИТАТА 2 (Обо мне) -->
-    <section class="quote-section">
-        <div class="container">
-            <div class="quote-block">
-                <div class="quote-text">
-                    Профайлинг - не про поиск врагов и не про разоблачение. Это про способность видеть мир чуть объемнее, чем он кажется на первый взгляд. И когда такой угол зрения становится привычным, перестаешь делить людей на «честных» и «лжецов». Просто начинаешь замечать, как устроена человеческая природа. Со всеми её противоречиями, страхами и попытками казаться лучше, чем есть. А это, пожалуй, важнее любых разоблачений.
-                </div>
-                <div class="quote-author">Елена Галанова <span>Из книги «Лидерские психотипы»</span></div>
             </div>
         </div>
     </section>
