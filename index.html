@@ -97,6 +97,26 @@
         .btn-max { background: linear-gradient(135deg, #8E2DE2, #4A00E0); color: #ffffff !important; }
         .btn-max:hover { background: linear-gradient(135deg, #7b27c4, #4000c2); }
 
+        /* Подсказка для MAX */
+        .max-hint {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 18px;
+            height: 18px;
+            background: #e2e8f0;
+            color: #4a5568;
+            border-radius: 50%;
+            font-size: 12px;
+            font-weight: 700;
+            cursor: pointer;
+            margin-left: 5px;
+            transition: background 0.2s;
+        }
+        .max-hint:hover {
+            background: #cbd5e0;
+        }
+
         .section-title { text-align: center; font-size: 2.2rem; color: var(--primary); margin-bottom: 20px; }
         .section-subtitle { text-align: center; font-size: 1.1rem; color: var(--text-gray); max-width: 700px; margin: 0 auto 50px auto; }
         
@@ -415,11 +435,13 @@
                 <a href="#formats">Форматы и цены</a>
             </nav>
             <div class="header-messengers">
-                <!-- ОБНОВЛЕННАЯ ССЫЛКА НА MAX -->
+                <!-- Кнопка MAX с обновленной ссылкой и подсказкой -->
                 <a href="https://max.ru/u/f9LHodD0cOIwE5Tk0yqsCdSW7aH2YKheHnM5PcwHgDaWAse8blY_Usz5-7Q" target="_blank" class="header-messenger-btn btn-max" title="Написать в MAX" onclick="openMessenger(event, 'max')">
                     <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12c0 1.7.45 3.31 1.23 4.7L2 22l5.48-1.15C8.89 21.57 10.41 22 12 22c5.52 0 10-4.48 10-10S17.52 2 12 2z"/></svg>
                     MAX
                 </a>
+                <span class="max-hint" onclick="alert('Если у вас установлено приложение MAX, оно откроется автоматически. Если нет — вы перейдёте в веб-версию, где можно войти по номеру телефона или QR-коду.')" title="Как это работает?">?</span>
+                
                 <a href="https://t.me/ElenaProprofiler" target="_blank" class="header-messenger-btn btn-telegram" title="Написать в Telegram" onclick="openMessenger(event, 'tg')">
                     <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69.01-.03.01-.14-.06-.2-.07-.06-.17-.04-.25-.02-.11.02-1.78 1.14-5.06 3.34-.48.33-.91.49-1.3.48-.43-.01-1.25-.24-1.87-.44-.75-.24-1.35-.37-1.3-.79.03-.22.33-.44.89-.66 3.5-1.53 5.83-2.53 7-3.02 3.33-1.39 4.02-1.63 4.47-1.64.1 0 .32.02.47.14.12.1.15.25.17.33.02.13.04.28.02.4z"/></svg>
                     Telegram
@@ -1132,7 +1154,8 @@
                     botReply = 'Отличная задача. Елена разработает программу под ваши цели. Оставьте контакты, и она свяжется с вами.';
                     nextOptions = [{ text: "Оставить контакты", action: "contacts" }];
                 } else if (action === 'contacts') {
-                    botReply = 'Отлично! Нажмите на кнопку ниже, чтобы заполнить форму, или напишите ваш телефон/email прямо в чат.';
+                    // Обновленный текст с напоминанием про веб-версию
+                    botReply = 'Отлично! Вы можете оставить контакты в форме ниже или написать мне в MAX/Telegram. Если приложение не открылось — воспользуйтесь веб-версией (вход по номеру телефона).';
                     nextOptions = [{ text: "Открыть форму", action: "open_form" }];
                 } else if (action === 'open_form') {
                     openModal();
