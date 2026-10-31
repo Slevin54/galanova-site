@@ -182,67 +182,44 @@
             display: flex;
             align-items: center;
             background-color: #ffffff;
-            padding-top: 100px; 
-            padding-bottom: 50px;
+            padding-top: 80px; 
             overflow: hidden;
         }
         .hero-content {
-            width: 55%;
+            width: 50%;
             padding-left: max(20px, calc((100% - 1100px) / 2));
-            padding-right: 20px;
+            padding-right: 40px;
             position: relative;
             z-index: 2;
             box-sizing: border-box;
         }
-        .hero-content h1 { font-size: 3.2rem; color: var(--primary); margin-bottom: 20px; line-height: 1.1; }
+        .hero-content h1 { font-size: 3.2rem; color: var(--primary); margin-bottom: 15px; line-height: 1.1; }
         
-        /* СТИЛЬНЫЙ БЛОК РЕГАЛИЙ */
-        .hero-credentials {
-            background: #ffffff;
-            border-left: 4px solid var(--accent);
-            padding: 20px 25px;
-            border-radius: 0 12px 12px 0;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.06);
-            margin-bottom: 30px;
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-        }
-        .hero-credential-item {
-            font-size: 0.95rem;
-            color: var(--text-dark);
-            font-weight: 500;
-            line-height: 1.5;
-            display: flex;
-            align-items: flex-start;
-            gap: 10px;
-        }
-        .hero-credential-item::before {
-            content: '—';
-            color: var(--accent);
-            font-weight: 800;
-            flex-shrink: 0;
-        }
-        .hero-credential-item strong {
-            color: var(--primary);
-            font-weight: 700;
+        /* ТЕГИ (ПРЕЖНИЙ ВАРИАНТ) */
+        .hero-tags { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 25px; }
+        .hero-tag { 
+            background: rgba(211, 84, 0, 0.08); 
+            color: var(--accent); 
+            padding: 6px 14px; 
+            border-radius: 20px; 
+            font-size: 0.8rem; 
+            font-weight: 700; 
+            text-transform: uppercase; 
+            letter-spacing: 0.5px; 
+            border: 1px solid rgba(211, 84, 0, 0.15);
         }
         
-        .hero-content p { font-size: 1.1rem; color: var(--text-gray); margin-bottom: 30px; max-width: 95%; line-height: 1.6; }
+        .hero-content p { font-size: 1.15rem; color: var(--text-gray); margin-bottom: 35px; max-width: 95%; line-height: 1.6; }
         
-        /* УМЕНЬШЕННОЕ И ОБЪЕМНОЕ ФОТО */
+        /* СКОШЕННОЕ ФОТО (ВОЗВРАЩЕНО) */
         .hero-image-bg {
             position: absolute;
-            top: 50%;
-            right: 5%;
-            width: 35%; /* Уменьшили ширину */
-            height: 75%; /* Уменьшили высоту */
-            transform: translateY(-50%);
-            border-radius: 20px; /* Закруглили углы */
-            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25); /* Добавили красивую тень */
+            top: 0;
+            right: 0;
+            width: 55%;
+            height: 100%;
             z-index: 1;
-            overflow: hidden; /* Чтобы фото не вылезало за края */
-            border: 5px solid #ffffff; /* Белая рамка для объема */
+            clip-path: polygon(15% 0, 100% 0, 100% 100%, 0% 100%);
         }
         .hero-image-bg img {
             width: 100%;
@@ -284,7 +261,7 @@
         .social-text-icon { font-weight: 800; font-size: 14px; letter-spacing: 0.5px; color: #ffffff; }
 
         /* БЛОК ДОВЕРИЯ (СМИ) */
-        .hero-trust { margin-top: 40px; display: flex; align-items: center; gap: 20px; flex-wrap: wrap; }
+        .hero-trust { margin-top: 50px; display: flex; align-items: center; gap: 20px; flex-wrap: wrap; }
         .hero-trust span { font-size: 0.8rem; font-weight: 700; color: #a0aec0; text-transform: uppercase; letter-spacing: 1px; }
         .hero-trust-logos { display: flex; gap: 12px; align-items: center; flex-wrap: wrap; }
         .press-link { 
@@ -544,19 +521,13 @@
         @media (max-width: 900px) {
             .hero-wrapper { flex-direction: column; padding-top: 100px; padding-bottom: 40px; min-height: auto; }
             .hero-content { width: 100%; padding: 0 20px; text-align: center; margin-bottom: 30px; }
-            .hero-credentials { text-align: left; align-items: flex-start; } /* Список на мобильных слева */
+            .hero-tags { justify-content: center; } 
+            .hero-image-bg { position: relative; width: 100%; height: 400px; clip-path: none; } 
             
-            .hero-image-bg { 
-                position: relative; top: 0; right: 0; transform: none; 
-                width: 80%; height: 350px; margin: 0 auto; 
-            } 
-            
-            .header-nav { display: none; } 
-            .hamburger-btn { display: flex; } 
+            .header-nav { display: none; } /* Скрываем горизонтальное меню */
+            .hamburger-btn { display: flex; } /* Показываем бургер */
             .header-messengers { gap: 5px; margin-right: 10px; }
             .header-messenger-btn { padding: 6px 10px; font-size: 0.75rem; }
-            .hero-actions { justify-content: center; width: 100%; flex-direction: column; gap: 15px; }
-            .contact-btn { width: 100%; box-sizing: border-box; }
             
             .hero-trust { margin-top: 40px; justify-content: center; flex-direction: column; gap: 15px; border-top: none; padding-top: 0;}
             .hero-trust-logos { justify-content: center; flex-wrap: wrap; }
@@ -655,21 +626,16 @@
         <div class="hero-content">
             <h1>Елена Галанова</h1>
             
-            <!-- Стильный блок регалий -->
-            <div class="hero-credentials">
-                <div class="hero-credential-item"><strong>В практическом профайлинге и оперативной психодиагностике более 10 лет</strong></div>
-                <div class="hero-credential-item"><strong>Кандидат психологических наук</strong></div>
-                <div class="hero-credential-item">Эксперт в области безинструментальной детекции лжи и прогнозирования поведения</div>
-                <div class="hero-credential-item">Преподаватель ВУЗа: готовит специалистов по управлению персоналом</div>
-                <div class="hero-credential-item">Автор научных трудов в сфере детекции лжи</div>
-                <div class="hero-credential-item">Постоянный эксперт и автор крупнейших деловых изданий: <strong>Executive.ru, Psychologies, «Управление персоналом»</strong></div>
+            <!-- Возвращенные плашки-теги -->
+            <div class="hero-tags">
+                <span class="hero-tag">Кандидат психологических наук</span>
+                <span class="hero-tag">Профайлер-полиграфолог</span>
+                <span class="hero-tag">Преподаватель ВУЗа</span>
             </div>
 
             <p>Превентивная защита бизнеса от кадровых рисков. Помогаю руководителям и HR принимать кадровые решения без риска: выявлять скрытые мотивы сотрудников, предотвращать инсайдерские угрозы и прогнозировать поведение команд.</p>
             
-            <div class="hero-actions">
-                <button class="contact-btn" onclick="openModal()">Обсудить задачу</button>
-            </div>
+            <!-- Кнопка "Обсудить задачу" убрана, чтобы не торопить клиента -->
             
             <div class="hero-trust">
                 <span>Эксперт изданий:</span>
@@ -681,7 +647,7 @@
             </div>
         </div>
         
-        <!-- Уменьшенное и стильное фото -->
+        <!-- Возвращенное скошенное фото -->
         <div class="hero-image-bg">
             <img src="profile.jpg" alt="Елена Галанова" loading="lazy">
         </div>
