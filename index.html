@@ -187,7 +187,7 @@
             overflow: hidden;
         }
         .hero-content {
-            width: 60%; /* Увеличили ширину текста, так как фото стало меньше */
+            width: 60%; 
             padding-left: max(20px, calc((100% - 1100px) / 2));
             padding-right: 20px;
             position: relative;
@@ -199,7 +199,7 @@
         /* ТЕГИ В СТОЛБИК */
         .hero-tags { 
             display: flex; 
-            flex-direction: column; /* Выстраиваем в колонку */
+            flex-direction: column; 
             align-items: flex-start; 
             gap: 10px; 
             margin-bottom: 30px; 
@@ -221,11 +221,15 @@
             font-size: 1.05rem;
             font-style: italic;
             color: var(--text-dark);
+            background: #f8fafc;
             border-left: 4px solid var(--accent);
-            padding-left: 20px;
+            padding: 20px 25px;
             margin: 0 0 30px 0;
             line-height: 1.6;
             max-width: 95%;
+            border-radius: 0 8px 8px 0;
+            text-align: justify;
+            hyphens: auto; /* Переносы для ровного текста */
         }
         .hero-quote cite {
             display: block;
@@ -236,6 +240,7 @@
             color: var(--accent);
             text-transform: uppercase;
             letter-spacing: 0.5px;
+            text-align: right; /* Подпись справа */
         }
         
         /* УМЕНЬШЕННОЕ ФОТО В ПОЛНЫЙ РОСТ (КАРТОЧКА) */
@@ -243,8 +248,8 @@
             position: absolute;
             top: 55%;
             right: 5%;
-            width: 32%; /* Значительно уменьшили ширину */
-            height: 80%; /* Увеличили высоту, чтобы было в полный рост */
+            width: 32%; 
+            height: 80%; 
             transform: translateY(-50%);
             z-index: 1;
             border-radius: 12px;
@@ -552,8 +557,9 @@
         @media (max-width: 900px) {
             .hero-wrapper { flex-direction: column; padding-top: 100px; padding-bottom: 40px; min-height: auto; }
             .hero-content { width: 100%; padding: 0 20px; text-align: center; margin-bottom: 30px; }
-            .hero-tags { align-items: center; } /* Центрируем теги на мобильных */
-            .hero-quote { text-align: left; }
+            .hero-tags { align-items: center; } 
+            .hero-quote { text-align: justify; padding: 15px 20px; }
+            .hero-quote cite { text-align: center; }
             
             .hero-image-bg { 
                 position: relative; top: 0; right: 0; transform: none; 
@@ -669,10 +675,10 @@
                 <span class="hero-tag">Преподаватель ВУЗа</span>
             </div>
 
-            <!-- Цитата на главном экране -->
+            <!-- Обновленная цитата с названием книги -->
             <blockquote class="hero-quote">
                 «Профайлинг - не про поиск врагов и не про разоблачение. Это про способность видеть мир чуть объемнее, чем он кажется на первый взгляд. И когда такой угол зрения становится привычным, перестаешь делить людей на «честных» и «лжецов». Просто начинаешь замечать, как устроена человеческая природа. Со всеми её противоречиями, страхами и попытками казаться лучше, чем есть. А это, пожалуй, важнее любых разоблачений.»
-                <cite>Из книги «Лидерские психотипы»</cite>
+                <cite>Из книги «Почерк лжи»</cite>
             </blockquote>
             
             <div class="hero-trust">
@@ -720,7 +726,7 @@
                 <div class="quote-text">
                     Поведенческий анализ — это не инструмент обвинений, а метод критического мышления. Он учит не слепо принимать информацию, а внимательно изучать её, замечать несоответствия, задавать уточняющие вопросы и выстраивать целостную картину на основе наблюдаемых фактов.
                 </div>
-                <div class="quote-author">Елена Галанова <span>Из книги «Лидерские психотипы»</span></div>
+                <div class="quote-author">Елена Галанова <span>Из книги «Почерк лжи»</span></div>
             </div>
         </div>
     </section>
@@ -749,7 +755,7 @@
                     
                     <ul class="about-list">
                         <li>Кандидат психологических наук</li>
-                        <li>Автор готовящейся книги «Лидерские психотипы»</li>
+                        <li>Автор готовящейся книги «Почерк лжи»</li>
                         <li>Преподаватель ВУЗа: готовлю специалистов по профайлингу</li>
                         <li>Постоянный эксперт изданий Executive.ru и Psychologies</li>
                     </ul>
@@ -827,7 +833,7 @@
                 <div class="quote-text">
                     Для меня профайлер — прежде всего аналитик, а сам профайлинг — прикладная поведенческая аналитика, которая органично объединяет отдельные техники в единую живую систему.
                 </div>
-                <div class="quote-author">Елена Галанова <span>Из книги «Лидерские психотипы»</span></div>
+                <div class="quote-author">Елена Галанова <span>Из книги «Почерк лжи»</span></div>
             </div>
         </div>
     </section>
@@ -946,7 +952,7 @@
                 <div class="quote-text">
                     Профайлинг — это не только решение сложных задач, но и возможность постоянно развиваться, открывая для себя новые грани человеческой психологии.
                 </div>
-                <div class="quote-author">Елена Галанова <span>Из книги «Лидерские психотипы»</span></div>
+                <div class="quote-author">Елена Галанова <span>Из книги «Почерк лжи»</span></div>
             </div>
         </div>
     </section>
@@ -993,11 +999,11 @@
                     </div>
                     <div class="pub-card">
                         <div class="pub-image">
-                            <img src="https://images.unsplash.com/photo-1544947950-fa07a98d237f?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Обложка книги Лидерские психотипы" class="pub-img" loading="lazy">
+                            <img src="https://images.unsplash.com/photo-1544947950-fa07a98d237f?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Обложка книги Почерк лжи" class="pub-img" loading="lazy">
                         </div>
                         <div class="pub-content">
                             <span class="pub-tag">Книга в работе</span>
-                            <h3>Лидерские психотипы</h3>
+                            <h3>Почерк лжи</h3>
                             <p>Книга об организационных рисках, контекстном анализе и прогнозировании поведения в корпоративной среде.</p>
                             <span class="pub-link pub-link-disabled">Скоро в продаже</span>
                         </div>
@@ -1039,11 +1045,11 @@
                     </div>
                     <div class="pub-card">
                         <div class="pub-image">
-                            <img src="https://images.unsplash.com/photo-1544947950-fa07a98d237f?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Обложка книги Лидерские психотипы" class="pub-img" loading="lazy">
+                            <img src="https://images.unsplash.com/photo-1544947950-fa07a98d237f?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Обложка книги Почерк лжи" class="pub-img" loading="lazy">
                         </div>
                         <div class="pub-content">
                             <span class="pub-tag">Книга в работе</span>
-                            <h3>Лидерские психотипы</h3>
+                            <h3>Почерк лжи</h3>
                             <p>Книга об организационных рисках, контекстном анализе и прогнозировании поведения в корпоративной среде.</p>
                             <span class="pub-link pub-link-disabled">Скоро в продаже</span>
                         </div>
