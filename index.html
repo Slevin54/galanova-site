@@ -1076,7 +1076,7 @@
     <!-- ПУБЛИКАЦИИ (БЕСКОНЕЧНАЯ АВТОПРОКРУТКА) -->
     <section class="publications" id="publications">
         <div class="container">
-            <h2 class="section-title" style="margin-bottom: 20px;">Аналитика, статьи и разборы</h2>
+            <h2 class="section-title" style="margin-bottom: 20px;">Медиа и Блог</h2>
             
             <div class="carousel-wrapper-pub">
                 <div class="pub-track">
@@ -1297,17 +1297,43 @@
             document.getElementById('menuOverlay').classList.remove('active');
         }
 
-        // КАРУСЕЛЬ УСЛУГ
+        // ============================================================
+        // КАРУСЕЛЬ УСЛУГ (ЗАЦИКЛЕННАЯ)
+        // При достижении последней карточки («Анализ анонимных
+        // сообщений» и др.) карусель возвращается к началу и
+        // пролистывание начинается заново. Аналогично при листании
+        // назад с первой карточки — переход к последней.
+        // ============================================================
         function scrollCarousel(direction) {
             const track = document.getElementById('solutionsTrack');
             if (!track) return;
             const card = track.querySelector('.solution-card');
-            const scrollAmount = card.offsetWidth + 20; 
-            
-            if (direction === 'left') {
-                track.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
+            if (!card) return;
+
+            const GAP = 20;
+            const scrollAmount = card.offsetWidth + GAP;
+            const maxScroll = track.scrollWidth - track.clientWidth;
+            const tolerance = 15; // допуск округления при smooth-скролле
+
+            // Если все карточки помещаются на экране — ничего не делаем
+            if (maxScroll <= 0) return;
+
+            if (direction === 'right') {
+                // Находимся у правого края → возврат к началу
+                if (track.scrollLeft >= maxScroll - tolerance) {
+                    track.scrollTo({ left: 0, behavior: 'smooth' });
+                } else {
+                    const target = Math.min(track.scrollLeft + scrollAmount, maxScroll);
+                    track.scrollTo({ left: target, behavior: 'smooth' });
+                }
             } else {
-                track.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+                // Находимся у левого края → прыжок к последней карточке
+                if (track.scrollLeft <= tolerance) {
+                    track.scrollTo({ left: maxScroll, behavior: 'smooth' });
+                } else {
+                    const target = Math.max(track.scrollLeft - scrollAmount, 0);
+                    track.scrollTo({ left: target, behavior: 'smooth' });
+                }
             }
         }
 
