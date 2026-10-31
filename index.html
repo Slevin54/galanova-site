@@ -81,12 +81,13 @@
         },
         {
           "@type": "Service",
-          "name": "Кадровая безопасность и профайлинг",
+          "name": "Профайлинг и кадровая безопасность",
           "serviceType": [
-            "Скрининг кандидатов",
-            "Проверка на полиграфе",
-            "Служебные расследования",
-            "Аудит руководителей"
+            "Профайлинг цифрового следа",
+            "Экспертная консультация",
+            "Сопровождение расследований",
+            "Анализ анонимных сообщений",
+            "Медиация конфликтов"
           ],
           "provider": { "@id": "https://galanova-elena.ru/#organization" },
           "areaServed": {
@@ -96,9 +97,9 @@
           "offers": {
             "@type": "Offer",
             "priceCurrency": "RUB",
-            "price": "7000",
+            "price": "5000",
             "priceValidUntil": "2026-12-31",
-            "description": "Скрининг при найме — от 7 000 ₽ за кандидата"
+            "description": "Профайлинг и консультации — от 5 000 ₽"
           }
         }
       ]
@@ -229,7 +230,7 @@
             max-width: 95%;
             border-radius: 0 8px 8px 0;
             text-align: justify;
-            hyphens: auto; /* Переносы для ровного текста */
+            hyphens: auto;
         }
         .hero-quote cite {
             display: block;
@@ -240,7 +241,7 @@
             color: var(--accent);
             text-transform: uppercase;
             letter-spacing: 0.5px;
-            text-align: right; /* Подпись справа */
+            text-align: right;
         }
         
         /* УМЕНЬШЕННОЕ ФОТО В ПОЛНЫЙ РОСТ (КАРТОЧКА) */
@@ -382,7 +383,7 @@
         .about-list li { position: relative; padding-left: 30px; margin-bottom: 15px; font-size: 1.05rem; color: var(--text-dark); font-weight: 600; }
         .about-list li::before { content: '✓'; position: absolute; left: 0; top: 2px; color: var(--accent); font-weight: 800; font-size: 18px; }
 
-        /* Решения для бизнеса */
+        /* УСЛУГИ (НОВЫЙ БЛОК) */
         .solutions { padding: 100px 0 60px 0; background-color: var(--bg-light); scroll-margin-top: 70px; }
         .solutions-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 30px; }
         .solution-card {
@@ -403,6 +404,7 @@
             content: '✓'; position: absolute; left: 0; top: 2px; width: 20px; height: 20px; background: rgba(211, 84, 0, 0.15);
             color: var(--accent); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 800;
         }
+        .solution-price { margin-top: 20px; font-weight: 700; color: var(--accent); font-size: 1.1rem; }
 
         .legal-note { display: flex; align-items: flex-start; gap: 15px; background: #fff; padding: 25px 30px; border-radius: 8px; margin-top: 40px; border: 1px solid #e2e8f0; box-shadow: 0 5px 15px rgba(0,0,0,0.02); }
         .legal-note svg { width: 30px; height: 30px; fill: var(--text-gray); flex-shrink: 0; margin-top: 3px; }
@@ -605,7 +607,7 @@
             </a>
             <nav class="header-nav">
                 <a href="#about">Обо мне</a>
-                <a href="#solutions">Компетенции</a>
+                <a href="#solutions">Услуги</a>
                 <a href="#process">Процесс</a>
                 <a href="#formats">Форматы и цены</a>
             </nav>
@@ -644,7 +646,7 @@
         </div>
         <nav class="side-menu-nav">
             <a href="#about" onclick="closeMenu()">Обо мне</a>
-            <a href="#solutions" onclick="closeMenu()">Компетенции</a>
+            <a href="#solutions" onclick="closeMenu()">Услуги</a>
             <a href="#process" onclick="closeMenu()">Процесс</a>
             <a href="#formats" onclick="closeMenu()">Форматы и цены</a>
             <a href="#publications" onclick="closeMenu()">Публикации</a>
@@ -675,7 +677,7 @@
                 <span class="hero-tag">Преподаватель ВУЗа</span>
             </div>
 
-            <!-- Обновленная цитата с названием книги -->
+            <!-- Цитата на главном экране -->
             <blockquote class="hero-quote">
                 «Профайлинг - не про поиск врагов и не про разоблачение. Это про способность видеть мир чуть объемнее, чем он кажется на первый взгляд. И когда такой угол зрения становится привычным, перестаешь делить людей на «честных» и «лжецов». Просто начинаешь замечать, как устроена человеческая природа. Со всеми её противоречиями, страхами и попытками казаться лучше, чем есть. А это, пожалуй, важнее любых разоблачений.»
                 <cite>Из книги «Почерк лжи»</cite>
@@ -764,59 +766,103 @@
         </div>
     </section>
 
-    <!-- Решения для бизнеса -->
+    <!-- УСЛУГИ -->
     <section class="solutions" id="solutions">
         <div class="container">
-            <h2 class="section-title">Компетенции и решения</h2>
-            <p class="section-subtitle">Системный подход к кадровой безопасности и оценке управленческих рисков</p>
+            <h2 class="section-title">Услуги</h2>
+            <p class="section-subtitle">Профессиональные решения для бизнеса и оценки персонала</p>
             <div class="solutions-grid">
-                <div class="solution-card">
-                    <div class="solution-header">
-                        <div class="solution-icon"><svg viewBox="0 0 24 24"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm0 10.99h7c-.53 4.12-3.28 7.79-7 8.94V12H5V6.3l7-3.11v8.8z"/></svg></div>
-                        <div class="solution-title-wrap">
-                            <h3>Кадровая безопасность</h3>
-                            <span class="solution-badge">Для владельцев и СБ</span>
-                        </div>
-                    </div>
-                    <p class="solution-desc">Минимизация финансовых и репутационных рисков компании через глубокую проверку персонала.</p>
-                    <ul class="solution-list">
-                        <li>Скрининг соискателей на топовые позиции</li>
-                        <li>Выявление корпоративных инсайдеров</li>
-                        <li>Проверка на полиграфе (детекторе лжи)</li>
-                    </ul>
-                </div>
-
-                <div class="solution-card">
-                    <div class="solution-header">
-                        <div class="solution-icon"><svg viewBox="0 0 24 24"><path d="M19 22H5v-2h14v2zm-2.03-4.26c-.53-.88-1.46-1.52-2.58-1.74l-.96-.19c-.31-.06-.52-.36-.45-.68.06-.31.36-.52.68-.45l.97.19c1.92.38 3.51 1.48 4.41 2.98L16.97 17.74zM12 13c-2.21 0-4-1.79-4-4s1.79-4 4-4 4 1.79 4 4-1.79 4-4 4zm0-6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zM5.97 17.74c-.53-.88-1.46-1.52-2.58-1.74l-.96-.19c-.31-.06-.52-.36-.45-.68.06-.31.36-.52.68-.45l.97.19c1.92.38 3.51 1.48 4.41 2.98L5.97 17.74z"/></svg></div>
-                        <div class="solution-title-wrap">
-                            <h3>Аудит руководителей</h3>
-                            <span class="solution-badge">Для акционеров и CEO</span>
-                        </div>
-                    </div>
-                    <p class="solution-desc">Оценка управленческого потенциала, прогнозирование лидерских решений и анализ мотивов топ-менеджмента.</p>
-                    <ul class="solution-list">
-                        <li>Составление профиля лидерских качеств</li>
-                        <li>Оценка психологической совместимости в борде</li>
-                        <li>Прогнозирование реакций топов на кризис</li>
-                    </ul>
-                </div>
-
+                
+                <!-- Услуга 1 -->
                 <div class="solution-card">
                     <div class="solution-header">
                         <div class="solution-icon"><svg viewBox="0 0 24 24"><path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/></svg></div>
                         <div class="solution-title-wrap">
-                            <h3>Служебные расследования</h3>
+                            <h3>Профайлинг цифрового следа</h3>
+                            <span class="solution-badge">Для бизнеса</span>
+                        </div>
+                    </div>
+                    <p class="solution-desc">Анализ открытых источников и социальных сетей для углубленного разбора личности, скрытых мотивов и факторов риска.</p>
+                    <ul class="solution-list">
+                        <li>Психологический портрет</li>
+                        <li>Оценка факторов риска</li>
+                        <li>Прогноз поведения в бизнесе</li>
+                    </ul>
+                    <div class="solution-price">от 5 000 ₽</div>
+                </div>
+
+                <!-- Услуга 2 -->
+                <div class="solution-card">
+                    <div class="solution-header">
+                        <div class="solution-icon"><svg viewBox="0 0 24 24"><path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2z"/></svg></div>
+                        <div class="solution-title-wrap">
+                            <h3>Экспертная консультация</h3>
+                            <span class="solution-badge">Для руководителей</span>
+                        </div>
+                    </div>
+                    <p class="solution-desc">Разбор сложных ситуаций, где важно понять человека: от оценки кандидатов и партнеров до анализа скрытых мотивов и конфликтов.</p>
+                    <ul class="solution-list">
+                        <li>Разбор конкретного кейса</li>
+                        <li>Трезвый взгляд со стороны</li>
+                        <li>Стратегия дальнейших действий</li>
+                    </ul>
+                    <div class="solution-price">от 5 000 ₽</div>
+                </div>
+
+                <!-- Услуга 3 -->
+                <div class="solution-card">
+                    <div class="solution-header">
+                        <div class="solution-icon"><svg viewBox="0 0 24 24"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm0 10.99h7c-.53 4.12-3.28 7.79-7 8.94V12H5V6.3l7-3.11v8.8z"/></svg></div>
+                        <div class="solution-title-wrap">
+                            <h3>Сопровождение расследований</h3>
                             <span class="solution-badge">При инцидентах</span>
                         </div>
                     </div>
-                    <p class="solution-desc">Выявление причастных к корпоративному мошенничеству, хищениям и утечкам конфиденциальной информации.</p>
+                    <p class="solution-desc">Помощь в раскрытии сложных инцидентов (хищения, сговоры, утечки данных). Оценка причастности лиц и скрытых мотивов.</p>
                     <ul class="solution-list">
-                        <li>Проверки на полиграфе при ЧП</li>
-                        <li>Анализ показаний и выявление лжи</li>
-                        <li>Локализация источника угрозы</li>
+                        <li>Анализ поведенческих профилей</li>
+                        <li>Стратегия опроса фигурантов</li>
+                        <li>Оценка искренности показаний</li>
                     </ul>
+                    <div class="solution-price">от 10 000 ₽</div>
                 </div>
+
+                <!-- Услуга 4 -->
+                <div class="solution-card">
+                    <div class="solution-header">
+                        <div class="solution-icon"><svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg></div>
+                        <div class="solution-title-wrap">
+                            <h3>Анализ анонимных сообщений</h3>
+                            <span class="solution-badge">Для СБ</span>
+                        </div>
+                    </div>
+                    <p class="solution-desc">Помощь в ситуациях, когда поступают анонимные угрозы, жалобы, доносы или компрометирующие материалы.</p>
+                    <ul class="solution-list">
+                        <li>Психолингвистический анализ текста</li>
+                        <li>Анализ корпоративного контекста</li>
+                        <li>Определение профиля автора</li>
+                    </ul>
+                    <div class="solution-price">от 5 000 ₽</div>
+                </div>
+
+                <!-- Услуга 5 -->
+                <div class="solution-card">
+                    <div class="solution-header">
+                        <div class="solution-icon"><svg viewBox="0 0 24 24"><path d="M19 22H5v-2h14v2zm-2.03-4.26c-.53-.88-1.46-1.52-2.58-1.74l-.96-.19c-.31-.06-.52-.36-.45-.68.06-.31.36-.52.68-.45l.97.19c1.92.38 3.51 1.48 4.41 2.98L16.97 17.74zM12 13c-2.21 0-4-1.79-4-4s1.79-4 4-4 4 1.79 4 4-1.79 4-4 4zm0-6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zM5.97 17.74c-.53-.88-1.46-1.52-2.58-1.74l-.96-.19c-.31-.06-.52-.36-.45-.68.06-.31.36-.52.68-.45l.97.19c1.92.38 3.51 1.48 4.41 2.98L5.97 17.74z"/></svg></div>
+                        <div class="solution-title-wrap">
+                            <h3>Медиация конфликтов</h3>
+                            <span class="solution-badge">Для HR</span>
+                        </div>
+                    </div>
+                    <p class="solution-desc">Помогаю сторонам, которые «говорят на разных языках», услышать друг друга и прийти к соглашению в деловых спорах.</p>
+                    <ul class="solution-list">
+                        <li>Работа с корпоративными спорами</li>
+                        <li>Нейтральный посредник</li>
+                        <li>Сохранение деловых отношений</li>
+                    </ul>
+                    <div class="solution-price">от 5 000 ₽</div>
+                </div>
+
             </div>
             
             <div class="legal-note">
@@ -826,7 +872,7 @@
         </div>
     </section>
 
-    <!-- ЦИТАТА 3 (Компетенции) -->
+    <!-- ЦИТАТА 3 (Услуги) -->
     <section class="quote-section">
         <div class="container">
             <div class="quote-block">
