@@ -1263,7 +1263,7 @@
         </div>
     </div>
 
-    <!-- Скрипты -->
+       <!-- Скрипты -->
     <script>
         try { document.getElementById('currentYear').textContent = new Date().getFullYear(); } catch(e) {}
 
@@ -1328,12 +1328,11 @@
                 }
             } else if (type === 'max') {
                 if (isMobile) {
+                    // Открываем приложение (или страницу установки) по правильной ссылке
                     window.location.href = 'https://max.ru/u/f9LHodD0cOIwE5Tk0yqsCdSW7aH2YKheHnM5PcwHgDaWAse8blY_Usz5-7Q';
-                    setTimeout(() => {
-                        window.location.href = 'https://web.max.ru/145461114';
-                    }, 1500);
                 } else {
-                    window.open('https://web.max.ru/145461114', '_blank');
+                    // На компьютере просто открываем в новой вкладке
+                    window.open('https://max.ru/u/f9LHodD0cOIwE5Tk0yqsCdSW7aH2YKheHnM5PcwHgDaWAse8blY_Usz5-7Q', '_blank');
                 }
             }
         }
@@ -1392,7 +1391,7 @@
                     } else {
                         alert("Произошла ошибка при отправке. Пожалуйста, попробуйте еще раз.");
                     }
-                } catch (error) {
+                } catch (e) { // Исправлено: убрано (error), добавлено (e)
                     alert("Ошибка сети. Пожалуйста, проверьте подключение к интернету.");
                 }
             });
