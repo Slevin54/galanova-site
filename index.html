@@ -1,6 +1,20 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
+    <!-- Yandex.Metrika counter -->
+    <script type="text/javascript">
+        (function(m,e,t,r,i,k,a){
+            m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+            m[i].l=1*new Date();
+            for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
+            k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)
+        })(window, document,'script','https://mc.yandex.ru/metrika/tag.js?id=113975964', 'ym');
+
+        ym(113975964, 'init', {ssr:true, webvisor:true, clickmap:true, ecommerce:"dataLayer", referrer: document.referrer, url: location.href, accurateTrackBounce:true, trackLinks:true});
+    </script>
+    <noscript><div><img src="https://mc.yandex.ru/watch/113975964" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+    <!-- /Yandex.Metrika counter -->
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Елена Галанова — профайлер, полиграфолог. Кадровая безопасность и аудит бизнеса</title>
@@ -1261,10 +1275,6 @@
 
         // ============================================================
         // КАРУСЕЛЬ УСЛУГ (ЗАЦИКЛЕННАЯ)
-        // При достижении последней карточки («Анализ анонимных
-        // сообщений» и др.) карусель возвращается к началу и
-        // пролистывание начинается заново. Аналогично при листании
-        // назад с первой карточки — переход к последней.
         // ============================================================
         function scrollCarousel(direction) {
             const track = document.getElementById('solutionsTrack');
@@ -1275,13 +1285,11 @@
             const GAP = 20;
             const scrollAmount = card.offsetWidth + GAP;
             const maxScroll = track.scrollWidth - track.clientWidth;
-            const tolerance = 15; // допуск округления при smooth-скролле
+            const tolerance = 15;
 
-            // Если все карточки помещаются на экране — ничего не делаем
             if (maxScroll <= 0) return;
 
             if (direction === 'right') {
-                // Находимся у правого края → возврат к началу
                 if (track.scrollLeft >= maxScroll - tolerance) {
                     track.scrollTo({ left: 0, behavior: 'smooth' });
                 } else {
@@ -1289,7 +1297,6 @@
                     track.scrollTo({ left: target, behavior: 'smooth' });
                 }
             } else {
-                // Находимся у левого края → прыжок к последней карточке
                 if (track.scrollLeft <= tolerance) {
                     track.scrollTo({ left: maxScroll, behavior: 'smooth' });
                 } else {
@@ -1352,7 +1359,7 @@
             }
         }
 
-        // ОТПРАВКА ФОРМЫ
+        // ОТПРАВКА ФОРМЫ (С ФИКСАЦИЕЙ В МЕТРИКЕ)
         const contactForm = document.getElementById('contactForm');
         if (contactForm) {
             contactForm.addEventListener("submit", async function(event) {
@@ -1367,6 +1374,11 @@
                         headers: { 'Accept': 'application/json' }
                     });
                     if (response.ok) {
+                        // Отправляем цель в Яндекс Метрику
+                        if (typeof ym === 'function') {
+                            ym(113975964, 'reachGoal', 'form_sent');
+                        }
+
                         if(formContent) formContent.style.display = 'none';
                         if(formSuccess) {
                             formSuccess.style.display = 'block';
