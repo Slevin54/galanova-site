@@ -1,7 +1,10 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
- <!-- Yandex.Metrika counter -->
+    <!-- Подтверждение прав в Яндекс Вебмастере -->
+    <meta name="yandex-verification" content="3ce838687ac9171f" />
+
+    <!-- Yandex.Metrika counter -->
     <script type="text/javascript">
         (function(m,e,t,r,i,k,a){
             m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
@@ -17,15 +20,14 @@
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="yandex-verification" content="3ce838687ac9171f" />
-      
- <!-- НОВЫЙ SEO-ЗАГОЛОВОК И ОПИСАНИЕ -->
-    <title>Елена Галанова | Профайлер-полиграфолог — проверка персонала и кадровая безопасность</title>
-    <meta name="description" content="Экспертная проверка сотрудников и кандидатов, профайлинг, полиграф, служебные расследования и аудит бизнеса. Кандидат психологических наук, 700+ успешных кейсов. Конфиденциально.">
     
-    <!-- Open Graph разметка для красивых ссылок в Telegram/WhatsApp -->
+    <!-- SEO заголовки (Title и Description) -->
+    <title>Профайлинг и проверка на полиграфе для бизнеса | Елена Галанова</title>
+    <meta name="description" content="Экспертная проверка персонала на полиграфе, служебные расследования и аудит кадровой безопасности. Профайлер-полиграфолог Елена Галанова. 700+ успешных кейсов. Конфиденциально.">
+    
+    <!-- Open Graph разметка (для красивых ссылок в Telegram/WhatsApp/MAX) -->
     <meta property="og:title" content="Елена Галанова — Профайлер-полиграфолог">
-    <meta property="og:description" content="Кадровая безопасность и аудит бизнеса. Научный подход к проверке персонала и оценке рисков.">
+    <meta property="og:description" content="Кадровая безопасность и аудит бизнеса. Экспертная проверка персонала и оценка рисков.">
     <meta property="og:image" content="https://galanova-elena.ru/og-image.jpg">
     <meta property="og:url" content="https://galanova-elena.ru">
     <meta property="og:type" content="website">
@@ -489,6 +491,35 @@
         .legal-note p { margin: 0; font-size: 0.95rem; color: #4a5568; line-height: 1.5; }
         .legal-note strong { color: var(--primary); }
 
+        /* Блок оплаты и документов */
+        .payment-note { 
+            display: flex; 
+            align-items: flex-start; 
+            gap: 15px; 
+            background: #f0fdf4; 
+            padding: 20px 25px; 
+            border-radius: 8px; 
+            margin-top: 20px; 
+            border: 1px solid #bbf7d0; 
+            box-shadow: 0 5px 15px rgba(0,0,0,0.02);
+        }
+        .payment-note svg { 
+            width: 28px; 
+            height: 28px; 
+            fill: #16a34a; 
+            flex-shrink: 0; 
+            margin-top: 2px; 
+        }
+        .payment-note p { 
+            margin: 0; 
+            font-size: 0.95rem; 
+            color: #166534; 
+            line-height: 1.5; 
+        }
+        .payment-note strong { 
+            color: #14532d; 
+        }
+
         /* ЭТАПЫ РАБОТЫ */
         .process { padding: 80px 0; background-color: #ffffff; scroll-margin-top: 70px; }
         .process-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; margin-top: 50px; }
@@ -509,19 +540,6 @@
         .case-result { background: rgba(211, 84, 0, 0.05); padding: 15px 20px; border-radius: 8px; border: 1px solid rgba(211, 84, 0, 0.1); }
         .case-result strong { display: block; color: var(--accent); margin-bottom: 5px; font-size: 0.9rem; text-transform: uppercase; }
         .case-result span { color: var(--text-dark); font-weight: 600; font-size: 1.05rem; }
-
-        /* Форматы работы */
-        .formats { padding: 80px 0 100px 0; background-color: #ffffff; scroll-margin-top: 70px; }
-        .formats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; margin-top: 40px; }
-        .format-card { background: #fff; border: 1px solid #e2e8f0; border-radius: 12px; padding: 40px; display: flex; flex-direction: column; transition: box-shadow 0.3s; }
-        .format-card:hover { box-shadow: 0 15px 35px rgba(0,0,0,0.06); border-color: #cbd5e0; }
-        .format-card h3 { font-size: 1.3rem; color: var(--primary); margin: 0 0 15px 0; }
-        .format-desc { color: var(--text-gray); font-size: 0.95rem; line-height: 1.6; margin-bottom: 25px; flex-grow: 1; }
-        .format-price-wrap { border-top: 1px solid #edf2f7; padding-top: 20px; display: flex; align-items: center; justify-content: space-between; }
-        .format-price { font-weight: 700; color: var(--text-dark); font-size: 1.1rem; }
-        .format-price span { display: block; font-size: 0.75rem; color: var(--text-gray); font-weight: 400; text-transform: uppercase; letter-spacing: 0.5px; }
-        .format-link { color: var(--accent); font-weight: 600; text-decoration: none; font-size: 0.95rem; cursor: pointer; transition: opacity 0.2s; border: none; background: none; padding: 0;}
-        .format-link:hover { opacity: 0.7; }
 
         /* CTA Баннер */
         .cta-banner { background-color: var(--primary); padding: 60px 0; text-align: center; background-image: linear-gradient(to right, #1a252f, #2c3e50); color: #fff; }
@@ -956,6 +974,13 @@
                 <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 15l-5-5 1.41-1.41L11 14.17l7.59-7.59L20 8l-9 9z"/></svg>
                 <p><strong>Юридическая безопасность бизнеса:</strong> Все мероприятия, включая аппаратные тестирования на полиграфе, проводятся в строгом соответствии с нормами ТК РФ и исключительно при наличии <em>письменного добровольного согласия</em> проверяемого лица.</p>
             </div>
+
+            <!-- Блок оплаты -->
+            <div class="payment-note">
+                <svg viewBox="0 0 24 24"><path d="M11.8 10.9c-2.27-.59-3-1.2-3-2.15 0-1.09 1.01-1.85 2.7-1.85 1.78 0 2.44.85 2.5 2.1h2.21c-.07-1.72-1.12-3.3-3.21-3.81V3h-3v2.16c-1.94.42-3.5 1.68-3.5 3.61 0 2.31 1.91 3.46 4.7 4.13 2.5.6 3 1.48 3 2.41 0 .69-.49 1.79-2.7 1.79-2.06 0-2.87-.92-2.98-2.1h-2.2c.12 2.19 1.76 3.42 3.68 3.83V21h3v-2.15c1.95-.37 3.5-1.5 3.5-3.55 0-2.84-2.43-3.81-4.7-4.4z"/></svg>
+                <p><strong>Оплата и документы:</strong> Стоимость зависит от сложности задачи и согласовывается индивидуально. Работаю с физическими и юридическими лицами. Предоставляю чеки НПД и полный пакет закрывающих документов.</p>
+            </div>
+
         </div>
     </section>
 
@@ -1263,7 +1288,7 @@
         </div>
     </div>
 
-       <!-- Скрипты -->
+    <!-- Скрипты -->
     <script>
         try { document.getElementById('currentYear').textContent = new Date().getFullYear(); } catch(e) {}
 
@@ -1328,10 +1353,8 @@
                 }
             } else if (type === 'max') {
                 if (isMobile) {
-                    // Открываем приложение (или страницу установки) по правильной ссылке
                     window.location.href = 'https://max.ru/u/f9LHodD0cOIwE5Tk0yqsCdSW7aH2YKheHnM5PcwHgDaWAse8blY_Usz5-7Q';
                 } else {
-                    // На компьютере просто открываем в новой вкладке
                     window.open('https://max.ru/u/f9LHodD0cOIwE5Tk0yqsCdSW7aH2YKheHnM5PcwHgDaWAse8blY_Usz5-7Q', '_blank');
                 }
             }
@@ -1391,7 +1414,7 @@
                     } else {
                         alert("Произошла ошибка при отправке. Пожалуйста, попробуйте еще раз.");
                     }
-                } catch (e) { // Исправлено: убрано (error), добавлено (e)
+                } catch (e) { 
                     alert("Ошибка сети. Пожалуйста, проверьте подключение к интернету.");
                 }
             });
