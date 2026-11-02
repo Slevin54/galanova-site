@@ -1618,6 +1618,28 @@
                 resetChat();
             }
         });
+
+        // ==========================================
+        // КОПИРОВАНИЕ ТЕКСТА С УКАЗАНИЕМ АВТОРА
+        // ==========================================
+        document.addEventListener('copy', function(e) {
+            // Получаем выделенный пользователем текст
+            const selection = document.getSelection().toString();
+            
+            // Если ничего не выделено, не мешаем
+            if (!selection) return;
+            
+            // Предотвращаем стандартное копирование
+            e.preventDefault();
+            
+            // Формируем текст с указанием источника
+            const author = "Елена Галанова";
+            const url = window.location.href;
+            const attribution = `\n\nИсточник: ${author} — ${url}`;
+            
+            // Записываем в буфер обмена измененный текст
+            e.clipboardData.setData('text/plain', selection + attribution);
+        });
     </script>
 </body>
 </html>
