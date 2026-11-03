@@ -871,7 +871,7 @@
             <p class="section-subtitle">Профессиональные решения для бизнеса и оценки персонала</p>
             
             <div class="carousel-container">
-                <button class="carousel-btn prev" onclick="scrollCarousel('left')">&#10094;</button>
+                <button class="carousel-btn prev" onclick="scrollCarousel('left'); resetAutoScroll();">&#10094;</button>
                 
                 <div class="solutions-track" id="solutionsTrack">
                     
@@ -967,7 +967,7 @@
 
                 </div>
                 
-                <button class="carousel-btn next" onclick="scrollCarousel('right')">&#10095;</button>
+                <button class="carousel-btn next" onclick="scrollCarousel('right'); resetAutoScroll();">&#10095;</button>
             </div>
 
             <div class="legal-note">
@@ -1303,7 +1303,7 @@
         }
 
         // ============================================================
-        // КАРУСЕЛЬ УСЛУГ (ЗАЦИКЛЕННАЯ)
+        // КАРУСЕЛЬ УСЛУГ (ЗАЦИКЛЕННАЯ + АВТОПРОКРУТКА)
         // ============================================================
         function scrollCarousel(direction) {
             const track = document.getElementById('solutionsTrack');
@@ -1333,6 +1333,38 @@
                     track.scrollTo({ left: target, behavior: 'smooth' });
                 }
             }
+        }
+
+        let autoScrollInterval;
+        const solutionsTrack = document.getElementById('solutionsTrack');
+
+        function startAutoScroll() {
+            stopAutoScroll();
+            autoScrollInterval = setInterval(() => {
+                scrollCarousel('right');
+            }, 4000); // Прокрутка каждые 4 секунды
+        }
+
+        function stopAutoScroll() {
+            clearInterval(autoScrollInterval);
+        }
+
+        function resetAutoScroll() {
+            stopAutoScroll();
+            startAutoScroll();
+        }
+
+        if (solutionsTrack) {
+            // Останавливаем прокрутку, когда пользователь наводит мышку или трогает экран
+            solutionsTrack.addEventListener('mouseenter', stopAutoScroll);
+            solutionsTrack.addEventListener('touchstart', stopAutoScroll, {passive: true});
+            
+            // Возобновляем, когда мышка уходит или пользователь отпускает палец
+            solutionsTrack.addEventListener('mouseleave', startAutoScroll);
+            solutionsTrack.addEventListener('touchend', startAutoScroll);
+            
+            // Запускаем автопрокрутку при загрузке страницы
+            startAutoScroll();
         }
 
         // УМНЫЙ РОУТИНГ ДЛЯ МЕССЕНДЖЕРОВ (ПК vs ТЕЛЕФОН)
