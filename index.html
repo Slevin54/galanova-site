@@ -118,7 +118,7 @@
             "priceCurrency": "RUB",
             "price": "5000",
             "priceValidUntil": "2026-12-31",
-            "description": "Профайлинг и консультации — от 5 000 Ᵽ"
+            "description": "Профайлинг и консультации — от 5 000 ₽"
           }
         }
       ]
@@ -282,11 +282,14 @@
         .about-list li { position: relative; padding-left: 30px; margin-bottom: 15px; font-size: 1.05rem; color: var(--text-dark); font-weight: 600; }
         .about-list li::before { content: '✓'; position: absolute; left: 0; top: 2px; color: var(--accent); font-weight: 800; font-size: 18px; }
 
-        /* УСЛУГИ (СТАТИЧНАЯ СЕТКА: 3 + 2) */
-        .solutions { padding: 100px 0 80px 0; background-color: var(--bg-light); scroll-margin-top: 70px; }
-        .solutions-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; max-width: 1100px; margin: 0 auto; }
-        .solution-card { background: #ffffff; padding: 35px; border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.04); border-top: 4px solid var(--primary); transition: transform 0.3s cubic-bezier(0.25, 0.8, 0.25, 1), box-shadow 0.3s ease, border-top-color 0.3s; display: flex; flex-direction: column; position: relative; z-index: 1; }
-        .solution-card:hover { transform: translateY(-8px) scale(1.03); box-shadow: 0 20px 40px rgba(0,0,0,0.12); border-top-color: var(--accent); z-index: 10; }
+        /* УСЛУГИ (БЕСКОНЕЧНАЯ АВТОПРОКРУТКА) */
+        .solutions { padding: 100px 0 80px 0; background-color: var(--bg-light); scroll-margin-top: 70px; overflow: hidden; }
+        .carousel-wrapper-sol { position: relative; width: 100%; overflow: hidden; padding-bottom: 20px; margin-top: 30px; }
+        .solutions-track { display: flex; gap: 20px; width: max-content; animation: marquee-services 40s linear infinite; }
+        .solutions-track:hover { animation-play-state: paused; }
+        @keyframes marquee-services { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+        .solution-card { width: 320px; flex-shrink: 0; background: #ffffff; padding: 35px; border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.04); border-top: 4px solid var(--primary); transition: transform 0.3s ease, box-shadow 0.3s ease, border-top-color 0.3s; display: flex; flex-direction: column; }
+        .solution-card:hover { transform: translateY(-8px); box-shadow: 0 20px 40px rgba(0,0,0,0.08); border-top-color: var(--accent); }
         .solution-header { display: flex; align-items: center; gap: 15px; margin-bottom: 20px; }
         .solution-icon { width: 44px; height: 44px; background: rgba(211, 84, 0, 0.1); border-radius: 10px; display: flex; align-items: center; justify-content: center; color: var(--accent); flex-shrink: 0; }
         .solution-icon svg { width: 24px; height: 24px; fill: currentColor; }
@@ -298,19 +301,79 @@
         .solution-list li { position: relative; padding-left: 28px; margin-bottom: 10px; color: #2d3748; font-size: 0.9rem; font-weight: 600; }
         .solution-list li::before { content: '✓'; position: absolute; left: 0; top: 2px; width: 18px; height: 18px; background: rgba(211, 84, 0, 0.15); color: var(--accent); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 10px; font-weight: 800; }
         .solution-price { margin-top: 20px; font-weight: 800; color: var(--accent); font-size: 1.15rem; }
-        .solutions-grid-bottom { display: grid; grid-template-columns: repeat(2, 1fr); gap: 30px; max-width: 720px; margin: 30px auto 0 auto; }
 
-        .info-blocks-container { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; max-width: 1100px; margin: 40px auto 0 auto; }
-        .legal-note, .payment-note { display: flex; align-items: flex-start; gap: 15px; padding: 20px 25px; border-radius: 8px; box-shadow: 0 5px 15px rgba(0,0,0,0.02); }
-        .legal-note { background: #fff; border: 1px solid #e2e8f0; }
-        .payment-note { background: #f0fdf4; border: 1px solid #bbf7d0; }
-        .legal-note svg { width: 24px; height: 24px; fill: var(--text-gray); flex-shrink: 0; margin-top: 2px; }
-        .payment-note svg { width: 24px; height: 24px; fill: #16a34a; flex-shrink: 0; margin-top: 2px; }
-        .legal-note p, .payment-note p { margin: 0; font-size: 0.9rem; line-height: 1.5; }
-        .legal-note p { color: #4a5568; }
-        .payment-note p { color: #166534; }
+        .legal-note { display: flex; align-items: flex-start; gap: 15px; background: #fff; padding: 25px 30px; border-radius: 8px; margin-top: 40px; border: 1px solid #e2e8f0; box-shadow: 0 5px 15px rgba(0,0,0,0.02); }
+        .legal-note svg { width: 30px; height: 30px; fill: var(--text-gray); flex-shrink: 0; margin-top: 3px; }
+        .legal-note p { margin: 0; font-size: 0.95rem; color: #4a5568; line-height: 1.5; }
         .legal-note strong { color: var(--primary); }
+
+        .payment-note { display: flex; align-items: flex-start; gap: 15px; background: #f0fdf4; padding: 20px 25px; border-radius: 8px; margin-top: 20px; border: 1px solid #bbf7d0; box-shadow: 0 5px 15px rgba(0,0,0,0.02); }
+        .payment-note svg { width: 28px; height: 28px; fill: #16a34a; flex-shrink: 0; margin-top: 2px; }
+        .payment-note p { margin: 0; font-size: 0.95rem; color: #166534; line-height: 1.5; }
         .payment-note strong { color: #14532d; }
+
+        /* ИГРА */
+        .game-section { padding: 80px 0; background-color: var(--primary); color: #fff; }
+        .game-section .section-title { color: #fff; }
+        .game-section .section-subtitle { color: #cbd5e0; }
+        .game-wrapper {
+            position: relative;
+            max-width: 800px;
+            margin: 0 auto;
+            background: #1e2a38;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+        #snowGameCanvas {
+            display: block;
+            width: 100%;
+            height: auto;
+            background: linear-gradient(to bottom, #2c3e50 0%, #4ca1af 100%);
+            cursor: crosshair;
+            touch-action: none; /* Чтобы тапы не скроллили страницу */
+        }
+        .game-ui-overlay {
+            position: absolute;
+            top: 15px;
+            left: 0;
+            width: 100%;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            pointer-events: none; /* Чтобы клики проходили сквозь UI в игру */
+            box-sizing: border-box;
+        }
+        .game-score-box {
+            background: rgba(0, 0, 0, 0.5);
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 20px;
+            font-weight: bold;
+            color: #fff;
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+        .game-reset-btn {
+            pointer-events: auto; /* Кнопка должна быть кликабельной */
+            background: rgba(255, 255, 255, 0.2);
+            border: 1px solid rgba(255,255,255,0.3);
+            color: #fff;
+            padding: 8px 16px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: background 0.2s;
+        }
+        .game-reset-btn:hover { background: rgba(255, 255, 255, 0.4); }
+        .game-instructions {
+            text-align: center;
+            padding: 15px;
+            background: rgba(0,0,0,0.3);
+            color: #cbd5e0;
+            font-size: 0.9rem;
+        }
 
         .cta-banner { background-color: var(--primary); padding: 60px 0; text-align: center; background-image: linear-gradient(to right, #1a252f, #2c3e50); color: #fff; }
         .cta-banner h2 { font-size: 2.2rem; margin: 0 0 15px 0; color: #fff; }
@@ -410,9 +473,9 @@
             .hero-trust-logos { justify-content: center; flex-wrap: wrap; }
             .sticky-socials { display: none; }
             .about-grid { grid-template-columns: 1fr; }
-            .solutions-grid, .solutions-grid-bottom, .info-blocks-container { grid-template-columns: 1fr; max-width: 100%; }
-            .solution-card { width: auto; padding: 25px; }
-            .solution-card:hover { transform: none; }
+            .solution-card { width: 280px; padding: 25px; }
+            .solutions-track { animation-name: marquee-services-mobile; animation-duration: 35s; }
+            @keyframes marquee-services-mobile { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
             .pub-card { width: 280px; }
             .pub-track { animation-name: marquee-mobile; animation-duration: 25s; }
             @keyframes marquee-mobile { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
@@ -445,6 +508,7 @@
             <nav class="header-nav">
                 <a href="#about">Обо мне</a>
                 <a href="#solutions">Услуги</a>
+                <a href="#game">Игра</a>
                 <a href="#publications">Медиа и Блог</a>
             </nav>
             <div class="header-messengers">
@@ -483,6 +547,7 @@
         <nav class="side-menu-nav">
             <a href="#about" onclick="closeMenu()">Обо мне</a>
             <a href="#solutions" onclick="closeMenu()">Услуги</a>
+            <a href="#game" onclick="closeMenu()">Игра</a>
             <a href="#publications" onclick="closeMenu()">Медиа и Блог</a>
         </nav>
         <div class="side-menu-footer">
@@ -585,121 +650,85 @@
         </div>
     </section>
 
-    <!-- УСЛУГИ (СТАТИЧНАЯ СЕТКА 3 + 2) -->
+    <!-- УСЛУГИ -->
     <section class="solutions" id="solutions">
         <div class="container">
             <h2 class="section-title">Услуги</h2>
             <p class="section-subtitle">Профессиональные решения для бизнеса и оценки персонала</p>
-            
-            <!-- ВЕРХНИЙ РЯД (3 карточки) -->
-            <div class="solutions-grid">
-                
-                <!-- Услуга 1 -->
-                <div class="solution-card">
-                    <div class="solution-header">
-                        <div class="solution-icon"><svg viewBox="0 0 24 24"><path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/></svg></div>
-                        <div class="solution-title-wrap">
-                            <h3>Профайлинг цифрового следа</h3>
-                            <span class="solution-badge">Для бизнеса</span>
-                        </div>
+            <div class="carousel-wrapper-sol">
+                <div class="solutions-track">
+                    <div class="solution-card">
+                        <div class="solution-header"><div class="solution-icon"><svg viewBox="0 0 24 24"><path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/></svg></div><div class="solution-title-wrap"><h3>Профайлинг цифрового следа</h3><span class="solution-badge">Для бизнеса</span></div></div>
+                        <p class="solution-desc">Анализ открытых источников и социальных сетей для углубленного разбора личности, скрытых мотивов и факторов риска.</p>
+                        <ul class="solution-list"><li>Психологический портрет</li><li>Оценка факторов риска</li><li>Прогноз поведения в бизнесе</li></ul>
+                        <div class="solution-price">от 5 000 ₽</div>
                     </div>
-                    <p class="solution-desc">Анализ открытых источников и социальных сетей для углубленного разбора личности, скрытых мотивов и факторов риска.</p>
-                    <ul class="solution-list">
-                        <li>Психологический портрет</li>
-                        <li>Оценка факторов риска</li>
-                        <li>Прогноз поведения в бизнесе</li>
-                    </ul>
-                    <div class="solution-price">от 5 000 Ᵽ</div>
-                </div>
-
-                <!-- Услуга 2 -->
-                <div class="solution-card">
-                    <div class="solution-header">
-                        <div class="solution-icon"><svg viewBox="0 0 24 24"><path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2z"/></svg></div>
-                        <div class="solution-title-wrap">
-                            <h3>Экспертная консультация</h3>
-                            <span class="solution-badge">Для руководителей</span>
-                        </div>
+                    <div class="solution-card">
+                        <div class="solution-header"><div class="solution-icon"><svg viewBox="0 0 24 24"><path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2z"/></svg></div><div class="solution-title-wrap"><h3>Экспертная консультация</h3><span class="solution-badge">Для руководителей</span></div></div>
+                        <p class="solution-desc">Разбор сложных ситуаций, где важно понять человека: от оценки кандидатов и партнеров до анализа скрытых мотивов и конфликтов.</p>
+                        <ul class="solution-list"><li>Разбор конкретного кейса</li><li>Трезвый взгляд со стороны</li><li>Стратегия дальнейших действий</li></ul>
+                        <div class="solution-price">от 5 000 ₽</div>
                     </div>
-                    <p class="solution-desc">Разбор сложных ситуаций, где важно понять человека: от оценки кандидатов и партнеров до анализа скрытых мотивов и конфликтов.</p>
-                    <ul class="solution-list">
-                        <li>Разбор конкретного кейса</li>
-                        <li>Трезвый взгляд со стороны</li>
-                        <li>Стратегия дальнейших действий</li>
-                    </ul>
-                    <div class="solution-price">от 5 000 Ᵽ</div>
-                </div>
-
-                <!-- Услуга 3 -->
-                <div class="solution-card">
-                    <div class="solution-header">
-                        <div class="solution-icon"><svg viewBox="0 0 24 24"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm0 10.99h7c-.53 4.12-3.28 7.79-7 8.94V12H5V6.3l7-3.11v8.8z"/></svg></div>
-                        <div class="solution-title-wrap">
-                            <h3>Сопровождение расследований</h3>
-                            <span class="solution-badge">При инцидентах</span>
-                        </div>
+                    <div class="solution-card">
+                        <div class="solution-header"><div class="solution-icon"><svg viewBox="0 0 24 24"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm0 10.99h7c-.53 4.12-3.28 7.79-7 8.94V12H5V6.3l7-3.11v8.8z"/></svg></div><div class="solution-title-wrap"><h3>Сопровождение расследований</h3><span class="solution-badge">При инцидентах</span></div></div>
+                        <p class="solution-desc">Помощь в раскрытии сложных инцидентов (хищения, сговоры, утечки данных). Оценка причастности лиц и скрытых мотивов.</p>
+                        <ul class="solution-list"><li>Анализ поведенческих профилей</li><li>Стратегия опроса фигурантов</li><li>Оценка искренности показаний</li></ul>
+                        <div class="solution-price">от 10 000 ₽</div>
                     </div>
-                    <p class="solution-desc">Помощь в раскрытии сложных инцидентов (хищения, сговоры, утечки данных). Оценка причастности лиц и скрытых мотивов.</p>
-                    <ul class="solution-list">
-                        <li>Анализ поведенческих профилей</li>
-                        <li>Стратегия опроса фигурантов</li>
-                        <li>Оценка искренности показаний</li>
-                    </ul>
-                    <div class="solution-price">от 10 000 Ᵽ</div>
+                    <div class="solution-card">
+                        <div class="solution-header"><div class="solution-icon"><svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg></div><div class="solution-title-wrap"><h3>Анализ анонимных сообщений</h3><span class="solution-badge">Для СБ</span></div></div>
+                        <p class="solution-desc">Помощь в ситуациях, когда поступают анонимные угрозы, жалобы, доносы или компрометирующие материалы.</p>
+                        <ul class="solution-list"><li>Психолингвистический анализ текста</li><li>Анализ корпоративного контекста</li><li>Определение профиля автора</li></ul>
+                        <div class="solution-price">от 5 000 ₽</div>
+                    </div>
+                    <div class="solution-card">
+                        <div class="solution-header"><div class="solution-icon"><svg viewBox="0 0 24 24"><path d="M19 22H5v-2h14v2zm-2.03-4.26c-.53-.88-1.46-1.52-2.58-1.74l-.96-.19c-.31-.06-.52-.36-.45-.68.06-.31.36-.52.68-.45l.97.19c1.92.38 3.51 1.48 4.41 2.98L16.97 17.74zM12 13c-2.21 0-4-1.79-4-4s1.79-4 4-4 4 1.79 4 4-1.79 4-4 4zm0-6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zM5.97 17.74c-.53-.88-1.46-1.52-2.58-1.74l-.96-.19c-.31-.06-.52-.36-.45-.68.06-.31.36-.52.68-.45l.97.19c1.92.38 3.51 1.48 4.41 2.98L5.97 17.74z"/></svg></div><div class="solution-title-wrap"><h3>Медиация конфликтов</h3><span class="solution-badge">Для HR</span></div></div>
+                        <p class="solution-desc">Помогаю сторонам, которые «говорят на разных языках», услышать друг друга и прийти к соглашению в деловых спорах.</p>
+                        <ul class="solution-list"><li>Работа с корпоративными спорами</li><li>Нейтральный посредник</li><li>Сохранение деловых отношений</li></ul>
+                        <div class="solution-price">от 5 000 ₽</div>
+                    </div>
+                    <!-- ДУБЛИКАТ ДЛЯ БЕСШОВНОСТИ -->
+                    <div class="solution-card">
+                        <div class="solution-header"><div class="solution-icon"><svg viewBox="0 0 24 24"><path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/></svg></div><div class="solution-title-wrap"><h3>Профайлинг цифрового следа</h3><span class="solution-badge">Для бизнеса</span></div></div>
+                        <p class="solution-desc">Анализ открытых источников и социальных сетей для углубленного разбора личности, скрытых мотивов и факторов риска.</p>
+                        <ul class="solution-list"><li>Психологический портрет</li><li>Оценка факторов риска</li><li>Прогноз поведения в бизнесе</li></ul>
+                        <div class="solution-price">от 5 000 ₽</div>
+                    </div>
+                    <div class="solution-card">
+                        <div class="solution-header"><div class="solution-icon"><svg viewBox="0 0 24 24"><path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2z"/></svg></div><div class="solution-title-wrap"><h3>Экспертная консультация</h3><span class="solution-badge">Для руководителей</span></div></div>
+                        <p class="solution-desc">Разбор сложных ситуаций, где важно понять человека: от оценки кандидатов и партнеров до анализа скрытых мотивов и конфликтов.</p>
+                        <ul class="solution-list"><li>Разбор конкретного кейса</li><li>Трезвый взгляд со стороны</li><li>Стратегия дальнейших действий</li></ul>
+                        <div class="solution-price">от 5 000 ₽</div>
+                    </div>
+                    <div class="solution-card">
+                        <div class="solution-header"><div class="solution-icon"><svg viewBox="0 0 24 24"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm0 10.99h7c-.53 4.12-3.28 7.79-7 8.94V12H5V6.3l7-3.11v8.8z"/></svg></div><div class="solution-title-wrap"><h3>Сопровождение расследований</h3><span class="solution-badge">При инцидентах</span></div></div>
+                        <p class="solution-desc">Помощь в раскрытии сложных инцидентов (хищения, сговоры, утечки данных). Оценка причастности лиц и скрытых мотивов.</p>
+                        <ul class="solution-list"><li>Анализ поведенческих профилей</li><li>Стратегия опроса фигурантов</li><li>Оценка искренности показаний</li></ul>
+                        <div class="solution-price">от 10 000 ₽</div>
+                    </div>
+                    <div class="solution-card">
+                        <div class="solution-header"><div class="solution-icon"><svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg></div><div class="solution-title-wrap"><h3>Анализ анонимных сообщений</h3><span class="solution-badge">Для СБ</span></div></div>
+                        <p class="solution-desc">Помощь в ситуациях, когда поступают анонимные угрозы, жалобы, доносы или компрометирующие материалы.</p>
+                        <ul class="solution-list"><li>Психолингвистический анализ текста</li><li>Анализ корпоративного контекста</li><li>Определение профиля автора</li></ul>
+                        <div class="solution-price">от 5 000 ₽</div>
+                    </div>
+                    <div class="solution-card">
+                        <div class="solution-header"><div class="solution-icon"><svg viewBox="0 0 24 24"><path d="M19 22H5v-2h14v2zm-2.03-4.26c-.53-.88-1.46-1.52-2.58-1.74l-.96-.19c-.31-.06-.52-.36-.45-.68.06-.31.36-.52.68-.45l.97.19c1.92.38 3.51 1.48 4.41 2.98L16.97 17.74zM12 13c-2.21 0-4-1.79-4-4s1.79-4 4-4 4 1.79 4 4-1.79 4-4 4zm0-6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zM5.97 17.74c-.53-.88-1.46-1.52-2.58-1.74l-.96-.19c-.31-.06-.52-.36-.45-.68.06-.31.36-.52.68-.45l.97.19c1.92.38 3.51 1.48 4.41 2.98L5.97 17.74z"/></svg></div><div class="solution-title-wrap"><h3>Медиация конфликтов</h3><span class="solution-badge">Для HR</span></div></div>
+                        <p class="solution-desc">Помогаю сторонам, которые «говорят на разных языках», услышать друг друга и прийти к соглашению в деловых спорах.</p>
+                        <ul class="solution-list"><li>Работа с корпоративными спорами</li><li>Нейтральный посредник</li><li>Сохранение деловых отношений</li></ul>
+                        <div class="solution-price">от 5 000 ₽</div>
+                    </div>
                 </div>
-
             </div>
 
-            <!-- НИЖНИЙ РЯД (2 карточки по центру) -->
-            <div class="solutions-grid-bottom">
-                
-                <!-- Услуга 4 -->
-                <div class="solution-card">
-                    <div class="solution-header">
-                        <div class="solution-icon"><svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg></div>
-                        <div class="solution-title-wrap">
-                            <h3>Анализ анонимных сообщений</h3>
-                            <span class="solution-badge">Для СБ</span>
-                        </div>
-                    </div>
-                    <p class="solution-desc">Помощь в ситуациях, когда поступают анонимные угрозы, жалобы, доносы или компрометирующие материалы.</p>
-                    <ul class="solution-list">
-                        <li>Психолингвистический анализ текста</li>
-                        <li>Анализ корпоративного контекста</li>
-                        <li>Определение профиля автора</li>
-                    </ul>
-                    <div class="solution-price">от 5 000 Ᵽ</div>
-                </div>
-
-                <!-- Услуга 5 -->
-                <div class="solution-card">
-                    <div class="solution-header">
-                        <div class="solution-icon"><svg viewBox="0 0 24 24"><path d="M19 22H5v-2h14v2zm-2.03-4.26c-.53-.88-1.46-1.52-2.58-1.74l-.96-.19c-.31-.06-.52-.36-.45-.68.06-.31.36-.52.68-.45l.97.19c1.92.38 3.51 1.48 4.41 2.98L16.97 17.74zM12 13c-2.21 0-4-1.79-4-4s1.79-4 4-4 4 1.79 4 4-1.79 4-4 4zm0-6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zM5.97 17.74c-.53-.88-1.46-1.52-2.58-1.74l-.96-.19c-.31-.06-.52-.36-.45-.68.06-.31.36-.52.68-.45l.97.19c1.92.38 3.51 1.48 4.41 2.98L5.97 17.74z"/></svg></div>
-                        <div class="solution-title-wrap">
-                            <h3>Медиация конфликтов</h3>
-                            <span class="solution-badge">Для HR</span>
-                        </div>
-                    </div>
-                    <p class="solution-desc">Помогаю сторонам, которые «говорят на разных языках», услышать друг друга и прийти к соглашению в деловых спорах.</p>
-                    <ul class="solution-list">
-                        <li>Работа с корпоративными спорами</li>
-                        <li>Нейтральный посредник</li>
-                        <li>Сохранение деловых отношений</li>
-                    </ul>
-                    <div class="solution-price">от 5 000 Ᵽ</div>
-                </div>
-
+            <div class="legal-note">
+                <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 15l-5-5 1.41-1.41L11 14.17l7.59-7.59L20 8l-9 9z"/></svg>
+                <p><strong>Юридическая безопасность бизнеса:</strong> Все мероприятия, включая аппаратные тестирования на полиграфе, проводятся в строгом соответствии с нормами ТК РФ и исключительно при наличии <em>письменного добровольного согласия</em> проверяемого лица.</p>
             </div>
 
-            <div class="info-blocks-container">
-                <div class="legal-note">
-                    <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 15l-5-5 1.41-1.41L11 14.17l7.59-7.59L20 8l-9 9z"/></svg>
-                    <p><strong>Юридическая безопасность бизнеса:</strong> Все мероприятия проводятся в строгом соответствии с ТК РФ при наличии <em>письменного согласия</em> проверяемого лица.</p>
-                </div>
-                <div class="payment-note">
-                    <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 15l-5-5 1.41-1.41L11 14.17l7.59-7.59L20 8l-9 9z"/></svg>
-                    <p><strong>Оплата и документы:</strong> Стоимость рассчитывается индивидуально. Работаю с физ. и юрлицами (договор, чеки НПД, закрывающие документы).</p>
-                </div>
+            <div class="payment-note">
+                <svg viewBox="0 0 24 24"><path d="M11.8 10.9c-2.27-.59-3-1.2-3-2.15 0-1.09 1.01-1.85 2.7-1.85 1.78 0 2.44.85 2.5 2.1h2.21c-.07-1.72-1.12-3.3-3.21-3.81V3h-3v2.16c-1.94.42-3.5 1.68-3.5 3.61 0 2.31 1.91 3.46 4.7 4.13 2.5.6 3 1.48 3 2.41 0 .69-.49 1.79-2.7 1.79-2.06 0-2.87-.92-2.98-2.1h-2.2c.12 2.19 1.76 3.42 3.68 3.83V21h3v-2.15c1.95-.37 3.5-1.5 3.5-3.55 0-2.84-2.43-3.81-4.7-4.4z"/></svg>
+                <p><strong>Оплата и документы:</strong> Стоимость зависит от сложности задачи и согласовывается индивидуально. Работаю с физическими и юридическими лицами. Предоставляю чеки НПД и полный пакет закрывающих документов.</p>
             </div>
         </div>
     </section>
@@ -712,6 +741,24 @@
                     Для меня профайлер — прежде всего аналитик, а сам профайлинг — прикладная поведенческая аналитика, которая органично объединяет отдельные техники в единую живую систему.
                 </div>
                 <div class="quote-author">Елена Галанова <span>Из книги «Почерк лжи»</span></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ИГРА: СНЕЖНЫЙ БОЙ -->
+    <section class="game-section" id="game">
+        <div class="container">
+            <h2 class="section-title">Снежная забава</h2>
+            <p class="section-subtitle">Немного отдыха после серьезной работы. Проверьте свою меткость!</p>
+            <div class="game-wrapper">
+                <canvas id="snowGameCanvas" width="800" height="400"></canvas>
+                <div class="game-ui-overlay">
+                    <div class="game-score-box">Очки: <span id="snowScore">0</span></div>
+                    <button class="game-reset-btn" onclick="resetGame()">Заново</button>
+                </div>
+                <div class="game-instructions">
+                    Кликните мышкой по полю или нажмите ПРОБЕЛ, чтобы бросить снежок!
+                </div>
             </div>
         </div>
     </section>
@@ -1068,7 +1115,7 @@
             {
                 intent: "Стоимость и условия",
                 keywords: ["цен", "стоим", "скольк", "прайс", "тариф", "бюджет", "дорог", "руб"],
-                reply: "Базовая стоимость услуг Елены:\n• Профайлинг цифрового следа — от 5 000 Ᵽ\n• Экспертная консультация — от 5 000 Ᵽ\n• Анализ анонимных писем — от 5 000 Ᵽ\n• Медиация конфликтов — от 5 000 Ᵽ\n• Сопровождение расследований — от 10 000 Ᵽ.\n\nТочная смета зависит от объема задачи. Напишите ваш телефон или @ник прямо сюда в чат — Елена рассчитает стоимость под ваш кейс.",
+                reply: "Базовая стоимость услуг Елены:\n• Профайлинг цифрового следа — от 5 000 ₽\n• Экспертная консультация — от 5 000 ₽\n• Анализ анонимных писем — от 5 000 ₽\n• Медиация конфликтов — от 5 000 ₽\n• Сопровождение расследований — от 10 000 ₽.\n\nТочная смета зависит от объема задачи. Напишите ваш телефон или @ник прямо сюда в чат — Елена рассчитает стоимость под ваш кейс.",
                 options: [
                     { text: "Оставить контакт в чате", action: "ask_contact_inline" },
                     { text: "Открыть анкету заявки", action: "open_form" }
@@ -1096,7 +1143,7 @@
             {
                 intent: "Анализ анонимных сообщений",
                 keywords: ["аноним", "угроз", "донос", "шантаж", "письм", "кляуз", "жалоб", "компромат"],
-                reply: "По анонимным сообщениям и угрозам Елена проводит психолингвистическую экспертизу текста с учетом вашего корпоративного контекста. Это позволяет определить психологический портрет, мотивы и сузить круг до конкретного автора внутри коллектива (стоимость — от 5 000 Ᵽ). Хотите обсудить ваш случай?",
+                reply: "По анонимным сообщениям и угрозам Елена проводит психолингвистическую экспертизу текста с учетом вашего корпоративного контекста. Это позволяет определить психологический портрет, мотивы и сузить круг до конкретного автора внутри коллектива (стоимость — от 5 000 ₽). Хотите обсудить ваш случай?",
                 options: [
                     { text: "Да, оставить телефон в чате", action: "ask_contact_inline" },
                     { text: "Открыть форму заявки", action: "open_form" }
@@ -1105,7 +1152,7 @@
             {
                 intent: "Профайлинг цифрового следа / Дистанционная оценка",
                 keywords: ["цифров", "след", "соцсет", "интернет", "профиль", "портрет", "дистанцион", "удален", "онлайн", "резюме", "партнер"],
-                reply: "Профайлинг цифрового следа и дистанционная оценка позволяют составить глубокий психологический портрет человека (кандидата, топ-менеджера или делового партнера) без его личного присутствия — по открытым источникам, соцсетям, текстам или видеозаписи собеседования (от 5 000 Ᵽ). Подходит для работы по всей России.",
+                reply: "Профайлинг цифрового следа и дистанционная оценка позволяют составить глубокий психологический портрет человека (кандидата, топ-менеджера или делового партнера) без его личного присутствия — по открытым источникам, соцсетям, текстам или видеозаписи собеседования (от 5 000 ₽). Подходит для работы по всей России.",
                 options: [
                     { text: "Заказать разбор профиля", action: "ask_contact_inline" },
                     { text: "Узнать про другие услуги", action: "reset" }
@@ -1114,7 +1161,7 @@
             {
                 intent: "Медиация конфликтов",
                 keywords: ["конфликт", "спор", "медиац", "ссор", "команд", "коллектив", "атмосфер", "разноглас"],
-                reply: "В корпоративных конфликтах Елена выступает как нейтральный медиатор и поведенческий аналитик: помогает выявить скрытые мотивы сторон, снять напряжение и прийти к выгодному для бизнеса решению (от 5 000 Ᵽ).",
+                reply: "В корпоративных конфликтах Елена выступает как нейтральный медиатор и поведенческий аналитик: помогает выявить скрытые мотивы сторон, снять напряжение и прийти к выгодному для бизнеса решению (от 5 000 ₽).",
                 options: [
                     { text: "Обсудить ситуацию", action: "ask_contact_inline" }
                 ]
@@ -1356,7 +1403,7 @@
 
                 if (action === 'hiring') {
                     lastTopic = "Проверка кандидата";
-                    botReply = 'Скрининг кандидатов (профайлинг цифрового следа от 5 000 Ᵽ и проверка на полиграфе) помогает отсеять токсичных или нечистых на руку сотрудников до найма. На какую позицию вы рассматриваете человека?';
+                    botReply = 'Скрининг кандидатов (профайлинг цифрового следа от 5 000 ₽ и проверка на полиграфе) помогает отсеять токсичных или нечистых на руку сотрудников до найма. На какую позицию вы рассматриваете человека?';
                     nextOptions = [
                         { text: "Топ-менеджер / Руководитель", action: "hiring_top" },
                         { text: "Сотрудник с матответственностью", action: "hiring_material" },
@@ -1369,7 +1416,7 @@
                     nextOptions = [{ text: "Открыть анкету заявки", action: "open_form" }];
                 } else if (action === 'investigation') {
                     lastTopic = "Служебное расследование";
-                    botReply = 'Сопровождение расследований (от 10 000 Ᵽ) позволяет быстро выявить инсайдеров, сговоры и авторов анонимок. С каким инцидентом вы столкнулись?';
+                    botReply = 'Сопровождение расследований (от 10 000 ₽) позволяет быстро выявить инсайдеров, сговоры и авторов анонимок. С каким инцидентом вы столкнулись?';
                     nextOptions = [
                         { text: "Утечка базы / коммерческой тайны", action: "invest_leak" },
                         { text: "Хищение / откаты / недостача", action: "invest_theft" },
@@ -1382,7 +1429,7 @@
                     nextOptions = [{ text: "Заполнить форму заявки", action: "open_form" }];
                 } else if (action === 'audit') {
                     lastTopic = "Аудит и профайлинг";
-                    botReply = 'Мы проводим аудит лояльности текущей команды, анализ цифрового следа деловых партнеров и медиацию сложных конфликтов (от 5 000 Ᵽ). Что для вас сейчас актуальнее?';
+                    botReply = 'Мы проводим аудит лояльности текущей команды, анализ цифрового следа деловых партнеров и медиацию сложных конфликтов (от 5 000 ₽). Что для вас сейчас актуальнее?';
                     nextOptions = [
                         { text: "Проверить партнера / контрагента", action: "ask_contact_inline" },
                         { text: "Оценить команду / разрешить конфликт", action: "ask_contact_inline" },
@@ -1390,7 +1437,7 @@
                     ];
                 } else if (action === 'price_btn') {
                     lastTopic = "Стоимость и условия";
-                    botReply = 'Профайлинг цифрового следа, анализ анонимок, медиация и консультации — от 5 000 Ᵽ. Сопровождение расследований — от 10 000 Ᵽ. Работаем с физлицами и юрлицами (договор, чеки НПД, закрывающие документы).';
+                    botReply = 'Профайлинг цифрового следа, анализ анонимок, медиация и консультации — от 5 000 ₽. Сопровождение расследований — от 10 000 ₽. Работаем с физлицами и юрлицами (договор, чеки НПД, закрывающие документы).';
                     nextOptions = [
                         { text: "Рассчитать стоимость моей задачи", action: "ask_contact_inline" },
                         { text: "Вернуться в начало", action: "reset" }
@@ -1458,6 +1505,192 @@
             const attribution = `\n\nИсточник: ${author} — ${url}`;
             e.clipboardData.setData('text/plain', selection + attribution);
         });
+
+        // ==========================================
+        // ПОЛНАЯ ЛОГИКА ИГРЫ "СНЕЖНЫЙ БОЙ"
+        // ==========================================
+        const canvas = document.getElementById('snowGameCanvas');
+        if (canvas) {
+            const ctx = canvas.getContext('2d');
+            const scoreElement = document.getElementById('snowScore');
+
+            let score = 0;
+            let snowballs = [];
+            let particles = [];
+
+            const snowman = {
+                x: canvas.width / 2,
+                y: 120,
+                radius: 40,
+                speed: 4,
+                direction: 1,
+                hit: false,
+                hitTimer: 0
+            };
+
+            const player = {
+                x: canvas.width / 2,
+                y: canvas.height - 40,
+                radius: 25
+            };
+
+            // Управление
+            canvas.addEventListener('mousedown', (e) => { e.preventDefault(); throwSnowball(); });
+            canvas.addEventListener('touchstart', (e) => { e.preventDefault(); throwSnowball(); }, { passive: false });
+            window.addEventListener('keydown', (e) => {
+                if (e.code === 'Space') { e.preventDefault(); throwSnowball(); }
+            });
+
+            function throwSnowball() {
+                if (snowballs.length > 3) return; 
+                snowballs.push({ x: player.x, y: player.y - 20, radius: 8, speedY: -10 });
+            }
+
+            function resetSnowman() {
+                snowman.x = 60 + Math.random() * (canvas.width - 120);
+                snowman.speed = 3 + Math.random() * 4;
+                snowman.hit = false;
+            }
+
+            function createParticles(x, y) {
+                for (let i = 0; i < 20; i++) {
+                    particles.push({
+                        x: x, y: y,
+                        vx: (Math.random() - 0.5) * 12,
+                        vy: (Math.random() - 0.5) * 12 - 3,
+                        life: 1,
+                        size: Math.random() * 4 + 2
+                    });
+                }
+            }
+
+            window.resetGame = function() { 
+                score = 0;
+                scoreElement.innerText = score;
+                snowballs = [];
+                particles = [];
+                resetSnowman();
+            };
+
+            function updateGame() {
+                // Движение снеговика
+                if (!snowman.hit) {
+                    snowman.x += snowman.speed * snowman.direction;
+                    if (snowman.x > canvas.width - snowman.radius || snowman.x < snowman.radius) {
+                        snowman.direction *= -1;
+                    }
+                } else {
+                    snowman.hitTimer--;
+                    if (snowman.hitTimer <= 0) resetSnowman();
+                }
+
+                // Движение снежков
+                for (let i = snowballs.length - 1; i >= 0; i--) {
+                    let ball = snowballs[i];
+                    ball.y += ball.speedY;
+
+                    let dx = ball.x - snowman.x;
+                    let dy = ball.y - snowman.y;
+                    let distance = Math.sqrt(dx * dx + dy * dy);
+
+                    // Попадание
+                    if (distance < snowman.radius + ball.radius && !snowman.hit) {
+                        snowman.hit = true;
+                        snowman.hitTimer = 30;
+                        score++;
+                        scoreElement.innerText = score;
+                        createParticles(ball.x, ball.y);
+                        snowballs.splice(i, 1);
+                        continue;
+                    }
+
+                    if (ball.y < -20) snowballs.splice(i, 1);
+                }
+
+                // Частицы
+                for (let i = particles.length - 1; i >= 0; i--) {
+                    let p = particles[i];
+                    p.x += p.vx;
+                    p.y += p.vy;
+                    p.vy += 0.2; // Гравитация
+                    p.life -= 0.03;
+                    if (p.life <= 0) particles.splice(i, 1);
+                }
+            }
+
+            function drawGame() {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+                // Земля
+                ctx.fillStyle = '#ffffff';
+                ctx.beginPath();
+                ctx.moveTo(0, canvas.height);
+                ctx.quadraticCurveTo(canvas.width / 2, canvas.height - 50, canvas.width, canvas.height);
+                ctx.fill();
+
+                // Игрок
+                ctx.fillStyle = '#e0f6ff';
+                ctx.beginPath();
+                ctx.arc(player.x, player.y, player.radius, 0, Math.PI * 2);
+                ctx.fill();
+                ctx.strokeStyle = '#b0d4ec';
+                ctx.lineWidth = 3;
+                ctx.stroke();
+
+                // Снеговик
+                ctx.save();
+                ctx.translate(snowman.x, snowman.y);
+                let bodyColor = snowman.hit ? '#ffcccc' : '#ffffff';
+
+                // Нижний шар
+                ctx.fillStyle = bodyColor;
+                ctx.beginPath(); ctx.arc(0, 20, 30, 0, Math.PI * 2); ctx.fill();
+                // Средний шар
+                ctx.beginPath(); ctx.arc(0, -10, 22, 0, Math.PI * 2); ctx.fill();
+                // Голова
+                ctx.beginPath(); ctx.arc(0, -35, 16, 0, Math.PI * 2); ctx.fill();
+                
+                // Глаза
+                ctx.fillStyle = '#2c3e50';
+                ctx.beginPath(); ctx.arc(-5, -40, 2, 0, Math.PI * 2); ctx.arc(5, -40, 2, 0, Math.PI * 2); ctx.fill();
+                // Нос
+                ctx.fillStyle = '#e67e22';
+                ctx.beginPath(); ctx.moveTo(0, -35); ctx.lineTo(12, -32); ctx.lineTo(0, -28); ctx.fill();
+                // Пуговицы
+                ctx.fillStyle = '#2c3e50';
+                ctx.beginPath(); ctx.arc(0, -10, 2, 0, Math.PI * 2); ctx.arc(0, 0, 2, 0, Math.PI * 2); ctx.fill();
+                // Ведро
+                ctx.fillStyle = '#34495e';
+                ctx.beginPath(); ctx.moveTo(-12, -48); ctx.lineTo(12, -48); ctx.lineTo(8, -65); ctx.lineTo(-8, -65); ctx.fill();
+                
+                ctx.restore();
+
+                // Снежки
+                ctx.fillStyle = '#ffffff';
+                ctx.shadowColor = '#b0d4ec';
+                ctx.shadowBlur = 5;
+                for (let ball of snowballs) {
+                    ctx.beginPath(); ctx.arc(ball.x, ball.y, ball.radius, 0, Math.PI * 2); ctx.fill();
+                }
+                ctx.shadowBlur = 0;
+
+                // Частицы
+                for (let p of particles) {
+                    ctx.fillStyle = `rgba(255, 255, 255, ${p.life})`;
+                    ctx.beginPath(); ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2); ctx.fill();
+                }
+            }
+
+            function gameLoop() {
+                updateGame();
+                drawGame();
+                requestAnimationFrame(gameLoop);
+            }
+
+            // Запуск
+            resetSnowman();
+            gameLoop();
+        }
     </script>
 </body>
 </html>
