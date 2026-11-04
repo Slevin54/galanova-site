@@ -11,7 +11,7 @@
             m[i].l=1*new Date();
             for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
             k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)
-        })(window, document,'script','https://mc.yandex.ru/metrika/tag.js?id=113975964', 'ym');
+        })(window, document,'script', 'https://mc.yandex.ru/metrika/tag.js?id=113975964', 'ym');
 
         ym(113975964, 'init', {ssr:true, webvisor:true, clickmap:true, ecommerce:"dataLayer", referrer: document.referrer, url: location.href, accurateTrackBounce:true, trackLinks:true});
     </script>
@@ -151,6 +151,18 @@
             position: relative;
         }
         
+        /* КАНВАС ДЛЯ ОСЕННИХ ЛИСТЬЕВ */
+        #autumn-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none; /* Листья не мешают кликам */
+            z-index: 10; /* Поверх контента, но под шапкой (1000) и чатом (1000) */
+            opacity: 0.85;
+        }
+
         /* ПЛАВАЮЩАЯ ШАПКА */
         .site-header {
             position: fixed; top: 0; left: 0; width: 100%;
@@ -287,7 +299,7 @@
         .carousel-wrapper-sol { position: relative; width: 100%; overflow: hidden; padding-bottom: 20px; margin-top: 30px; }
         .solutions-track { display: flex; gap: 20px; width: max-content; animation: marquee-services 40s linear infinite; }
         .solutions-track:hover { animation-play-state: paused; }
-        @keyframes marquee-services { 0% { transform: translateX(0); } 100% { transform: translateX(-1700px); } }
+        @keyframes marquee-services { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
         .solution-card { width: 320px; flex-shrink: 0; background: #ffffff; padding: 35px; border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.04); border-top: 4px solid var(--primary); transition: transform 0.3s ease, box-shadow 0.3s ease, border-top-color 0.3s; display: flex; flex-direction: column; }
         .solution-card:hover { transform: translateY(-8px); box-shadow: 0 20px 40px rgba(0,0,0,0.08); border-top-color: var(--accent); }
         .solution-header { display: flex; align-items: center; gap: 15px; margin-bottom: 20px; }
@@ -329,7 +341,7 @@
         .carousel-wrapper-pub { position: relative; width: 100%; overflow: hidden; padding-bottom: 20px; margin-top: 30px; }
         .pub-track { display: flex; gap: 20px; width: max-content; animation: marquee 30s linear infinite; }
         .pub-track:hover { animation-play-state: paused; }
-        @keyframes marquee { 0% { transform: translateX(0); } 100% { transform: translateX(-1280px); } }
+        @keyframes marquee { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
         .pub-card { width: 300px; flex-shrink: 0; background: #fff; border-radius: 8px; overflow: hidden; box-shadow: 0 6px 12px rgba(0,0,0,0.05); display: flex; flex-direction: column; border: 1px solid #e2e8f0; height: 100%; }
         .pub-image { height: 160px; background-color: #e2e8f0; overflow: hidden; position: relative; }
         .pub-image::after { content: ''; position: absolute; top:0; left:0; width: 100%; height: 100%; background: rgba(0,0,0,0.1); }
@@ -405,6 +417,7 @@
         .side-menu-footer { margin-top: auto; text-align: center; font-size: 0.85rem; color: var(--text-gray); }
 
         @media (max-width: 900px) {
+            #autumn-canvas { display: none; /* Отключаем листья на телефонах для экономии батареи */ }
             .hero-wrapper { flex-direction: column; padding-top: 100px; padding-bottom: 40px; min-height: auto; }
             .hero-content { width: 100%; padding: 0 20px; text-align: center; margin-bottom: 30px; }
             .hero-tags { align-items: center; } 
@@ -423,10 +436,10 @@
             .process-step::after { display: none; }
             .solution-card { width: 280px; padding: 25px; }
             .solutions-track { animation-name: marquee-services-mobile; animation-duration: 35s; }
-            @keyframes marquee-services-mobile { 0% { transform: translateX(0); } 100% { transform: translateX(-1500px); } }
+            @keyframes marquee-services-mobile { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
             .pub-card { width: 280px; }
             .pub-track { animation-name: marquee-mobile; animation-duration: 25s; }
-            @keyframes marquee-mobile { 0% { transform: translateX(0); } 100% { transform: translateX(-1200px); } }
+            @keyframes marquee-mobile { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
             .chat-window { right: -15px; bottom: 75px; width: calc(100vw - 30px); }
             .modal-box { max-width: 95%; padding: 30px 20px; }
             .quote-block { padding: 0 20px; }
@@ -445,6 +458,9 @@
     </style>
 </head>
 <body>
+
+    <!-- КАНВАС ДЛЯ ПАДАЮЩИХ ЛИСТЬЕВ -->
+    <canvas id="autumn-canvas"></canvas>
 
     <!-- ШАПКА САЙТА -->
     <header class="site-header">
@@ -1054,7 +1070,7 @@
         let lastTopic = "Консультация в чате";
         let chatOpenedAt = Date.now();
 
-        // База знаний Ирины (распознавание намерений по корням слов)
+        // База знаний Ирины (распознавание намерений по корневым словам)
         const knowledgeBase = [
             {
                 intent: "Стоимость и условия",
@@ -1449,6 +1465,124 @@
             const attribution = `\n\nИсточник: ${author} — ${url}`;
             e.clipboardData.setData('text/plain', selection + attribution);
         });
+
+        // ==========================================
+        // ОСЕННИЕ ЛИСТЬЯ (CANVAS)
+        // ==========================================
+        const canvas = document.getElementById('autumn-canvas');
+        const ctx = canvas.getContext('2d');
+        let width, height;
+
+        function resizeCanvas() {
+            width = canvas.width = window.innerWidth;
+            height = canvas.height = window.innerHeight;
+        }
+        window.addEventListener('resize', resizeCanvas);
+        resizeCanvas();
+
+        const leaves = [];
+        const settledLeaves = [];
+        const colors = ['#d35400', '#e67e22', '#f39c12', '#c0392b', '#b03a2e', '#d4ac0d'];
+        const maxActiveLeaves = 50; // Количество падающих листьев
+        const maxSettledLeaves = 150; // Сколько листьев может лежать внизу
+
+        class Leaf {
+            constructor() {
+                this.reset();
+                this.y = Math.random() * height - height; // Начинают падать сверху экрана
+            }
+            reset() {
+                this.x = Math.random() * width;
+                this.y = -20;
+                this.size = Math.random() * 10 + 12;
+                this.speedY = Math.random() * 1.5 + 0.8;
+                this.speedX = Math.random() * 1 - 0.5;
+                this.rotation = Math.random() * Math.PI * 2;
+                this.rotationSpeed = Math.random() * 0.05 - 0.025;
+                this.color = colors[Math.floor(Math.random() * colors.length)];
+                this.sway = Math.random() * 2; // Амплитуда покачивания
+                this.swaySpeed = Math.random() * 0.02 + 0.01;
+                this.angle = Math.random() * Math.PI * 2;
+            }
+            update() {
+                this.y += this.speedY;
+                this.x += this.speedX + Math.sin(this.angle) * this.sway;
+                this.angle += this.swaySpeed;
+                this.rotation += this.rotationSpeed;
+
+                // Если лист упал вниз
+                if (this.y > height - 20) {
+                    this.y = height - 10 - Math.random() * 20; // Оставляем на земле
+                    this.x += Math.random() * 40 - 20; // Разлетаются при приземлении
+                    settledLeaves.push(this);
+                    
+                    // Ограничиваем количество лежащих листьев
+                    if (settledLeaves.length > maxSettledLeaves) {
+                        settledLeaves.shift();
+                    }
+                    return false; // Удаляем из активных
+                }
+                return true;
+            }
+            draw(ctx) {
+                ctx.save();
+                ctx.translate(this.x, this.y);
+                ctx.rotate(this.rotation);
+                ctx.fillStyle = this.color;
+                
+                // Рисуем форму листа
+                ctx.beginPath();
+                ctx.moveTo(0, -this.size / 2);
+                ctx.quadraticCurveTo(this.size / 2, -this.size / 2, this.size / 2, 0);
+                ctx.quadraticCurveTo(this.size / 2, this.size / 2, 0, this.size / 2);
+                ctx.quadraticCurveTo(-this.size / 2, this.size / 2, -this.size / 2, 0);
+                ctx.quadraticCurveTo(-this.size / 2, -this.size / 2, 0, -this.size / 2);
+                ctx.fill();
+                
+                // Добавляем прожилку
+                ctx.strokeStyle = 'rgba(0,0,0,0.1)';
+                ctx.lineWidth = 1;
+                ctx.beginPath();
+                ctx.moveTo(0, -this.size / 2);
+                ctx.lineTo(0, this.size / 2);
+                ctx.stroke();
+
+                ctx.restore();
+            }
+        }
+
+        function initLeaves() {
+            for (let i = 0; i < maxActiveLeaves; i++) {
+                leaves.push(new Leaf());
+            }
+        }
+
+        function animateLeaves() {
+            ctx.clearRect(0, 0, width, height);
+            
+            // Рисуем уже упавшие листья
+            settledLeaves.forEach(leaf => leaf.draw(ctx));
+
+            // Обновляем и рисуем падающие
+            for (let i = leaves.length - 1; i >= 0; i--) {
+                const leaf = leaves[i];
+                if (!leaf.update()) {
+                    leaves.splice(i, 1);
+                } else {
+                    leaf.draw(ctx);
+                }
+            }
+
+            // Добавляем новые, если каких-то не хватает
+            if (leaves.length < maxActiveLeaves) {
+                leaves.push(new Leaf());
+            }
+
+            requestAnimationFrame(animateLeaves);
+        }
+
+        initLeaves();
+        animateLeaves();
     </script>
 </body>
 </html>
