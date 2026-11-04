@@ -1495,7 +1495,7 @@
         });
 
         // ==========================================
-        // ЛОГИКА ИГРЫ "СНЕЖНЫЙ БОЙ"
+        // ПОЛНАЯ ЛОГИКА ИГРЫ "СНЕЖНЫЙ БОЙ"
         // ==========================================
         const canvas = document.getElementById('snowGameCanvas');
         const ctx = canvas.getContext('2d');
@@ -1507,8 +1507,8 @@
         let gameAnimationId;
 
         const snowman = {
-            x: 400,
-            y: 120, // Подняли снеговика выше
+            x: canvas.width / 2,
+            y: 120,
             radius: 40,
             speed: 4,
             direction: 1,
@@ -1524,20 +1524,18 @@
 
         // Обработка клика мыши
         canvas.addEventListener('mousedown', (e) => {
-            // Предотвращаем скролл при клике
             e.preventDefault();
             throwSnowball();
         });
         
         // Обработка тапа на мобильных
         canvas.addEventListener('touchstart', (e) => {
-            e.preventDefault(); // Предотвращаем зум/скролл
+            e.preventDefault();
             throwSnowball();
         }, { passive: false });
 
         // Управление пробелом
         window.addEventListener('keydown', (e) => {
-            // Проверяем, что игра в зоне видимости (опционально)
             if (e.code === 'Space') {
                 e.preventDefault();
                 throwSnowball();
@@ -1545,7 +1543,6 @@
         });
 
         function throwSnowball() {
-            // Не даем спамить, если снежок еще не улетел высоко
             if (snowballs.length > 3) return; 
             
             snowballs.push({
@@ -1568,7 +1565,7 @@
                     x: x,
                     y: y,
                     vx: (Math.random() - 0.5) * 12,
-                    vy: (Math.random() - 0.5) * 12 - 3, // Немного вверх
+                    vy: (Math.random() - 0.5) * 12 - 3,
                     life: 1,
                     size: Math.random() * 4 + 2
                 });
@@ -1604,7 +1601,6 @@
                 let dy = ball.y - snowman.y;
                 let distance = Math.sqrt(dx * dx + dy * dy);
 
-                // Проверка коллизии (радиус снеговика + радиус снежка)
                 if (distance < snowman.radius + ball.radius && !snowman.hit) {
                     snowman.hit = true;
                     snowman.hitTimer = 30;
@@ -1624,4 +1620,25 @@
                 let p = particles[i];
                 p.x += p.vx;
                 p.y += p.vy;
-               
+                p.vy += 0.2;
+                p.life -= 0.03;
+                if (p.life <= 0) {
+                    particles.splice(i, 1);
+                }
+            }
+        }
+
+        function drawGame() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            // Снежная земля
+            ctx.fillStyle = '#ffffff';
+            ctx.beginPath();
+            ctx.moveTo(0, canvas.height);
+            ctx.quadraticCurveTo(canvas.width / 2, canvas.height - 50, canvas.width, canvas.height);
+            ctx.fill();
+
+            // Игрок (снежная база)
+            ctx.fillStyle = '#e0f6ff';
+            ctx.beginPath();
+            ctx
