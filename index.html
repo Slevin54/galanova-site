@@ -213,7 +213,17 @@
             z-index: 2;
             box-sizing: border-box;
         }
-        .hero-content h1 { font-size: 3.2rem; color: var(--primary); margin-bottom: 20px; line-height: 1.1; }
+        
+        /* НОВЫЙ ГЛАВНЫЙ ЗАГОЛОВОК */
+        .main-name-title {
+            font-size: 2.8rem;
+            font-weight: 800;
+            color: var(--primary);
+            margin: 0 0 25px 0;
+            line-height: 1.1;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
         
         .hero-tags { display: flex; flex-direction: column; align-items: flex-start; gap: 10px; margin-bottom: 30px; }
         .hero-tag { background: rgba(211, 84, 0, 0.08); color: var(--accent); padding: 8px 16px; border-radius: 6px; font-size: 0.85rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; border: 1px solid rgba(211, 84, 0, 0.15); }
@@ -401,6 +411,7 @@
             .hero-tags { align-items: center; } 
             .hero-quote { text-align: justify; padding: 15px 20px; }
             .hero-quote cite { text-align: center; }
+            .main-name-title { font-size: 2rem; margin-bottom: 20px; }
             .hero-image-bg { position: relative; top: 0; right: 0; transform: none; width: 60%; height: 400px; margin: 0 auto; } 
             .header-nav { display: none; } 
             .hamburger-btn { display: flex; } 
@@ -435,9 +446,7 @@
 </head>
 <body>
 
-    <!-- ===================================================== -->
-    <!-- 📊 СКРИПТ ОТСЛЕЖИВАНИЯ ИСТОЧНИКА ТРАФИКА (UTM + REFERRER) -->
-    <!-- ===================================================== -->
+    <!-- СКРИПТ ОТСЛЕЖИВАНИЯ ИСТОЧНИКА ТРАФИКА -->
     <script>
         (function captureTrafficSource() {
             try {
@@ -454,7 +463,6 @@
                 const utmSource = urlParams.get('utm_source');
                 const hasUtm = !!utmSource;
                 
-                // Если в URL есть UTM — это новый клик по рекламной ссылке, ВСЕГДА обновляем источник
                 if (hasUtm) {
                     const source = {
                         referrer: document.referrer || '',
@@ -470,10 +478,8 @@
                     return;
                 }
                 
-                // Если UTM нет и уже есть сохраненный источник — не перезаписываем (first touch)
                 if (sessionStorage.getItem('eg_traffic_source')) return;
                 
-                // Первый визит без UTM — используем referrer
                 const source = {
                     referrer: document.referrer || '',
                     referrerDomain: getDomain(document.referrer),
@@ -487,7 +493,6 @@
             } catch(e) { console.warn('Traffic capture error:', e); }
         })();
 
-        // Вспомогательная функция для получения источника
         function getTrafficSource() {
             try {
                 const stored = sessionStorage.getItem('eg_traffic_source');
@@ -500,8 +505,9 @@
     <!-- ШАПКА САЙТА -->
     <header class="site-header">
         <div class="container header-container">
-            <a href="#" class="header-logo" style="display: block; line-height: 0;">
-                <img src="logotip.jpg" alt="Елена Галанова - Профайлер" style="height: 40px; width: auto; object-fit: contain;">
+            <a href="#" class="header-logo">
+                <div class="header-logo-dot"></div>
+                Елена Галанова
             </a>
             <nav class="header-nav">
                 <a href="#about">Обо мне</a>
@@ -538,7 +544,7 @@
     <div class="side-menu-overlay" id="menuOverlay" onclick="closeMenu()"></div>
     <div class="side-menu" id="sideMenu">
         <div class="side-menu-header">
-            <img src="logotip.jpg" alt="Елена Галанова" style="height: 35px; width: auto;">
+            <span class="side-menu-logo">Елена Галанова</span>
             <button class="side-menu-close" onclick="closeMenu()">&times;</button>
         </div>
         <nav class="side-menu-nav">
@@ -563,8 +569,7 @@
     <!-- ГЛАВНЫЙ ЭКРАН -->
     <section class="hero-wrapper">
         <div class="hero-content">
-            <img src="logotip.jpg" alt="Елена Галанова - Профайлер" style="max-width: 100%; height: auto; max-height: 90px; margin-bottom: 25px; display: block;">
-            <h1 style="position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0; overflow: hidden; clip: rect(0, 0, 0, 0); border: 0;">Елена Галанова - Профайлер</h1>
+            <h1 class="main-name-title">Галанова Елена Владимировна</h1>
             <div class="hero-tags">
                 <span class="hero-tag">Кандидат психологических наук</span>
                 <span class="hero-tag">Профайлер-полиграфолог</span>
@@ -938,7 +943,6 @@
     <script>
         try { document.getElementById('currentYear').textContent = new Date().getFullYear(); } catch(e) {}
 
-        // БОКОВОЕ МЕНЮ
         function toggleMenu() {
             document.getElementById('sideMenu').classList.toggle('active');
             document.getElementById('menuOverlay').classList.toggle('active');
@@ -948,7 +952,6 @@
             document.getElementById('menuOverlay').classList.remove('active');
         }
 
-        // УМНЫЙ РОУТИНГ ДЛЯ МЕССЕНДЖЕРОВ
         function openMessenger(e, type) {
             const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) || 
                              (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
@@ -969,7 +972,6 @@
             }
         }
 
-        // МОДАЛЬНОЕ ОКНО
         function openModal() {
             const modal = document.getElementById('leadModal');
             if (modal) {
@@ -996,7 +998,6 @@
             }
         }
 
-        // ЗАЩИТА EMAIL ОТ БОТОВ-ПАРСЕРОВ
         function openEmail(e) {
             e.preventDefault();
             const u = 'kombinir';
@@ -1004,7 +1005,6 @@
             window.location.href = 'mailto:' + u + '@' + d;
         }
 
-        // АНТИСПАМ
         const SITE_SECURITY_TOKEN = "eg_sec_2026_v1";
         const RATE_LIMIT_MS = 2 * 60 * 1000;
 
@@ -1024,7 +1024,6 @@
             } catch (e) {}
         }
 
-        // ОТПРАВКА ФОРМЫ С ИСТОЧНИКОМ ТРАФИКА
         const contactForm = document.getElementById('contactForm');
         if (contactForm) {
             contactForm.addEventListener("submit", async function(event) {
@@ -1060,7 +1059,6 @@
                 const submitBtn = contactForm.querySelector('button[type="submit"]');
                 const originalBtnText = submitBtn.textContent;
 
-                // 📊 ПОЛУЧАЕМ ИСТОЧНИК ТРАФИКА
                 const trafficSource = getTrafficSource();
 
                 const data = {
@@ -1069,7 +1067,7 @@
                     message: formData.get('message'),
                     _gotcha: honeypotVal,
                     _token: SITE_SECURITY_TOKEN,
-                    source: trafficSource  // 👈 Передаем источник
+                    source: trafficSource
                 };
 
                 try {
@@ -1109,9 +1107,6 @@
             });
         }
 
-        // ==========================================
-        // УМНЫЙ КОНСУЛЬТАНТ ИРИНА
-        // ==========================================
         let chatInitialized = false;
         let awaitingContact = false;
         let lastTopic = "Консультация в чате";
@@ -1251,12 +1246,10 @@
             return false;
         }
 
-        // ОТПРАВКА ЛИДА ИЗ ЧАТА С ИСТОЧНИКОМ ТРАФИКА
         async function sendLeadFromChat(contactText, contextMsg) {
             if (Date.now() - chatOpenedAt < 2500) return false;
             if (isRateLimited()) return "rate_limited";
             
-            // 📊 ПОЛУЧАЕМ ИСТОЧНИК ТРАФИКА
             const trafficSource = getTrafficSource();
             
             try {
@@ -1268,7 +1261,7 @@
                         message: `Тема в чате: ${lastTopic}. Сообщение клиента: ${contextMsg}`,
                         _gotcha: "",
                         _token: SITE_SECURITY_TOKEN,
-                        source: trafficSource  // 👈 Передаем источник
+                        source: trafficSource
                     }),
                     headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' }
                 });
@@ -1500,7 +1493,6 @@
             if (chatBody && chatBody.children.length <= 2) { resetChat(); }
         });
 
-        // КОПИРОВАНИЕ ТЕКСТА С УКАЗАНИЕМ АВТОРА
         document.addEventListener('copy', function(e) {
             const selection = document.getSelection().toString();
             if (!selection) return;
