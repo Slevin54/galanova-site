@@ -213,7 +213,17 @@
             z-index: 2;
             box-sizing: border-box;
         }
-        .hero-content h1 { font-size: 3.2rem; color: var(--primary); margin-bottom: 20px; line-height: 1.1; }
+        
+        /* НОВЫЙ ГЛАВНЫЙ ЗАГОЛОВОК */
+        .main-name-title {
+            font-size: 2.8rem;
+            font-weight: 800;
+            color: var(--primary);
+            margin: 0 0 25px 0;
+            line-height: 1.1;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
         
         .hero-tags { display: flex; flex-direction: column; align-items: flex-start; gap: 10px; margin-bottom: 30px; }
         .hero-tag { background: rgba(211, 84, 0, 0.08); color: var(--accent); padding: 8px 16px; border-radius: 6px; font-size: 0.85rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; border: 1px solid rgba(211, 84, 0, 0.15); }
@@ -395,12 +405,50 @@
         .side-menu-nav a:hover { color: var(--accent); }
         .side-menu-footer { margin-top: auto; text-align: center; font-size: 0.85rem; color: var(--text-gray); }
 
+        /* КНОПКА "НАВЕРХ" */
+        #scrollToTopBtn {
+            display: none; 
+            position: fixed;
+            bottom: 105px; 
+            right: 30px;
+            z-index: 999;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background-color: var(--primary);
+            color: #fff;
+            border: 2px solid var(--accent);
+            cursor: pointer;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease;
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        #scrollToTopBtn.show {
+            display: flex;
+            opacity: 1;
+            transform: translateY(0);
+        }
+        #scrollToTopBtn:hover {
+            background-color: var(--accent);
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(211, 84, 0, 0.4);
+        }
+        #scrollToTopBtn svg {
+            width: 24px;
+            height: 24px;
+            fill: #ffffff;
+        }
+
         @media (max-width: 900px) {
             .hero-wrapper { flex-direction: column; padding-top: 100px; padding-bottom: 40px; min-height: auto; }
             .hero-content { width: 100%; padding: 0 20px; text-align: center; margin-bottom: 30px; }
             .hero-tags { align-items: center; } 
             .hero-quote { text-align: justify; padding: 15px 20px; }
             .hero-quote cite { text-align: center; }
+            .main-name-title { font-size: 2rem; margin-bottom: 20px; }
             .hero-image-bg { position: relative; top: 0; right: 0; transform: none; width: 60%; height: 400px; margin: 0 auto; } 
             .header-nav { display: none; } 
             .hamburger-btn { display: flex; } 
@@ -421,6 +469,8 @@
             .quote-block { padding: 0 20px; }
             .quote-block::before { top: -20px; font-size: 80px; }
             .quote-text { font-size: 1.1rem; }
+            #scrollToTopBtn { bottom: 95px; right: 20px; width: 44px; height: 44px; }
+            #scrollToTopBtn svg { width: 20px; height: 20px; }
         }
     
         @keyframes fadeIn {
@@ -435,9 +485,7 @@
 </head>
 <body>
 
-    <!-- ===================================================== -->
-    <!-- 📊 СКРИПТ ОТСЛЕЖИВАНИЯ ИСТОЧНИКА ТРАФИКА (UTM + REFERRER) -->
-    <!-- ===================================================== -->
+    <!-- СКРИПТ ОТСЛЕЖИВАНИЯ ИСТОЧНИКА ТРАФИКА -->
     <script>
         (function captureTrafficSource() {
             try {
@@ -454,7 +502,6 @@
                 const utmSource = urlParams.get('utm_source');
                 const hasUtm = !!utmSource;
                 
-                // Если в URL есть UTM — это новый клик по рекламной ссылке, ВСЕГДА обновляем источник
                 if (hasUtm) {
                     const source = {
                         referrer: document.referrer || '',
@@ -470,10 +517,8 @@
                     return;
                 }
                 
-                // Если UTM нет и уже есть сохраненный источник — не перезаписываем (first touch)
                 if (sessionStorage.getItem('eg_traffic_source')) return;
                 
-                // Первый визит без UTM — используем referrer
                 const source = {
                     referrer: document.referrer || '',
                     referrerDomain: getDomain(document.referrer),
@@ -487,7 +532,6 @@
             } catch(e) { console.warn('Traffic capture error:', e); }
         })();
 
-        // Вспомогательная функция для получения источника
         function getTrafficSource() {
             try {
                 const stored = sessionStorage.getItem('eg_traffic_source');
@@ -500,8 +544,9 @@
     <!-- ШАПКА САЙТА -->
     <header class="site-header">
         <div class="container header-container">
-            <a href="#" class="header-logo" style="display: block; line-height: 0;">
-                <img src="logotip.jpg" alt="Елена Галанова - Профайлер" style="height: 40px; width: auto; object-fit: contain;">
+            <a href="#" class="header-logo">
+                <div class="header-logo-dot"></div>
+                Елена Галанова
             </a>
             <nav class="header-nav">
                 <a href="#about">Обо мне</a>
@@ -538,7 +583,7 @@
     <div class="side-menu-overlay" id="menuOverlay" onclick="closeMenu()"></div>
     <div class="side-menu" id="sideMenu">
         <div class="side-menu-header">
-            <img src="logotip.jpg" alt="Елена Галанова" style="height: 35px; width: auto;">
+            <span class="side-menu-logo">Елена Галанова</span>
             <button class="side-menu-close" onclick="closeMenu()">&times;</button>
         </div>
         <nav class="side-menu-nav">
@@ -563,8 +608,7 @@
     <!-- ГЛАВНЫЙ ЭКРАН -->
     <section class="hero-wrapper">
         <div class="hero-content">
-            <img src="logotip.jpg" alt="Елена Галанова - Профайлер" style="max-width: 100%; height: auto; max-height: 90px; margin-bottom: 25px; display: block;">
-            <h1 style="position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0; overflow: hidden; clip: rect(0, 0, 0, 0); border: 0;">Елена Галанова - Профайлер</h1>
+            <h1 class="main-name-title">Галанова Елена Владимировна</h1>
             <div class="hero-tags">
                 <span class="hero-tag">Кандидат психологических наук</span>
                 <span class="hero-tag">Профайлер-полиграфолог</span>
@@ -809,6 +853,7 @@
                         <div class="pub-image"><img src="https://images.unsplash.com/photo-1544947950-fa07a98d237f?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Обложка книги Почерк лжи" class="pub-img" loading="lazy"></div>
                         <div class="pub-content"><span class="pub-tag">Книга в работе</span><h3>Почерк лжи</h3><p>Книга об организационных рисках, контекстном анализе и прогнозировании поведения в корпоративной среде.</p><span class="pub-link pub-link-disabled">Скоро в продаже</span></div>
                     </div>
+                    <!-- ДУБЛИКАТ -->
                     <div class="pub-card">
                         <div class="pub-image"><img src="Executive.jpg" alt="Как вычислить инсайдера - статья на Executive.ru" class="pub-img" loading="lazy" style="object-fit: contain; background-color: #ffffff; padding: 20px 15px;"></div>
                         <div class="pub-content"><span class="pub-tag">Executive.ru</span><h3>Как вычислить и безопасно уволить инсайдера</h3><p>Маркеры токсичного поведения, вычисление корпоративных шпионов и алгоритм расставания без рисков для бизнеса.</p><a href="https://www.e-xecutive.ru/management/itforbusiness/2000619-kak-vychislit-i-bezopasno-uvolit-insaidera" target="_blank" class="pub-link">Читать статью →</a></div>
@@ -835,9 +880,9 @@
         <div class="container">
             <div style="max-width: 600px; margin: 0 auto; text-align: center;">
                 <h2 style="font-size: 2.2rem; margin-bottom: 15px;">Не уверены, какая услуга нужна?</h2>
-<p style="font-size: 1.05rem; color: #cbd5e0; margin: 0 auto 35px auto; line-height: 1.6; max-width: 780px;">
-    Все обращения строго конфиденциальны. Опишите вашу ситуацию, и я предложу вам оптимальный формат сотрудничества.
-</p>
+                <p style="font-size: 1.05rem; color: #cbd5e0; margin: 0 auto 35px auto; line-height: 1.6; max-width: 750px;">
+                    Все обращения строго конфиденциальны. Опишите вашу ситуацию, и я предложу вам оптимальный формат сотрудничества.
+                </p>
                 <button class="contact-btn" onclick="openModal()" style="padding: 16px 45px; font-size: 1.1rem; box-shadow: 0 10px 25px rgba(211, 84, 0, 0.4);">Запросить консультацию</button>
                 <div style="border-top: 1px solid rgba(255,255,255,0.05); padding-top: 25px; margin-top: 40px;">
                     <div style="display: flex; justify-content: center; gap: 20px; margin-bottom: 15px; flex-wrap: wrap; font-size: 0.85rem;">
@@ -934,11 +979,17 @@
         </div>
     </div>
 
+    <!-- КНОПКА "НАВЕРХ" -->
+    <button id="scrollToTopBtn" title="Вернуться наверх" aria-label="Вернуться наверх">
+        <svg viewBox="0 0 24 24">
+            <path d="M4 12l1.41 1.41L11 7.83V20h2V7.83l5.58 5.59L20 12l-8-8-8 8z"/>
+        </svg>
+    </button>
+
     <!-- Скрипты -->
     <script>
         try { document.getElementById('currentYear').textContent = new Date().getFullYear(); } catch(e) {}
 
-        // БОКОВОЕ МЕНЮ
         function toggleMenu() {
             document.getElementById('sideMenu').classList.toggle('active');
             document.getElementById('menuOverlay').classList.toggle('active');
@@ -948,12 +999,26 @@
             document.getElementById('menuOverlay').classList.remove('active');
         }
 
-        // УМНЫЙ РОУТИНГ ДЛЯ МЕССЕНДЖЕРОВ
+        // УМНЫЙ РОУТИНГ ДЛЯ МЕССЕНДЖЕРОВ (С УВЕДОМЛЕНИЕМ О TELEGRAM)
         function openMessenger(e, type) {
             const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) || 
                              (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
             
             if (type === 'tg') {
+                const trafficSource = getTrafficSource();
+                fetch("https://functions.yandexcloud.net/d4et6k8nfd7dna181g4v", {
+                    method: "POST",
+                    body: JSON.stringify({
+                        name: "SYSTEM_NOTIFICATION_TG",
+                        contact: "Клиент нажал Telegram",
+                        message: "Клиент кликнул по кнопке Telegram на сайте.",
+                        _gotcha: "",
+                        _token: "eg_sec_2026_v1",
+                        source: trafficSource
+                    }),
+                    headers: { 'Content-Type': 'application/json' }
+                }).catch(err => console.log('Silent TG notification error:', err));
+
                 if (isMobile) {
                     e.preventDefault(); 
                     window.location.href = 'tg://resolve?domain=ElenaProprofiler';
@@ -969,7 +1034,6 @@
             }
         }
 
-        // МОДАЛЬНОЕ ОКНО
         function openModal() {
             const modal = document.getElementById('leadModal');
             if (modal) {
@@ -996,7 +1060,6 @@
             }
         }
 
-        // ЗАЩИТА EMAIL ОТ БОТОВ-ПАРСЕРОВ
         function openEmail(e) {
             e.preventDefault();
             const u = 'kombinir';
@@ -1004,7 +1067,6 @@
             window.location.href = 'mailto:' + u + '@' + d;
         }
 
-        // АНТИСПАМ
         const SITE_SECURITY_TOKEN = "eg_sec_2026_v1";
         const RATE_LIMIT_MS = 2 * 60 * 1000;
 
@@ -1024,7 +1086,6 @@
             } catch (e) {}
         }
 
-        // ОТПРАВКА ФОРМЫ С ИСТОЧНИКОМ ТРАФИКА
         const contactForm = document.getElementById('contactForm');
         if (contactForm) {
             contactForm.addEventListener("submit", async function(event) {
@@ -1060,7 +1121,6 @@
                 const submitBtn = contactForm.querySelector('button[type="submit"]');
                 const originalBtnText = submitBtn.textContent;
 
-                // 📊 ПОЛУЧАЕМ ИСТОЧНИК ТРАФИКА
                 const trafficSource = getTrafficSource();
 
                 const data = {
@@ -1069,7 +1129,7 @@
                     message: formData.get('message'),
                     _gotcha: honeypotVal,
                     _token: SITE_SECURITY_TOKEN,
-                    source: trafficSource  // 👈 Передаем источник
+                    source: trafficSource
                 };
 
                 try {
@@ -1109,9 +1169,6 @@
             });
         }
 
-        // ==========================================
-        // УМНЫЙ КОНСУЛЬТАНТ ИРИНА
-        // ==========================================
         let chatInitialized = false;
         let awaitingContact = false;
         let lastTopic = "Консультация в чате";
@@ -1251,12 +1308,10 @@
             return false;
         }
 
-        // ОТПРАВКА ЛИДА ИЗ ЧАТА С ИСТОЧНИКОМ ТРАФИКА
         async function sendLeadFromChat(contactText, contextMsg) {
             if (Date.now() - chatOpenedAt < 2500) return false;
             if (isRateLimited()) return "rate_limited";
             
-            // 📊 ПОЛУЧАЕМ ИСТОЧНИК ТРАФИКА
             const trafficSource = getTrafficSource();
             
             try {
@@ -1268,7 +1323,7 @@
                         message: `Тема в чате: ${lastTopic}. Сообщение клиента: ${contextMsg}`,
                         _gotcha: "",
                         _token: SITE_SECURITY_TOKEN,
-                        source: trafficSource  // 👈 Передаем источник
+                        source: trafficSource
                     }),
                     headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' }
                 });
@@ -1500,7 +1555,6 @@
             if (chatBody && chatBody.children.length <= 2) { resetChat(); }
         });
 
-        // КОПИРОВАНИЕ ТЕКСТА С УКАЗАНИЕМ АВТОРА
         document.addEventListener('copy', function(e) {
             const selection = document.getSelection().toString();
             if (!selection) return;
@@ -1510,6 +1564,26 @@
             const attribution = `\n\nИсточник: ${author} — ${url}`;
             e.clipboardData.setData('text/plain', selection + attribution);
         });
+
+        // КНОПКА "НАВЕРХ"
+        const scrollToTopBtn = document.getElementById('scrollToTopBtn');
+        
+        if (scrollToTopBtn) {
+            window.addEventListener('scroll', function() {
+                if (window.pageYOffset > 400) {
+                    scrollToTopBtn.classList.add('show');
+                } else {
+                    scrollToTopBtn.classList.remove('show');
+                }
+            });
+            
+            scrollToTopBtn.addEventListener('click', function() {
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+            });
+        }
     </script>
 </body>
 </html>
