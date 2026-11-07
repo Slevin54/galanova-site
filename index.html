@@ -676,7 +676,7 @@
     <!-- ГЛАВНЫЙ ЭКРАН -->
     <section class="hero-wrapper">
         <div class="hero-content">
-            <h1 class="main-name-title">Галанова Елена Владимировна <span class="main-name-subtitle">Профайлинг, оценка персонала и кадровая безопасность бизнеса</span></h1>
+            <h1 class="main-name-title">Галанова Елена Владимировна</h1>
             <div class="hero-tags">
                 <span class="hero-tag">Кандидат психологических наук</span>
                 <span class="hero-tag">Профайлер-полиграфолог</span>
@@ -1680,7 +1680,25 @@
             }
         ];
 
-        // Точный поиск по началу слов (исключает ложные срабатывания внутри чужих слов, но понимает короткие запросы из 1 слова)
+        // Умный поиск с учетом возможных опечаток (расстояние Левенштейна / нечеткое совпадение по началу или корню)
+        function getLevenshteinDistance(a, b) {
+            if (a.length === 0) return b.length;
+            if (b.length === 0) return a.length;
+            const matrix = [];
+            for (let i = 0; i <= b.length; i++) { matrix[i] = [i]; }
+            for (let j = 0; j <= a.length; j++) { matrix[0][j] = j; }
+            for (let i = 1; i <= b.length; i++) {
+                for (let j = 1; j <= a.length; j++) {
+                    if (b.charAt(i - 1) === a.charAt(j - 1)) {
+                        matrix[i][j] = matrix[i - 1][j - 1];
+                    } else {
+                        matrix[i][j] = Math.min(matrix[i - 1][j - 1] + 1, Math.min(matrix[i][j - 1] + 1, matrix[i - 1][j] + 1));
+                    }
+                }
+            }
+            return matrix[b.length][a.length];
+        }
+
         function matchKnowledgeIntent(text) {
             const words = text.toLowerCase().replace(/ё/g, 'е').split(/[^a-zа-я0-9_]+/).filter(Boolean);
             let bestMatch = null;
@@ -1690,8 +1708,20 @@
                 let score = 0;
                 for (const kw of item.keywords) {
                     const normKw = kw.replace(/ё/g, 'е');
-                    if (words.some(w => w.startsWith(normKw))) {
-                        score += normKw.length >= 5 ? 2 : 1;
+                    for (const w of words) {
+                        // Точное совпадение начала или вхождения
+                        if (w.startsWith(normKw) || normKw.startsWith(w)) {
+                            score += normKw.length >= 5 ? 3 : 2;
+                        } else if (w.length >= 3 && normKw.length >= 3) {
+                            // Нечеткое сравнение (опечатки вроде "приивет" вместо "привет", "полиграфф" и т.д.)
+                            const maxDist = w.length <= 5 ? 1 : 2;
+                            // Сравниваем либо слово целиком, либо корень
+                            const subW = w.slice(0, normKw.length + 1);
+                            const subKw = normKw.slice(0, w.length + 1);
+                            if (getLevenshteinDistance(subW, subKw) <= maxDist) {
+                                score += 2;
+                            }
+                        }
                     }
                 }
                 if (score > maxScore) {
