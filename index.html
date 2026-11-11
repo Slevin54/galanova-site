@@ -636,9 +636,30 @@
         .form-success h4 { font-size: 1.5rem; margin: 0 0 10px 0; color: #38a169; }
 
         .chat-widget { position: fixed; bottom: 30px; right: 30px; z-index: 1000; }
-        .chat-btn { background-color: var(--chat-blue); color: white; width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; box-shadow: 0 8px 25px rgba(0, 119, 255, 0.4); border: none; transition: transform 0.3s, box-shadow 0.3s; }
+        .chat-btn { background-color: var(--chat-blue); color: white; width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; box-shadow: 0 8px 25px rgba(0, 119, 255, 0.4); border: none; transition: transform 0.3s, box-shadow 0.3s; position: relative; }
         .chat-btn:hover { transform: scale(1.1); box-shadow: 0 10px 30px rgba(0, 119, 255, 0.6); }
         .chat-btn svg { width: 28px; height: 28px; fill: currentColor; }
+        
+        /* ИНДИКАТОР НЕПРОЧИТАННЫХ */
+        .chat-unread-badge {
+            display: none; /* Управляется через JS */
+            position: absolute;
+            top: -2px;
+            right: -2px;
+            background-color: #ff3b30;
+            color: white;
+            font-size: 12px;
+            font-weight: 800;
+            width: 22px;
+            height: 22px;
+            border-radius: 50%;
+            align-items: center;
+            justify-content: center;
+            border: 2px solid #fff;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+            animation: popIn 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
         .chat-window { display: none; position: absolute; bottom: 75px; right: 0; width: 350px; background: #fff; border-radius: 12px; box-shadow: 0 15px 40px rgba(0,0,0,0.15); overflow: hidden; flex-direction: column; border: 1px solid #e2e8f0; }
         .chat-header { background: var(--chat-blue); color: #fff; padding: 15px 20px; display: flex; align-items: center; justify-content: space-between; }
         .chat-header-info { display: flex; align-items: center; gap: 12px; }
@@ -658,9 +679,15 @@
         .typing-dot { width: 6px; height: 6px; background: #cbd5e0; border-radius: 50%; animation: typing 1.4s infinite; }
         .typing-dot:nth-child(2) { animation-delay: 0.2s; }
         .typing-dot:nth-child(3) { animation-delay: 0.4s; }
-        .chat-input { display: flex; border-top: 1px solid #e2e8f0; padding: 15px; background: #fff; gap: 10px; border-bottom: none; }
-        .chat-input input { flex-grow: 1; border: 1px solid #cbd5e0; border-radius: 20px; padding: 10px 15px; outline: none; font-size: 0.9rem; }
-        .chat-input button { background: var(--chat-blue); color: #fff; border: none; padding: 10px 15px; border-radius: 20px; cursor: pointer; font-weight: 600; font-size: 0.9rem;}
+        
+        .chat-input { display: flex; border-top: 1px solid #e2e8f0; padding: 15px; background: #fff; gap: 10px; border-bottom: none; transition: background-color 0.2s ease; }
+        .chat-input input { flex-grow: 1; border: 1px solid #cbd5e0; border-radius: 20px; padding: 10px 15px; outline: none; font-size: 0.9rem; transition: background-color 0.2s ease; }
+        .chat-input button { background: var(--chat-blue); color: #fff; border: none; padding: 10px 15px; border-radius: 20px; cursor: pointer; font-weight: 600; font-size: 0.9rem; transition: opacity 0.2s ease; }
+        
+        /* СТИЛИ ДЛЯ ЗАБЛОКИРОВАННОГО ИНПУТА */
+        .chat-input input:disabled { background-color: #f1f5f9; cursor: not-allowed; color: #a0aec0; }
+        .chat-input button:disabled { opacity: 0.5; cursor: not-allowed; }
+
         .chat-legal { text-align: center; font-size: 0.65rem; color: #a0aec0; padding: 0 15px 10px; background: #fff; }
         .chat-legal a { color: var(--chat-blue); text-decoration: none; }
 
@@ -754,6 +781,10 @@
         @keyframes fadeIn {
             from { opacity: 0; transform: translateY(8px); }
             to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes popIn {
+            from { transform: scale(0); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
         }
         @keyframes typing {
             0%, 100% { transform: translateY(0); }
@@ -1352,6 +1383,7 @@
     <div class="chat-widget">
         <button class="chat-btn" onclick="toggleChat()" title="Открыть чат">
             <svg viewBox="0 0 24 24"><path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2z"></path></svg>
+            <span id="chatUnreadBadge" class="chat-unread-badge">1</span>
         </button>
         
         <div class="chat-window" id="chatWindow">
@@ -1378,7 +1410,7 @@
             
             <div class="chat-input">
                 <input type="text" id="chatInput" placeholder="Напишите сообщение..." maxlength="500" aria-label="Сообщение консультанту" onkeydown="handleEnter(event)">
-                <button type="button" onclick="sendManualMessage()">Отправить</button>
+                <button type="button" id="chatSendBtn" onclick="sendManualMessage()">Отправить</button>
             </div>
             <div class="chat-legal">Отправляя сообщение, вы соглашаетесь с <a href="privacy.html" target="_blank" rel="noopener noreferrer">Политикой конфиденциальности</a></div>
         </div>
@@ -1892,10 +1924,12 @@
             });
         }
 
-        // УМНЫЙ КОНСУЛЬТАНТ ИРИНА (УСТОЙЧИВОСТЬ К ОПЕЧАТКАМ, ТРАНСПОЗИЦИИ БУКВ И УДВОЕНИЯМ)
+        // УМНЫЙ КОНСУЛЬТАНТ ИРИНА (С ПАМЯТЬЮ, КОНТЕКСТОМ, АНАЛИТИКОЙ И UNREAD BADGE)
         let chatInitialized = false;
         let isBotResponding = false;
         let lastTopic = "Консультация в чате";
+        let expectedAction = null;
+        let unreadCount = 0;
 
         const knowledgeBase = [
             {
@@ -1982,7 +2016,45 @@
             }
         ];
 
-        // Нормализация слова: нижний регистр, ё->е, э->е, схлопывание повторяющихся букв ("приивет" -> "привет", "полиграфф" -> "полиграф")
+        // --- ФУНКЦИИ ДЛЯ РАБОТЫ С ПАМЯТЬЮ (SESSION STORAGE) ---
+        function saveChatState() {
+            if (isBotResponding) return;
+            const chatBody = document.getElementById('chatBody');
+            if (!chatBody) return;
+            const state = {
+                html: chatBody.innerHTML,
+                lastTopic: lastTopic,
+                expectedAction: expectedAction
+            };
+            try { sessionStorage.setItem('eg_chat_state', JSON.stringify(state)); } catch(e) { console.debug(e); }
+        }
+
+        function loadChatState() {
+            try {
+                const saved = sessionStorage.getItem('eg_chat_state');
+                if (saved) {
+                    const state = JSON.parse(saved);
+                    if (state.html) {
+                        document.getElementById('chatBody').innerHTML = state.html;
+                        lastTopic = state.lastTopic || "Консультация в чате";
+                        expectedAction = state.expectedAction || null;
+                        chatInitialized = true;
+                        const chatBody = document.getElementById('chatBody');
+                        chatBody.scrollTop = chatBody.scrollHeight;
+                        return true;
+                    }
+                }
+            } catch(e) { console.debug(e); }
+            return false;
+        }
+
+        // --- ДИНАМИЧЕСКАЯ СКОРОСТЬ ПЕЧАТАНИЯ ---
+        function getTypingDelay(text) {
+            if (!text) return 600;
+            return Math.min(3000, Math.max(600, text.length * 15));
+        }
+
+        // --- НОРМАЛИЗАЦИЯ И ПОИСК ---
         function normalizeWordForBot(str) {
             return str
                 .toLowerCase()
@@ -1991,7 +2063,6 @@
                 .replace(/([а-яa-z])\1+/g, '$1');
         }
 
-        // Расстояние Дамерау-Левенштейна (считает перестановку двух соседних букв "привте" за 1 опечатку, а не за 2)
         function getDamerauLevenshteinDistance(a, b) {
             const lenA = a.length;
             const lenB = b.length;
@@ -2005,12 +2076,12 @@
                 for (let j = 1; j <= lenB; j++) {
                     const cost = a[i - 1] === b[j - 1] ? 0 : 1;
                     d[i][j] = Math.min(
-                        d[i - 1][j] + 1,       // удаление
-                        d[i][j - 1] + 1,       // вставка
-                        d[i - 1][j - 1] + cost // замена
+                        d[i - 1][j] + 1,
+                        d[i][j - 1] + 1,
+                        d[i - 1][j - 1] + cost
                     );
                     if (i > 1 && j > 1 && a[i - 1] === b[j - 2] && a[i - 2] === b[j - 1]) {
-                        d[i][j] = Math.min(d[i][j], d[i - 2][j - 2] + cost); // перестановка соседних букв
+                        d[i][j] = Math.min(d[i][j], d[i - 2][j - 2] + cost);
                     }
                 }
             }
@@ -2030,13 +2101,11 @@
                         const w = normalizeWordForBot(rawW);
                         if (w.length < 3) continue;
 
-                        // 1. Точное совпадение после схлопывания дублей букв ("приивет" -> "привет")
                         if (w.startsWith(normKw) || normKw.startsWith(w)) {
                             score += normKw.length >= 5 ? 4 : 3;
                             continue;
                         }
 
-                        // 2. Сравнение начала слова с корнем той же длины (чтобы окончания не портили метрику)
                         const targetLen = normKw.length;
                         const prefixesToTest = [
                             w.slice(0, targetLen),
@@ -2064,13 +2133,36 @@
             return maxScore > 0 ? bestMatch : null;
         }
 
+        // --- УПРАВЛЕНИЕ UNREAD BADGE ---
+        function incrementUnread() {
+            unreadCount++;
+            const badge = document.getElementById('chatUnreadBadge');
+            if (badge) {
+                badge.textContent = unreadCount > 9 ? '9+' : unreadCount;
+                badge.style.display = 'flex';
+            }
+        }
+
+        function clearUnread() {
+            unreadCount = 0;
+            const badge = document.getElementById('chatUnreadBadge');
+            if (badge) badge.style.display = 'none';
+        }
+
+        // --- УПРАВЛЕНИЕ ЧАТОМ ---
         function toggleChat() {
             const chatWindow = document.getElementById('chatWindow');
             const chatBody = document.getElementById('chatBody');
             if (!chatWindow) return;
-            chatWindow.style.display = (chatWindow.style.display === 'flex') ? 'none' : 'flex';
-            if (chatWindow.style.display === 'flex' && !chatInitialized && chatBody) {
-                resetChat();
+            
+            const isOpening = chatWindow.style.display !== 'flex';
+            chatWindow.style.display = isOpening ? 'flex' : 'none';
+            
+            if (isOpening) {
+                clearUnread();
+                if (!chatInitialized && chatBody) {
+                    resetChat();
+                }
             }
         }
 
@@ -2079,12 +2171,15 @@
             if (!chatBody) return;
             chatInitialized = true;
             isBotResponding = false;
+            expectedAction = null;
+            clearUnread();
             chatBody.innerHTML = `
                 <div class="chat-msg msg-bot">Здравствуйте! Меня зовут Ирина, я консультант Елены. Вы можете <b>написать свой вопрос в свободной форме</b> или выбрать тему ниже:</div>
                 <div class="typing-indicator" id="typingIndicator">
                     <div class="typing-dot"></div><div class="typing-dot"></div><div class="typing-dot"></div>
                 </div>
             `;
+            saveChatState();
             setTimeout(() => {
                 showOptions([
                     { text: "Проверка кандидата / Полиграф", action: "hiring" },
@@ -2130,6 +2225,7 @@
             }
         }
 
+        // ОСНОВНАЯ ЛОГИКА ОТПРАВКИ СООБЩЕНИЙ
         async function sendManualMessage() {
             if (isBotResponding) return;
             const chatInput = document.getElementById('chatInput');
@@ -2145,6 +2241,19 @@
             isBotResponding = true;
             showTypingIndicator();
 
+            const lowerMsg = message.toLowerCase();
+            const isAffirmative = /^(да|ок|хорошо|давай|конечно|давайте|ага)/i.test(lowerMsg);
+
+            if (expectedAction === 'awaiting_contact' && isAffirmative) {
+                setTimeout(() => {
+                    hideTypingIndicator();
+                    isBotResponding = false;
+                    appendMessage("Отлично! Напишите ваш номер телефона, Email или @ник в Telegram прямо сюда, и я сразу передам вашу заявку Елене.", 'bot');
+                    saveChatState();
+                }, getTypingDelay("Отлично! Напишите ваш номер телефона..."));
+                return;
+            }
+
             const bestMatch = matchKnowledgeIntent(message);
             if (bestMatch) {
                 lastTopic = bestMatch.intent;
@@ -2153,6 +2262,7 @@
             const extractedContact = extractContact(message);
 
             if (extractedContact) {
+                expectedAction = null;
                 const sent = await sendLeadFromChat(extractedContact, message);
                 hideTypingIndicator();
                 isBotResponding = false;
@@ -2169,6 +2279,7 @@
                     appendMessage("Не удалось передать контакт из-за сбоя сети. Нажмите кнопку ниже, чтобы оставить заявку через форму.", 'bot');
                     showOptions([{ text: "Открыть форму заявки", action: "open_form" }]);
                 }
+                saveChatState();
                 return;
             }
 
@@ -2180,13 +2291,23 @@
                     if (bestMatch.options) showOptions(bestMatch.options);
                 } else {
                     lastTopic = message;
+                    sendSilentNotification({
+                        name: "LOG: Бот не распознал запрос",
+                        contact: "Требуется дообучение",
+                        message: `Клиент написал: "${message}". Бот не нашел совпадений в базе знаний.`,
+                        _gotcha: "",
+                        _token: SITE_SECURITY_TOKEN,
+                        source: getTrafficSource()
+                    });
+
                     appendMessage("К сожалению, я не совсем поняла ваш запрос. Напишите прямо сюда ваш номер телефона, Email или @ник в Telegram, и я передам ваше сообщение Елене — она свяжется с вами лично!", 'bot');
                     showOptions([
                         { text: "Открыть стандартную анкету", action: "open_form" },
                         { text: "Вернуться к списку тем", action: "reset" }
                     ]);
                 }
-            }, 600);
+                saveChatState();
+            }, getTypingDelay(bestMatch ? bestMatch.reply : "К сожалению, я не совсем поняла ваш запрос..."));
         }
 
         function showOptions(options) {
@@ -2208,6 +2329,8 @@
                 btn.type = 'button';
                 btn.className = 'chat-options-btn';
                 btn.textContent = opt.text;
+                btn.setAttribute('data-action', opt.action);
+                btn.setAttribute('data-text', opt.text);
                 btn.style.background = '#fff';
                 btn.style.color = '#0077ff';
                 btn.style.border = '1px solid #0077ff';
@@ -2217,7 +2340,6 @@
                 btn.style.fontWeight = '600';
                 btn.style.fontSize = '0.9rem';
                 btn.style.textAlign = 'left';
-                btn.onclick = () => handleOptionClick(opt.action, opt.text);
                 optionsDiv.appendChild(btn);
             });
 
@@ -2225,7 +2347,21 @@
             chatBody.scrollTop = chatBody.scrollHeight;
         }
 
+        document.getElementById('chatBody').addEventListener('click', function(e) {
+            if (e.target.classList.contains('chat-options-btn')) {
+                const action = e.target.getAttribute('data-action');
+                const text = e.target.getAttribute('data-text');
+                if (action && text) {
+                    handleOptionClick(action, text);
+                }
+            }
+        });
+
         function handleOptionClick(action, text) {
+            if (typeof ym === 'function') {
+                ym(113975964, 'reachGoal', 'chat_click_' + action);
+            }
+
             if (action === 'reset') {
                 resetChat();
                 return;
@@ -2235,63 +2371,69 @@
             appendMessage(text, 'user');
             showTypingIndicator();
 
+            let botReply = '';
+            let nextOptions = [];
+
+            if (action === 'hiring') {
+                lastTopic = "Проверка кандидата";
+                botReply = 'Скрининг кандидатов (профайлинг цифрового следа от 8 000 Ᵽ и проверка на полиграфе) помогает отсеять нелояльных сотрудников до найма. На какую позицию вы рассматриваете человека?';
+                nextOptions = [
+                    { text: "Топ-менеджер / Руководитель", action: "hiring_top" },
+                    { text: "Сотрудник с матответственностью", action: "hiring_material" },
+                    { text: "Оставить контакт для обсуждения", action: "ask_contact_inline" }
+                ];
+            } else if (action === 'hiring_top' || action === 'hiring_material') {
+                lastTopic = text;
+                botReply = 'Для таких позиций Елена проверяет скрытые факторы риска, долговую нагрузку, мотивы и опыт откатов. Напишите ваш телефон или @ник прямо в чат.';
+                expectedAction = 'awaiting_contact';
+                nextOptions = [{ text: "Открыть анкету заявки", action: "open_form" }];
+            } else if (action === 'investigation') {
+                lastTopic = "Служебное расследование";
+                botReply = 'Сопровождение расследований (от 10 000 Ᵽ) и анализ анонимок (от 15 000 Ᵽ) позволяют быстро выявить инсайдеров и сговоры. С каким инцидентом вы столкнулись?';
+                nextOptions = [
+                    { text: "Утечка базы / коммерческой тайны", action: "invest_leak" },
+                    { text: "Хищение / откаты / недостача", action: "invest_theft" },
+                    { text: "Анонимные сообщения или угрозы", action: "invest_anon" }
+                ];
+            } else if (action === 'invest_leak' || action === 'invest_theft' || action === 'invest_anon') {
+                lastTopic = text;
+                botReply = 'Поняла вас. Главное сейчас — не спугнуть причастных лиц. Напишите ваш телефон или @ник прямо сюда в сообщение.';
+                expectedAction = 'awaiting_contact';
+                nextOptions = [{ text: "Заполнить форму заявки", action: "open_form" }];
+            } else if (action === 'audit') {
+                lastTopic = "Аудит и профайлинг";
+                botReply = 'Мы проводим аудит лояльности команды, анализ цифрового следа партнеров (от 8 000 Ᵽ) и медиацию конфликтов (от 5 000 Ᵽ). Что для вас сейчас актуальнее?';
+                nextOptions = [
+                    { text: "Проверить партнера / контрагента", action: "ask_contact_inline" },
+                    { text: "Оценить команду / разрешить конфликт", action: "ask_contact_inline" },
+                    { text: "Обучение для HR и СБ", action: "ask_contact_inline" }
+                ];
+            } else if (action === 'price_btn') {
+                lastTopic = "Стоимость и условия";
+                botReply = 'Экспертные консультации и медиация — от 5 000 Ᵽ. Профайлинг цифрового следа — от 8 000 Ᵽ. Сопровождение расследований — от 10 000 Ᵽ. Анализ анонимных сообщений — от 15 000 Ᵽ. Работаем с физлицами и юрлицами.';
+                nextOptions = [
+                    { text: "Рассчитать стоимость моей задачи", action: "ask_contact_inline" },
+                    { text: "Вернуться в начало", action: "reset" }
+                ];
+            } else if (action === 'ask_contact_inline') {
+                botReply = 'Напишите прямо в строке ввода ниже ваш номер телефона, Email или @ник в Telegram — и я сразу отправлю заявку Елене!';
+                expectedAction = 'awaiting_contact';
+            } else if (action === 'contacts') {
+                botReply = 'Вы можете написать свой номер телефона прямо мне в чат, заполнить форму или перейти в MAX / Telegram по кнопкам в шапке сайта.';
+                expectedAction = 'awaiting_contact';
+                nextOptions = [{ text: "Открыть форму", action: "open_form" }];
+            } else if (action === 'open_form') {
+                openModal();
+                botReply = 'Я открыла окно заявки. Заполните его или просто напишите свой контакт прямо здесь в чате.';
+                expectedAction = 'awaiting_contact';
+            }
+
             setTimeout(() => {
                 hideTypingIndicator();
-                let botReply = '';
-                let nextOptions = [];
-
-                if (action === 'hiring') {
-                    lastTopic = "Проверка кандидата";
-                    botReply = 'Скрининг кандидатов (профайлинг цифрового следа от 8 000 Ᵽ и проверка на полиграфе) помогает отсеять нелояльных сотрудников до найма. На какую позицию вы рассматриваете человека?';
-                    nextOptions = [
-                        { text: "Топ-менеджер / Руководитель", action: "hiring_top" },
-                        { text: "Сотрудник с матответственностью", action: "hiring_material" },
-                        { text: "Оставить контакт для обсуждения", action: "ask_contact_inline" }
-                    ];
-                } else if (action === 'hiring_top' || action === 'hiring_material') {
-                    lastTopic = text;
-                    botReply = 'Для таких позиций Елена проверяет скрытые факторы риска, долговую нагрузку, мотивы и опыт откатов. Напишите ваш телефон или @ник прямо в чат.';
-                    nextOptions = [{ text: "Открыть анкету заявки", action: "open_form" }];
-                } else if (action === 'investigation') {
-                    lastTopic = "Служебное расследование";
-                    botReply = 'Сопровождение расследований (от 10 000 Ᵽ) и анализ анонимок (от 15 000 Ᵽ) позволяют быстро выявить инсайдеров и сговоры. С каким инцидентом вы столкнулись?';
-                    nextOptions = [
-                        { text: "Утечка базы / коммерческой тайны", action: "invest_leak" },
-                        { text: "Хищение / откаты / недостача", action: "invest_theft" },
-                        { text: "Анонимные сообщения или угрозы", action: "invest_anon" }
-                    ];
-                } else if (action === 'invest_leak' || action === 'invest_theft' || action === 'invest_anon') {
-                    lastTopic = text;
-                    botReply = 'Поняла вас. Главное сейчас — не спугнуть причастных лиц. Напишите ваш телефон или @ник прямо сюда в сообщение.';
-                    nextOptions = [{ text: "Заполнить форму заявки", action: "open_form" }];
-                } else if (action === 'audit') {
-                    lastTopic = "Аудит и профайлинг";
-                    botReply = 'Мы проводим аудит лояльности команды, анализ цифрового следа партнеров (от 8 000 Ᵽ) и медиацию конфликтов (от 5 000 Ᵽ). Что для вас сейчас актуальнее?';
-                    nextOptions = [
-                        { text: "Проверить партнера / контрагента", action: "ask_contact_inline" },
-                        { text: "Оценить команду / разрешить конфликт", action: "ask_contact_inline" },
-                        { text: "Обучение для HR и СБ", action: "ask_contact_inline" }
-                    ];
-                } else if (action === 'price_btn') {
-                    lastTopic = "Стоимость и условия";
-                    botReply = 'Экспертные консультации и медиация — от 5 000 Ᵽ. Профайлинг цифрового следа — от 8 000 Ᵽ. Сопровождение расследований — от 10 000 Ᵽ. Анализ анонимных сообщений — от 15 000 Ᵽ. Работаем с физлицами и юрлицами.';
-                    nextOptions = [
-                        { text: "Рассчитать стоимость моей задачи", action: "ask_contact_inline" },
-                        { text: "Вернуться в начало", action: "reset" }
-                    ];
-                } else if (action === 'ask_contact_inline') {
-                    botReply = 'Напишите прямо в строке ввода ниже ваш номер телефона, Email или @ник в Telegram — и я сразу отправлю заявку Елене!';
-                } else if (action === 'contacts') {
-                    botReply = 'Вы можете написать свой номер телефона прямо мне в чат, заполнить форму или перейти в MAX / Telegram по кнопкам в шапке сайта.';
-                    nextOptions = [{ text: "Открыть форму", action: "open_form" }];
-                } else if (action === 'open_form') {
-                    openModal();
-                    botReply = 'Я открыла окно заявки. Заполните его или просто напишите свой контакт прямо здесь в чате.';
-                }
-
                 appendMessage(botReply, 'bot');
                 if (nextOptions.length > 0) showOptions(nextOptions);
-            }, 500);
+                saveChatState();
+            }, getTypingDelay(botReply));
         }
 
         function handleEnter(event) {
@@ -2315,22 +2457,52 @@
             }
             if (typingIndicator) { chatBody.insertBefore(msgDiv, typingIndicator); } else { chatBody.appendChild(msgDiv); }
             chatBody.scrollTop = chatBody.scrollHeight;
+
+            // Если сообщение от бота и чат закрыт - показываем бейдж
+            if (sender === 'bot') {
+                const chatWindow = document.getElementById('chatWindow');
+                if (chatWindow && chatWindow.style.display !== 'flex') {
+                    incrementUnread();
+                }
+            }
         }
 
         function showTypingIndicator() {
             const typingIndicator = document.getElementById('typingIndicator');
             const chatBody = document.getElementById('chatBody');
+            const chatInput = document.getElementById('chatInput');
+            const chatSendBtn = document.getElementById('chatSendBtn');
+            
             if (typingIndicator) typingIndicator.classList.add('active');
             if (chatBody) chatBody.scrollTop = chatBody.scrollHeight;
+            
+            // Блокировка инпута
+            if (chatInput) chatInput.disabled = true;
+            if (chatSendBtn) chatSendBtn.disabled = true;
         }
 
         function hideTypingIndicator() {
             const typingIndicator = document.getElementById('typingIndicator');
+            const chatInput = document.getElementById('chatInput');
+            const chatSendBtn = document.getElementById('chatSendBtn');
+            
             if (typingIndicator) typingIndicator.classList.remove('active');
+            
+            // Разблокировка инпута
+            if (chatInput) {
+                chatInput.disabled = false;
+                chatInput.focus();
+            }
+            if (chatSendBtn) chatSendBtn.disabled = false;
         }
 
         window.addEventListener('load', () => {
-            if (!chatInitialized) { resetChat(); }
+            if (!chatInitialized) {
+                const restored = loadChatState();
+                if (!restored) {
+                    resetChat();
+                }
+            }
         });
 
         // БЕЗОПАСНОЕ КОПИРОВАНИЕ ТЕКСТА С ЧИСТЫМ URL БЕЗ UTM-ХВОСТОВ
