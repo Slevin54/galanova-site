@@ -5,7 +5,7 @@
     <meta name="yandex-verification" content="3ce838687ac9171f" />
 
     <!-- Yandex.Metrika counter -->
-    <script>
+    <script type="text/javascript">
         (function(m,e,t,r,i,k,a){
             m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
             m[i].l=1*new Date();
@@ -40,8 +40,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="preload" as="image" href="profile.jpg" fetchpriority="high">
-    <!-- Подключение 2 шрифтов: Inter (основной) и Playfair Display (заголовки и цитаты) -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&family=Playfair+Display:ital,wght@0,600;0,700;0,800;1,400;1,600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
     
     <!-- SEO Микроразметка Schema.org -->
     <script type="application/ld+json">
@@ -68,7 +67,6 @@
           "@type": "Person",
           "@id": "https://galanova-elena.ru/#person",
           "name": "Елена Галанова",
-          "alternateName": "Галанова Елена Владимировна",
           "jobTitle": "Кандидат психологических наук, Профайлер-полиграфолог, Преподаватель ВУЗа",
           "url": "https://galanova-elena.ru",
           "image": "https://galanova-elena.ru/profile.jpg",
@@ -129,7 +127,7 @@
             "priceCurrency": "RUB",
             "price": "5000",
             "priceValidUntil": "2027-12-31",
-            "description": "Экспертные консультации и профайлинг — от 5 000 Ᵽ"
+            "description": "Профайлинг и консультации — от 5 000 Ᵽ"
           }
         }
       ]
@@ -160,7 +158,7 @@
             scroll-behavior: smooth;
         }
         .container {
-            max-width: 1140px; 
+            max-width: 1100px; 
             margin: 0 auto;
             padding: 0 20px;
             position: relative;
@@ -171,7 +169,7 @@
             position: fixed; top: 0; left: 0; width: 100%;
             background-color: rgba(255, 255, 255, 0.95);
             backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
-            box-shadow: 0 2px 15px rgba(0,0,0,0.05); z-index: 1000; padding: 12px 0; transition: background-color 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 2px 15px rgba(0,0,0,0.05); z-index: 1000; padding: 12px 0; transition: all 0.3s ease;
         }
         .header-container { display: flex; justify-content: space-between; align-items: center; }
         .header-logo { font-size: 1.2rem; font-weight: 700; color: var(--primary); text-decoration: none; display: flex; align-items: center; gap: 10px; }
@@ -180,14 +178,14 @@
         .header-nav { display: flex; gap: 20px; align-items: center; }
         .header-nav a { 
             color: var(--text-dark); font-size: 0.9rem; font-weight: 600; text-decoration: underline;
-            text-decoration-color: rgba(44, 62, 80, 0.15); text-decoration-thickness: 2px; text-underline-offset: 6px; transition: color 0.2s ease, text-decoration-color 0.2s ease; 
+            text-decoration-color: rgba(44, 62, 80, 0.15); text-decoration-thickness: 2px; text-underline-offset: 6px; transition: all 0.3s ease; 
         }
         .header-nav a:hover { color: var(--accent); text-decoration-color: var(--accent); }
         
         .header-messengers { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
         .header-messenger-btn {
             display: flex; align-items: center; gap: 6px; padding: 8px 14px; border-radius: 6px;
-            font-size: 0.85rem; font-weight: 700; text-decoration: none; transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease; box-shadow: 0 2px 5px rgba(0,0,0,0.1); cursor: pointer;
+            font-size: 0.85rem; font-weight: 700; text-decoration: none; transition: all 0.2s ease; box-shadow: 0 2px 5px rgba(0,0,0,0.1); cursor: pointer;
         }
         .header-messenger-btn:hover { transform: translateY(-2px); box-shadow: 0 4px 10px rgba(0,0,0,0.15); }
         .header-messenger-btn svg { width: 15px; height: 15px; fill: #ffffff; }
@@ -199,290 +197,75 @@
         .btn-email { background-color: #4a5568; color: #ffffff !important; }
         .btn-email:hover { background-color: #2d3748; }
 
-        /* CSS-ТУЛТИП ДЛЯ КНОПКИ "?" ВОЗЛЕ MAX */
-        .max-btn-group {
-            position: relative;
-            display: flex;
-            align-items: stretch;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-            border-radius: 6px;
-        }
-        .max-help-trigger {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 24px;
-            background: linear-gradient(135deg, #8E2DE2, #4A00E0);
-            color: #fff;
-            font-size: 13px;
-            font-weight: 700;
-            cursor: pointer;
-            border: none;
-            padding: 0;
-            border-top-right-radius: 6px;
-            border-bottom-right-radius: 6px;
-        }
-        .max-tooltip-popup {
-            position: absolute;
-            top: calc(100% + 10px);
-            right: 0;
-            width: 270px;
-            background: var(--primary);
-            color: #ffffff;
-            font-size: 0.78rem;
-            font-weight: 400;
-            line-height: 1.45;
-            padding: 12px 14px;
-            border-radius: 8px;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
-            opacity: 0;
-            visibility: hidden;
-            transform: translateY(-5px);
-            transition: opacity 0.2s ease, transform 0.2s ease, visibility 0.2s;
-            z-index: 1100;
-            pointer-events: none;
-        }
-        .max-tooltip-popup::before {
-            content: '';
-            position: absolute;
-            top: -6px;
-            right: 8px;
-            border-width: 0 6px 6px 6px;
-            border-style: solid;
-            border-color: transparent transparent var(--primary) transparent;
-        }
-        .max-btn-group:hover .max-tooltip-popup,
-        .max-btn-group:focus-within .max-tooltip-popup,
-        .max-btn-group.tooltip-open .max-tooltip-popup {
-            opacity: 1;
-            visibility: visible;
-            transform: translateY(0);
-        }
-
         .hamburger-btn {
             background: none; border: none; cursor: pointer; display: none; padding: 5px; margin-left: 10px;
             flex-direction: column; justify-content: space-between; height: 22px; width: 28px;
         }
         .hamburger-btn span { display: block; height: 3px; width: 100%; background-color: var(--primary); border-radius: 2px; transition: 0.3s; }
 
-        .section-title { text-align: center; font-size: 2.2rem; color: var(--primary); margin-bottom: 20px; font-family: 'Playfair Display', serif; }
+        .section-title { text-align: center; font-size: 2.2rem; color: var(--primary); margin-bottom: 20px; }
         .section-subtitle { text-align: center; font-size: 1.1rem; color: var(--text-gray); max-width: 700px; margin: 0 auto 50px auto; }
         
-        /* ГЛАВНЫЙ ЭКРАН (ИСПРАВЛЕННАЯ СЕТКА ВНУТРИ КОНТЕЙНЕРА) */
+        /* ГЛАВНЫЙ ЭКРАН */
         .hero-wrapper {
             position: relative;
             width: 100%;
-            min-height: calc(100vh - 40px);
+            min-height: 85vh;
             display: flex;
             align-items: center;
             background-color: #ffffff;
-            padding-top: 105px; 
-            padding-bottom: 60px;
-            box-sizing: border-box;
-        }
-        .hero-grid {
-            display: grid;
-            grid-template-columns: 1.25fr 0.85fr;
-            gap: 50px;
-            align-items: center;
-            width: 100%;
+            padding-top: 100px; 
+            padding-bottom: 50px;
+            overflow: hidden;
         }
         .hero-content {
+            width: 60%; 
+            padding-left: max(20px, calc((100% - 1100px) / 2));
+            padding-right: 20px;
             position: relative;
             z-index: 2;
             box-sizing: border-box;
         }
         
-        /* ВАРИАНТ А: ДВУХУРОВНЕВАЯ ИЕРАРХИЯ ИМЕНИ БЕЗ КАПСА И БОКОВОЙ ПАЛОЧКИ */
+        /* НОВЫЙ ГЛАВНЫЙ ЗАГОЛОВОК */
         .main-name-title {
-            margin: 0 0 22px 0;
-            position: relative;
-            padding-bottom: 18px;
-        }
-        .main-name-title::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 64px;
-            height: 3px;
-            background-color: var(--accent);
-            border-radius: 2px;
-        }
-        .hero-name-primary {
-            display: block;
-            font-family: 'Playfair Display', serif;
-            font-size: 3.4rem;
-            font-weight: 700;
+            font-size: 2.8rem;
+            font-weight: 800;
             color: var(--primary);
-            line-height: 1.08;
-            letter-spacing: -0.3px;
-            margin-bottom: 8px;
-        }
-        .hero-name-patronymic {
-            display: block;
-            font-family: 'Inter', sans-serif;
-            font-size: 0.92rem;
-            font-weight: 600;
-            color: var(--text-gray);
+            margin: 0 0 25px 0;
+            line-height: 1.1;
             text-transform: uppercase;
-            letter-spacing: 2.2px;
+            letter-spacing: 0.5px;
+        }
+        .main-name-subtitle {
+            display: block;
+            font-size: 1.05rem;
+            font-weight: 600;
+            color: var(--secondary);
+            text-transform: none;
+            letter-spacing: 0;
+            margin-top: 10px;
+            line-height: 1.4;
         }
         
-        /* ПЛАШКИ РЕГАЛИЙ КОМПАКТНЫМ КАСКАДОМ */
-        .hero-tags {
-            display: flex;
-            flex-direction: row;
-            flex-wrap: wrap;
-            gap: 10px;
-            margin-bottom: 26px;
-        }
-        .hero-tag { 
-            background: rgba(211, 84, 0, 0.06); 
-            color: var(--accent); 
-            padding: 9px 15px; 
-            border-radius: 8px; 
-            font-size: 0.8rem; 
-            font-weight: 700; 
-            text-transform: uppercase; 
-            letter-spacing: 0.5px; 
-            border: 1px solid rgba(211, 84, 0, 0.16);
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-        }
-        .hero-tag svg {
-            width: 17px;
-            height: 17px;
-            fill: var(--accent);
-            flex-shrink: 0;
-        }
+        .hero-tags { display: flex; flex-direction: column; align-items: flex-start; gap: 10px; margin-bottom: 30px; }
+        .hero-tag { background: rgba(211, 84, 0, 0.08); color: var(--accent); padding: 8px 16px; border-radius: 6px; font-size: 0.85rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; border: 1px solid rgba(211, 84, 0, 0.15); }
         
         .hero-quote {
-            font-family: 'Playfair Display', serif;
-            font-size: 1.05rem; 
-            font-style: italic; 
-            color: var(--text-dark); 
-            background: #f8fafc; 
-            border-left: 4px solid var(--accent);
-            padding: 20px 26px; 
-            margin: 0 0 28px 0; 
-            line-height: 1.65; 
-            border-radius: 0 8px 8px 0; 
+            font-size: 1.05rem; font-style: italic; color: var(--text-dark); background: #f8fafc; border-left: 4px solid var(--accent);
+            padding: 20px 25px; margin: 0 0 30px 0; line-height: 1.6; max-width: 95%; border-radius: 0 8px 8px 0; text-align: justify; hyphens: auto;
         }
-        .hero-quote cite { 
-            display: block; 
-            margin-top: 12px; 
-            font-size: 0.8rem; 
-            font-style: normal; 
-            font-weight: 700; 
-            color: var(--accent); 
-            text-transform: uppercase; 
-            letter-spacing: 0.5px; 
-            text-align: right; 
-            font-family: 'Inter', sans-serif;
-        }
-
-        /* КНОПКА "ОБСУДИТЬ ЗАДАЧУ" НА ПЕРВОМ ЭКРАНЕ С ВЫПАДАЮЩИМ ВЫБОРОМ СВЯЗИ */
-        .hero-cta-wrap {
-            position: relative;
-            display: inline-block;
-            margin-bottom: 32px;
-        }
-        .hero-cta-btn {
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            background-color: var(--accent);
-            color: #fff;
-            padding: 15px 30px;
-            border-radius: 8px;
-            font-weight: 700;
-            font-size: 1rem;
-            border: none;
-            cursor: pointer;
-            font-family: inherit;
-            box-shadow: 0 10px 25px rgba(211, 84, 0, 0.28);
-            transition: background-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
-        }
-        .hero-cta-btn:hover {
-            background-color: #e67e22;
-            transform: translateY(-2px);
-            box-shadow: 0 12px 30px rgba(211, 84, 0, 0.38);
-        }
-        .hero-cta-btn svg {
-            width: 18px;
-            height: 18px;
-            fill: currentColor;
-            transition: transform 0.25s ease;
-        }
-        .hero-cta-wrap.open .hero-cta-btn svg {
-            transform: rotate(180deg);
-        }
-        .hero-cta-dropdown {
-            position: absolute;
-            top: calc(100% + 10px);
-            left: 0;
-            width: 280px;
-            background: #ffffff;
-            border: 1px solid #e2e8f0;
-            border-radius: 12px;
-            padding: 10px;
-            box-shadow: 0 18px 40px rgba(26, 37, 47, 0.16);
-            display: none;
-            flex-direction: column;
-            gap: 8px;
-            z-index: 300;
-        }
-        .hero-cta-wrap.open .hero-cta-dropdown {
-            display: flex;
-            animation: fadeIn 0.2s ease;
-        }
-        .hero-dropdown-item {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            padding: 11px 14px;
-            border-radius: 8px;
-            text-decoration: none;
-            font-size: 0.88rem;
-            font-weight: 700;
-            color: #ffffff !important;
-            border: none;
-            cursor: pointer;
-            font-family: inherit;
-            text-align: left;
-            transition: transform 0.15s ease, opacity 0.15s ease;
-        }
-        .hero-dropdown-item:hover {
-            transform: translateX(3px);
-            opacity: 0.95;
-        }
-        .hero-dropdown-item svg {
-            width: 17px;
-            height: 17px;
-            fill: currentColor;
-            flex-shrink: 0;
-        }
-        .hero-dropdown-form {
-            background-color: var(--primary);
-        }
+        .hero-quote cite { display: block; margin-top: 15px; font-size: 0.85rem; font-style: normal; font-weight: 700; color: var(--accent); text-transform: uppercase; letter-spacing: 0.5px; text-align: right; }
         
         .hero-image-bg {
-            width: 100%;
-            max-width: 410px;
-            height: 520px;
-            margin-left: auto;
-            border-radius: 14px;
-            overflow: hidden;
-            box-shadow: 0 20px 45px rgba(26, 37, 47, 0.15);
-            background-color: #f8fafc;
+            position: absolute; top: 55%; right: 5%; width: 32%; height: 80%; transform: translateY(-50%);
+            z-index: 1; border-radius: 12px; overflow: hidden; box-shadow: 0 20px 40px rgba(0,0,0,0.15); background-color: #f8fafc;
         }
         .hero-image-bg img { width: 100%; height: 100%; object-fit: cover; object-position: center top; }
 
         .contact-btn {
             display: inline-block; background-color: var(--accent); color: #fff; padding: 16px 35px;
-            text-decoration: none; border-radius: 6px; font-weight: 600; font-size: 1.1rem; transition: background-color 0.3s, transform 0.2s;
+            text-decoration: none; border-radius: 6px; font-weight: 600; font-size: 1.1rem; transition: background 0.3s, transform 0.2s;
             cursor: pointer; border: none; font-family: inherit; text-align: center; box-shadow: 0 10px 25px rgba(211, 84, 0, 0.3);
         }
         .contact-btn:hover { background-color: #e67e22; transform: translateY(-2px); box-shadow: 0 12px 30px rgba(211, 84, 0, 0.4); }
@@ -499,23 +282,23 @@
         .sticky-socials svg { width: 22px; height: 22px; fill: #ffffff; }
         .social-text-icon { font-weight: 800; font-size: 14px; letter-spacing: 0.5px; color: #ffffff; }
 
-        .hero-trust { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; }
-        .hero-trust span { font-size: 0.78rem; font-weight: 700; color: #64748b; text-transform: uppercase; letter-spacing: 1px; }
-        .hero-trust-logos { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; }
-        .press-link { font-weight: 600; font-size: 0.84rem; color: var(--secondary); text-decoration: none; background: var(--bg-light); border: 1px solid #e2e8f0; padding: 7px 14px; border-radius: 8px; transition: color 0.2s ease, border-color 0.2s ease, transform 0.2s ease; display: inline-block; }
+        .hero-trust { margin-top: 40px; display: flex; align-items: center; gap: 20px; flex-wrap: wrap; }
+        .hero-trust span { font-size: 0.8rem; font-weight: 700; color: #64748b; text-transform: uppercase; letter-spacing: 1px; }
+        .hero-trust-logos { display: flex; gap: 12px; align-items: center; flex-wrap: wrap; }
+        .press-link { font-weight: 600; font-size: 0.85rem; color: var(--secondary); text-decoration: none; background: var(--bg-light); border: 1px solid #e2e8f0; padding: 8px 16px; border-radius: 8px; transition: all 0.3s ease; display: inline-block; }
         .press-link:hover { color: var(--accent); border-color: var(--accent); background: #fff; transform: translateY(-2px); box-shadow: 0 4px 10px rgba(0,0,0,0.05); }
 
         .quote-section { padding: 60px 0; background-color: var(--bg-light); position: relative; }
         .quote-block { max-width: 800px; margin: 0 auto; text-align: center; position: relative; padding: 0 40px; }
-        .quote-block::before { content: '“'; position: absolute; top: -40px; left: 50%; transform: translateX(-50%); font-size: 120px; color: rgba(211, 84, 0, 0.1); font-family: 'Playfair Display', serif; line-height: 1; pointer-events: none; }
-        .quote-text { font-family: 'Playfair Display', serif; font-size: 1.28rem; font-style: italic; color: var(--primary); line-height: 1.7; margin-bottom: 20px; position: relative; z-index: 1; }
+        .quote-block::before { content: '“'; position: absolute; top: -40px; left: 50%; transform: translateX(-50%); font-size: 120px; color: rgba(211, 84, 0, 0.1); font-family: serif; line-height: 1; pointer-events: none; }
+        .quote-text { font-size: 1.25rem; font-style: italic; color: var(--primary); line-height: 1.7; margin-bottom: 20px; position: relative; z-index: 1; }
         .quote-author { font-size: 0.9rem; font-weight: 700; color: var(--accent); text-transform: uppercase; letter-spacing: 1px; }
-        .quote-author span { display: block; font-size: 0.75rem; color: var(--text-gray); font-weight: 400; text-transform: none; margin-top: 5px; font-family: 'Inter', sans-serif; }
+        .quote-author span { display: block; font-size: 0.75rem; color: var(--text-gray); font-weight: 400; text-transform: none; margin-top: 5px; }
 
         .principles { padding: 80px 0; background-color: var(--primary); color: #fff; }
         .principles .section-title { color: #fff; }
         .principles-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 30px; text-align: center; }
-        .principle-card h3 { font-size: 1.1rem; margin-bottom: 12px; color: var(--accent); font-family: 'Playfair Display', serif; }
+        .principle-card h3 { font-size: 1.1rem; margin-bottom: 12px; color: var(--accent); }
         .principle-card p { color: #cbd5e0; font-size: 0.9rem; }
 
         .about { padding: 100px 0; background-color: #ffffff; scroll-margin-top: 70px; }
@@ -526,43 +309,31 @@
         .about-desc { font-size: 1.1rem; color: var(--text-gray); margin-bottom: 30px; line-height: 1.6; }
         .stats-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 30px; }
         .stat-card { background: var(--bg-light); padding: 25px; border-radius: 8px; border-left: 4px solid var(--accent); }
-        .stat-num { font-size: 2.5rem; font-weight: 800; color: var(--primary); line-height: 1; margin-bottom: 10px; font-family: 'Playfair Display', serif; }
+        .stat-num { font-size: 2.5rem; font-weight: 800; color: var(--primary); line-height: 1; margin-bottom: 10px; }
         .stat-text { font-size: 0.9rem; color: var(--text-gray); font-weight: 600; line-height: 1.4; }
         .about-list { list-style: none; padding: 0; margin: 0; }
         .about-list li { position: relative; padding-left: 30px; margin-bottom: 15px; font-size: 1.05rem; color: var(--text-dark); font-weight: 600; }
         .about-list li::before { content: '✓'; position: absolute; left: 0; top: 2px; color: var(--accent); font-weight: 800; font-size: 18px; }
 
-        /* УСЛУГИ (СТАТИЧНАЯ СЕТКА: 3 + 2, БЕЗ ДУБЛИРОВАНИЯ ПРАВИЛ) */
+        /* УСЛУГИ (СТАТИЧНАЯ СЕТКА: 3 + 2) */
         .solutions { padding: 100px 0 80px 0; background-color: var(--bg-light); scroll-margin-top: 70px; }
         .solutions-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; max-width: 1100px; margin: 0 auto; }
-        .solutions-grid-bottom { display: grid; grid-template-columns: repeat(2, 1fr); gap: 30px; max-width: 720px; margin: 30px auto 0 auto; }
         .solution-card { cursor: pointer; background: #ffffff; padding: 35px; border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.04); border-top: 4px solid var(--primary); transition: transform 0.3s cubic-bezier(0.25, 0.8, 0.25, 1), box-shadow 0.3s ease, border-top-color 0.3s; display: flex; flex-direction: column; position: relative; z-index: 1; }
-        .solution-card:hover { transform: translateY(-8px) scale(1.03); box-shadow: 0 20px 40px rgba(0,0,0,0.12); border-top-color: var(--accent); z-index: 10; }
-        .solution-header { display: flex; align-items: center; gap: 15px; margin-bottom: 20px; }
-        .solution-icon { width: 44px; height: 44px; background: rgba(211, 84, 0, 0.1); border-radius: 10px; display: flex; align-items: center; justify-content: center; color: var(--accent); flex-shrink: 0; }
-        .solution-icon svg { width: 24px; height: 24px; fill: currentColor; }
-        .solution-title-wrap { flex: 1; }
-        .solution-card h3 { font-size: 1.15rem; margin: 0 0 5px 0; color: var(--primary); line-height: 1.2; }
-        .solution-desc { color: var(--text-gray); font-size: 0.9rem; margin-bottom: 20px; line-height: 1.6; }
-        .solution-list { list-style: none; padding: 0; margin: 0; flex-grow: 1; }
-        .solution-list li { position: relative; padding-left: 28px; margin-bottom: 10px; color: #2d3748; font-size: 0.9rem; font-weight: 600; }
-        .solution-list li::before { content: '✓'; position: absolute; left: 0; top: 2px; width: 18px; height: 18px; background: rgba(211, 84, 0, 0.15); color: var(--accent); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 10px; font-weight: 800; }
-        .solution-price { margin-top: 20px; font-weight: 800; color: var(--accent); font-size: 1.15rem; }
         .solution-card-cta { margin-top: 15px; font-size: 0.85rem; font-weight: 700; color: var(--primary); display: flex; align-items: center; gap: 6px; transition: color 0.2s, transform 0.2s; }
         .solution-card:hover .solution-card-cta { color: var(--accent); transform: translateX(4px); }
         .solution-card-cta svg { width: 16px; height: 16px; fill: currentColor; }
 
-        /* РАСШИРЕННОЕ МОДАЛЬНОЕ ОКНО УСЛУГИ (РАВНОМЕРНОЕ РАСТЯГИВАНИЕ ПЛАШЕК) */
+        /* РАСШИРЕННОЕ МОДАЛЬНОЕ ОКНО УСЛУГИ (ВАРИАНТ А) */
         .service-modal-box { background: #fff; width: 100%; max-width: 860px; border-radius: 14px; padding: 35px 40px; position: relative; box-sizing: border-box; transform: translateY(20px); transition: transform 0.3s ease; max-height: 92vh; overflow-y: auto; box-shadow: 0 25px 60px rgba(0,0,0,0.25); }
         .modal-overlay.active .service-modal-box { transform: translateY(0); }
         .service-modal-header { border-bottom: 1px solid #e2e8f0; padding-bottom: 18px; margin-bottom: 22px; padding-right: 30px; }
-        .service-modal-header h3 { margin: 0 0 12px 0; font-size: 1.6rem; color: var(--primary); line-height: 1.25; font-family: 'Playfair Display', serif; }
-        .service-meta-tags { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; width: 100%; }
-        .service-meta-tag { background: #f1f5f9; color: var(--secondary); font-size: 0.82rem; font-weight: 600; padding: 10px 14px; border-radius: 8px; display: flex; align-items: center; gap: 6px; border: 1px solid #e2e8f0; box-sizing: border-box; width: 100%; }
-        .service-meta-tag strong { color: var(--accent); flex-shrink: 0; }
+        .service-modal-header h3 { margin: 0 0 10px 0; font-size: 1.6rem; color: var(--primary); line-height: 1.25; }
+        .service-meta-tags { display: flex; flex-wrap: wrap; gap: 10px; }
+        .service-meta-tag { background: #f1f5f9; color: var(--secondary); font-size: 0.8rem; font-weight: 600; padding: 6px 12px; border-radius: 6px; display: inline-flex; align-items: center; gap: 6px; border: 1px solid #e2e8f0; }
+        .service-meta-tag strong { color: var(--accent); }
         .service-modal-grid { display: grid; grid-template-columns: 1.15fr 1fr; gap: 25px; margin-bottom: 25px; }
         .service-steps-box { background: var(--bg-light); padding: 22px; border-radius: 10px; border-left: 4px solid var(--accent); }
-        .service-steps-box h4, .service-benefits-box h4 { margin: 0 0 14px 0; font-size: 1rem; color: var(--primary); text-transform: uppercase; letter-spacing: 0.5px; font-family: 'Inter', sans-serif; }
+        .service-steps-box h4, .service-benefits-box h4 { margin: 0 0 14px 0; font-size: 1rem; color: var(--primary); text-transform: uppercase; letter-spacing: 0.5px; }
         .service-steps-list { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 12px; }
         .service-steps-list li { display: flex; align-items: flex-start; gap: 12px; font-size: 0.9rem; color: var(--text-dark); line-height: 1.5; }
         .service-step-badge { width: 24px; height: 24px; border-radius: 50%; background: var(--accent); color: #fff; font-weight: 700; font-size: 0.75rem; display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 2px; }
@@ -580,6 +351,19 @@
         .channel-action-btn svg { width: 18px; height: 18px; fill: currentColor; flex-shrink: 0; }
         .service-quick-form-link { background: none; border: none; color: var(--secondary); font-size: 0.82rem; font-weight: 600; text-decoration: underline; cursor: pointer; padding: 4px; }
         .service-quick-form-link:hover { color: var(--accent); }
+        .solution-card:hover { transform: translateY(-8px) scale(1.03); box-shadow: 0 20px 40px rgba(0,0,0,0.12); border-top-color: var(--accent); z-index: 10; }
+        .solution-header { display: flex; align-items: center; gap: 15px; margin-bottom: 20px; }
+        .solution-icon { width: 44px; height: 44px; background: rgba(211, 84, 0, 0.1); border-radius: 10px; display: flex; align-items: center; justify-content: center; color: var(--accent); flex-shrink: 0; }
+        .solution-icon svg { width: 24px; height: 24px; fill: currentColor; }
+        .solution-title-wrap { flex: 1; }
+        .solution-card h3 { font-size: 1.15rem; margin: 0 0 5px 0; color: var(--primary); line-height: 1.2; }
+        .solution-badge { display: inline-block; background: #e2e8f0; color: #4a5568; font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; padding: 3px 8px; border-radius: 4px; }
+        .solution-desc { color: var(--text-gray); font-size: 0.9rem; margin-bottom: 20px; line-height: 1.6; }
+        .solution-list { list-style: none; padding: 0; margin: 0; flex-grow: 1; }
+        .solution-list li { position: relative; padding-left: 28px; margin-bottom: 10px; color: #2d3748; font-size: 0.9rem; font-weight: 600; }
+        .solution-list li::before { content: '✓'; position: absolute; left: 0; top: 2px; width: 18px; height: 18px; background: rgba(211, 84, 0, 0.15); color: var(--accent); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 10px; font-weight: 800; }
+        .solution-price { margin-top: 20px; font-weight: 800; color: var(--accent); font-size: 1.15rem; }
+        .solutions-grid-bottom { display: grid; grid-template-columns: repeat(2, 1fr); gap: 30px; max-width: 720px; margin: 30px auto 0 auto; }
 
         .info-blocks-container { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; max-width: 1100px; margin: 40px auto 0 auto; }
         .legal-note, .payment-note { display: flex; align-items: flex-start; gap: 15px; padding: 20px 25px; border-radius: 8px; box-shadow: 0 5px 15px rgba(0,0,0,0.02); }
@@ -594,7 +378,7 @@
         .payment-note strong { color: #14532d; }
 
         .cta-banner { background-color: var(--primary); padding: 60px 0; text-align: center; background-image: linear-gradient(to right, #1a252f, #2c3e50); color: #fff; }
-        .cta-banner h2 { font-size: 2.2rem; margin: 0 0 15px 0; color: #fff; font-family: 'Playfair Display', serif; }
+        .cta-banner h2 { font-size: 2.2rem; margin: 0 0 15px 0; color: #fff; }
         .cta-banner p { font-size: 1.1rem; color: #cbd5e0; max-width: 800px; margin: 0 auto; line-height: 1.6; }
 
         .publications { padding: 80px 0; background-color: #ffffff; scroll-margin-top: 70px; overflow: hidden; }
@@ -620,7 +404,7 @@
         .modal-overlay.active .modal-box { transform: translateY(0); }
         .modal-close { position: absolute; top: 15px; right: 20px; font-size: 28px; color: #a0aec0; background: none; border: none; cursor: pointer; line-height: 1; padding: 0; }
         .modal-close:hover { color: var(--primary); }
-        .modal-box h3 { margin: 0 0 10px 0; font-size: 1.5rem; color: var(--primary); font-family: 'Playfair Display', serif; }
+        .modal-box h3 { margin: 0 0 10px 0; font-size: 1.5rem; color: var(--primary); }
         .modal-box p { margin: 0 0 25px 0; color: var(--text-gray); font-size: 0.95rem; }
         .form-group { margin-bottom: 20px; }
         .form-group label { display: block; margin-bottom: 8px; font-size: 0.9rem; font-weight: 600; color: var(--primary); }
@@ -664,7 +448,7 @@
         .chat-legal { text-align: center; font-size: 0.65rem; color: #a0aec0; padding: 0 15px 10px; background: #fff; }
         .chat-legal a { color: var(--chat-blue); text-decoration: none; }
 
-        .side-menu-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 2001; opacity: 0; visibility: hidden; transition: opacity 0.3s ease, visibility 0.3s ease; }
+        .side-menu-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 2001; opacity: 0; visibility: hidden; transition: all 0.3s ease; }
         .side-menu-overlay.active { opacity: 1; visibility: visible; }
         .side-menu { position: fixed; top: 0; right: -350px; width: 300px; height: 100%; background: #ffffff; z-index: 2002; box-shadow: -5px 0 25px rgba(0,0,0,0.1); transition: right 0.4s cubic-bezier(0.77, 0, 0.175, 1); display: flex; flex-direction: column; padding: 30px; }
         .side-menu.active { right: 0; }
@@ -693,7 +477,7 @@
             align-items: center;
             justify-content: center;
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-            transition: background-color 0.3s ease, transform 0.3s ease, opacity 0.3s ease;
+            transition: all 0.3s ease;
             opacity: 0;
             transform: translateY(20px);
         }
@@ -714,34 +498,30 @@
         }
 
         @media (max-width: 900px) {
-            .hero-wrapper { padding-top: 95px; padding-bottom: 40px; min-height: auto; }
-            .hero-grid { grid-template-columns: 1fr; gap: 30px; }
-            .hero-content { text-align: center; }
-            .main-name-title::after { left: 50%; transform: translateX(-50%); }
-            .hero-name-primary { font-size: 2.35rem; }
-            .hero-name-patronymic { font-size: 0.8rem; letter-spacing: 1.5px; }
-            .hero-tags { justify-content: center; } 
-            .hero-quote { text-align: left; padding: 16px 20px; }
-            .hero-quote cite { text-align: right; }
-            .hero-cta-dropdown { left: 50%; transform: translateX(-50%); }
-            .hero-image-bg { width: 100%; max-width: 340px; height: 420px; margin: 0 auto; } 
+            .hero-wrapper { flex-direction: column; padding-top: 100px; padding-bottom: 40px; min-height: auto; }
+            .hero-content { width: 100%; padding: 0 20px; text-align: center; margin-bottom: 30px; }
+            .hero-tags { align-items: center; } 
+            .hero-quote { text-align: justify; padding: 15px 20px; }
+            .hero-quote cite { text-align: center; }
+            .main-name-title { font-size: 2rem; margin-bottom: 20px; }
+            .hero-image-bg { position: relative; top: 0; right: 0; transform: none; width: 60%; height: 400px; margin: 0 auto; } 
             .header-nav { display: none; } 
             .hamburger-btn { display: flex; } 
             .header-messengers { gap: 5px; margin-right: 10px; }
             .header-messenger-btn { padding: 6px 10px; font-size: 0.75rem; }
-            .hero-trust { justify-content: center; flex-direction: column; gap: 12px; }
-            .hero-trust-logos { justify-content: center; }
+            .hero-trust { margin-top: 40px; justify-content: center; flex-direction: column; gap: 15px; border-top: none; padding-top: 0;}
+            .hero-trust-logos { justify-content: center; flex-wrap: wrap; }
             .sticky-socials { display: none; }
             .about-grid { grid-template-columns: 1fr; }
             .solutions-grid, .solutions-grid-bottom, .info-blocks-container { grid-template-columns: 1fr; max-width: 100%; }
             .solution-card { width: auto; padding: 25px; }
             .solution-card:hover { transform: none; }
             .pub-card { width: 280px; }
-            .pub-track { animation-duration: 25s; }
+            .pub-track { animation-name: marquee-mobile; animation-duration: 25s; }
+            @keyframes marquee-mobile { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
             .chat-window { right: -15px; bottom: 75px; width: calc(100vw - 30px); }
             .modal-box { max-width: 95%; padding: 30px 20px; }
             .service-modal-box { max-width: 96%; padding: 25px 18px; }
-            .service-meta-tags { grid-template-columns: 1fr; }
             .service-modal-grid { grid-template-columns: 1fr; gap: 18px; }
             .service-channels-btns { grid-template-columns: 1fr; }
             .quote-block { padding: 0 20px; }
@@ -752,7 +532,7 @@
         }
     
         @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(8px); }
+            from { opacity: 0; transform: translateY(10px); }
             to { opacity: 1; transform: translateY(0); }
         }
         @keyframes typing {
@@ -762,7 +542,7 @@
         .hp-field { position: absolute; left: -9999px; top: auto; width: 1px; height: 1px; overflow: hidden; }
         .form-error-msg { display: none; background: #fef2f2; border: 1px solid #fecaca; color: #b91c1c; padding: 10px 14px; border-radius: 6px; font-size: 0.85rem; font-weight: 600; margin-bottom: 15px; }
         .form-error-msg.visible { display: block; }
-        .solution-card:focus-visible, .contact-btn:focus-visible, .hero-cta-btn:focus-visible, .header-messenger-btn:focus-visible, .channel-action-btn:focus-visible, .chat-input input:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+        .solution-card:focus-visible, .contact-btn:focus-visible, .header-messenger-btn:focus-visible, .channel-action-btn:focus-visible, .chat-input input:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
         @media (prefers-reduced-motion: reduce) {
             *, *::before, *::after {
                 animation-duration: 0.01ms !important;
@@ -824,7 +604,7 @@
             try {
                 const stored = sessionStorage.getItem('eg_traffic_source');
                 if (stored) return JSON.parse(stored);
-            } catch(e) { console.debug(e); }
+            } catch(e) {}
             return { referrerDomain: 'unknown', utm_source: '' };
         }
     </script>
@@ -842,24 +622,21 @@
                 <a href="#publications">Медиа и Блог</a>
             </nav>
             <div class="header-messengers">
-                <div class="max-btn-group" id="maxBtnGroup">
+                <div style="display: flex; align-items: stretch; box-shadow: 0 2px 5px rgba(0,0,0,0.1); border-radius: 6px;">
                     <a href="https://max.ru/u/f9LHodD0cOIwE5Tk0yqsCdSW7aH2YKheHnM5PcwHgDaWAse8blY_Usz5-7Q" target="_blank" rel="noopener noreferrer" class="header-messenger-btn btn-max" title="Написать в MAX" onclick="openMessenger(event, 'max')" style="border-top-right-radius: 0; border-bottom-right-radius: 0; padding-right: 10px; border-right: 1px solid rgba(255,255,255,0.3); box-shadow: none; transform: none;">
-                        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2C6.48 2 2 6.48 2 12c0 1.7.45 3.31 1.23 4.7L2 22l5.48-1.15C8.89 21.57 10.41 22 12 22c5.52 0 10-4.48 10-10S17.52 2 12 2z"/></svg>
+                        <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12c0 1.7.45 3.31 1.23 4.7L2 22l5.48-1.15C8.89 21.57 10.41 22 12 22c5.52 0 10-4.48 10-10S17.52 2 12 2z"/></svg>
                         MAX
                     </a>
-                    <button type="button" class="max-help-trigger" onclick="toggleMaxTooltip(event)" aria-label="Как работает переход в мессенджер MAX">?</button>
-                    <div class="max-tooltip-popup" role="tooltip">
-                        Если у вас установлено приложение <strong>MAX</strong>, диалог откроется автоматически. Если нет — откроется веб-версия (вход по номеру телефона или QR-коду).
-                    </div>
+                    <button type="button" onclick="alert('Если у вас установлено приложение MAX, оно откроется автоматически. Если нет — вы перейдёте в веб-версию, где можно войти по номеру телефона или QR-коду.')" title="Как это работает?" aria-label="Как работает переход в мессенджер MAX" style="display: flex; align-items: center; justify-content: center; width: 24px; background: linear-gradient(135deg, #8E2DE2, #4A00E0); color: #fff; font-size: 13px; font-weight: 700; cursor: pointer; border: none; padding: 0; border-top-right-radius: 6px; border-bottom-right-radius: 6px;">?</button>
                 </div>
                 
                 <a href="https://t.me/ElenaProprofiler" target="_blank" rel="noopener noreferrer" class="header-messenger-btn btn-telegram" title="Написать в Telegram" onclick="openMessenger(event, 'tg')">
-                    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69.01-.03.01-.14-.06-.2-.07-.06-.17-.04-.25-.02-.11.02-1.78 1.14-5.06 3.34-.48.33-.91.49-1.3.48-.43-.01-1.25-.24-1.87-.44-.75-.24-1.35-.37-1.3-.79.03-.22.33-.44.89-.66 3.5-1.53 5.83-2.53 7-3.02 3.33-1.39 4.02-1.63 4.47-1.64.1 0 .32.02.47.14.12.1.15.25.17.33.02.13.04.28.02.4z"/></svg>
+                    <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69.01-.03.01-.14-.06-.2-.07-.06-.17-.04-.25-.02-.11.02-1.78 1.14-5.06 3.34-.48.33-.91.49-1.3.48-.43-.01-1.25-.24-1.87-.44-.75-.24-1.35-.37-1.3-.79.03-.22.33-.44.89-.66 3.5-1.53 5.83-2.53 7-3.02 3.33-1.39 4.02-1.63 4.47-1.64.1 0 .32.02.47.14.12.1.15.25.17.33.02.13.04.28.02.4z"/></svg>
                     Telegram
                 </a>
 
                 <a href="#" onclick="openEmail(event)" class="header-messenger-btn btn-email" title="Написать на почту">
-                    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+                    <svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
                     Почта
                 </a>
             </div>
@@ -898,74 +675,28 @@
 
     <!-- ГЛАВНЫЙ ЭКРАН -->
     <section class="hero-wrapper">
-        <div class="container hero-grid">
-            <div class="hero-content">
-                <!-- ВАРИАНТ А: ДВУХУРОВНЕВАЯ ИЕРАРХИЯ ФИО -->
-                <h1 class="main-name-title">
-                    <span class="hero-name-primary">Елена Галанова</span>
-                    <span class="hero-name-patronymic">Галанова Елена Владимировна</span>
-                </h1>
-                
-                <!-- ПЛАШКИ С ИКОНКАМИ КАСКАДОМ -->
-                <div class="hero-tags">
-                    <span class="hero-tag">
-                        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3L1 9l4 2.18v6L12 21l7-3.82v-6l2-1.09V17h2V9L12 3zm6.82 6L12 12.72 5.18 9 12 5.28 18.82 9zM17 15.99l-5 2.73-5-2.73v-3.72L12 15l5-2.73v3.72z"/></svg>
-                        Кандидат психологических наук
-                    </span>
-                    <span class="hero-tag">
-                        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm0 10.99h7c-.53 4.12-3.28 7.79-7 8.94V12H5V6.3l7-3.11v8.8z"/></svg>
-                        Профайлер-полиграфолог
-                    </span>
-                    <span class="hero-tag">
-                        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 13.18v4L12 21l7-3.82v-4L12 17l-7-3.82zM12 3L1 9l11 6 9-4.91V17h2V9L12 3z"/></svg>
-                        Преподаватель ВУЗа
-                    </span>
-                </div>
-
-                <blockquote class="hero-quote">
-                    «Профайлинг - не про поиск врагов и не про разоблачение. Это про способность видеть мир чуть объемнее, чем он кажется на первый взгляд. И когда такой угол зрения становится привычным, перестаешь делить людей на «честных» и «лжецов». Просто начинаешь замечать, как устроена человеческая природа. Со всеми её противоречиями, страхами и попытками казаться лучше, чем есть. А это, пожалуй, важнее любых разоблачений.»
-                    <cite>Из книги «Почерк лжи»</cite>
-                </blockquote>
-
-                <!-- КНОПКА ОБСУДИТЬ ЗАДАЧУ С ВЫПАДАЮЩИМ МЕНЮ СВЯЗИ -->
-                <div class="hero-cta-wrap" id="heroCtaWrap">
-                    <button type="button" class="hero-cta-btn" onclick="toggleHeroCta(event)" aria-expanded="false" id="heroCtaBtn">
-                        Обсудить задачу
-                        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 10l5 5 5-5z"/></svg>
-                    </button>
-                    <div class="hero-cta-dropdown" id="heroCtaDropdown">
-                        <a href="https://max.ru/u/f9LHodD0cOIwE5Tk0yqsCdSW7aH2YKheHnM5PcwHgDaWAse8blY_Usz5-7Q" target="_blank" rel="noopener noreferrer" class="hero-dropdown-item btn-max" onclick="openMessenger(event, 'max')">
-                            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2C6.48 2 2 6.48 2 12c0 1.7.45 3.31 1.23 4.7L2 22l5.48-1.15C8.89 21.57 10.41 22 12 22c5.52 0 10-4.48 10-10S17.52 2 12 2z"/></svg>
-                            Написать в MAX
-                        </a>
-                        <a href="https://t.me/ElenaProprofiler" target="_blank" rel="noopener noreferrer" class="hero-dropdown-item btn-telegram" onclick="openMessenger(event, 'tg')">
-                            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69.01-.03.01-.14-.06-.2-.07-.06-.17-.04-.25-.02-.11.02-1.78 1.14-5.06 3.34-.48.33-.91.49-1.3.48-.43-.01-1.25-.24-1.87-.44-.75-.24-1.35-.37-1.3-.79.03-.22.33-.44.89-.66 3.5-1.53 5.83-2.53 7-3.02 3.33-1.39 4.02-1.63 4.47-1.64.1 0 .32.02.47.14.12.1.15.25.17.33.02.13.04.28.02.4z"/></svg>
-                            Написать в Telegram
-                        </a>
-                        <a href="#" class="hero-dropdown-item btn-email" onclick="openEmail(event)">
-                            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
-                            Написать на Почту
-                        </a>
-                        <button type="button" class="hero-dropdown-item hero-dropdown-form" onclick="closeHeroCta(); openModal();">
-                            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"/></svg>
-                            Заполнить анкету
-                        </button>
-                    </div>
-                </div>
-
-                <div class="hero-trust">
-                    <span>Эксперт изданий:</span>
-                    <div class="hero-trust-logos">
-                        <a href="https://www.e-xecutive.ru/management/itforbusiness/2000619-kak-vychislit-i-bezopasno-uvolit-insaidera" target="_blank" rel="noopener noreferrer" class="press-link">Executive.ru</a>
-                        <a href="https://www.top-personal.ru/magazine.html?905" target="_blank" rel="noopener noreferrer" class="press-link">Управление персоналом</a>
-                        <a href="https://www.psychologies.ru/articles/psikhologiya-anonimki-vychislyaem-avtora-anonimnykh-pisem-po-6-priznakam/" target="_blank" rel="noopener noreferrer" class="press-link">Psychologies</a>
-                    </div>
+        <div class="hero-content">
+            <h1 class="main-name-title">Галанова Елена Владимировна</h1>
+            <div class="hero-tags">
+                <span class="hero-tag">Кандидат психологических наук</span>
+                <span class="hero-tag">Профайлер-полиграфолог</span>
+                <span class="hero-tag">Преподаватель ВУЗа</span>
+            </div>
+            <blockquote class="hero-quote">
+                «Профайлинг - не про поиск врагов и не про разоблачение. Это про способность видеть мир чуть объемнее, чем он кажется на первый взгляд. И когда такой угол зрения становится привычным, перестаешь делить людей на «честных» и «лжецов». Просто начинаешь замечать, как устроена человеческая природа. Со всеми её противоречиями, страхами и попытками казаться лучше, чем есть. А это, пожалуй, важнее любых разоблачений.»
+                <cite>Из книги «Почерк лжи»</cite>
+            </blockquote>
+            <div class="hero-trust">
+                <span>Эксперт изданий:</span>
+                <div class="hero-trust-logos">
+                    <a href="https://www.e-xecutive.ru/" target="_blank" rel="noopener noreferrer" class="press-link">Executive.ru</a>
+                    <a href="https://www.top-personal.ru/" target="_blank" rel="noopener noreferrer" class="press-link">Управление персоналом</a>
+                    <a href="https://www.psychologies.ru/" target="_blank" rel="noopener noreferrer" class="press-link">Psychologies</a>
                 </div>
             </div>
-
-            <div class="hero-image-bg">
-                <img src="profile.jpg" alt="Елена Галанова — профайлер-полиграфолог" fetchpriority="high" decoding="async" width="410" height="520">
-            </div>
+        </div>
+        <div class="hero-image-bg">
+            <img src="profile.jpg" alt="Елена Галанова — профайлер-полиграфолог" fetchpriority="high" decoding="async" width="420" height="560">
         </div>
     </section>
 
@@ -1048,7 +779,7 @@
                         <li>Оценка факторов риска</li>
                         <li>Прогноз поведения в бизнесе</li>
                     </ul>
-                    <div class="solution-price">от 8 000 Ᵽ</div>
+                    <div class="solution-price">от 5 000 Ᵽ</div>
                     <div class="solution-card-cta">Как проходит работа и связь <svg viewBox="0 0 24 24"><path d="M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z"/></svg></div>
                 </div>
 
@@ -1059,11 +790,11 @@
                             <h3>Экспертная консультация</h3>
                         </div>
                     </div>
-                    <p class="solution-desc">Разбор сложных управленческих ситуаций, где важно понять человека: от оценки кандидатов и партнеров до анализа скрытых мотивов и конфликтов.</p>
+                    <p class="solution-desc">Обсуждаем все, что связано с пониманием людей в бизнесе и жизни: оценка кандидатов, анализ мотивов, доверие, сложные переговоры и личные решения.</p>
                     <ul class="solution-list">
-                        <li>Разбор конкретного кейса</li>
-                        <li>Трезвый взгляд со стороны</li>
-                        <li>Стратегия дальнейших действий</li>
+                        <li>Разбор ваших кейсов и гипотез</li>
+                        <li>Кадровые и личные вопросы</li>
+                        <li>Стратегия сложных коммуникаций</li>
                     </ul>
                     <div class="solution-price">от 5 000 Ᵽ</div>
                     <div class="solution-card-cta">Как проходит работа и связь <svg viewBox="0 0 24 24"><path d="M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z"/></svg></div>
@@ -1101,7 +832,7 @@
                         <li>Анализ корпоративного контекста</li>
                         <li>Определение профиля автора</li>
                     </ul>
-                    <div class="solution-price">от 15 000 Ᵽ</div>
+                    <div class="solution-price">от 5 000 Ᵽ</div>
                     <div class="solution-card-cta">Как проходит работа и связь <svg viewBox="0 0 24 24"><path d="M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z"/></svg></div>
                 </div>
 
@@ -1129,8 +860,8 @@
                     <p><strong>Правовая чистота (152-ФЗ):</strong> Очные опросы и тестирования на полиграфе проводятся строго при наличии <em>добровольного письменного согласия</em> проверяемого лица. Аналитика цифрового следа (OSINT) выполняется исключительно по общедоступным открытым источникам.</p>
                 </div>
                 <div class="payment-note">
-                    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 15l-5-5 1.41-1.41L11 14.17l7.59-7.59L20 8l-9 9z"/></svg>
-                    <p><strong>Оплата и документы:</strong> Базовые цены указаны в услугах. Итоговая стоимость фиксируется после уточнения деталей вашей задачи. Работаю с физ. и юрлицами (договор, чеки НПД, закрывающие документы).</p>
+                    <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 15l-5-5 1.41-1.41L11 14.17l7.59-7.59L20 8l-9 9z"/></svg>
+                    <p><strong>Оплата и документы:</strong> Базовые цены указаны в услугах. Итоговая стоимость фиксируется после уточнения деталей вашей задачи. Работаю с физ. и юрлицами (договор, чеки НПД, акты).</p>
                 </div>
             </div>
         </div>
@@ -1242,10 +973,10 @@
             <button class="modal-close" onclick="closeServiceDetail()" aria-label="Закрыть">&times;</button>
             
             <div class="service-modal-header">
-                <h3 id="smTitle"></h3>
+                <h3 id="smTitle">Название услуги</h3>
                 <div class="service-meta-tags">
-                    <span class="service-meta-tag"><strong>Формат работы:</strong> <span id="smFormat"></span></span>
-                    <span class="service-meta-tag"><strong>География:</strong> <span id="smGeo"></span></span>
+                    <span class="service-meta-tag"><strong>Формат работы:</strong> <span id="smFormat">100% онлайн (Secure Video Call)</span></span>
+                    <span class="service-meta-tag"><strong>География:</strong> <span id="smGeo">Москва, Санкт-Петербург, регионы РФ, международные запросы</span></span>
                 </div>
             </div>
 
@@ -1261,22 +992,22 @@
                     <h4>Преимущества формата:</h4>
                     <div class="service-benefit-item">
                         <strong>🔒 Конфиденциальность</strong>
-                        <span id="smConf"></span>
+                        <span id="smConf">Удаленный формат обеспечивает максимальную приватность для топ-менеджеров и собственников бизнеса (не нужно никуда ехать, светиться в чужих офисах или принимать у себя).</span>
                     </div>
                     <div class="service-benefit-item">
                         <strong>⚡ Оперативность</strong>
-                        <span id="smSpeed"></span>
+                        <span id="smSpeed">Возможность быстро подключиться к разбору критической ситуации (сложные переговоры, конфликт в команде, срочный анализ кандидата), не дожидаясь командировок.</span>
                     </div>
                     <div class="service-benefit-item">
                         <strong>🛡️ Технологичность</strong>
-                        <span id="smTech"></span>
+                        <span id="smTech">Использование защищенных каналов связи и цифровых инструментов анализа.</span>
                     </div>
                 </div>
             </div>
 
             <div class="service-modal-result">
-                <div><strong>Итог работы:</strong> <span id="smResult"></span></div>
-                <div class="service-modal-price-tag" id="smPrice"></div>
+                <div><strong>Итог работы:</strong> <span id="smResult">По итогам сессии вы получаете структурированное экспертное заключение или план действий.</span></div>
+                <div class="service-modal-price-tag" id="smPrice">от 5 000 Ᵽ</div>
             </div>
 
             <div class="service-channels-wrap">
@@ -1415,41 +1146,6 @@
             }
         }
 
-        // УПРАВЛЕНИЕ ТУЛТИПОМ MAX И КНОПКОЙ НА ГЛАВНОМ ЭКРАНЕ
-        function toggleMaxTooltip(e) {
-            e.stopPropagation();
-            const group = document.getElementById('maxBtnGroup');
-            if (group) group.classList.toggle('tooltip-open');
-        }
-
-        function toggleHeroCta(e) {
-            e.stopPropagation();
-            const wrap = document.getElementById('heroCtaWrap');
-            const btn = document.getElementById('heroCtaBtn');
-            if (wrap) {
-                const isOpen = wrap.classList.toggle('open');
-                if (btn) btn.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
-            }
-        }
-
-        function closeHeroCta() {
-            const wrap = document.getElementById('heroCtaWrap');
-            const btn = document.getElementById('heroCtaBtn');
-            if (wrap) wrap.classList.remove('open');
-            if (btn) btn.setAttribute('aria-expanded', 'false');
-        }
-
-        document.addEventListener('click', function(e) {
-            const maxGroup = document.getElementById('maxBtnGroup');
-            if (maxGroup && !maxGroup.contains(e.target)) {
-                maxGroup.classList.remove('tooltip-open');
-            }
-            const heroWrap = document.getElementById('heroCtaWrap');
-            if (heroWrap && !heroWrap.contains(e.target)) {
-                closeHeroCta();
-            }
-        });
-
         function toggleMenu() {
             document.getElementById('sideMenu').classList.toggle('active');
             document.getElementById('menuOverlay').classList.toggle('active');
@@ -1469,7 +1165,6 @@
 
         // УМНЫЙ РОУТИНГ ДЛЯ МЕССЕНДЖЕРОВ (С ГАРАНТИРОВАННОЙ ДОСТАВКОЙ УВЕДОМЛЕНИЯ)
         function openMessenger(e, type, customContext) {
-            closeHeroCta();
             const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) || 
                              (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
             const trafficSource = getTrafficSource();
@@ -1514,69 +1209,69 @@
             }
         }
 
-        // ДАННЫЕ И ЛОГИКА МОДАЛЬНЫХ ОКОН ДЛЯ КАЖДОЙ УСЛУГИ
+        // ДАННЫЕ И ЛОГИКА МОДАЛЬНЫХ ОКОН ДЛЯ КАЖДОЙ УСЛУГИ (ВАРИАНТ А - ЮРИДИЧЕСКИ ВЫВЕРЕННЫЙ)
         let currentSelectedServiceTitle = "";
 
         const serviceModalDetails = {
             digital: {
                 title: "Профайлинг цифрового следа",
-                format: "100% онлайн (OSINT-аналитика открытых данных)",
+                format: "100% онлайн (OSINT-аналитика + видеосессия)",
                 geo: "Москва, Санкт-Петербург, регионы РФ, международные запросы",
                 steps: [
                     "Вы оставляете заявку через Telegram, MAX или почту и передаете вводные для оценки (резюме, ссылки на открытые профили или публичные материалы).",
                     "Я провожу комплексный поведенческий анализ цифрового следа исключительно по общедоступным открытым источникам (OSINT) в рамках правового поля.",
-                    "Мы проводим онлайн-сессию в видеочате (Telegram / MAX / Zoom) для детального разбора выводов или я направляю вам структурированное текстовое экспертное заключение."
+                    "Мы проводим онлайн-сессию в видеочате для детального разбора выводов или я направляю вам структурированное экспертное заключение."
                 ],
                 conf: "Дистанционная оценка по открытым источникам: позволяет составить объективный портрет кандидата или контрагента до начала очных переговоров.",
                 speed: "Возможность быстро оценить риски перед сделкой или наймом ключевого специалиста в любой точке мира без личных встреч.",
                 tech: "Применение методик прикладного поведенческого анализа, OSINT и психолингвистической оценки публичной цифровой активности.",
                 result: "Развернутый психологический портрет, карта факторов риска и прогноз делового поведения.",
-                price: "от 8 000 Ᵽ"
+                price: "от 5 000 Ᵽ"
             },
             consult: {
                 title: "Экспертная консультация",
-                format: "Онлайн (Приватная видеосессия) или очно",
-                geo: "Москва, Санкт-Петербург, регионы РФ, международные запросы",
+                format: "Онлайн (Видеосессия) или очно",
+                geo: "Любой регион (онлайн) / Очные встречи по договоренности",
                 steps: [
-                    "Вы оставляете заявку и кратко описываете задачу (оценка кандидатов и партнеров, подготовка к сложным переговорам, анализ конфликтов и мотивов).",
-                    "Мы согласовываем удобное время и встречаемся в онлайн-формате (Telegram / MAX / Zoom) или очно. Подробно разбираем ваши кейсы, вопросы и гипотезы.",
-                    "По итогам сессии вы получаете системное видение ситуации, структурированное экспертное заключение или пошаговый план действий."
+                    "Вы оставляете заявку и описываете задачу. Обсуждаем всё, что связано с пониманием людей в бизнесе и жизни: от оценки партнеров до вопросов личного доверия.",
+                    "Мы встречаемся в онлайн-формате или лично. Подробно разбираем ваши конкретные кейсы, вопросы и гипотезы.",
+                    "Я применяю методы профайлинга и психологического анализа, чтобы помочь вам увидеть ситуацию системно и принять обоснованное решение."
                 ],
-                conf: "Максимальная приватность для топ-менеджеров и собственников бизнеса при обсуждении чувствительных кадровых и партнерских вопросов.",
-                speed: "Возможность быстро подключиться к разбору критической ситуации (сложные переговоры, конфликт в команде, срочный анализ кандидата).",
-                tech: "Комплексный разбор контекста, вербальных и невербальных паттернов поведения по предоставленным материалам.",
-                result: "Объективная картина мотивов человека и выверенная стратегия ваших действий.",
+                conf: "Максимальная приватность: вы можете безопасно обсудить самые сложные кадровые, партнерские или личные вопросы.",
+                speed: "Быстрый «трезвый взгляд» со стороны на вашу ситуацию, когда решение нужно принимать срочно.",
+                tech: "Разбор контекста, коммуникации и паттернов поведения на основе предоставленной вами информации.",
+                result: "Системное видение ситуации, ответы на ваши вопросы и выверенная стратегия действий.",
                 price: "от 5 000 Ᵽ"
             },
             investigation: {
                 title: "Сопровождение расследований",
-                format: "Очный формат (Личное присутствие и полиграф)",
+                format: "Очный формат (Личное присутствие)",
                 geo: "Выезд на территорию заказчика обсуждается индивидуально",
                 steps: [
-                    "Вы связываетесь со мной и описываете инцидент (утечка данных, хищение, откат, конфликт интересов или подозрение на сговор).",
-                    "Мы согласовываем выезд. Я провожу очный поведенческий опрос фигурантов (живой контакт критически важен для точной оценки невербалики и реакций).",
-                    "Проводим аппаратное тестирование на полиграфе (с письменного согласия лиц по 152-ФЗ) и формируем письменное экспертное заключение."
+                    "Вы связываетесь со мной и описываете инцидент (утечка данных, хищение, откат, подозрение на сговор).",
+                    "Мы согласовываем выезд. Я провожу очный поведенческий опрос всех фигурантов (живой контакт критически важен для точной оценки невербалики и реакций).",
+                    "Проводим аппаратное тестирование на полиграфе (с письменного согласия лиц) и формируем итоговое экспертное заключение."
                 ],
-                conf: "Строгая конфиденциальность: подготовка расследования идет напрямую с собственником или главой СБ без утечки информации внутри коллектива.",
-                speed: "Оперативное подключение к инциденту по горячим следам — помогает предотвратить уничтожение улик и сговор причастных лиц.",
-                tech: "Синтез очного прикладного поведенческого анализа и инструментальной детекции лжи (полиграф).",
-                result: "Локализация причастных лиц, оценка достоверности показаний и письменное экспертное заключение для руководства.",
+                conf: "Подготовка расследования идет напрямую с собственником без утечки информации внутри коллектива до начала проверок.",
+                speed: "Подключение к инциденту по горячим следам помогает предотвратить уничтожение улик и сговор причастных лиц.",
+                tech: "Синтез очного поведенческого анализа (считывание микровыражений) и инструментальной детекции лжи (полиграф).",
+                result: "Локализация причастных лиц, оценка достоверности показаний и письменное заключение для руководства.",
                 price: "от 10 000 Ᵽ"
             },
             anon: {
                 title: "Анализ анонимных сообщений",
                 format: "100% онлайн (Психолингвистика + видеосессия)",
-                geo: "Москва, Санкт-Петербург, регионы РФ, международные запросы",
+                geo: "Любой регион",
                 steps: [
-                    "Вы направляете текст анонимного сообщения (угрозы, жалобы, шантажа, корпоративного вброса) и краткое описание контекста ситуации.",
-                    "Для лучшего анализа я могу уточнить у вас дополнительные детали, чтобы сделать выводы максимально прозрачными исходя из всех вводных данных.",
-                    "Я провожу психолингвистическую экспертизу текста и передаю вам детальный профиль вероятного автора и алгоритм безопасного реагирования."
+                    "Вы направляете текст анонимного сообщения (угрозы, жалобы, шантажа) и краткое описание контекста ситуации.",
+                    "Для лучшего анализа я могу запросить у вас дополнительные детали, чтобы сделать выводы максимально прозрачными исходя из всех вводных данных.",
+                    "Я провожу психолингвистическую экспертизу (выявляю скрытые мотивы и профиль автора), после чего мы созваниваемся для разбора результатов."
                 ],
-                conf: "Удаленный разбор позволяет руководству и СБ спокойно оценить ситуацию без создания паники и слухов внутри компании.",
-                speed: "Быстрая оценка реальной степени угрозы (манипуляция, блеф или реальный риск) без потери времени на ожидание долгих очных процедур.",
-                tech: "Применение научных методик автороведческого и психолингвистического профилирования цифровых и печатных текстов.",
-                result: "Психологический и ролевой профиль автора, сужение круга подозреваемых и тактика нейтрализации угрозы.",
-                price: "от 15 000 Ᵽ"
+                conf: "Разбор позволяет руководству вычислить инициатора интриг абсолютно незаметно для сотрудников компании.",
+                speed: "Оценка реальной степени угрозы (манипуляция, блеф или реальный риск) без потери времени на долгие очные процедуры.",
+                tech: "Применение методик автороведческого и психолингвистического профилирования текстов.",
+                result: "Психологический профиль автора, сужение круга подозреваемых и тактика реагирования.",
+                price: "от 5 000 Ᵽ"
             },
             mediation: {
                 title: "Медиация конфликтов",
@@ -1584,13 +1279,13 @@
                 geo: "Выезд обсуждается индивидуально",
                 steps: [
                     "Вы оставляете заявку и кратко описываете суть корпоративного, управленческого или партнерского спора.",
-                    "Мы проводим серию очных индивидуальных и совместных встреч со сторонами (живое присутствие необходимо для точного считывания эмоций и управления динамикой).",
-                    "По итогам медиации вы получаете снижение напряженности, конструктивные договоренности и дорожную карту взаимодействия сторон."
+                    "Мы проводим очные индивидуальные и совместные встречи со сторонами. Живое присутствие необходимо для считывания истинных эмоций и управления динамикой.",
+                    "По итогам работы снижается напряженность, вырабатываются конструктивные договоренности и план взаимодействия."
                 ],
-                conf: "Переговоры модерируются нейтральным экспертом, обеспечивая безопасную среду для обсуждения острых деловых проблем.",
-                speed: "Оперативное подключение нейтрального посредника в острой фазе конфликта до того, как спор парализует бизнес-процессы.",
-                tech: "Использование техник профайлинга и медиации для точного считывания истинных мотивов, скрытых опасений и точек согласия каждой стороны.",
-                result: "Разрешение делового тупика, сохранение ключевых людей в бизнесе и четкий регламент договоренностей.",
+                conf: "Переговоры модерируются нейтральным экспертом, обеспечивая безопасную среду для обсуждения острых проблем.",
+                speed: "Оперативное подключение в острой фазе конфликта до того, как спор парализует работу отдела или бизнеса.",
+                tech: "Использование техник профайлинга для точного понимания скрытых опасений и точек согласия каждой стороны.",
+                result: "Разрешение делового тупика, сохранение ключевых людей и четкий регламент договоренностей.",
                 price: "от 5 000 Ᵽ"
             }
         };
@@ -1731,12 +1426,9 @@
             }
         }
 
-        // ЗАКРЫТИЕ ВСЕХ МОДАЛЬНЫХ ОКОН, ВЫПАДАЮЩИХ МЕНЮ И БОКОВОЙ ПАНЕЛИ ПО ESCAPE
+        // ЗАКРЫТИЕ ВСЕХ МОДАЛЬНЫХ ОКОН И МЕНЮ ПО КЛАВИШЕ ESCAPE
         document.addEventListener('keydown', function(e) {
             if (e.key === 'Escape') {
-                closeHeroCta();
-                const maxGroup = document.getElementById('maxBtnGroup');
-                if (maxGroup) maxGroup.classList.remove('tooltip-open');
                 const serviceModal = document.getElementById('serviceDetailModal');
                 const leadModal = document.getElementById('leadModal');
                 const sideMenu = document.getElementById('sideMenu');
@@ -1752,7 +1444,6 @@
 
         function openEmail(e) {
             e.preventDefault();
-            closeHeroCta();
             const u = 'kombinir';
             const d = 'mail.ru';
             window.location.href = 'mailto:' + u + '@' + d;
@@ -1779,9 +1470,11 @@
             if (!text) return null;
             const str = String(text).trim();
 
+            // 1. Проверка Email
             const emailMatch = str.match(/[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}/);
             if (emailMatch) return emailMatch[0];
 
+            // 2. Проверка телефона РФ (без использования (?<!\d), совместимо с iOS < 16.4)
             const phoneRegex = /(?:^|[^\d])((?:\+7|7|8|9)[\s\-()]*\d{3}[\s\-()]*\d{3}[\s\-]*\d{2}[\s\-]*\d{2})(?!\d)/g;
             let match;
             while ((match = phoneRegex.exec(str)) !== null) {
@@ -1793,10 +1486,15 @@
                 }
             }
 
+            // 3. Проверка @ника в Telegram / MAX (перед @ должно быть начало строки или пробел)
             const tgMatch = str.match(/(?:^|\s)(@[a-zA-Z][a-zA-Z0-9_]{2,31})/);
             if (tgMatch) return tgMatch[1];
 
             return null;
+        }
+
+        function isValidPhone(text) {
+            return extractContact(text) !== null;
         }
 
         // ОТПРАВКА ФОРМЫ С ТАЙМАУТОМ ABORTCONTROLLER И ИНЛАЙН-УВЕДОМЛЕНИЕМ ОБ ОШИБКЕ
@@ -1892,7 +1590,7 @@
             });
         }
 
-        // УМНЫЙ КОНСУЛЬТАНТ ИРИНА (УСТОЙЧИВОСТЬ К ОПЕЧАТКАМ, ТРАНСПОЗИЦИИ БУКВ И УДВОЕНИЯМ)
+        // УМНЫЙ КОНСУЛЬТАНТ ИРИНА (УЛУЧШЕННЫЙ NLP ПО ГРАНИЦАМ СЛОВ + ЧИСТЫЙ ПАРСИНГ КОНТАКТА)
         let chatInitialized = false;
         let isBotResponding = false;
         let lastTopic = "Консультация в чате";
@@ -1900,8 +1598,8 @@
         const knowledgeBase = [
             {
                 intent: "Стоимость и условия",
-                keywords: ["цен", "стоим", "скольк", "прайс", "тариф", "бюджет", "дорог", "расценк", "деньг"],
-                reply: "Базовая стоимость услуг Елены:\n• Экспертная консультация — от 5 000 Ᵽ\n• Медиация конфликтов — от 5 000 Ᵽ\n• Профайлинг цифрового следа — от 8 000 Ᵽ\n• Сопровождение расследований — от 10 000 Ᵽ\n• Анализ анонимных сообщений — от 15 000 Ᵽ.\n\nТочная смета зависит от объема задачи. Напишите ваш телефон или @ник прямо сюда в чат — Елена рассчитает стоимость под ваш кейс.",
+                keywords: ["цен", "стоим", "скольк", "прайс", "тариф", "бюджет", "дорог", "расценк"],
+                reply: "Базовая стоимость услуг Елены:\n• Профайлинг цифрового следа — от 5 000 Ᵽ\n• Экспертная консультация — от 5 000 Ᵽ\n• Анализ анонимных сообщений — от 5 000 Ᵽ\n• Медиация конфликтов — от 5 000 Ᵽ\n• Сопровождение расследований — от 10 000 Ᵽ.\n\nТочная смета зависит от объема задачи. Напишите ваш телефон или @ник прямо сюда в чат — Елена рассчитает стоимость под ваш кейс.",
                 options: [
                     { text: "Оставить контакт в чате", action: "ask_contact_inline" },
                     { text: "Открыть анкету заявки", action: "open_form" }
@@ -1920,7 +1618,7 @@
             {
                 intent: "Служебное расследование / Утечка / Хищение",
                 keywords: ["украл", "краж", "хищен", "утечк", "слив", "конкурент", "откат", "взятк", "недостач", "инсайдер", "шпион", "воров", "ущерб", "расследован"],
-                reply: "Понимаю, ситуация требует полной конфиденциальности. В таких случаях Елена проводит контекстный анализ поведения подозреваемых, формирует стратегию очного опроса и при необходимости подключает полиграф. Напишите ваш номер для оперативной связи — мы разберем ситуацию.",
+                reply: "Понимаю, ситуация требует полной конфиденциальности. В таких случаях Елена проводит контекстный анализ поведения подозреваемых, формирует стратегию опроса и при необходимости подключает полиграф. Напишите ваш номер для оперативной связи — мы разберем ситуацию.",
                 options: [
                     { text: "Написать контакт прямо в чате", action: "ask_contact_inline" },
                     { text: "Перейти в MAX / Telegram", action: "contacts" }
@@ -1929,7 +1627,7 @@
             {
                 intent: "Анализ анонимных сообщений",
                 keywords: ["аноним", "угроз", "донос", "шантаж", "письм", "кляуз", "жалоб", "компромат"],
-                reply: "По анонимным сообщениям и угрозам Елена проводит психолингвистическую экспертизу текста с учетом вашего корпоративного контекста (от 15 000 Ᵽ). Хотите обсудить ваш случай?",
+                reply: "По анонимным сообщениям и угрозам Елена проводит психолингвистическую экспертизу текста с учетом вашего корпоративного контекста (от 5 000 Ᵽ). Хотите обсудить ваш случай?",
                 options: [
                     { text: "Да, оставить телефон в чате", action: "ask_contact_inline" },
                     { text: "Открыть форму заявки", action: "open_form" }
@@ -1937,8 +1635,8 @@
             },
             {
                 intent: "Профайлинг цифрового следа / Дистанционная оценка",
-                keywords: ["цифров", "след", "соцсет", "интернет", "профил", "портрет", "дистанцион", "удален", "онлайн", "резюме", "партнер", "osint", "консультац"],
-                reply: "Профайлинг цифрового следа (от 8 000 Ᵽ) позволяет составить психологический портрет человека по открытым источникам без очной встречи. А экспертная консультация (от 5 000 Ᵽ) поможет детально разобрать вашу управленческую задачу.",
+                keywords: ["цифров", "след", "соцсет", "интернет", "профил", "портрет", "дистанцион", "удален", "онлайн", "резюме", "партнер", "osint"],
+                reply: "Профайлинг цифрового следа и дистанционная оценка позволяют составить психологический портрет человека (кандидата, топ-менеджера или делового партнера) по открытым источникам без очной встречи (от 5 000 Ᵽ). Подходит для работы по всей России.",
                 options: [
                     { text: "Заказать разбор профиля", action: "ask_contact_inline" },
                     { text: "Узнать про другие услуги", action: "reset" }
@@ -1972,7 +1670,7 @@
             },
             {
                 intent: "Приветствие",
-                keywords: ["привет", "здравств", "добрый", "доброе", "доброго", "алло", "здраст"],
+                keywords: ["привет", "здравств", "добрый", "доброе", "алло"],
                 reply: "Здравствуйте! Опишите вашу задачу своими словами (например: «нужно проверить кандидата на должность финдиректора»), и я сразу подскажу решение!",
                 options: [
                     { text: "Проверка кандидата", action: "hiring" },
@@ -1982,76 +1680,46 @@
             }
         ];
 
-        // Нормализация слова: нижний регистр, ё->е, э->е, схлопывание повторяющихся букв ("приивет" -> "привет", "полиграфф" -> "полиграф")
-        function normalizeWordForBot(str) {
-            return str
-                .toLowerCase()
-                .replace(/ё/g, 'е')
-                .replace(/э/g, 'е')
-                .replace(/([а-яa-z])\1+/g, '$1');
-        }
-
-        // Расстояние Дамерау-Левенштейна (считает перестановку двух соседних букв "привте" за 1 опечатку, а не за 2)
-        function getDamerauLevenshteinDistance(a, b) {
-            const lenA = a.length;
-            const lenB = b.length;
-            if (lenA === 0) return lenB;
-            if (lenB === 0) return lenA;
-            const d = Array.from({ length: lenA + 1 }, () => new Array(lenB + 1).fill(0));
-            for (let i = 0; i <= lenA; i++) d[i][0] = i;
-            for (let j = 0; j <= lenB; j++) d[0][j] = j;
-
-            for (let i = 1; i <= lenA; i++) {
-                for (let j = 1; j <= lenB; j++) {
-                    const cost = a[i - 1] === b[j - 1] ? 0 : 1;
-                    d[i][j] = Math.min(
-                        d[i - 1][j] + 1,       // удаление
-                        d[i][j - 1] + 1,       // вставка
-                        d[i - 1][j - 1] + cost // замена
-                    );
-                    if (i > 1 && j > 1 && a[i - 1] === b[j - 2] && a[i - 2] === b[j - 1]) {
-                        d[i][j] = Math.min(d[i][j], d[i - 2][j - 2] + cost); // перестановка соседних букв
+        // Умный поиск с учетом возможных опечаток (расстояние Левенштейна / нечеткое совпадение по началу или корню)
+        function getLevenshteinDistance(a, b) {
+            if (a.length === 0) return b.length;
+            if (b.length === 0) return a.length;
+            const matrix = [];
+            for (let i = 0; i <= b.length; i++) { matrix[i] = [i]; }
+            for (let j = 0; j <= a.length; j++) { matrix[0][j] = j; }
+            for (let i = 1; i <= b.length; i++) {
+                for (let j = 1; j <= a.length; j++) {
+                    if (b.charAt(i - 1) === a.charAt(j - 1)) {
+                        matrix[i][j] = matrix[i - 1][j - 1];
+                    } else {
+                        matrix[i][j] = Math.min(matrix[i - 1][j - 1] + 1, Math.min(matrix[i][j - 1] + 1, matrix[i - 1][j] + 1));
                     }
                 }
             }
-            return d[lenA][lenB];
+            return matrix[b.length][a.length];
         }
 
         function matchKnowledgeIntent(text) {
-            const rawWords = text.toLowerCase().split(/[^a-zа-яё0-9_]+/).filter(Boolean);
+            const words = text.toLowerCase().replace(/ё/g, 'е').split(/[^a-zа-я0-9_]+/).filter(Boolean);
             let bestMatch = null;
             let maxScore = 0;
 
             for (const item of knowledgeBase) {
                 let score = 0;
                 for (const kw of item.keywords) {
-                    const normKw = normalizeWordForBot(kw);
-                    for (const rawW of rawWords) {
-                        const w = normalizeWordForBot(rawW);
-                        if (w.length < 3) continue;
-
-                        // 1. Точное совпадение после схлопывания дублей букв ("приивет" -> "привет")
+                    const normKw = kw.replace(/ё/g, 'е');
+                    for (const w of words) {
+                        // Точное совпадение начала или вхождения
                         if (w.startsWith(normKw) || normKw.startsWith(w)) {
-                            score += normKw.length >= 5 ? 4 : 3;
-                            continue;
-                        }
-
-                        // 2. Сравнение начала слова с корнем той же длины (чтобы окончания не портили метрику)
-                        const targetLen = normKw.length;
-                        const prefixesToTest = [
-                            w.slice(0, targetLen),
-                            w.slice(0, Math.min(w.length, targetLen + 1)),
-                            w.slice(0, Math.max(3, targetLen - 1))
-                        ];
-
-                        const allowedErrors = targetLen <= 4 ? 1 : 2;
-                        for (const pref of prefixesToTest) {
-                            if (Math.abs(pref.length - targetLen) <= allowedErrors) {
-                                const dist = getDamerauLevenshteinDistance(pref, normKw);
-                                if (dist <= allowedErrors) {
-                                    score += (allowedErrors - dist + 1) * 2;
-                                    break;
-                                }
+                            score += normKw.length >= 5 ? 3 : 2;
+                        } else if (w.length >= 3 && normKw.length >= 3) {
+                            // Нечеткое сравнение (опечатки вроде "приивет" вместо "привет", "полиграфф" и т.д.)
+                            const maxDist = w.length <= 5 ? 1 : 2;
+                            // Сравниваем либо слово целиком, либо корень
+                            const subW = w.slice(0, normKw.length + 1);
+                            const subKw = normKw.slice(0, w.length + 1);
+                            if (getLevenshteinDistance(subW, subKw) <= maxDist) {
+                                score += 2;
                             }
                         }
                     }
@@ -2180,7 +1848,7 @@
                     if (bestMatch.options) showOptions(bestMatch.options);
                 } else {
                     lastTopic = message;
-                    appendMessage("Задача понятна — такие кейсы Елена разбирает индивидуально. Напишите прямо сюда ваш номер телефона, Email или @ник в Telegram/MAX, и я мгновенно передам ваш вопрос Елене лично!", 'bot');
+                    appendMessage("К сожалению, я не совсем поняла ваш запрос. Напишите прямо сюда ваш номер телефона, Email или @ник в Telegram, и я передам ваше сообщение Елене — она свяжется с вами лично!", 'bot');
                     showOptions([
                         { text: "Открыть стандартную анкету", action: "open_form" },
                         { text: "Вернуться к списку тем", action: "reset" }
@@ -2242,7 +1910,7 @@
 
                 if (action === 'hiring') {
                     lastTopic = "Проверка кандидата";
-                    botReply = 'Скрининг кандидатов (профайлинг цифрового следа от 8 000 Ᵽ и проверка на полиграфе) помогает отсеять нелояльных сотрудников до найма. На какую позицию вы рассматриваете человека?';
+                    botReply = 'Скрининг кандидатов (профайлинг цифрового следа от 5 000 Ᵽ и проверка на полиграфе) помогает отсеять нелояльных сотрудников до найма. На какую позицию вы рассматриваете человека?';
                     nextOptions = [
                         { text: "Топ-менеджер / Руководитель", action: "hiring_top" },
                         { text: "Сотрудник с матответственностью", action: "hiring_material" },
@@ -2254,7 +1922,7 @@
                     nextOptions = [{ text: "Открыть анкету заявки", action: "open_form" }];
                 } else if (action === 'investigation') {
                     lastTopic = "Служебное расследование";
-                    botReply = 'Сопровождение расследований (от 10 000 Ᵽ) и анализ анонимок (от 15 000 Ᵽ) позволяют быстро выявить инсайдеров и сговоры. С каким инцидентом вы столкнулись?';
+                    botReply = 'Сопровождение расследований (от 10 000 Ᵽ) позволяет быстро выявить инсайдеров, сговоры и авторов анонимок. С каким инцидентом вы столкнулись?';
                     nextOptions = [
                         { text: "Утечка базы / коммерческой тайны", action: "invest_leak" },
                         { text: "Хищение / откаты / недостача", action: "invest_theft" },
@@ -2266,7 +1934,7 @@
                     nextOptions = [{ text: "Заполнить форму заявки", action: "open_form" }];
                 } else if (action === 'audit') {
                     lastTopic = "Аудит и профайлинг";
-                    botReply = 'Мы проводим аудит лояльности команды, анализ цифрового следа партнеров (от 8 000 Ᵽ) и медиацию конфликтов (от 5 000 Ᵽ). Что для вас сейчас актуальнее?';
+                    botReply = 'Мы проводим аудит лояльности команды, анализ цифрового следа партнеров и медиацию конфликтов (от 5 000 Ᵽ). Что для вас сейчас актуальнее?';
                     nextOptions = [
                         { text: "Проверить партнера / контрагента", action: "ask_contact_inline" },
                         { text: "Оценить команду / разрешить конфликт", action: "ask_contact_inline" },
@@ -2274,7 +1942,7 @@
                     ];
                 } else if (action === 'price_btn') {
                     lastTopic = "Стоимость и условия";
-                    botReply = 'Экспертные консультации и медиация — от 5 000 Ᵽ. Профайлинг цифрового следа — от 8 000 Ᵽ. Сопровождение расследований — от 10 000 Ᵽ. Анализ анонимных сообщений — от 15 000 Ᵽ. Работаем с физлицами и юрлицами.';
+                    botReply = 'Профайлинг цифрового следа, анализ анонимных сообщений, медиация и консультации — от 5 000 Ᵽ. Сопровождение расследований — от 10 000 Ᵽ. Работаем с физлицами и юрлицами.';
                     nextOptions = [
                         { text: "Рассчитать стоимость моей задачи", action: "ask_contact_inline" },
                         { text: "Вернуться в начало", action: "reset" }
