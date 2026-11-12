@@ -765,7 +765,12 @@
             .solution-card { width: auto; padding: 25px; }
             .solution-card:hover { transform: none; }
             .pub-card { width: 280px; }
-            .pub-track { animation-duration: 25s; }
+            
+            .carousel-wrapper-pub { overflow-x: auto; overflow-y: hidden; -webkit-overflow-scrolling: touch; scroll-snap-type: x mandatory; padding-bottom: 20px; scrollbar-width: none; margin-left: -20px; margin-right: -20px; padding-left: 20px; }
+            .carousel-wrapper-pub::-webkit-scrollbar { display: none; }
+            .pub-track { animation: none !important; width: max-content; padding-right: 20px; gap: 15px; }
+            .pub-card { scroll-snap-align: center; }
+
             .chat-window { right: -15px; bottom: 75px; width: calc(100vw - 30px); }
             .modal-box { max-width: 95%; padding: 30px 20px; }
             .service-modal-box { max-width: 96%; padding: 25px 18px; }
@@ -794,7 +799,8 @@
         .hp-field { position: absolute; left: -9999px; top: auto; width: 1px; height: 1px; overflow: hidden; }
         .form-error-msg { display: none; background: #fef2f2; border: 1px solid #fecaca; color: #b91c1c; padding: 10px 14px; border-radius: 6px; font-size: 0.85rem; font-weight: 600; margin-bottom: 15px; }
         .form-error-msg.visible { display: block; }
-        .solution-card:focus-visible, .contact-btn:focus-visible, .hero-cta-btn:focus-visible, .header-messenger-btn:focus-visible, .channel-action-btn:focus-visible, .chat-input input:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+        .solution-card:focus-visible, .contact-btn:focus-visible, .hero-cta-btn:focus-visible, .header-messenger-btn:focus-visible, .channel-action-btn:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+        .chat-input input:focus-visible, .chat-options-btn:focus-visible { outline: 2px solid var(--chat-blue); outline-offset: 2px; }
         @media (prefers-reduced-motion: reduce) {
             *, *::before, *::after {
                 animation-duration: 0.01ms !important;
@@ -803,7 +809,15 @@
                 scroll-behavior: auto !important;
             }
         }
-    </style>
+    
+        @media (max-width: 380px) {
+            .header-messenger-btn { padding: 6px 8px; font-size: 0 !important; }
+            .header-messenger-btn svg { margin: 0; width: 18px; height: 18px; }
+            .header-logo { font-size: 1rem; }
+            .max-help-trigger { width: 22px; font-size: 12px; }
+            .max-btn-group { margin-right: 0; }
+        }
+</style>
 </head>
 <body>
 
@@ -1815,7 +1829,7 @@
             const emailMatch = str.match(/[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}/);
             if (emailMatch) return emailMatch[0];
 
-            const phoneRegex = /(?:^|[^\d])((?:\+7|7|8|9)[\s\-()]*\d{3}[\s\-()]*\d{3}[\s\-]*\d{2}[\s\-]*\d{2})(?!\d)/g;
+            const phoneRegex = /(?:^|[^\d])((?:\+7[\s\-()]*|7[\s\-()]*|8[\s\-()]*)?9\d{2}[\s\-()]*\d{3}[\s\-]*\d{2}[\s\-]*\d{2})(?!\d)/g;
             let match;
             while ((match = phoneRegex.exec(str)) !== null) {
                 const candidate = match[1];
@@ -2020,7 +2034,6 @@
 
         // --- ФУНКЦИИ ДЛЯ РАБОТЫ С ПАМЯТЬЮ (SESSION STORAGE) ---
         function saveChatState() {
-            if (isBotResponding) return;
             const chatBody = document.getElementById('chatBody');
             if (!chatBody) return;
             const state = {
@@ -2231,8 +2244,7 @@
         async function sendManualMessage() {
         if (isBotResponding) return;
         const chatInput = document.getElementById('chatInput');
-            if (chatInput) chatInput.value = '';
-        if (!chatInput) return;
+            if (!chatInput) return;
         const message = chatInput.value.trim();
         if (message === '') return;
 
@@ -2497,7 +2509,6 @@
             const typingIndicator = document.getElementById('typingIndicator');
             const chatBody = document.getElementById('chatBody');
             const chatInput = document.getElementById('chatInput');
-            if (chatInput) chatInput.value = '';
             const chatSendBtn = document.getElementById('chatSendBtn');
             
             if (typingIndicator) typingIndicator.classList.add('active');
@@ -2511,7 +2522,6 @@
         function hideTypingIndicator() {
             const typingIndicator = document.getElementById('typingIndicator');
             const chatInput = document.getElementById('chatInput');
-            if (chatInput) chatInput.value = '';
             const chatSendBtn = document.getElementById('chatSendBtn');
             
             if (typingIndicator) typingIndicator.classList.remove('active');
@@ -2530,6 +2540,16 @@
                 if (!restored) {
                     resetChat();
                 }
+            }
+            
+            // Фикс для клавиатуры iOS Safari
+            const cInput = document.getElementById('chatInput');
+            if (cInput) {
+                cInput.addEventListener('focus', () => {
+                    setTimeout(() => {
+                        window.scrollTo(0, document.body.scrollHeight);
+                    }, 300);
+                });
             }
         });
 
