@@ -2217,6 +2217,10 @@
             isBotResponding = false;
             expectedAction = null;
             clearUnread();
+            
+            const chatInput = document.getElementById('chatInput');
+            if (chatInput) chatInput.value = '';
+            
             chatBody.innerHTML = `
                 <div class="chat-msg msg-bot">Здравствуйте! Меня зовут Ирина, я консультант Елены. Вы можете <b>написать свой вопрос в свободной форме</b> или выбрать тему ниже:</div>
                 <div class="typing-indicator" id="typingIndicator">
@@ -2224,7 +2228,10 @@
                 </div>
             `;
             saveChatState();
+            
+            const myResetSession = chatSessionId;
             setTimeout(() => {
+                if (myResetSession !== chatSessionId) return;
                 showOptions([
                     { text: "Проверка кандидата / Полиграф", action: "hiring" },
                     { text: "Служебное расследование", action: "investigation" },
