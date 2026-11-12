@@ -1370,7 +1370,7 @@
             </div>
             
             <div class="chat-body" id="chatBody" aria-live="polite" aria-relevant="additions text">
-                <div class="typing-indicator" id="typingIndicator"><div class="typing-dot"></div><div class="typing-dot"></div><div class="typing-dot"></div></div>
+                <div class="typing-indicator" id="typingIndicator" aria-hidden="true"><div class="typing-dot"></div><div class="typing-dot"></div><div class="typing-dot"></div></div>
             </div>
             
             <div class="chat-input">
@@ -1780,7 +1780,7 @@
             const emailMatch = str.match(/[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}/);
             if (emailMatch) return emailMatch[0];
 
-            const phoneRegex = /(?:^|[^\d])((?:\+7|7|8|9)[\s\-()]*\d{3}[\s\-()]*\d{3}[\s\-]*\d{2}[\s\-]*\d{2})(?!\d)/g;
+            const phoneRegex = /(?:^|[^\d])((?:\+7[\s\-()]*|7[\s\-()]*|8[\s\-()]*)?9\d{2}[\s\-()]*\d{3}[\s\-]*\d{2}[\s\-]*\d{2})(?!\d)/g;
             let match;
             while ((match = phoneRegex.exec(str)) !== null) {
                 const candidate = match[1];
@@ -1991,7 +1991,6 @@
                 
                 // Ограничение истории для Session Storage (не удаляя элементы из визуального DOM)
                 const allElements = Array.from(chatBody.children);
-                const typingIndicator = chatBody.querySelector('#typingIndicator');
                 let htmlToSave = chatBody.innerHTML;
                 
                 if (allElements.length > 50) {
@@ -2161,16 +2160,12 @@
             
             appendMessage("Здравствуйте! Меня зовут Ирина, я консультант Елены. Вы можете <b>написать свой вопрос в свободной форме</b> или выбрать тему ниже:", 'bot');
             
-            const mySession = chatSessionId;
-            setTimeout(() => {
-                if (mySession !== chatSessionId) return;
-                showOptions([
-                    { text: "Проверка кандидата / Полиграф", action: "hiring" },
-                    { text: "Служебное расследование", action: "investigation" },
-                    { text: "Аудит команды / Цифровой след", action: "audit" },
-                    { text: "Стоимость и документы", action: "price_btn" }
-                ]);
-            }, 350);
+            showOptions([
+                { text: "Проверка кандидата / Полиграф", action: "hiring" },
+                { text: "Служебное расследование", action: "investigation" },
+                { text: "Аудит команды / Цифровой след", action: "audit" },
+                { text: "Стоимость и документы", action: "price_btn" }
+            ]);
         }
 
         async function sendLeadFromChat(extractedContact, fullMessageText) {
@@ -2222,9 +2217,36 @@
             chatInput.value = '';
             isBotResponding = true;
             showTypingIndicator();
-            chatSessionId++;
             const mySession = chatSessionId;
 
+            // 1. ПРИОРИТЕТ: Проверяем, есть ли контакт в сообщении
+            const extractedContact = extractContact(message);
+
+            if (extractedContact) {
+                expectedAction = null;
+                const sent = await sendLeadFromChat(extractedContact, message);
+                
+                if (mySession !== chatSessionId) return;
+                hideTypingIndicator();
+                isBotResponding = false;
+
+                const bestMatch = matchKnowledgeIntent(message);
+                if (bestMatch && bestMatch.intent !== "Приветствие") {
+                    appendMessage(bestMatch.reply, 'bot');
+                }
+
+                if (sent === "rate_limited") {
+                    appendMessage("✅ Ваша предыдущая заявка уже передана Елене! Она свяжется с вами в ближайшее время.", 'bot');
+                } else if (sent) {
+                    appendMessage("✅ Спасибо! Ваш контакт (" + extractedContact + ") и вопрос переданы Елене в мессенджер MAX и на почту. Она свяжется с вами в ближайшее время.", 'bot');
+                } else {
+                    appendMessage("Не удалось передать контакт из-за сбоя сети. Нажмите кнопку ниже, чтобы оставить заявку через форму.", 'bot');
+                    showOptions([{ text: "Открыть форму заявки", action: "open_form" }]);
+                }
+                return;
+            }
+
+            // 2. ВТОРИЧНО: Проверка согласия (если ждем контакт, но пользователь написал просто "Да")
             const lowerMsg = message.toLowerCase();
             const words = lowerMsg.replace(/ё/g, 'е').split(/[^a-zа-я0-9_]+/).filter(Boolean);
             
@@ -2247,34 +2269,10 @@
                 return;
             }
 
+            // 3. БАЗА ЗНАНИЙ
             const bestMatch = matchKnowledgeIntent(message);
             if (bestMatch) {
                 lastTopic = bestMatch.intent;
-            }
-
-            const extractedContact = extractContact(message);
-
-            if (extractedContact) {
-                expectedAction = null;
-                const sent = await sendLeadFromChat(extractedContact, message);
-                
-                if (mySession !== chatSessionId) return;
-                hideTypingIndicator();
-                isBotResponding = false;
-
-                if (bestMatch && bestMatch.intent !== "Приветствие") {
-                    appendMessage(bestMatch.reply, 'bot');
-                }
-
-                if (sent === "rate_limited") {
-                    appendMessage("✅ Ваша предыдущая заявка уже передана Елене! Она свяжется с вами в ближайшее время.", 'bot');
-                } else if (sent) {
-                    appendMessage("✅ Спасибо! Ваш контакт (" + extractedContact + ") и вопрос переданы Елене в мессенджер MAX и на почту. Она свяжется с вами в ближайшее время.", 'bot');
-                } else {
-                    appendMessage("Не удалось передать контакт из-за сбоя сети. Нажмите кнопку ниже, чтобы оставить заявку через форму.", 'bot');
-                    showOptions([{ text: "Открыть форму заявки", action: "open_form" }]);
-                }
-                return;
             }
 
             setTimeout(() => {
@@ -2287,9 +2285,9 @@
                 } else {
                     lastTopic = message;
                     
-                    const hasLogged = sessionStorage.getItem('eg_logged_blind_spot');
+                    const logCount = parseInt(sessionStorage.getItem('eg_logged_blind_spot') || '0', 10);
                     const isBot = navigator.webdriver || message.length > 300 || message.length < 4;
-                    if (!hasLogged && !isBot) {
+                    if (logCount < 3 && !isBot) {
                         sendSilentNotification({
                             name: "LOG: Бот не распознал запрос",
                             contact: "Требуется дообучение",
@@ -2298,7 +2296,7 @@
                             _token: SITE_SECURITY_TOKEN,
                             source: getTrafficSource()
                         });
-                        sessionStorage.setItem('eg_logged_blind_spot', '1');
+                        sessionStorage.setItem('eg_logged_blind_spot', (logCount + 1).toString());
                     }
 
                     appendMessage("К сожалению, я не совсем поняла ваш запрос. Напишите прямо сюда ваш номер телефона, Email или @ник в Telegram, и я передам ваше сообщение Елене — она свяжется с вами лично!", 'bot');
@@ -2372,7 +2370,6 @@
             appendMessage(text, 'user');
             isBotResponding = true;
             showTypingIndicator();
-            chatSessionId++;
             const mySession = chatSessionId;
 
             let botReply = '';
