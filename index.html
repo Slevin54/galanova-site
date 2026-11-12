@@ -636,30 +636,9 @@
         .form-success h4 { font-size: 1.5rem; margin: 0 0 10px 0; color: #38a169; }
 
         .chat-widget { position: fixed; bottom: 30px; right: 30px; z-index: 1000; }
-        .chat-btn { background-color: var(--chat-blue); color: white; width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; box-shadow: 0 8px 25px rgba(0, 119, 255, 0.4); border: none; transition: transform 0.3s, box-shadow 0.3s; position: relative; }
+        .chat-btn { background-color: var(--chat-blue); color: white; width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; box-shadow: 0 8px 25px rgba(0, 119, 255, 0.4); border: none; transition: transform 0.3s, box-shadow 0.3s; }
         .chat-btn:hover { transform: scale(1.1); box-shadow: 0 10px 30px rgba(0, 119, 255, 0.6); }
         .chat-btn svg { width: 28px; height: 28px; fill: currentColor; }
-        
-        /* ИНДИКАТОР НЕПРОЧИТАННЫХ */
-        .chat-unread-badge {
-            display: none; /* Управляется через JS */
-            position: absolute;
-            top: -2px;
-            right: -2px;
-            background-color: #ff3b30;
-            color: white;
-            font-size: 12px;
-            font-weight: 800;
-            width: 22px;
-            height: 22px;
-            border-radius: 50%;
-            align-items: center;
-            justify-content: center;
-            border: 2px solid #fff;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
-            animation: popIn 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-        }
-
         .chat-window { display: none; position: absolute; bottom: 75px; right: 0; width: 350px; background: #fff; border-radius: 12px; box-shadow: 0 15px 40px rgba(0,0,0,0.15); overflow: hidden; flex-direction: column; border: 1px solid #e2e8f0; }
         .chat-header { background: var(--chat-blue); color: #fff; padding: 15px 20px; display: flex; align-items: center; justify-content: space-between; }
         .chat-header-info { display: flex; align-items: center; gap: 12px; }
@@ -679,15 +658,9 @@
         .typing-dot { width: 6px; height: 6px; background: #cbd5e0; border-radius: 50%; animation: typing 1.4s infinite; }
         .typing-dot:nth-child(2) { animation-delay: 0.2s; }
         .typing-dot:nth-child(3) { animation-delay: 0.4s; }
-        
-        .chat-input { display: flex; border-top: 1px solid #e2e8f0; padding: 15px; background: #fff; gap: 10px; border-bottom: none; transition: background-color 0.2s ease; }
-        .chat-input input { flex-grow: 1; border: 1px solid #cbd5e0; border-radius: 20px; padding: 10px 15px; outline: none; font-size: 0.9rem; transition: background-color 0.2s ease; }
-        .chat-input button { background: var(--chat-blue); color: #fff; border: none; padding: 10px 15px; border-radius: 20px; cursor: pointer; font-weight: 600; font-size: 0.9rem; transition: opacity 0.2s ease; }
-        
-        /* СТИЛИ ДЛЯ ЗАБЛОКИРОВАННОГО ИНПУТА */
-        .chat-input input:disabled { background-color: #f1f5f9; cursor: not-allowed; color: #a0aec0; }
-        .chat-input button:disabled { opacity: 0.5; cursor: not-allowed; }
-
+        .chat-input { display: flex; border-top: 1px solid #e2e8f0; padding: 15px; background: #fff; gap: 10px; border-bottom: none; }
+        .chat-input input { flex-grow: 1; border: 1px solid #cbd5e0; border-radius: 20px; padding: 10px 15px; outline: none; font-size: 0.9rem; }
+        .chat-input button { background: var(--chat-blue); color: #fff; border: none; padding: 10px 15px; border-radius: 20px; cursor: pointer; font-weight: 600; font-size: 0.9rem;}
         .chat-legal { text-align: center; font-size: 0.65rem; color: #a0aec0; padding: 0 15px 10px; background: #fff; }
         .chat-legal a { color: var(--chat-blue); text-decoration: none; }
 
@@ -782,17 +755,11 @@
             from { opacity: 0; transform: translateY(8px); }
             to { opacity: 1; transform: translateY(0); }
         }
-        @keyframes popIn {
-            from { transform: scale(0); opacity: 0; }
-            to { transform: scale(1); opacity: 1; }
-        }
         @keyframes typing {
             0%, 100% { transform: translateY(0); }
             50% { transform: translateY(-4px); }
         }
         .hp-field { position: absolute; left: -9999px; top: auto; width: 1px; height: 1px; overflow: hidden; }
-        .form-error-msg { display: none; background: #fef2f2; border: 1px solid #fecaca; color: #b91c1c; padding: 10px 14px; border-radius: 6px; font-size: 0.85rem; font-weight: 600; margin-bottom: 15px; }
-        .form-error-msg.visible { display: block; }
         .solution-card:focus-visible, .contact-btn:focus-visible, .hero-cta-btn:focus-visible, .header-messenger-btn:focus-visible, .channel-action-btn:focus-visible, .chat-input input:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
         @media (prefers-reduced-motion: reduce) {
             *, *::before, *::after {
@@ -1361,7 +1328,7 @@
                     </div>
                     
                     <div class="form-checkbox">
-                        <input type="checkbox" id="privacyAgree" name="privacyAgree" required>
+                        <input type="checkbox" id="privacyAgree" name="privacyAgree" required onchange="this.parentElement.classList.remove('checkbox-error')">
                         <label for="privacyAgree">Я даю согласие на обработку персональных данных в соответствии с <a href="privacy.html" target="_blank" rel="noopener noreferrer">Политикой конфиденциальности</a></label>
                     </div>
 
@@ -1383,7 +1350,6 @@
     <div class="chat-widget">
         <button class="chat-btn" onclick="toggleChat()" title="Открыть чат">
             <svg viewBox="0 0 24 24"><path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2z"></path></svg>
-            <span id="chatUnreadBadge" class="chat-unread-badge">1</span>
         </button>
         
         <div class="chat-window" id="chatWindow">
@@ -1403,8 +1369,7 @@
                 </div>
             </div>
             
-            <div class="chat-body" id="chatBody">
-               <div class="chat-msg msg-bot">Здравствуйте! Меня зовут Ирина, я консультант Елены. Выберите, какая задача вас интересует:</div>
+            <div class="chat-body" id="chatBody" aria-live="polite" aria-relevant="additions text">
                 <div class="typing-indicator" id="typingIndicator"><div class="typing-dot"></div><div class="typing-dot"></div><div class="typing-dot"></div></div>
             </div>
             
@@ -1425,6 +1390,7 @@
 
     <!-- Скрипты -->
     <script>
+    (function() {
         try { document.getElementById('currentYear').textContent = new Date().getFullYear(); } catch(e) { console.debug(e); }
 
         // ЕДИНЫЕ КОНСТАНТЫ API И ЗАЩИТЫ (СОХРАНЕНА ПОЛНАЯ СОВМЕСТИМОСТЬ С YANDEX CLOUD)
@@ -1924,12 +1890,13 @@
             });
         }
 
-        // УМНЫЙ КОНСУЛЬТАНТ ИРИНА (С ПАМЯТЬЮ, КОНТЕКСТОМ, АНАЛИТИКОЙ И UNREAD BADGE)
+        // УМНЫЙ КОНСУЛЬТАНТ ИРИНА (С ПАМЯТЬЮ, КОНТЕКСТОМ, АНАЛИТИКОЙ И ЗАЩИТОЙ ОТ ГОНОК)
+        
         let chatInitialized = false;
         let isBotResponding = false;
         let lastTopic = "Консультация в чате";
         let expectedAction = null;
-        let unreadCount = 0;
+        let chatSessionId = 0; // Для защиты от гонки таймеров при сбросе
 
         const knowledgeBase = [
             {
@@ -2018,40 +1985,62 @@
 
         // --- ФУНКЦИИ ДЛЯ РАБОТЫ С ПАМЯТЬЮ (SESSION STORAGE) ---
         function saveChatState() {
-            if (isBotResponding) return;
-            const chatBody = document.getElementById('chatBody');
-            if (!chatBody) return;
-            const state = {
-                html: chatBody.innerHTML,
-                lastTopic: lastTopic,
-                expectedAction: expectedAction
-            };
-            try { sessionStorage.setItem('eg_chat_state', JSON.stringify(state)); } catch(e) { console.debug(e); }
+            try {
+                const chatBody = document.getElementById('chatBody');
+                if (!chatBody) return;
+                
+                // Ограничение истории для Session Storage (не удаляя элементы из визуального DOM)
+                const allElements = Array.from(chatBody.children);
+                const typingIndicator = chatBody.querySelector('#typingIndicator');
+                let htmlToSave = chatBody.innerHTML;
+                
+                if (allElements.length > 50) {
+                    // Создаем временный контейнер для обрезки HTML без влияния на интерфейс
+                    const tempDiv = document.createElement('div');
+                    tempDiv.innerHTML = htmlToSave;
+                    const tempElements = Array.from(tempDiv.children).filter(el => el.id !== 'typingIndicator');
+                    
+                    // Удаляем самые старые сообщения во временном контейнере
+                    while (tempElements.length > 40) {
+                        const elToRemove = tempElements.shift();
+                        if (elToRemove && elToRemove.parentNode) {
+                            elToRemove.parentNode.removeChild(elToRemove);
+                        }
+                    }
+                    htmlToSave = tempDiv.innerHTML;
+                }
+
+                sessionStorage.setItem('eg_chat_state', JSON.stringify({
+                    html: htmlToSave,
+                    
+                    lastTopic: lastTopic,
+                    expectedAction: expectedAction,
+                    timestamp: Date.now()
+                }));
+            } catch(e) {}
         }
 
         function loadChatState() {
             try {
-                const saved = sessionStorage.getItem('eg_chat_state');
-                if (saved) {
-                    const state = JSON.parse(saved);
-                    if (state.html) {
-                        document.getElementById('chatBody').innerHTML = state.html;
-                        lastTopic = state.lastTopic || "Консультация в чате";
-                        expectedAction = state.expectedAction || null;
-                        chatInitialized = true;
-                        const chatBody = document.getElementById('chatBody');
-                        chatBody.scrollTop = chatBody.scrollHeight;
-                        return true;
-                    }
+                const s = JSON.parse(sessionStorage.getItem('eg_chat_state') || 'null');
+                if (!s || !s.html) return false;
+                if (Date.now() - (s.timestamp || 0) > 30 * 60 * 1000) {
+                    sessionStorage.removeItem('eg_chat_state');
+                    return false;
                 }
-            } catch(e) { console.debug(e); }
-            return false;
+                const chatBody = document.getElementById('chatBody');
+                chatBody.innerHTML = s.html;
+                lastTopic = s.lastTopic || "Консультация в чате";
+                expectedAction = s.expectedAction || null;
+                chatBody.scrollTop = chatBody.scrollHeight;
+                return true;
+            } catch(e) { return false; }
         }
 
         // --- ДИНАМИЧЕСКАЯ СКОРОСТЬ ПЕЧАТАНИЯ ---
         function getTypingDelay(text) {
             if (!text) return 600;
-            return Math.min(3000, Math.max(600, text.length * 15));
+            return Math.min(1800, Math.max(600, 400 + text.length * 8));
         }
 
         // --- НОРМАЛИЗАЦИЯ И ПОИСК ---
@@ -2133,22 +2122,6 @@
             return maxScore > 0 ? bestMatch : null;
         }
 
-        // --- УПРАВЛЕНИЕ UNREAD BADGE ---
-        function incrementUnread() {
-            unreadCount++;
-            const badge = document.getElementById('chatUnreadBadge');
-            if (badge) {
-                badge.textContent = unreadCount > 9 ? '9+' : unreadCount;
-                badge.style.display = 'flex';
-            }
-        }
-
-        function clearUnread() {
-            unreadCount = 0;
-            const badge = document.getElementById('chatUnreadBadge');
-            if (badge) badge.style.display = 'none';
-        }
-
         // --- УПРАВЛЕНИЕ ЧАТОМ ---
         function toggleChat() {
             const chatWindow = document.getElementById('chatWindow');
@@ -2159,28 +2132,38 @@
             chatWindow.style.display = isOpening ? 'flex' : 'none';
             
             if (isOpening) {
-                clearUnread();
                 if (!chatInitialized && chatBody) {
                     resetChat();
+                } else if (chatBody) {
+                    chatBody.scrollTop = chatBody.scrollHeight;
                 }
             }
         }
 
         function resetChat() {
+            chatSessionId++;
             const chatBody = document.getElementById('chatBody');
             if (!chatBody) return;
             chatInitialized = true;
             isBotResponding = false;
             expectedAction = null;
-            clearUnread();
-            chatBody.innerHTML = `
-                <div class="chat-msg msg-bot">Здравствуйте! Меня зовут Ирина, я консультант Елены. Вы можете <b>написать свой вопрос в свободной форме</b> или выбрать тему ниже:</div>
-                <div class="typing-indicator" id="typingIndicator">
-                    <div class="typing-dot"></div><div class="typing-dot"></div><div class="typing-dot"></div>
-                </div>
-            `;
-            saveChatState();
+            
+            // Сбрасываем зависший индикатор печатания и разблокируем поле ввода
+            const chatInput = document.getElementById('chatInput');
+            const chatSendBtn = document.getElementById('chatSendBtn');
+            const typingIndicator = document.getElementById('typingIndicator');
+            if (chatInput) { chatInput.value = ''; chatInput.disabled = false; }
+            if (chatSendBtn) chatSendBtn.disabled = false;
+            if (typingIndicator) typingIndicator.classList.remove('active');
+            
+            // Очищаем старые сообщения, оставляя только индикатор печатания
+            chatBody.querySelectorAll('.chat-msg, .chat-options').forEach(el => el.remove());
+            
+            appendMessage("Здравствуйте! Меня зовут Ирина, я консультант Елены. Вы можете <b>написать свой вопрос в свободной форме</b> или выбрать тему ниже:", 'bot');
+            
+            const mySession = chatSessionId;
             setTimeout(() => {
+                if (mySession !== chatSessionId) return;
                 showOptions([
                     { text: "Проверка кандидата / Полиграф", action: "hiring" },
                     { text: "Служебное расследование", action: "investigation" },
@@ -2225,7 +2208,6 @@
             }
         }
 
-        // ОСНОВНАЯ ЛОГИКА ОТПРАВКИ СООБЩЕНИЙ
         async function sendManualMessage() {
             if (isBotResponding) return;
             const chatInput = document.getElementById('chatInput');
@@ -2240,16 +2222,27 @@
             chatInput.value = '';
             isBotResponding = true;
             showTypingIndicator();
+            chatSessionId++;
+            const mySession = chatSessionId;
 
             const lowerMsg = message.toLowerCase();
-            const isAffirmative = /^(да|ок|хорошо|давай|конечно|давайте|ага)/i.test(lowerMsg);
+            const words = lowerMsg.replace(/ё/g, 'е').split(/[^a-zа-я0-9_]+/).filter(Boolean);
+            
+            const agreementWords = ["да", "давай", "давайте", "окей", "ок", "хорошо", "согласен", "согласна", "конечно", "хочу"];
+            const isAffirmative = words.some(w => {
+                const bw = normalizeWordForBot(w);
+                return agreementWords.some(aw => {
+                    if (aw.length <= 3) return bw === aw; 
+                    return bw.startsWith(aw); 
+                });
+            });
 
             if (expectedAction === 'awaiting_contact' && isAffirmative) {
                 setTimeout(() => {
+                    if (mySession !== chatSessionId) return;
                     hideTypingIndicator();
                     isBotResponding = false;
                     appendMessage("Отлично! Напишите ваш номер телефона, Email или @ник в Telegram прямо сюда, и я сразу передам вашу заявку Елене.", 'bot');
-                    saveChatState();
                 }, getTypingDelay("Отлично! Напишите ваш номер телефона..."));
                 return;
             }
@@ -2264,6 +2257,8 @@
             if (extractedContact) {
                 expectedAction = null;
                 const sent = await sendLeadFromChat(extractedContact, message);
+                
+                if (mySession !== chatSessionId) return;
                 hideTypingIndicator();
                 isBotResponding = false;
 
@@ -2279,11 +2274,11 @@
                     appendMessage("Не удалось передать контакт из-за сбоя сети. Нажмите кнопку ниже, чтобы оставить заявку через форму.", 'bot');
                     showOptions([{ text: "Открыть форму заявки", action: "open_form" }]);
                 }
-                saveChatState();
                 return;
             }
 
             setTimeout(() => {
+                if (mySession !== chatSessionId) return;
                 hideTypingIndicator();
                 isBotResponding = false;
                 if (bestMatch) {
@@ -2291,14 +2286,20 @@
                     if (bestMatch.options) showOptions(bestMatch.options);
                 } else {
                     lastTopic = message;
-                    sendSilentNotification({
-                        name: "LOG: Бот не распознал запрос",
-                        contact: "Требуется дообучение",
-                        message: `Клиент написал: "${message}". Бот не нашел совпадений в базе знаний.`,
-                        _gotcha: "",
-                        _token: SITE_SECURITY_TOKEN,
-                        source: getTrafficSource()
-                    });
+                    
+                    const hasLogged = sessionStorage.getItem('eg_logged_blind_spot');
+                    const isBot = navigator.webdriver || message.length > 300 || message.length < 4;
+                    if (!hasLogged && !isBot) {
+                        sendSilentNotification({
+                            name: "LOG: Бот не распознал запрос",
+                            contact: "Требуется дообучение",
+                            message: `Клиент написал: "${message}". Бот не нашел совпадений в базе знаний.`,
+                            _gotcha: "",
+                            _token: SITE_SECURITY_TOKEN,
+                            source: getTrafficSource()
+                        });
+                        sessionStorage.setItem('eg_logged_blind_spot', '1');
+                    }
 
                     appendMessage("К сожалению, я не совсем поняла ваш запрос. Напишите прямо сюда ваш номер телефона, Email или @ник в Telegram, и я передам ваше сообщение Елене — она свяжется с вами лично!", 'bot');
                     showOptions([
@@ -2306,7 +2307,6 @@
                         { text: "Вернуться к списку тем", action: "reset" }
                     ]);
                 }
-                saveChatState();
             }, getTypingDelay(bestMatch ? bestMatch.reply : "К сожалению, я не совсем поняла ваш запрос..."));
         }
 
@@ -2345,6 +2345,7 @@
 
             if (typingIndicator) { chatBody.insertBefore(optionsDiv, typingIndicator); } else { chatBody.appendChild(optionsDiv); }
             chatBody.scrollTop = chatBody.scrollHeight;
+            saveChatState();
         }
 
         document.getElementById('chatBody').addEventListener('click', function(e) {
@@ -2358,9 +2359,8 @@
         });
 
         function handleOptionClick(action, text) {
-            if (typeof ym === 'function') {
-                ym(113975964, 'reachGoal', 'chat_click_' + action);
-            }
+            if (isBotResponding) return;
+            if (typeof ym === 'function') ym(113975964, 'reachGoal', 'chat_click_' + action);
 
             if (action === 'reset') {
                 resetChat();
@@ -2368,8 +2368,12 @@
             }
             const oldOptions = document.querySelectorAll('.chat-options');
             oldOptions.forEach(opt => opt.remove());
+            
             appendMessage(text, 'user');
+            isBotResponding = true;
             showTypingIndicator();
+            chatSessionId++;
+            const mySession = chatSessionId;
 
             let botReply = '';
             let nextOptions = [];
@@ -2429,10 +2433,11 @@
             }
 
             setTimeout(() => {
+                if (mySession !== chatSessionId) return;
                 hideTypingIndicator();
+                isBotResponding = false;
                 appendMessage(botReply, 'bot');
                 if (nextOptions.length > 0) showOptions(nextOptions);
-                saveChatState();
             }, getTypingDelay(botReply));
         }
 
@@ -2457,14 +2462,7 @@
             }
             if (typingIndicator) { chatBody.insertBefore(msgDiv, typingIndicator); } else { chatBody.appendChild(msgDiv); }
             chatBody.scrollTop = chatBody.scrollHeight;
-
-            // Если сообщение от бота и чат закрыт - показываем бейдж
-            if (sender === 'bot') {
-                const chatWindow = document.getElementById('chatWindow');
-                if (chatWindow && chatWindow.style.display !== 'flex') {
-                    incrementUnread();
-                }
-            }
+            saveChatState();
         }
 
         function showTypingIndicator() {
@@ -2472,11 +2470,8 @@
             const chatBody = document.getElementById('chatBody');
             const chatInput = document.getElementById('chatInput');
             const chatSendBtn = document.getElementById('chatSendBtn');
-            
             if (typingIndicator) typingIndicator.classList.add('active');
             if (chatBody) chatBody.scrollTop = chatBody.scrollHeight;
-            
-            // Блокировка инпута
             if (chatInput) chatInput.disabled = true;
             if (chatSendBtn) chatSendBtn.disabled = true;
         }
@@ -2485,10 +2480,7 @@
             const typingIndicator = document.getElementById('typingIndicator');
             const chatInput = document.getElementById('chatInput');
             const chatSendBtn = document.getElementById('chatSendBtn');
-            
             if (typingIndicator) typingIndicator.classList.remove('active');
-            
-            // Разблокировка инпута
             if (chatInput) {
                 chatInput.disabled = false;
                 chatInput.focus();
@@ -2498,10 +2490,8 @@
 
         window.addEventListener('load', () => {
             if (!chatInitialized) {
-                const restored = loadChatState();
-                if (!restored) {
-                    resetChat();
-                }
+                if (!loadChatState()) resetChat();
+                else chatInitialized = true;
             }
         });
 
@@ -2519,7 +2509,6 @@
 
         // КНОПКА "НАВЕРХ" (С PASSIVE: TRUE И WINDOW.SCROLLY)
         const scrollToTopBtn = document.getElementById('scrollToTopBtn');
-        
         if (scrollToTopBtn) {
             window.addEventListener('scroll', function() {
                 if (window.scrollY > 400) {
@@ -2536,6 +2525,16 @@
                 });
             });
         }
-    </script>
+
+        // ЭКСПОРТ ФУНКЦИЙ В ГЛОБАЛЬНУЮ ОБЛАСТЬ (Для работы inline HTML обработчиков)
+        Object.assign(window, {
+            toggleMaxTooltip, toggleHeroCta, closeHeroCta, toggleMenu, closeMenu,
+            handleCardKey, openMessenger, openServiceDetail, closeServiceDetail,
+            handleServiceChannelClick, switchServiceToLeadForm, openModal, closeModal,
+            openEmail, toggleChat, resetChat, sendManualMessage, handleEnter
+        });
+
+    })(); // Конец IIFE
+</script>
 </body>
 </html>
