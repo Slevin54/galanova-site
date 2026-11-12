@@ -1363,7 +1363,7 @@
                     </div>
                     <div class="form-group">
                         <label for="leadContact">Телефон, Email или @ник в мессенджере</label>
-                        <input type="text" name="contact" placeholder="+7 (999) 000-00-00, email@mail.ru или @username" id="leadContact" maxlength="100" required>
+                        <input type="text" name="contact" placeholder="+7 (999) 000-00-00, email@example.com или @username" id="leadContact" maxlength="100" required>
                     </div>
                     <div class="form-group">
                         <label for="leadTask">Кратко о задаче (необязательно)</label>
@@ -1696,10 +1696,10 @@
 
             if (channelType === 'email') {
                 e.preventDefault();
-                const u = 'kombinir';
-                const d = 'mail.ru';
+                // Декодируем почту на лету (base64 защита от спам-ботов)
+                const em = atob('a29tYmluaXJAbWFpbC5ydQ==');
                 const subject = encodeURIComponent('Запрос по услуге: ' + currentSelectedServiceTitle);
-                window.location.href = 'mailto:' + u + '@' + d + '?subject=' + subject;
+                window.location.href = 'mailto:' + em + '?subject=' + subject;
             } else {
                 openMessenger(e, channelType, true);
             }
@@ -1823,9 +1823,8 @@
         function openEmail(e) {
             e.preventDefault();
             closeHeroCta();
-            const u = 'kombinir';
-            const d = 'mail.ru';
-            window.location.href = 'mailto:' + u + '@' + d;
+            const em = atob('a29tYmluaXJAbWFpbC5ydQ==');
+            window.location.href = 'mailto:' + em;
         }
 
         function isRateLimited() {
