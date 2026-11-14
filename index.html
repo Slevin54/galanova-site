@@ -22,15 +22,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
     <!-- SEO заголовки -->
-    <title>Профайлинг и проверка на полиграфе для бизнеса | Елена Галанова</title>
-    <meta name="description" content="Профайлинг и проверка персонала на полиграфе для бизнеса. Елена Галанова, к.пс.н.: служебные расследования, оценка рисков, 700+ кейсов. Конфиденциально.">
+    <title>Профайлинг и кадровая безопасность для бизнеса | Елена Галанова</title>
+    <meta name="description" content="Профайлинг и оценка персонала для бизнеса. Елена Галанова, к.пс.н.: кадровая безопасность, служебные расследования, оценка рисков, 700+ кейсов. Конфиденциально.">
     <link rel="canonical" href="https://galanova-elena.ru/">
     <meta name="theme-color" content="#1a252f">
     
     <!-- Open Graph и превью для мессенджеров -->
     <meta property="og:locale" content="ru_RU">
-    <meta property="og:site_name" content="Елена Галанова — Профайлер-полиграфолог">
-    <meta property="og:title" content="Елена Галанова — Профайлер-полиграфолог | Кадровая безопасность">
+    <meta property="og:site_name" content="Елена Галанова — Эксперт-профайлер">
+    <meta property="og:title" content="Елена Галанова — Эксперт-профайлер | Кадровая безопасность">
     <meta property="og:description" content="Кадровая безопасность и аудит бизнеса. Экспертная проверка персонала, сопровождение расследований и оценка рисков.">
     <meta property="og:image" content="https://galanova-elena.ru/profile.jpg">
     <meta property="og:url" content="https://galanova-elena.ru/">
@@ -52,14 +52,14 @@
           "@type": "WebSite",
           "@id": "https://galanova-elena.ru/#website",
           "url": "https://galanova-elena.ru",
-          "name": "Елена Галанова — Профайлер-полиграфолог",
+          "name": "Елена Галанова — Эксперт-профайлер",
           "inLanguage": "ru-RU"
         },
         {
           "@type": "WebPage",
           "@id": "https://galanova-elena.ru/#webpage",
           "url": "https://galanova-elena.ru",
-          "name": "Елена Галанова — профайлер, полиграфолог. Кадровая безопасность и аудит бизнеса",
+          "name": "Елена Галанова — эксперт-профайлер. Кадровая безопасность и аудит бизнеса",
           "isPartOf": { "@id": "https://galanova-elena.ru/#website" },
           "about": { "@id": "https://galanova-elena.ru/#person" },
           "inLanguage": "ru-RU"
@@ -69,13 +69,13 @@
           "@id": "https://galanova-elena.ru/#person",
           "name": "Елена Галанова",
           "alternateName": "Галанова Елена Владимировна",
-          "jobTitle": "Кандидат психологических наук, Профайлер-полиграфолог, Преподаватель ВУЗа",
+          "jobTitle": "Кандидат психологических наук, Эксперт-профайлер, Преподаватель ВУЗа",
           "url": "https://galanova-elena.ru",
           "image": "https://galanova-elena.ru/profile.jpg",
           "description": "Превентивная защита бизнеса от кадровых рисков. Помогаю руководителям и HR выявлять скрытые мотивы сотрудников, предотвращать инсайдерские угрозы и прогнозировать поведение команд.",
           "knowsAbout": [
             "Профайлинг",
-            "Полиграфология",
+            "Прикладной поведенческий анализ",
             "Кадровая безопасность",
             "Служебные расследования",
             "Аудит руководителей",
@@ -764,8 +764,10 @@
             .solutions-grid, .solutions-grid-bottom, .info-blocks-container { grid-template-columns: 1fr; max-width: 100%; }
             .solution-card { width: auto; padding: 25px; }
             .solution-card:hover { transform: none; }
-            .pub-card { width: 280px; }
-            .pub-track { animation-duration: 25s; }
+            .pub-card { width: 280px; scroll-snap-align: center; }
+            .carousel-wrapper-pub { overflow-x: auto; overflow-y: hidden; -webkit-overflow-scrolling: touch; scroll-snap-type: x mandatory; padding-bottom: 20px; scrollbar-width: none; margin-left: -20px; margin-right: -20px; padding-left: 20px; }
+            .carousel-wrapper-pub::-webkit-scrollbar { display: none; }
+            .pub-track { animation: none !important; width: max-content; padding-right: 20px; gap: 15px; }
             .chat-window { right: -15px; bottom: 75px; width: calc(100vw - 30px); }
             .modal-box { max-width: 95%; padding: 30px 20px; }
             .service-modal-box { max-width: 96%; padding: 25px 18px; }
@@ -794,7 +796,15 @@
         .hp-field { position: absolute; left: -9999px; top: auto; width: 1px; height: 1px; overflow: hidden; }
         .form-error-msg { display: none; background: #fef2f2; border: 1px solid #fecaca; color: #b91c1c; padding: 10px 14px; border-radius: 6px; font-size: 0.85rem; font-weight: 600; margin-bottom: 15px; }
         .form-error-msg.visible { display: block; }
-        .solution-card:focus-visible, .contact-btn:focus-visible, .hero-cta-btn:focus-visible, .header-messenger-btn:focus-visible, .channel-action-btn:focus-visible, .chat-input input:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+        .solution-card:focus-visible, .contact-btn:focus-visible, .hero-cta-btn:focus-visible, .header-messenger-btn:focus-visible, .channel-action-btn:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+        .chat-input input:focus-visible, .chat-options-btn:focus-visible { outline: 2px solid var(--chat-blue); outline-offset: 2px; }
+        @media (max-width: 380px) {
+            .header-messenger-btn { padding: 6px 8px; font-size: 0 !important; }
+            .header-messenger-btn svg { margin: 0; width: 18px; height: 18px; }
+            .header-logo { font-size: 1rem; }
+            .max-help-trigger { width: 22px; font-size: 12px; }
+            .max-btn-group { margin-right: 0; }
+        }
         @media (prefers-reduced-motion: reduce) {
             *, *::before, *::after {
                 animation-duration: 0.01ms !important;
@@ -946,7 +956,7 @@
                     </span>
                     <span class="hero-tag">
                         <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm0 10.99h7c-.53 4.12-3.28 7.79-7 8.94V12H5V6.3l7-3.11v8.8z"/></svg>
-                        Профайлер-полиграфолог
+                        Эксперт-профайлер
                     </span>
                     <span class="hero-tag">
                         <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 13.18v4L12 21l7-3.82v-4L12 17l-7-3.82zM12 3L1 9l11 6 9-4.91V17h2V9L12 3z"/></svg>
@@ -996,7 +1006,7 @@
             </div>
 
             <div class="hero-image-bg">
-                <img src="profile.jpg" alt="Елена Галанова — профайлер-полиграфолог" fetchpriority="high" decoding="async" width="410" height="520">
+                <img src="profile.jpg" alt="Елена Галанова — эксперт-профайлер" fetchpriority="high" decoding="async" width="410" height="520">
             </div>
         </div>
     </section>
@@ -1005,7 +1015,7 @@
     <section class="principles">
         <div class="container">
             <h2 class="section-title">Глубокая аналитика, подтвержденные данные и профессиональная интуиция</h2>
-            <p class="section-subtitle" style="color:#cbd5e0;">Строгий анализ, базирующийся на академической психологии и инструментальной детекции лжи.</p>
+            <p class="section-subtitle" style="color:#cbd5e0;">Строгий анализ, базирующийся на академической психологии и верифицированных методиках поведенческой аналитики.</p>
             <div class="principles-grid">
                 <div class="principle-card">
                     <h3>Научная база</h3>
@@ -1013,7 +1023,7 @@
                 </div>
                 <div class="principle-card">
                     <h3>Комплексная оценка</h3>
-                    <p>Синтез безинструментального профайлинга и проверок на полиграфе для максимальной объективности.</p>
+                    <p>Синтез оперативного профайлинга, психолингвистики и анализа цифрового следа (OSINT) для максимальной объективности.</p>
                 </div>
                 <div class="principle-card">
                     <h3>Снижение рисков</h3>
@@ -1158,7 +1168,7 @@
             <div class="info-blocks-container">
                 <div class="legal-note">
                     <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 15l-5-5 1.41-1.41L11 14.17l7.59-7.59L20 8l-9 9z"/></svg>
-                    <p><strong>Правовая чистота (152-ФЗ):</strong> Очные опросы и тестирования на полиграфе проводятся строго при наличии <em>добровольного письменного согласия</em> проверяемого лица. Аналитика цифрового следа (OSINT) выполняется исключительно по общедоступным открытым источникам.</p>
+                    <p><strong>Правовая чистота (152-ФЗ):</strong> Очные поведенческие интервью и опросы проводятся строго в рамках правового поля при наличии <em>добровольного согласия</em> лица. Аналитика цифрового следа (OSINT) выполняется исключительно по общедоступным открытым источникам.</p>
                 </div>
                 <div class="payment-note">
                     <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 15l-5-5 1.41-1.41L11 14.17l7.59-7.59L20 8l-9 9z"/></svg>
@@ -1591,16 +1601,16 @@
             },
             investigation: {
                 title: "Сопровождение расследований",
-                format: "Очный формат (Личное присутствие и полиграф)",
+                format: "Очный формат (Личное присутствие и поведенческий анализ)",
                 geo: "Выезд на территорию заказчика обсуждается индивидуально",
                 steps: [
                     "Вы связываетесь со мной и описываете инцидент (утечка данных, хищение, откат, конфликт интересов или подозрение на сговор).",
                     "Мы согласовываем выезд. Я провожу очный поведенческий опрос фигурантов (живой контакт критически важен для точной оценки невербалики и реакций).",
-                    "Проводим аппаратное тестирование на полиграфе (с письменного согласия лиц по 152-ФЗ) и формируем письменное экспертное заключение."
+                    "Проводим углубленную верификацию показаний и формируем письменное экспертное заключение с рекомендациями для руководства."
                 ],
                 conf: "Строгая конфиденциальность: подготовка расследования идет напрямую с собственником или главой СБ без утечки информации внутри коллектива.",
                 speed: "Оперативное подключение к инциденту по горячим следам — помогает предотвратить уничтожение улик и сговор причастных лиц.",
-                tech: "Синтез очного прикладного поведенческого анализа и инструментальной детекции лжи (полиграф).",
+                tech: "Синтез очного прикладного поведенческого анализа, контекстной аналитики и техник специализированного опроса.",
                 result: "Локализация причастных лиц, оценка достоверности показаний и письменное экспертное заключение для руководства.",
                 price: "от 10 000 Ᵽ"
             },
@@ -1851,16 +1861,19 @@
             const emailMatch = str.match(/[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}/);
             if (emailMatch) return emailMatch[0];
 
-            const phoneRegex = /(?:^|[^\d])((?:\+7[\s\-()]*|7[\s\-()]*|8[\s\-()]*)?9\d{2}[\s\-()]*\d{3}[\s\-]*\d{2}[\s\-]*\d{2})(?!\d)/g;
+            // Мобильные и городские номера РФ (+7/8 с кодами 3, 4, 8, 9), а также международные номера (+375, +77 и др.)
+            const phoneRegex = /(?:^|[^\d])((?:\+7|7|8)[\s\-()]*[3489]\d{2}[\s\-()]*\d{3}[\s\-]*\d{2}[\s\-]*\d{2}|9\d{2}[\s\-()]*\d{3}[\s\-]*\d{2}[\s\-]*\d{2}|\+\d{1,3}[\s\-()]*\d{2,4}[\s\-()]*\d{3}[\s\-]*\d{2}[\s\-]*\d{2})(?!\d)/g;
             let match;
             while ((match = phoneRegex.exec(str)) !== null) {
                 const candidate = match[1];
                 const digits = candidate.replace(/\D/g, '');
-                if ((digits.length === 11 && (digits.charAt(0) === '7' || digits.charAt(0) === '8')) ||
-                    (digits.length === 10 && digits.charAt(0) === '9')) {
+                if (digits.length >= 10 && digits.length <= 15) {
                     return candidate.trim();
                 }
             }
+
+            const tgLinkMatch = str.match(/(?:https?:\/\/)?(?:t\.me|telegram\.me)\/([a-zA-Z][a-zA-Z0-9_]{3,31})/i);
+            if (tgLinkMatch) return '@' + tgLinkMatch[1];
 
             const tgMatch = str.match(/(?:^|\s)(@[a-zA-Z][a-zA-Z0-9_]{2,31})/);
             if (tgMatch) return tgMatch[1];
@@ -1973,26 +1986,26 @@
             {
                 intent: "Стоимость и условия",
                 keywords: ["цен", "стоим", "скольк", "прайс", "тариф", "бюджет", "дорог", "расценк", "деньг"],
-                reply: "Базовая стоимость услуг Елены:\n• Проверка на полиграфе — от 5 000 Ᵽ\n• Экспертная консультация — от 5 000 Ᵽ\n• Медиация конфликтов — от 5 000 Ᵽ\n• Профайлинг цифрового следа — от 8 000 Ᵽ\n• Сопровождение расследований — от 10 000 Ᵽ\n• Анализ анонимных сообщений — от 15 000 Ᵽ.\n\nТочная смета зависит от объема задачи. Напишите ваш телефон или @ник прямо сюда в чат — Елена рассчитает стоимость под ваш кейс.",
+                reply: "Базовая стоимость услуг Елены:\n• Экспертная консультация — от 5 000 Ᵽ\n• Медиация конфликтов — от 5 000 Ᵽ\n• Профайлинг цифрового следа — от 8 000 Ᵽ\n• Сопровождение расследований — от 10 000 Ᵽ\n• Анализ анонимных сообщений — от 15 000 Ᵽ.\n\nТочная смета зависит от объема задачи. Напишите ваш телефон или @ник прямо сюда в чат — Елена рассчитает стоимость под ваш кейс.",
                 options: [
                     { text: "Оставить контакт в чате", action: "ask_contact_inline" },
                     { text: "Открыть анкету заявки", action: "open_form" }
                 ]
             },
             {
-                intent: "Проверка на полиграфе",
-                keywords: ["полиграф", "детектор", "лжи", "датчик", "тестирован", "аппарат", "скрининг", "провер", "проверит", "цена", "стоимость", "сколько"],
-                reply: "Стоимость проверки на полиграфе — от 5 000 Ᵽ (зависит от количества вопросов и задач). Процедура длится 1,5–2 часа: предтестовая беседа, настройка датчиков, тестирование и подготовка заключения. Проводится строго при наличии письменного согласия (152-ФЗ). Кого планируете проверить?",
+                intent: "Проверка кандидатов и сотрудников",
+                keywords: ["скрининг", "провер", "проверит", "кандидат", "сотрудник", "найм", "резюме", "собеседован", "лояльн", "риск", "благонадежн"],
+                reply: "Оценка кандидатов и действующих сотрудников проводится методами профайлинга цифрового следа (от 8 000 Ᵽ) и в формате экспертной консультации или участия в интервью (от 5 000 Ᵽ). Это позволяет выявить скрытые мотивы и факторы риска до принятия кадрового решения. Кого планируете оценить?",
                 options: [
                     { text: "Кандидата при найме", action: "hiring" },
-                    { text: "Действующего сотрудника", action: "poly_emp" },
+                    { text: "Действующего сотрудника", action: "emp_eval" },
                     { text: "Оставить контакт для связи", action: "ask_contact_inline" }
                 ]
             },
             {
                 intent: "Служебное расследование / Утечка / Хищение",
                 keywords: ["украл", "краж", "хищен", "утечк", "слив", "конкурент", "откат", "взятк", "недостач", "инсайдер", "шпион", "воров", "ущерб", "расследован"],
-                reply: "Понимаю, ситуация требует полной конфиденциальности. В таких случаях Елена проводит контекстный анализ поведения подозреваемых, формирует стратегию очного опроса и при необходимости подключает полиграф. Напишите ваш номер для оперативной связи — мы разберем ситуацию.",
+                reply: "Понимаю, ситуация требует полной конфиденциальности. В таких случаях Елена проводит контекстный анализ поведения фигурантов, формирует стратегию очного опроса и помогает локализовать причастных лиц. Напишите ваш номер для оперативной связи — мы разберем ситуацию.",
                 options: [
                     { text: "Написать контакт прямо в чате", action: "ask_contact_inline" },
                     { text: "Перейти в MAX / Telegram", action: "contacts" }
@@ -2027,7 +2040,7 @@
             {
                 intent: "Договор, оплата и юридические вопросы",
                 keywords: ["договор", "юрлиц", "счет", "чек", "нпд", "документ", "оплат", "безнал", "закон", "согласи", "конфиденц", "самозанят"],
-                reply: "Все мероприятия полностью легальны и конфиденциальны (очные проверки и полиграф — строго с добровольного письменного согласия по 152-ФЗ). Елена работает с физлицами и юрлицами, предоставляет договор, чеки НПД и закрывающие документы.",
+                reply: "Все мероприятия полностью легальны и конфиденциальны (аналитика открытых данных и очные опросы проводятся строго в рамках 152-ФЗ). Елена работает с физлицами и юрлицами, предоставляет договор, чеки НПД и закрывающие документы.",
                 options: [
                     { text: "Запросить консультацию", action: "ask_contact_inline" },
                     { text: "Открыть форму заявки", action: "open_form" }
@@ -2036,7 +2049,7 @@
             {
                 intent: "Об эксперте и книге",
                 keywords: ["опыт", "елен", "книг", "почерк", "наук", "кандидат", "преподав", "образован", "галанов"],
-                reply: "Елена Галанова — кандидат психологических наук, профайлер-полиграфолог, преподаватель ВУЗа и автор книги «Почерк лжи». Более 10 лет работы в службах экономической безопасности и 700+ успешных расследований.",
+                reply: "Елена Галанова — кандидат психологических наук, эксперт-профайлер, преподаватель ВУЗа и автор книги «Почерк лжи». Более 10 лет работы в службах экономической безопасности и 700+ успешных расследований.",
                 options: [
                     { text: "Связаться с Еленой", action: "ask_contact_inline" },
                     { text: "Посмотреть услуги", action: "reset" }
@@ -2081,6 +2094,13 @@
                         lastTopic = state.lastTopic || "Консультация в чате";
                         expectedAction = state.expectedAction || null;
                         chatInitialized = true;
+                        isBotResponding = false;
+                        const typingInd = document.getElementById('typingIndicator');
+                        if (typingInd) typingInd.classList.remove('active');
+                        const cInput = document.getElementById('chatInput');
+                        const cSendBtn = document.getElementById('chatSendBtn');
+                        if (cInput) cInput.disabled = false;
+                        if (cSendBtn) cSendBtn.disabled = false;
                         const chatBody = document.getElementById('chatBody');
                         chatBody.scrollTop = chatBody.scrollHeight;
                         return true;
@@ -2218,7 +2238,14 @@
             clearUnread();
             
             const chatInput = document.getElementById('chatInput');
-            if (chatInput) chatInput.value = '';
+            const chatSendBtn = document.getElementById('chatSendBtn');
+            if (chatInput) {
+                chatInput.value = '';
+                chatInput.disabled = false;
+            }
+            if (chatSendBtn) {
+                chatSendBtn.disabled = false;
+            }
             
             chatBody.innerHTML = `
                 <div class="chat-msg msg-bot">Здравствуйте! Меня зовут Ирина, я консультант Елены. Вы можете <b>написать свой вопрос в свободной форме</b> или выбрать тему ниже:</div>
@@ -2232,7 +2259,7 @@
             setTimeout(() => {
                 if (myResetSession !== chatSessionId) return;
                 showOptions([
-                    { text: "Проверка кандидата / Полиграф", action: "hiring" },
+                    { text: "Проверка кандидата / Скрининг", action: "hiring" },
                     { text: "Служебное расследование", action: "investigation" },
                     { text: "Аудит команды / Цифровой след", action: "audit" },
                     { text: "Стоимость и документы", action: "price_btn" }
@@ -2316,6 +2343,7 @@
                 appendMessage("Не удалось передать контакт из-за сбоя сети. Нажмите кнопку ниже, чтобы оставить заявку через форму.", 'bot');
                 showOptions([{ text: "Открыть форму заявки", action: "open_form" }]);
             }
+            saveChatState();
             return;
         }
 
@@ -2338,6 +2366,7 @@
                 hideTypingIndicator();
                 isBotResponding = false;
                 appendMessage("Отлично! Напишите ваш номер телефона, Email или @ник в Telegram прямо сюда, и я сразу передам вашу заявку Елене.", 'bot');
+                saveChatState();
             }, getTypingDelay("Отлично! Напишите ваш номер телефона..."));
             return;
         }
@@ -2451,7 +2480,7 @@
 
             if (action === 'hiring') {
                 lastTopic = "Проверка кандидата";
-                botReply = 'Скрининг кандидатов (профайлинг цифрового следа от 8 000 Ᵽ и проверка на полиграфе от 5 000 Ᵽ) помогает отсеять нелояльных сотрудников до найма. На какую позицию вы рассматриваете человека?';
+                botReply = 'Комплексный скрининг кандидатов (профайлинг цифрового следа от 8 000 Ᵽ и экспертная оценка интервью от 5 000 Ᵽ) помогает отсеять токсичных и нелояльных людей еще до найма. На какую позицию вы рассматриваете человека?';
                 nextOptions = [
                     { text: "Топ-менеджер / Руководитель", action: "hiring_top" },
                     { text: "Сотрудник с матответственностью", action: "hiring_material" },
@@ -2462,9 +2491,9 @@
                 botReply = 'Для таких позиций Елена проверяет скрытые факторы риска, долговую нагрузку, мотивы и опыт откатов. Напишите ваш телефон или @ник прямо в чат.';
                 expectedAction = 'awaiting_contact';
                 nextOptions = [{ text: "Открыть анкету заявки", action: "open_form" }];
-            } else if (action === 'poly_emp') {
-                lastTopic = "Полиграф для сотрудника";
-                botReply = 'Проверка действующего сотрудника на полиграфе стоит от 5 000 Ᵽ. Это помогает выявить скрытые риски, утечки или нелояльность. Напишите ваш телефон или @ник прямо сюда, и Елена свяжется с вами для обсуждения деталей.';
+            } else if (action === 'emp_eval') {
+                lastTopic = "Оценка действующего сотрудника";
+                botReply = 'Поведенческий аудит и оценка рисков по действующему сотруднику (от 5 000 Ᵽ) помогают выявить скрытые мотивы, выгорание или признаки нелояльности. Напишите ваш телефон или @ник прямо сюда, и Елена свяжется с вами для обсуждения деталей.';
                 expectedAction = 'awaiting_contact';
                 nextOptions = [{ text: "Открыть анкету заявки", action: "open_form" }];
             } else if (action === 'investigation') {
@@ -2490,7 +2519,7 @@
                 ];
             } else if (action === 'price_btn') {
                 lastTopic = "Стоимость и условия";
-                botReply = 'Полиграф, экспертные консультации и медиация — от 5 000 Ᵽ. Профайлинг цифрового следа — от 8 000 Ᵽ. Сопровождение расследований — от 10 000 Ᵽ. Анализ анонимных сообщений — от 15 000 Ᵽ. Работаем с физлицами и юрлицами.';
+                botReply = 'Экспертные консультации и медиация — от 5 000 Ᵽ. Профайлинг цифрового следа — от 8 000 Ᵽ. Сопровождение расследований — от 10 000 Ᵽ. Анализ анонимных сообщений — от 15 000 Ᵽ. Работаем с физлицами и юрлицами.';
                 nextOptions = [
                     { text: "Рассчитать стоимость моей задачи", action: "ask_contact_inline" },
                     { text: "Вернуться в начало", action: "reset" }
@@ -2567,13 +2596,16 @@
             const typingIndicator = document.getElementById('typingIndicator');
             const chatInput = document.getElementById('chatInput');
             const chatSendBtn = document.getElementById('chatSendBtn');
+            const chatWindow = document.getElementById('chatWindow');
             
             if (typingIndicator) typingIndicator.classList.remove('active');
             
-            // Разблокировка инпута
+            // Разблокировка инпута (фокус ставим только если окно чата открыто)
             if (chatInput) {
                 chatInput.disabled = false;
-                chatInput.focus();
+                if (chatWindow && chatWindow.style.display === 'flex') {
+                    chatInput.focus();
+                }
             }
             if (chatSendBtn) chatSendBtn.disabled = false;
         }
@@ -2589,6 +2621,8 @@
 
         // БЕЗОПАСНОЕ КОПИРОВАНИЕ ТЕКСТА С ЧИСТЫМ URL БЕЗ UTM-ХВОСТОВ
         document.addEventListener('copy', function(e) {
+            const activeEl = document.activeElement;
+            if (activeEl && (activeEl.tagName === 'INPUT' || activeEl.tagName === 'TEXTAREA' || activeEl.isContentEditable)) return;
             const selObj = document.getSelection ? document.getSelection() : null;
             const selection = selObj ? selObj.toString() : '';
             if (!selection || !e.clipboardData) return;
