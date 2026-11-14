@@ -944,8 +944,7 @@
             <div class="hero-content">
                 <!-- ВАРИАНТ А: ДВУХУРОВНЕВАЯ ИЕРАРХИЯ ФИО -->
                 <h1 class="main-name-title">
-                    <span class="hero-name-primary">Елена Галанова</span>
-                    <span class="hero-name-patronymic" style="line-height: 1.4; letter-spacing: 1px;">Основатель Центра прикладной поведенческой<br>аналитики (ЦППА)</span>
+                    <span class="hero-name-primary" style="margin-bottom: 0;">Елена Галанова</span>
                 </h1>
                 
                 <!-- ПЛАШКИ С ИКОНКАМИ КАСКАДОМ -->
@@ -1062,7 +1061,7 @@
                     <ul class="about-list">
                         <li>Кандидат психологических наук</li>
                         <li>Автор готовящейся книги «Почерк лжи»</li>
-                        <li>Преподаватель ВУЗа: готовлю специалистов по профайлингу</li>
+                        <li>Преподаватель ВУЗа: готовлю специалистов по управлению персоналом</li>
                         <li>Постоянный эксперт изданий Executive.ru и Psychologies</li>
                     </ul>
                 </div>
@@ -1284,7 +1283,7 @@
         <div class="modal-box" role="dialog" aria-modal="true" aria-labelledby="cppaModalTitle">
             <button class="modal-close" onclick="closeCppaModal()" aria-label="Закрыть окно">&times;</button>
             <h3 id="cppaModalTitle" style="font-size: 1.8rem; margin-bottom: 15px; color: var(--primary);">ЦППА</h3>
-            <p style="font-size: 1.05rem; line-height: 1.6; color: var(--text-dark);">ЦППА специализируется на комплексном аудите человеческого ресурса и оценке корпоративных рисков. Я выступаю главным методологом и гарантом качества каждого проекта, проводя ключевые профилирования и проверки лично.</p>
+            <p style="font-size: 1.05rem; line-height: 1.6; color: var(--text-dark);">Центр прикладной поведенческой аналитики (ЦППА) специализируется на комплексном аудите человеческого ресурса и оценке корпоративных рисков. Я выступаю главным методологом и гарантом качества каждого проекта, проводя ключевые профилирования и проверки лично.</p>
         </div>
     </div>
     <!-- МОДАЛЬНОЕ ОКНО ДЕТАЛЕЙ УСЛУГИ (ВАРИАНТ А: МЕХАНИКА РАБОТЫ + 3 КАНАЛА СВЯЗИ) -->
@@ -1993,13 +1992,12 @@
                 ]
             },
             {
-                intent: "Проверка кандидатов и сотрудников",
-                keywords: ["скрининг", "провер", "проверит", "кандидат", "сотрудник", "найм", "резюме", "собеседован", "лояльн", "риск", "благонадежн"],
-                reply: "Оценка кандидатов и действующих сотрудников проводится методами профайлинга цифрового следа (от 8 000 Ᵽ) и в формате экспертной консультации или участия в интервью (от 5 000 Ᵽ). Это позволяет выявить скрытые мотивы и факторы риска до принятия кадрового решения. Кого планируете оценить?",
+                intent: "Анализ анонимных сообщений",
+                keywords: ["аноним", "угроз", "донос", "шантаж", "письм", "сообщен", "текст", "автор", "кляуз", "жалоб", "компромат", "лингвист"],
+                reply: "По анонимным письмам, сообщениям и угрозам Елена проводит психолингвистическую экспертизу текста с учетом вашего корпоративного контекста (от 15 000 Ᵽ). Хотите обсудить ваш случай?",
                 options: [
-                    { text: "Кандидата при найме", action: "hiring" },
-                    { text: "Действующего сотрудника", action: "emp_eval" },
-                    { text: "Оставить контакт для связи", action: "ask_contact_inline" }
+                    { text: "Да, оставить телефон в чате", action: "ask_contact_inline" },
+                    { text: "Открыть форму заявки", action: "open_form" }
                 ]
             },
             {
@@ -2012,17 +2010,18 @@
                 ]
             },
             {
-                intent: "Анализ анонимных сообщений",
-                keywords: ["аноним", "угроз", "донос", "шантаж", "письм", "кляуз", "жалоб", "компромат"],
-                reply: "По анонимным сообщениям и угрозам Елена проводит психолингвистическую экспертизу текста с учетом вашего корпоративного контекста (от 15 000 Ᵽ). Хотите обсудить ваш случай?",
+                intent: "Проверка кандидатов и сотрудников",
+                keywords: ["скрининг", "провер", "кандидат", "сотрудник", "найм", "резюме", "собеседован", "лояльн", "риск", "благонадежн", "персонал", "работник"],
+                reply: "Оценка кандидатов и действующих сотрудников проводится методами профайлинга цифрового следа (от 8 000 Ᵽ) и в формате экспертной консультации или участия в интервью (от 5 000 Ᵽ). Это позволяет выявить скрытые мотивы и факторы риска до принятия кадрового решения. Кого планируете оценить?",
                 options: [
-                    { text: "Да, оставить телефон в чате", action: "ask_contact_inline" },
-                    { text: "Открыть форму заявки", action: "open_form" }
+                    { text: "Кандидата при найме", action: "hiring" },
+                    { text: "Действующего сотрудника", action: "emp_eval" },
+                    { text: "Оставить контакт для связи", action: "ask_contact_inline" }
                 ]
             },
             {
                 intent: "Профайлинг цифрового следа / Дистанционная оценка",
-                keywords: ["цифров", "след", "соцсет", "интернет", "профил", "портрет", "дистанцион", "удален", "онлайн", "резюме", "партнер", "osint", "консультац"],
+                keywords: ["цифров", "след", "соцсет", "интернет", "профил", "портрет", "дистанцион", "удален", "онлайн", "партнер", "osint", "консультац"],
                 reply: "Профайлинг цифрового следа (от 8 000 Ᵽ) позволяет составить психологический портрет человека по открытым источникам без очной встречи. А экспертная консультация (от 5 000 Ᵽ) поможет детально разобрать вашу управленческую задачу.",
                 options: [
                     { text: "Заказать разбор профиля", action: "ask_contact_inline" },
@@ -2057,8 +2056,9 @@
             },
             {
                 intent: "Приветствие",
+                isGreeting: true,
                 keywords: ["привет", "здравств", "добрый", "доброе", "доброго", "алло", "здраст"],
-                reply: "Здравствуйте! Опишите вашу задачу своими словами (например: «нужно проверить кандидата на должность финдиректора»), и я сразу подскажу решение!",
+                reply: "Здравствуйте! Опишите вашу задачу своими словами (например: «нужно оценить кандидата на должность финдиректора» или «проверить анонимное письмо»), и я сразу подскажу решение!",
                 options: [
                     { text: "Проверка кандидата", action: "hiring" },
                     { text: "Расследование инцидента", action: "investigation" },
@@ -2152,47 +2152,62 @@
 
         function matchKnowledgeIntent(text) {
             const rawWords = text.toLowerCase().split(/[^a-zа-яё0-9_]+/).filter(Boolean);
-            let bestMatch = null;
-            let maxScore = 0;
+            let bestBusinessMatch = null;
+            let maxBusinessScore = 0;
+            let greetingMatch = null;
 
             for (const item of knowledgeBase) {
                 let score = 0;
-                for (const kw of item.keywords) {
-                    const normKw = normalizeWordForBot(kw);
-                    for (const rawW of rawWords) {
-                        const w = normalizeWordForBot(rawW);
-                        if (w.length < 3) continue;
+                for (const rawW of rawWords) {
+                    const w = normalizeWordForBot(rawW);
+                    if (w.length < 3) continue;
+
+                    let wordMaxScore = 0;
+                    for (const kw of item.keywords) {
+                        const normKw = normalizeWordForBot(kw);
+                        let currentScore = 0;
 
                         if (w.startsWith(normKw) || normKw.startsWith(w)) {
-                            score += normKw.length >= 5 ? 4 : 3;
-                            continue;
-                        }
+                            // Предметные существительные получают небольшой приоритет над общим глаголом "проверить"
+                            currentScore = normKw === 'провер' ? 3 : (normKw.length >= 5 ? 5 : 4);
+                        } else {
+                            const targetLen = normKw.length;
+                            const prefixesToTest = [
+                                w.slice(0, targetLen),
+                                w.slice(0, Math.min(w.length, targetLen + 1)),
+                                w.slice(0, Math.max(3, targetLen - 1))
+                            ];
 
-                        const targetLen = normKw.length;
-                        const prefixesToTest = [
-                            w.slice(0, targetLen),
-                            w.slice(0, Math.min(w.length, targetLen + 1)),
-                            w.slice(0, Math.max(3, targetLen - 1))
-                        ];
-
-                        const allowedErrors = targetLen <= 4 ? 1 : 2;
-                        for (const pref of prefixesToTest) {
-                            if (Math.abs(pref.length - targetLen) <= allowedErrors) {
-                                const dist = getDamerauLevenshteinDistance(pref, normKw);
-                                if (dist <= allowedErrors) {
-                                    score += (allowedErrors - dist + 1) * 2;
-                                    break;
+                            const allowedErrors = targetLen <= 4 ? 1 : 2;
+                            for (const pref of prefixesToTest) {
+                                if (Math.abs(pref.length - targetLen) <= allowedErrors) {
+                                    const dist = getDamerauLevenshteinDistance(pref, normKw);
+                                    if (dist <= allowedErrors) {
+                                        currentScore = (allowedErrors - dist + 1) * 2;
+                                        break;
+                                    }
                                 }
                             }
                         }
+
+                        if (currentScore > wordMaxScore) {
+                            wordMaxScore = currentScore;
+                        }
                     }
+                    score += wordMaxScore;
                 }
-                if (score > maxScore) {
-                    maxScore = score;
-                    bestMatch = item;
+
+                if (item.isGreeting) {
+                    if (score > 0) greetingMatch = item;
+                } else if (score > maxBusinessScore) {
+                    maxBusinessScore = score;
+                    bestBusinessMatch = item;
                 }
             }
-            return maxScore > 0 ? bestMatch : null;
+
+            // Если в сообщении есть конкретный вопрос по услуге, он всегда приоритетнее приветствия
+            if (bestBusinessMatch) return bestBusinessMatch;
+            return greetingMatch;
         }
 
         // --- УПРАВЛЕНИЕ UNREAD BADGE ---
