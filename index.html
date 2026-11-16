@@ -2899,5 +2899,507 @@
         });
     }
 </script>
+<!-- ============================================================
+     НОВЫЙ ЧАТ «ИРИНА». Старый .chat-widget скрывается автоматически.
+     Конфликтов с существующим JS нет: свои ID, свои классы (egc-).
+     ============================================================ -->
+<style>
+  /* Скрываем старый чат (двойная страховка — CSS + JS ниже) */
+  .chat-widget{ display:none !important; }
+
+  /* ---------- Контейнер ---------- */
+  .egc-widget{ position:fixed; bottom:30px; right:30px; z-index:1500; font-family:'Inter',sans-serif; }
+  .egc-btn{
+    position:relative; width:60px; height:60px; border-radius:50%;
+    background:#0077ff; color:#fff; border:none; cursor:pointer;
+    display:flex; align-items:center; justify-content:center;
+    box-shadow:0 8px 25px rgba(0,119,255,.4); transition:transform .3s, box-shadow .3s;
+  }
+  .egc-btn:hover{ transform:scale(1.1); box-shadow:0 10px 30px rgba(0,119,255,.6); }
+  .egc-btn svg{ width:28px; height:28px; fill:currentColor; }
+  .egc-badge{
+    display:none; position:absolute; top:-2px; right:-2px;
+    min-width:22px; height:22px; padding:0 6px; box-sizing:border-box;
+    background:#ff3b30; color:#fff; font-size:12px; font-weight:800;
+    border-radius:11px; align-items:center; justify-content:center;
+    border:2px solid #fff; box-shadow:0 2px 5px rgba(0,0,0,.2);
+    animation:egc-pop .3s cubic-bezier(.175,.885,.32,1.275);
+  }
+  .egc-badge.show{ display:flex; }
+  .egc-window{
+    display:none; position:absolute; bottom:75px; right:0;
+    width:360px; max-height:calc(100vh - 120px);
+    background:#fff; border-radius:12px;
+    box-shadow:0 15px 40px rgba(0,0,0,.18);
+    border:1px solid #e2e8f0; overflow:hidden; flex-direction:column;
+  }
+  .egc-window.open{ display:flex; }
+  .egc-header{
+    background:#0077ff; color:#fff; padding:14px 18px;
+    display:flex; align-items:center; justify-content:space-between; flex-shrink:0;
+  }
+  .egc-header-info{ display:flex; align-items:center; gap:12px; }
+  .egc-avatar{
+    width:40px; height:40px; border-radius:50%;
+    background:#e0f2fe; color:#0077ff; display:flex;
+    align-items:center; justify-content:center;
+    border:2px solid #fff; font-weight:800; font-size:18px; flex-shrink:0;
+  }
+  .egc-header-text h4{ margin:0; font-size:1rem; font-weight:700; }
+  .egc-header-text span{ font-size:.75rem; color:rgba(255,255,255,.85); display:flex; align-items:center; gap:5px; }
+  .egc-status-dot{ width:8px; height:8px; background:#4ade80; border-radius:50%; display:inline-block; }
+  .egc-actions{ display:flex; gap:6px; align-items:center; }
+  .egc-icon-btn{
+    background:none; border:none; color:#fff; font-size:22px;
+    cursor:pointer; opacity:.8; padding:4px 6px; line-height:1;
+    border-radius:4px; transition:opacity .2s, background .2s;
+  }
+  .egc-icon-btn:hover{ opacity:1; background:rgba(255,255,255,.15); }
+  .egc-icon-btn svg{ fill:currentColor; display:block; }
+  .egc-body{
+    flex:1 1 auto; min-height:280px; max-height:400px;
+    padding:18px; overflow-y:auto; background:#f8fafc;
+    display:flex; flex-direction:column; gap:10px;
+  }
+  .egc-body::-webkit-scrollbar{ width:6px; }
+  .egc-body::-webkit-scrollbar-thumb{ background:#cbd5e0; border-radius:3px; }
+  .egc-msg{
+    max-width:85%; padding:11px 15px; border-radius:12px;
+    font-size:.9rem; line-height:1.45; white-space:pre-line;
+    word-wrap:break-word; animation:egc-fade .25s ease;
+  }
+  .egc-msg-bot{
+    background:#fff; color:#2d3748; align-self:flex-start;
+    border-bottom-left-radius:3px; border:1px solid #e2e8f0;
+    box-shadow:0 2px 5px rgba(0,0,0,.04);
+  }
+  .egc-msg-user{ background:#0077ff; color:#fff; align-self:flex-end; border-bottom-right-radius:3px; }
+  .egc-typing{
+    display:none; gap:4px; padding:12px 16px; background:#fff;
+    border-radius:12px; border-bottom-left-radius:3px;
+    align-self:flex-start; border:1px solid #e2e8f0;
+    box-shadow:0 2px 5px rgba(0,0,0,.04);
+  }
+  .egc-typing.show{ display:flex; }
+  .egc-dot{ width:6px; height:6px; background:#cbd5e0; border-radius:50%; animation:egc-typing 1.4s infinite; }
+  .egc-dot:nth-child(2){ animation-delay:.2s; }
+  .egc-dot:nth-child(3){ animation-delay:.4s; }
+  .egc-quick{ display:flex; flex-wrap:wrap; gap:8px; align-self:flex-start; max-width:100%; margin-top:2px; }
+  .egc-quick-btn{
+    background:#fff; border:1px solid #0077ff; color:#0077ff;
+    font-size:.8rem; font-weight:600; padding:7px 13px;
+    border-radius:16px; cursor:pointer; font-family:inherit;
+    transition:background .15s, color .15s, transform .15s;
+  }
+  .egc-quick-btn:hover{ background:#0077ff; color:#fff; transform:translateY(-1px); }
+  .egc-input{
+    display:flex; gap:8px; padding:12px 14px;
+    background:#fff; border-top:1px solid #e2e8f0; flex-shrink:0;
+  }
+  .egc-input input{
+    flex:1; border:1px solid #cbd5e0; border-radius:20px;
+    padding:10px 15px; outline:none; font-size:.9rem;
+    font-family:inherit; transition:border-color .2s;
+  }
+  .egc-input input:focus{ border-color:#0077ff; }
+  .egc-input input:disabled{ background:#f1f5f9; cursor:not-allowed; }
+  .egc-input button{
+    background:#0077ff; color:#fff; border:none;
+    padding:10px 18px; border-radius:20px; cursor:pointer;
+    font-weight:600; font-size:.9rem; font-family:inherit;
+    transition:background .2s, opacity .2s;
+  }
+  .egc-input button:hover:not(:disabled){ background:#0066dd; }
+  .egc-input button:disabled{ opacity:.5; cursor:not-allowed; }
+  .egc-legal{ text-align:center; font-size:.65rem; color:#a0aec0; padding:0 14px 10px; background:#fff; }
+  .egc-legal a{ color:#0077ff; text-decoration:none; }
+  .egc-legal a:hover{ text-decoration:underline; }
+  @keyframes egc-fade{ from{opacity:0;transform:translateY(6px);} to{opacity:1;transform:translateY(0);} }
+  @keyframes egc-pop{ from{transform:scale(0);opacity:0;} to{transform:scale(1);opacity:1;} }
+  @keyframes egc-typing{ 0%,100%{transform:translateY(0);opacity:.5;} 50%{transform:translateY(-4px);opacity:1;} }
+  @media (max-width:600px){
+    .egc-widget{ bottom:20px; right:20px; }
+    .egc-window{ width:calc(100vw - 24px); right:-10px; bottom:72px; max-height:calc(100vh - 100px); }
+    .egc-body{ max-height:calc(100vh - 280px); }
+  }
+  @media (prefers-reduced-motion:reduce){
+    .egc-msg,.egc-badge,.egc-dot{ animation:none !important; }
+    .egc-btn,.egc-quick-btn{ transition:none !important; }
+  }
+</style>
+
+<div class="egc-widget" id="egcWidget">
+  <button class="egc-btn" id="egcToggle" type="button"
+          aria-label="Открыть чат" aria-expanded="false" aria-controls="egcWindow">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2z"/></svg>
+    <span class="egc-badge" id="egcBadge" aria-hidden="true">0</span>
+  </button>
+  <div class="egc-window" id="egcWindow" role="dialog" aria-label="Чат-консультант" aria-modal="false">
+    <div class="egc-header">
+      <div class="egc-header-info">
+        <div class="egc-avatar" aria-hidden="true">И</div>
+        <div class="egc-header-text">
+          <h4>Консультант Ирина</h4>
+          <span><span class="egc-status-dot"></span> Виртуальный помощник</span>
+        </div>
+      </div>
+      <div class="egc-actions">
+        <button class="egc-icon-btn" id="egcReset" type="button" title="Начать заново" aria-label="Начать диалог заново">
+          <svg viewBox="0 0 24 24" width="20" height="20"><path d="M12.5 3C17.15 3 21 6.85 21 11.5S17.15 20 12.5 20 4 16.15 4 11.5H2l3.85-3.85L9.7 11.5H7.5c0 2.76 2.24 5 5 5s5-2.24 5-5-2.24-5-5-5c-1.25 0-2.4.47-3.3 1.25L7.75 6.3C9.07 4.88 10.7 4 12.5 3z"/></svg>
+        </button>
+        <button class="egc-icon-btn" id="egcClose" type="button" title="Закрыть" aria-label="Закрыть чат">&times;</button>
+      </div>
+    </div>
+    <div class="egc-body" id="egcBody" role="log" aria-live="polite">
+      <div class="egc-typing" id="egcTyping" aria-hidden="true">
+        <span class="egc-dot"></span><span class="egc-dot"></span><span class="egc-dot"></span>
+      </div>
+    </div>
+    <div class="egc-input">
+      <input type="text" id="egcInput" placeholder="Напишите сообщение…"
+             aria-label="Сообщение" maxlength="500" enterkeyhint="send" autocomplete="off">
+      <button type="button" id="egcSend">Отправить</button>
+    </div>
+    <div class="egc-legal">
+      Виртуальный помощник. <a href="privacy.html" target="_blank" rel="noopener noreferrer">Политика конфиденциальности</a>
+    </div>
+  </div>
+</div>
+
+<script>
+(function(){
+  'use strict';
+
+  // Страховка: скрыть старый чат, если он вдруг отобразится
+  try {
+    var oldWidget = document.querySelector('.chat-widget');
+    if (oldWidget) oldWidget.style.display = 'none';
+  } catch(e){}
+
+  var STORAGE_KEY = 'egc_history_v1';
+  var MAX_HISTORY = 40;
+  var MAX_INPUT   = 500;
+  var TYPING_MIN  = 550;
+  var TYPING_MAX  = 1400;
+  var LINKS = {
+    tg:  'https://t.me/ElenaProprofiler',
+    max: 'https://max.ru/u/f9LHodD0cOIwE5Tk0yqsCdSW7aH2YKheHnM5PcwHgDaWAse8blY_Usz5-7Q'
+  };
+
+  var elToggle = document.getElementById('egcToggle');
+  var elBadge  = document.getElementById('egcBadge');
+  var elWindow = document.getElementById('egcWindow');
+  var elReset  = document.getElementById('egcReset');
+  var elClose  = document.getElementById('egcClose');
+  var elBody   = document.getElementById('egcBody');
+  var elTyping = document.getElementById('egcTyping');
+  var elInput  = document.getElementById('egcInput');
+  var elSend   = document.getElementById('egcSend');
+
+  if (!elToggle || !elWindow || !elBody || !elInput || !elSend){
+    console.warn('[egc] Разметка чата не найдена');
+    return;
+  }
+
+  var state = { open:false, typing:false, greeted:false, failed:0, lastIntentId:null, history:[] };
+
+  function sleep(ms){ return new Promise(function(r){ setTimeout(r, ms); }); }
+  function normalize(text){
+    return String(text||'').toLowerCase().replace(/ё/g,'е')
+      .replace(/[^\wа-я0-9@+\s]/gi,' ').replace(/\s+/g,' ').trim();
+  }
+  function stem(w){
+    if (w.length <= 4) return w;
+    var sfx = ['иями','ями','ами','ов','ев','ах','ях','ий','ый','ой','ая','ое','ые',
+               'ую','юю','им','ем','ом','ам','ум','ия','ие','ии','ей',
+               'а','я','ы','и','о','е','у','ю','ь'];
+    for (var i=0;i<sfx.length;i++){
+      var s = sfx[i];
+      if (w.length - s.length >= 4 && w.slice(-s.length) === s) return w.slice(0,-s.length);
+    }
+    return w;
+  }
+  function lev(a,b){
+    if (Math.abs(a.length-b.length) > 2) return 99;
+    var m=a.length,n=b.length,dp=[],i,j;
+    for (i=0;i<=m;i++) dp[i]=[i];
+    for (j=0;j<=n;j++) dp[0][j]=j;
+    for (i=1;i<=m;i++) for (j=1;j<=n;j++)
+      dp[i][j]=Math.min(dp[i-1][j]+1, dp[i][j-1]+1, dp[i-1][j-1]+(a[i-1]===b[j-1]?0:1));
+    return dp[m][n];
+  }
+
+  var INTENTS = [
+    { id:'greeting', priority:1,
+      keywords:['привет','здравств','добр','hello','hi','хай','приветств','здраст'],
+      answer:'Здравствуйте! Я Ирина, виртуальный консультант Елены Галановой. Подскажу по услугам, ценам и каналам связи. С чего начнём?',
+      quickReplies:['Услуги и цены','Как связаться','Оставить заявку'] },
+    { id:'price', priority:5,
+      keywords:['цена','стоимост','стоит','сколько','прайс','тариф','оплат','расценк','дорог','бюджет','цен'],
+      answer:'Базовые цены:\n• Экспертная консультация — от 5 000 ₽\n• Профайлинг цифрового следа — от 8 000 ₽\n• Сопровождение расследований — от 10 000 ₽\n• Анализ анонимных сообщений — от 15 000 ₽\n\nИтоговая стоимость фиксируется после уточнения задачи. Работаю с физлицами и юрлицами (договор, чеки НПД).',
+      followUp:'Точная цена зависит от объёма. Консультация — 1 сессия; расследование — несколько этапов. Опишите задачу в двух словах — сориентирую по вилке.',
+      quickReplies:['Что входит в консультацию?','Как связаться','Оставить заявку'] },
+    { id:'services', priority:4,
+      keywords:['услуг','сервис','что вы дела','чем помож','направлен','перечень'],
+      answer:'Пять направлений:\n1. Профайлинг цифрового следа\n2. Экспертная консультация\n3. Сопровождение расследований\n4. Анализ анонимных сообщений\n5. Медиация конфликтов\n\nПро что рассказать подробнее?',
+      quickReplies:['Профайлинг цифрового следа','Расследования','Медиация'] },
+    { id:'digital', priority:4,
+      keywords:['цифров','след','osint','соцсет','открыт источник','портрет','скрининг'],
+      answer:'Профайлинг цифрового следа — анализ открытых источников (соцсети, публикации, комментарии) для составления психологического портрета, оценки рисков и прогноза поведения. Только публичные данные. От 8 000 ₽.',
+      quickReplies:['Как связаться','Оставить заявку','Услуги и цены'] },
+    { id:'consult', priority:4,
+      keywords:['консультац','разбор','совет','встреч','созвон','сессия'],
+      answer:'Экспертная консультация — разбор вашей ситуации: кандидат, партнёр, конфликт, скрытые мотивы. Формат — онлайн или офлайн, 1 сессия. От 5 000 ₽.',
+      quickReplies:['Как связаться','Оставить заявку','Услуги и цены'] },
+    { id:'investigation', priority:4,
+      keywords:['расследован','инцидент','хищен','сговор','утечк','кража','воровств','причастн','инсайдер'],
+      answer:'Сопровождение расследований: помощь в раскрытии инцидентов (хищения, сговоры, утечки). Анализ поведенческих профилей фигурантов, стратегия опроса, оценка искренности показаний. От 10 000 ₽. Конфиденциально.',
+      quickReplies:['Как связаться','Оставить заявку','Конфиденциальность'] },
+    { id:'anon', priority:4,
+      keywords:['аноним','донос','угроз','жалоб','компромет','письм','сообщени','автор'],
+      answer:'Анализ анонимных сообщений: психолингвистический разбор текста, определение профиля автора, анализ корпоративного контекста. От 15 000 ₽.',
+      quickReplies:['Как связаться','Оставить заявку','Услуги и цены'] },
+    { id:'mediation', priority:4,
+      keywords:['медиац','конфликт','спор','переговор','посредник','примир'],
+      answer:'Медиация конфликтов — нейтральный посредник помогает сторонам услышать друг друга и прийти к соглашению в деловом споре. От 5 000 ₽.',
+      quickReplies:['Как связаться','Оставить заявку','Услуги и цены'] },
+    { id:'contact', priority:6,
+      keywords:['связат','контакт','написат','телефон','почт','telegram','телеграм','telegramm','max','мессенджер','написать'],
+      answer:'Удобные каналы:\n• Telegram — @ElenaProprofiler\n• MAX — кнопка в шапке сайта\n• Email — кнопка «Почта» в шапке\n• Форма заявки — кнопка «Обсудить задачу» на главной\n\nОтвечаю лично, конфиденциально.',
+      quickReplies:['Telegram','MAX','Почта','Оставить заявку'] },
+    { id:'confidential', priority:4,
+      keywords:['конфиденц','секрет','тайна','nda','не разглаш','анонимн','приватн'],
+      answer:'Все обращения и материалы строго конфиденциальны. По запросу подписываю NDA. Данные не передаются третьим лицам.',
+      quickReplies:['Как связаться','Оставить заявку'] },
+    { id:'legal', priority:4,
+      keywords:['закон','152','фз','право','легальн','согласи','персональн'],
+      answer:'Работаю в правовом поле: очные интервью и опросы — только с добровольного согласия лица (152-ФЗ). Аналитика цифрового следа (OSINT) — исключительно по общедоступным открытым источникам.',
+      quickReplies:['Как связаться','Оставить заявку'] },
+    { id:'payment', priority:4,
+      keywords:['оплат','документ','чек','нпд','договор','счет','счёт','юрлиц','физлиц','реквизит'],
+      answer:'Работаю с физлицами и юрлицами. Плательщик НПД: договор, чеки, закрывающие документы. Реквизиты (ИНН, банк) — по запросу для заключения договора.',
+      quickReplies:['Как связаться','Оставить заявку'] },
+    { id:'about', priority:3,
+      keywords:['опыт','образован','кто вы','о себе','эксперт','галанова','биограф','квалификац','стаж','кейс'],
+      answer:'Елена Галанова — кандидат психологических наук, эксперт-профайлер, преподаватель ВУЗа. 10+ лет в службах экономической безопасности, 700+ расследований и кадровых проверок. Автор готовящейся книги «Почерк лжи».',
+      quickReplies:['Услуги и цены','Как связаться','Оставить заявку'] },
+    { id:'book', priority:3,
+      keywords:['книг','почерк лжи','издан','купить книг','читат'],
+      answer:'Книга «Почерк лжи» — об организационных рисках, контекстном анализе и прогнозировании поведения в корпоративной среде. Сейчас в работе, скоро в продаже. Следите за анонсами в Telegram.',
+      quickReplies:['Telegram','Как связаться'] },
+    { id:'media', priority:3,
+      keywords:['публикац','стать','медиа','блог','executive','psychologies','сми','пресс'],
+      answer:'Публикации и интервью — в разделе «Медиа и Блог» на сайте: Executive.ru, Psychologies, «Управление персоналом». Ссылки кликабельны.',
+      quickReplies:['Как связаться','Оставить заявку'] },
+    { id:'format', priority:3,
+      keywords:['онлайн','офлайн','формат','географ','город','москв','дистанц','удален'],
+      answer:'Формат — онлайн или офлайн, по договорённости. География — Россия и русскоязычные зарубежные компании. Консультации и расследования — дистанционно.',
+      quickReplies:['Как связаться','Оставить заявку'] },
+    { id:'thanks', priority:1,
+      keywords:['спасиб','благодар','спс','пасиб'],
+      answer:'Пожалуйста! Если появятся вопросы — я здесь. Можно также сразу написать Елене в Telegram.',
+      quickReplies:['Telegram','Оставить заявку'] },
+    { id:'bye', priority:1,
+      keywords:['пока','до свидан','всего добр','бай'],
+      answer:'До связи! Берегите себя и свой бизнес.',
+      quickReplies:[] }
+  ];
+
+  var QUICK_ACTIONS = {
+    'telegram':'tg','написать в telegram':'tg',
+    'max':'max','написать в max':'max',
+    'почта':'email','написать на почту':'email',
+    'оставить заявку':'form','заявка':'form'
+  };
+
+  function matchIntent(text){
+    var norm = normalize(text);
+    var raw = norm.split(' ').filter(Boolean);
+    var best = null, bestScore = 0;
+    for (var i=0;i<INTENTS.length;i++){
+      var it = INTENTS[i], score = 0;
+      for (var k=0;k<it.keywords.length;k++){
+        var kw = normalize(it.keywords[k]);
+        var kwStem = stem(kw);
+        if (kw.length>=4 && norm.indexOf(kw)!==-1){ score+=3; continue; }
+        for (var t=0;t<raw.length;t++){
+          var tok = raw[t];
+          if (tok===kw){ score+=3; break; }
+          if (tok.length>=5 && kw.length>=5){
+            if (stem(tok)===kwStem){ score+=2; break; }
+            if (Math.abs(tok.length-kw.length)<=2 && lev(tok,kw)<=1){ score+=1; break; }
+          }
+        }
+      }
+      if (score>0){
+        score += it.priority*0.01;
+        if (score>bestScore){ bestScore=score; best=it; }
+      }
+    }
+    return best;
+  }
+
+  function resolveResponse(text){
+    var m = matchIntent(text);
+    if (!m && state.lastIntentId){
+      var last = null;
+      for (var i=0;i<INTENTS.length;i++) if (INTENTS[i].id===state.lastIntentId){ last=INTENTS[i]; break; }
+      if (last && /\b(подробн|расскаж|а как|еще|ещё|поясн|уточн|детал)\b/i.test(text))
+        return { answer: last.followUp||last.answer, quickReplies: last.quickReplies };
+    }
+    if (m){ state.failed=0; state.lastIntentId=m.id; return { answer:m.answer, quickReplies:m.quickReplies }; }
+    state.failed++; state.lastIntentId=null;
+    if (state.failed>=2) return {
+      answer:'Чтобы не гадать — лучше сразу написать Елене напрямую. Выберите канал, и она ответит лично.',
+      quickReplies:['Telegram','MAX','Почта','Оставить заявку']
+    };
+    return {
+      answer:'Уточните, пожалуйста, вопрос. Я хорошо разбираюсь в темах: услуги и цены, форматы работы, каналы связи, профайлинг цифрового следа, расследования, медиация.',
+      quickReplies:['Услуги и цены','Как связаться','Оставить заявку']
+    };
+  }
+
+  function scrollBottom(){ requestAnimationFrame(function(){ elBody.scrollTop = elBody.scrollHeight; }); }
+  function clearQuickReplies(){
+    var n = elBody.querySelectorAll('.egc-quick');
+    for (var i=0;i<n.length;i++) n[i].parentNode.removeChild(n[i]);
+  }
+  function renderQuickReplies(items){
+    clearQuickReplies();
+    if (!items || !items.length) return;
+    var wrap = document.createElement('div'); wrap.className='egc-quick';
+    items.forEach(function(label){
+      var b = document.createElement('button');
+      b.type='button'; b.className='egc-quick-btn'; b.textContent=label;
+      b.addEventListener('click', function(){ handleUserMessage(label); });
+      wrap.appendChild(b);
+    });
+    elBody.appendChild(wrap); scrollBottom();
+  }
+  function appendMessage(text, role){
+    var el = document.createElement('div');
+    el.className = 'egc-msg ' + (role==='user'?'egc-msg-user':'egc-msg-bot');
+    el.textContent = text;
+    if (elTyping && elTyping.parentNode===elBody) elBody.insertBefore(el, elTyping);
+    else elBody.appendChild(el);
+    state.history.push({ role:role, text:text, ts:Date.now() });
+    if (state.history.length>MAX_HISTORY) state.history.shift();
+    persist(); scrollBottom();
+  }
+  function showTyping(){ if (elTyping) elTyping.classList.add('show'); scrollBottom(); }
+  function hideTyping(){ if (elTyping) elTyping.classList.remove('show'); }
+  function persist(){ try{ sessionStorage.setItem(STORAGE_KEY, JSON.stringify(state.history)); }catch(e){} }
+  function restore(){
+    try{
+      var raw = sessionStorage.getItem(STORAGE_KEY);
+      if (!raw) return false;
+      var arr = JSON.parse(raw);
+      if (!Array.isArray(arr)||!arr.length) return false;
+      arr.forEach(function(m){
+        var el = document.createElement('div');
+        el.className = 'egc-msg ' + (m.role==='user'?'egc-msg-user':'egc-msg-bot');
+        el.textContent = m.text;
+        if (elTyping && elTyping.parentNode===elBody) elBody.insertBefore(el, elTyping);
+        else elBody.appendChild(el);
+      });
+      state.history = arr; state.greeted = true; scrollBottom(); return true;
+    }catch(e){ return false; }
+  }
+  function bumpBadge(){
+    if (!elBadge) return;
+    var c = parseInt(elBadge.textContent,10)||0;
+    elBadge.textContent = String(c+1); elBadge.classList.add('show');
+  }
+  function clearBadge(){
+    if (!elBadge) return;
+    elBadge.textContent = '0'; elBadge.classList.remove('show');
+  }
+  function runAction(a){
+    if (a==='tg') window.open(LINKS.tg,'_blank','noopener');
+    else if (a==='max') window.open(LINKS.max,'_blank','noopener');
+    else if (a==='email'){
+      if (typeof window.openEmail==='function') window.openEmail(new Event('click'));
+      else window.location.href='mailto:info@galanova-elena.ru';
+    } else if (a==='form'){
+      if (typeof window.openModal==='function') window.openModal();
+      else window.open(LINKS.tg,'_blank','noopener');
+    }
+  }
+
+  async function handleUserMessage(raw){
+    var text = String(raw||'').trim();
+    if (!text || state.typing) return;
+    if (text.length > MAX_INPUT){
+      appendMessage('Слишком длинное сообщение — сократите до '+MAX_INPUT+' символов.','bot');
+      return;
+    }
+    var key = normalize(text);
+    if (QUICK_ACTIONS[key]){
+      appendMessage(text,'user'); elInput.value='';
+      state.typing=true; elSend.disabled=true; showTyping();
+      await sleep(400); hideTyping();
+      appendMessage('Открываю канал…','bot');
+      state.typing=false; elSend.disabled=false;
+      runAction(QUICK_ACTIONS[key]);
+      if (!state.open) bumpBadge();
+      return;
+    }
+    appendMessage(text,'user'); elInput.value='';
+    state.typing=true; elSend.disabled=true; elInput.disabled=true; showTyping();
+    var resp = resolveResponse(text);
+    var delay = TYPING_MIN + Math.random()*(TYPING_MAX-TYPING_MIN) + Math.min(resp.answer.length*8, 800);
+    await sleep(delay);
+    hideTyping();
+    appendMessage(resp.answer,'bot');
+    renderQuickReplies(resp.quickReplies);
+    state.typing=false; elSend.disabled=false; elInput.disabled=false; elInput.focus();
+    if (!state.open) bumpBadge();
+  }
+
+  function greet(){
+    state.greeted = true;
+    showTyping();
+    setTimeout(function(){
+      hideTyping();
+      var g=null;
+      for (var i=0;i<INTENTS.length;i++) if (INTENTS[i].id==='greeting'){ g=INTENTS[i]; break; }
+      if (!g) return;
+      appendMessage(g.answer,'bot'); renderQuickReplies(g.quickReplies);
+    }, 700);
+  }
+
+  function resetChat(){
+    var n = elBody.querySelectorAll('.egc-msg, .egc-quick');
+    for (var i=0;i<n.length;i++) n[i].parentNode.removeChild(n[i]);
+    state.history=[]; state.lastIntentId=null; state.failed=0; state.greeted=false; state.typing=false;
+    elSend.disabled=false; elInput.disabled=false;
+    try { sessionStorage.removeItem(STORAGE_KEY); } catch(e){}
+    greet();
+  }
+
+  function openChat(){
+    elWindow.classList.add('open'); elToggle.setAttribute('aria-expanded','true');
+    state.open = true; clearBadge();
+    setTimeout(function(){ if (elInput) elInput.focus(); }, 60);
+    if (!state.greeted && !restore()) greet(); else scrollBottom();
+  }
+  function closeChat(){
+    elWindow.classList.remove('open'); elToggle.setAttribute('aria-expanded','false'); state.open = false;
+  }
+  function toggleChat(){ if (state.open) closeChat(); else openChat(); }
+
+  elToggle.addEventListener('click', toggleChat);
+  elClose.addEventListener('click', closeChat);
+  elReset.addEventListener('click', resetChat);
+  elSend.addEventListener('click', function(){ handleUserMessage(elInput.value); });
+  elInput.addEventListener('keydown', function(e){
+    if (e.key==='Enter' && !e.shiftKey){ e.preventDefault(); handleUserMessage(elInput.value); }
+  });
+  document.addEventListener('keydown', function(e){
+    if (e.key==='Escape' && state.open) closeChat();
+  });
+})();
+</script>
+<!-- ==================== КОНЕЦ НОВОГО ЧАТА ==================== -->
 </body>
 </html>
