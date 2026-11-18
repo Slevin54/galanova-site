@@ -53,14 +53,14 @@
         {
           "@type": "WebSite",
           "@id": "https://galanova-elena.ru/#website",
-          "url": "https://galanova-elena.ru",
+          "url": "https://galanova-elena.ru/",
           "name": "Елена Галанова — Эксперт-профайлер",
           "inLanguage": "ru-RU"
         },
         {
           "@type": "WebPage",
           "@id": "https://galanova-elena.ru/#webpage",
-          "url": "https://galanova-elena.ru",
+          "url": "https://galanova-elena.ru/",
           "name": "Елена Галанова — эксперт-профайлер. Кадровая безопасность и аудит бизнеса",
           "isPartOf": { "@id": "https://galanova-elena.ru/#website" },
           "about": { "@id": "https://galanova-elena.ru/#person" },
@@ -72,7 +72,7 @@
           "name": "Елена Галанова",
           "alternateName": "Галанова Елена Владимировна",
           "jobTitle": "Кандидат психологических наук, Эксперт-профайлер, Преподаватель ВУЗа",
-          "url": "https://galanova-elena.ru",
+          "url": "https://galanova-elena.ru/",
           "image": "https://galanova-elena.ru/profile.jpg",
           "description": "Превентивная защита бизнеса от кадровых рисков. Помогаю руководителям и HR выявлять скрытые мотивы сотрудников, предотвращать инсайдерские угрозы и прогнозировать поведение команд.",
           "knowsAbout": [
@@ -100,7 +100,7 @@
           "@type": "Organization",
           "@id": "https://galanova-elena.ru/#organization",
           "name": "Консалтинг и аудит безопасности: Елена Галанова",
-          "url": "https://galanova-elena.ru",
+          "url": "https://galanova-elena.ru/",
           "founder": { "@id": "https://galanova-elena.ru/#person" },
           "address": {
             "@type": "PostalAddress",
@@ -600,7 +600,7 @@
         .carousel-wrapper-pub { position: relative; width: 100%; overflow: hidden; padding-bottom: 20px; margin-top: 30px; }
         .pub-track { display: flex; gap: 20px; width: max-content; animation: marquee 30s linear infinite; }
         .pub-track:hover { animation-play-state: paused; }
-        @keyframes marquee { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+        @keyframes marquee { 0% { transform: translateX(0); } 100% { transform: translateX(calc(-50% - 10px)); } }
         .pub-card { width: 300px; flex-shrink: 0; background: #fff; border-radius: 8px; overflow: hidden; box-shadow: 0 6px 12px rgba(0,0,0,0.05); display: flex; flex-direction: column; border: 1px solid #e2e8f0; height: 100%; }
         .pub-image { height: 160px; background-color: #e2e8f0; overflow: hidden; position: relative; }
         .pub-image::after { content: ''; position: absolute; top:0; left:0; width: 100%; height: 100%; background: rgba(0,0,0,0.1); }
@@ -742,6 +742,7 @@
         }
 
         @media (max-width: 900px) {
+            .chat-input input { font-size: 16px; }
             .hero-wrapper { padding-top: 95px; padding-bottom: 40px; min-height: auto; }
             .hero-grid { grid-template-columns: 1fr; gap: 30px; }
             .hero-content { text-align: center; }
@@ -867,6 +868,7 @@
                     utm_source: '',
                     utm_medium: '',
                     utm_campaign: '',
+                    utm_content: '',
                     landingPage: window.location.pathname,
                     capturedAt: new Date().toISOString()
                 };
@@ -918,7 +920,7 @@
                 </a>
             </div>
             
-            <button class="hamburger-btn" onclick="toggleMenu()" aria-label="Открыть меню">
+            <button class="hamburger-btn" type="button" onclick="toggleMenu()" aria-label="Открыть меню">
                 <span></span><span></span><span></span>
             </button>
         </div>
@@ -929,7 +931,7 @@
     <div class="side-menu" id="sideMenu">
         <div class="side-menu-header">
             <span class="side-menu-logo">Елена Галанова</span>
-            <button class="side-menu-close" onclick="closeMenu()">&times;</button>
+            <button class="side-menu-close" type="button" onclick="closeMenu()">&times;</button>
         </div>
         <nav class="side-menu-nav">
             <a href="#about" onclick="closeMenu()">Обо мне</a>
@@ -1091,7 +1093,7 @@
             <div class="solutions-grid">
                 <div class="solution-card" onclick="openServiceDetail('digital')" onkeydown="handleCardKey(event, 'digital')" role="button" tabindex="0">
                     <div class="solution-header">
-                        <div class="solution-icon"><svg viewBox="0 0 24 24"><path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/></svg></div>
+                        <div class="solution-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/></svg></div>
                         <div class="solution-title-wrap">
                             <h3>Профайлинг цифрового следа</h3>
                         </div>
@@ -1103,12 +1105,12 @@
                         <li>Прогноз поведения в бизнесе</li>
                     </ul>
                     <div class="solution-price">от 8 000 ₽</div>
-                    <div class="solution-card-cta">Как проходит работа и связь <svg viewBox="0 0 24 24"><path d="M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z"/></svg></div>
+                    <div class="solution-card-cta">Как проходит работа и связь <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z"/></svg></div>
                 </div>
 
                 <div class="solution-card" onclick="openServiceDetail('consult')" onkeydown="handleCardKey(event, 'consult')" role="button" tabindex="0">
                     <div class="solution-header">
-                        <div class="solution-icon"><svg viewBox="0 0 24 24"><path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2z"/></svg></div>
+                        <div class="solution-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2z"/></svg></div>
                         <div class="solution-title-wrap">
                             <h3>Экспертная консультация</h3>
                         </div>
@@ -1120,12 +1122,12 @@
                         <li>Стратегия дальнейших действий</li>
                     </ul>
                     <div class="solution-price">от 5 000 ₽</div>
-                    <div class="solution-card-cta">Как проходит работа и связь <svg viewBox="0 0 24 24"><path d="M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z"/></svg></div>
+                    <div class="solution-card-cta">Как проходит работа и связь <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z"/></svg></div>
                 </div>
 
                 <div class="solution-card" onclick="openServiceDetail('investigation')" onkeydown="handleCardKey(event, 'investigation')" role="button" tabindex="0">
                     <div class="solution-header">
-                        <div class="solution-icon"><svg viewBox="0 0 24 24"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm0 10.99h7c-.53 4.12-3.28 7.79-7 8.94V12H5V6.3l7-3.11v8.8z"/></svg></div>
+                        <div class="solution-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm0 10.99h7c-.53 4.12-3.28 7.79-7 8.94V12H5V6.3l7-3.11v8.8z"/></svg></div>
                         <div class="solution-title-wrap">
                             <h3>Сопровождение расследований</h3>
                         </div>
@@ -1137,14 +1139,14 @@
                         <li>Оценка искренности показаний</li>
                     </ul>
                     <div class="solution-price">от 10 000 ₽</div>
-                    <div class="solution-card-cta">Как проходит работа и связь <svg viewBox="0 0 24 24"><path d="M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z"/></svg></div>
+                    <div class="solution-card-cta">Как проходит работа и связь <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z"/></svg></div>
                 </div>
             </div>
 
             <div class="solutions-grid-bottom">
                 <div class="solution-card" onclick="openServiceDetail('anon')" onkeydown="handleCardKey(event, 'anon')" role="button" tabindex="0">
                     <div class="solution-header">
-                        <div class="solution-icon"><svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg></div>
+                        <div class="solution-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg></div>
                         <div class="solution-title-wrap">
                             <h3>Анализ анонимных сообщений</h3>
                         </div>
@@ -1156,12 +1158,12 @@
                         <li>Определение профиля автора</li>
                     </ul>
                     <div class="solution-price">от 15 000 ₽</div>
-                    <div class="solution-card-cta">Как проходит работа и связь <svg viewBox="0 0 24 24"><path d="M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z"/></svg></div>
+                    <div class="solution-card-cta">Как проходит работа и связь <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z"/></svg></div>
                 </div>
 
                 <div class="solution-card" onclick="openServiceDetail('mediation')" onkeydown="handleCardKey(event, 'mediation')" role="button" tabindex="0">
                     <div class="solution-header">
-                        <div class="solution-icon"><svg viewBox="0 0 24 24"><path d="M19 22H5v-2h14v2zm-2.03-4.26c-.53-.88-1.46-1.52-2.58-1.74l-.96-.19c-.31-.06-.52-.36-.45-.68.06-.31.36-.52.68-.45l.97.19c1.92.38 3.51 1.48 4.41 2.98L16.97 17.74zM12 13c-2.21 0-4-1.79-4-4s1.79-4 4-4 4 1.79 4 4-1.79 4-4 4zm0-6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zM5.97 17.74c-.53-.88-1.46-1.52-2.58-1.74l-.96-.19c-.31-.06-.52-.36-.45-.68.06-.31.36-.52.68-.45l.97.19c1.92.38 3.51 1.48 4.41 2.98L5.97 17.74z"/></svg></div>
+                        <div class="solution-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19 22H5v-2h14v2zm-2.03-4.26c-.53-.88-1.46-1.52-2.58-1.74l-.96-.19c-.31-.06-.52-.36-.45-.68.06-.31.36-.52.68-.45l.97.19c1.92.38 3.51 1.48 4.41 2.98L16.97 17.74zM12 13c-2.21 0-4-1.79-4-4s1.79-4 4-4 4 1.79 4 4-1.79 4-4 4zm0-6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zM5.97 17.74c-.53-.88-1.46-1.52-2.58-1.74l-.96-.19c-.31-.06-.52-.36-.45-.68.06-.31.36-.52.68-.45l.97.19c1.92.38 3.51 1.48 4.41 2.98L5.97 17.74z"/></svg></div>
                         <div class="solution-title-wrap">
                             <h3>Медиация конфликтов</h3>
                         </div>
@@ -1173,7 +1175,7 @@
                         <li>Сохранение деловых отношений</li>
                     </ul>
                     <div class="solution-price">от 5 000 ₽</div>
-                    <div class="solution-card-cta">Как проходит работа и связь <svg viewBox="0 0 24 24"><path d="M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z"/></svg></div>
+                    <div class="solution-card-cta">Как проходит работа и связь <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z"/></svg></div>
                 </div>
             </div>
 
@@ -1274,7 +1276,7 @@
                 <p style="font-size: 1.05rem; color: #cbd5e0; margin: 0 auto 35px auto; line-height: 1.6; max-width: 750px;">
                     Все обращения строго конфиденциальны. Опишите вашу ситуацию, и я предложу вам оптимальный формат сотрудничества.
                 </p>
-                <button class="contact-btn" onclick="openModal()" style="padding: 16px 45px; font-size: 1.1rem; box-shadow: 0 10px 25px rgba(211, 84, 0, 0.4);">Запросить консультацию</button>
+                <button type="button" class="contact-btn" onclick="openModal()" style="padding: 16px 45px; font-size: 1.1rem; box-shadow: 0 10px 25px rgba(211, 84, 0, 0.4);">Запросить консультацию</button>
                 <div style="border-top: 1px solid rgba(255,255,255,0.05); padding-top: 25px; margin-top: 40px;">
                     <div style="display: flex; justify-content: center; gap: 20px; margin-bottom: 15px; flex-wrap: wrap; font-size: 0.85rem;">
                         <a href="privacy.html" target="_blank" rel="noopener noreferrer" style="color: #cbd5e0; text-decoration: none;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='#cbd5e0'">Политика конфиденциальности</a>
@@ -1294,7 +1296,7 @@
     <!-- МОДАЛЬНОЕ ОКНО ЦППА -->
     <div class="modal-overlay" id="cppaModal" onclick="if(event.target === this) closeCppaModal()">
         <div class="modal-box" role="dialog" aria-modal="true" aria-labelledby="cppaModalTitle">
-            <button class="modal-close" onclick="closeCppaModal()" aria-label="Закрыть окно">&times;</button>
+            <button type="button" class="modal-close" onclick="closeCppaModal()" aria-label="Закрыть окно">&times;</button>
             <h3 id="cppaModalTitle" style="font-size: 1.8rem; margin-bottom: 15px; color: var(--primary);">ЦППА</h3>
             <p style="font-size: 1.05rem; line-height: 1.6; color: var(--text-dark);">Центр прикладной поведенческой аналитики (ЦППА) специализируется на комплексном аудите человеческого ресурса и оценке корпоративных рисков. Я выступаю главным методологом и гарантом качества каждого проекта, проводя ключевые профилирования и проверки лично.</p>
         </div>
@@ -1302,7 +1304,7 @@
     <!-- МОДАЛЬНОЕ ОКНО ДЕТАЛЕЙ УСЛУГИ (ВАРИАНТ А: МЕХАНИКА РАБОТЫ + 3 КАНАЛА СВЯЗИ) -->
     <div class="modal-overlay" id="serviceDetailModal" onclick="if(event.target === this) closeServiceDetail()">
         <div class="service-modal-box" role="dialog" aria-modal="true" aria-labelledby="smTitle">
-            <button class="modal-close" onclick="closeServiceDetail()" aria-label="Закрыть">&times;</button>
+            <button type="button" class="modal-close" onclick="closeServiceDetail()" aria-label="Закрыть">&times;</button>
             
             <div class="service-modal-header">
                 <h3 id="smTitle"></h3>
@@ -1347,15 +1349,15 @@
                 <div class="service-channels-sub">Переход откроет диалог со мной — кратко опишите запрос, и мы согласуем время</div>
                 <div class="service-channels-btns">
                     <a href="https://max.ru/u/f9LHodD0cOIwE5Tk0yqsCdSW7aH2YKheHnM5PcwHgDaWAse8blY_Usz5-7Q" target="_blank" rel="noopener noreferrer" class="channel-action-btn btn-max" onclick="handleServiceChannelClick(event, 'max')">
-                        <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12c0 1.7.45 3.31 1.23 4.7L2 22l5.48-1.15C8.89 21.57 10.41 22 12 22c5.52 0 10-4.48 10-10S17.52 2 12 2z"/></svg>
+                        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2C6.48 2 2 6.48 2 12c0 1.7.45 3.31 1.23 4.7L2 22l5.48-1.15C8.89 21.57 10.41 22 12 22c5.52 0 10-4.48 10-10S17.52 2 12 2z"/></svg>
                         Написать в MAX
                     </a>
                     <a href="https://t.me/ElenaProprofiler" target="_blank" rel="noopener noreferrer" class="channel-action-btn btn-telegram" onclick="handleServiceChannelClick(event, 'tg')">
-                        <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69.01-.03.01-.14-.06-.2-.07-.06-.17-.04-.25-.02-.11.02-1.78 1.14-5.06 3.34-.48.33-.91.49-1.3.48-.43-.01-1.25-.24-1.87-.44-.75-.24-1.35-.37-1.3-.79.03-.22.33-.44.89-.66 3.5-1.53 5.83-2.53 7-3.02 3.33-1.39 4.02-1.63 4.47-1.64.1 0 .32.02.47.14.12.1.15.25.17.33.02.13.04.28.02.4z"/></svg>
+                        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69.01-.03.01-.14-.06-.2-.07-.06-.17-.04-.25-.02-.11.02-1.78 1.14-5.06 3.34-.48.33-.91.49-1.3.48-.43-.01-1.25-.24-1.87-.44-.75-.24-1.35-.37-1.3-.79.03-.22.33-.44.89-.66 3.5-1.53 5.83-2.53 7-3.02 3.33-1.39 4.02-1.63 4.47-1.64.1 0 .32.02.47.14.12.1.15.25.17.33.02.13.04.28.02.4z"/></svg>
                         Написать в Telegram
                     </a>
                     <a href="#" class="channel-action-btn btn-email" onclick="handleServiceChannelClick(event, 'email')">
-                        <svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+                        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
                         Написать на Почту
                     </a>
                 </div>
@@ -1367,7 +1369,7 @@
     <!-- МОДАЛЬНОЕ ОКНО (ФОРМА ЗАЯВКИ) -->
     <div class="modal-overlay" id="leadModal" onclick="if(event.target === this) closeModal()">
         <div class="modal-box" role="dialog" aria-modal="true" aria-labelledby="leadModalTitle">
-            <button class="modal-close" onclick="closeModal()" aria-label="Закрыть окно">&times;</button>
+            <button type="button" class="modal-close" onclick="closeModal()" aria-label="Закрыть окно">&times;</button>
             <div id="formContent">
                 <h3 id="leadModalTitle">Обсудить задачу</h3>
                 <p>Оставьте контакты, и я свяжусь с вами для обсуждения деталей аудита или обучения.</p>
@@ -1381,7 +1383,7 @@
 
                     <div class="form-group">
                         <label for="leadName">Ваше имя</label>
-                        <input type="text" name="name" placeholder="Иван Иванов" id="leadName" maxlength="100" required>
+                        <input type="text" name="name" placeholder="Иван Иванов" id="leadName" maxlength="100" autocomplete="name" required>
                     </div>
                     <div class="form-group">
                         <label for="leadContact">Телефон, Email или @ник в мессенджере</label>
@@ -1406,15 +1408,15 @@
             <div class="form-success" id="formSuccess">
                 <h4>Заявка успешно отправлена!</h4>
                 <p style="font-size: 0.95rem; margin-bottom: 15px; color: #4a5568;">Спасибо за обращение. Я свяжусь с вами в ближайшее время по указанным контактам.</p>
-                <button class="contact-btn full-width" onclick="closeModal()">Закрыть окно</button>
+                <button type="button" class="contact-btn full-width" onclick="closeModal()">Закрыть окно</button>
             </div>
         </div>
     </div>
 
     <!-- УМНЫЙ ЧАТ-БОТ (ИРИНА) -->
     <div class="chat-widget">
-        <button class="chat-btn" onclick="toggleChat()" title="Открыть чат" aria-label="Открыть чат">
-            <svg viewBox="0 0 24 24"><path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2z"></path></svg>
+        <button type="button" class="chat-btn" onclick="toggleChat()" title="Открыть чат" aria-label="Открыть чат">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2z"></path></svg>
             <span id="chatUnreadBadge" class="chat-unread-badge">1</span>
         </button>
         
@@ -1428,10 +1430,10 @@
                     </div>
                 </div>
                 <div class="chat-header-actions">
-                    <button class="icon-btn" onclick="resetChat()" title="Начать заново" aria-label="Начать диалог заново">
+                    <button type="button" class="icon-btn" onclick="resetChat()" title="Начать заново" aria-label="Начать диалог заново">
                         <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M12.5 3C17.15 3 21 6.85 21 11.5S17.15 20 12.5 20 4 16.15 4 11.5H2l3.85-3.85L9.7 11.5H7.5c0 2.76 2.24 5 5 5s5-2.24 5-5-2.24-5-5-5c-1.25 0-2.4.47-3.3 1.25L7.75 6.3C9.07 4.88 10.7 4 12.5 3z"/></svg>
                     </button>
-                    <button class="icon-btn" onclick="toggleChat()" title="Закрыть чат" aria-label="Закрыть чат">&times;</button>
+                    <button type="button" class="icon-btn" onclick="toggleChat()" title="Закрыть чат" aria-label="Закрыть чат">&times;</button>
                 </div>
             </div>
             
@@ -1448,8 +1450,8 @@
     </div>
 
     <!-- КНОПКА "НАВЕРХ" -->
-    <button id="scrollToTopBtn" title="Вернуться наверх" aria-label="Вернуться наверх">
-        <svg viewBox="0 0 24 24">
+    <button type="button" id="scrollToTopBtn" title="Вернуться наверх" aria-label="Вернуться наверх">
+        <svg viewBox="0 0 24 24" aria-hidden="true">
             <path d="M4 12l1.41 1.41L11 7.83V20h2V7.83l5.58 5.59L20 12l-8-8-8 8z"/>
         </svg>
     </button>
@@ -1462,16 +1464,16 @@
     const API_URL = "https://functions.yandexcloud.net/d4et6k8nfd7dna181g4v";
     const SITE_SECURITY_TOKEN = "eg_sec_2026_v1";
     const RATE_LIMIT_MS = 2 * 60 * 1000;
-    const YM_ID = 113975964; // [NEW] Вынесли ID Метрики в константу
+    const YM_ID = 113975964;
 
-    // [FIX 1] Глобальные таймеры модалок для предотвращения race condition
+    // Глобальные таймеры модалок для предотвращения race condition
     let lastFocusedElement = null;
     let serviceModalTimeout;
     let leadModalTimeout;
     let cppaModalTimeout;
-    let switchFormTimeout; // [FIX 4] Таймер перехода из услуги в форму
+    let switchFormTimeout;
 
-    // [FIX 3] Управление блокировкой прокрутки (без дергания экрана)
+    // Управление блокировкой прокрутки (без дергания экрана)
     function updateBodyScroll() {
         const sideMenu = document.getElementById('sideMenu');
         const isMenuOpen = sideMenu ? sideMenu.classList.contains('active') : false;
@@ -1493,7 +1495,7 @@
         }
     }
 
-    // [FIX 3] Безопасная установка textContent по id
+    // Безопасная установка textContent по id
     function setTextSafe(id, text) {
         const el = document.getElementById(id);
         if (el) el.textContent = text;
@@ -1537,12 +1539,12 @@
     function toggleMenu() {
         document.getElementById('sideMenu').classList.toggle('active');
         document.getElementById('menuOverlay').classList.toggle('active');
-        updateBodyScroll(); // [FIX 3]
+        updateBodyScroll();
     }
     function closeMenu() {
         document.getElementById('sideMenu').classList.remove('active');
         document.getElementById('menuOverlay').classList.remove('active');
-        updateBodyScroll(); // [FIX 3]
+        updateBodyScroll();
     }
 
     // КЛАВИАТУРНАЯ ДОСТУПНОСТЬ КАРТОЧЕК УСЛУГ
@@ -1553,11 +1555,9 @@
         }
     }
 
-    // УМНЫЙ РОУТИНГ ДЛЯ МЕССЕНДЖЕРОВ
+    // УМНЫЙ РОУТИНГ ДЛЯ МЕССЕНДЖЕРОВ (без конфликта протоколов tg:// на iOS/Android)
     function openMessenger(e, type, customContext) {
         closeHeroCta();
-        const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ||
-                         (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
         const trafficSource = getTrafficSource();
 
         if (type === 'tg') {
@@ -1572,14 +1572,6 @@
                 });
             }
             if (typeof ym === 'function') ym(YM_ID, 'reachGoal', 'click_telegram');
-
-            if (isMobile) {
-                e.preventDefault();
-                window.location.href = 'tg://resolve?domain=ElenaProprofiler';
-                setTimeout(() => {
-                    window.location.href = 'https://t.me/ElenaProprofiler';
-                }, 1500);
-            }
         } else if (type === 'max') {
             if (!customContext) {
                 sendSilentNotification({
@@ -1592,11 +1584,6 @@
                 });
             }
             if (typeof ym === 'function') ym(YM_ID, 'reachGoal', 'click_max');
-
-            if (isMobile) {
-                e.preventDefault();
-                window.location.href = 'https://max.ru/u/f9LHodD0cOIwE5Tk0yqsCdSW7aH2YKheHnM5PcwHgDaWAse8blY_Usz5-7Q';
-            }
         }
     }
 
@@ -1687,6 +1674,9 @@
 
         clearTimeout(serviceModalTimeout);
         lastFocusedElement = document.activeElement;
+        if (currentSelectedServiceTitle !== item.title) {
+            contextHintShown = false;
+        }
         currentSelectedServiceTitle = item.title;
 
         setTextSafe('smTitle', item.title);
@@ -1713,9 +1703,7 @@
             modal.style.display = 'flex';
             requestAnimationFrame(() => { 
                 modal.classList.add('active'); 
-                updateBodyScroll(); // [FIX 3]
-                
-                // [NEW] Фокус на крестик для доступности
+                updateBodyScroll();
                 const closeBtn = modal.querySelector('.modal-close');
                 if (closeBtn) closeBtn.focus();
             });
@@ -1727,7 +1715,7 @@
         const modal = document.getElementById('serviceDetailModal');
         if (modal) {
             modal.classList.remove('active');
-            updateBodyScroll(); // [FIX 3]
+            updateBodyScroll();
             serviceModalTimeout = setTimeout(() => { modal.style.display = 'none'; }, 300);
         }
         if (lastFocusedElement && typeof lastFocusedElement.focus === 'function') {
@@ -1760,16 +1748,16 @@
     }
 
     function switchServiceToLeadForm() {
+        clearTimeout(switchFormTimeout);
         const selectedTitle = currentSelectedServiceTitle;
         closeServiceDetail();
-        clearTimeout(switchFormTimeout); // [FIX 4]
         switchFormTimeout = setTimeout(() => {
             openModal();
             const taskInput = document.getElementById('leadTask');
             if (taskInput && selectedTitle) {
                 taskInput.value = `Интересует услуга: «${selectedTitle}». `;
             }
-        }, 320);
+        }, 350);
     }
 
     function showFormError(msg) {
@@ -1787,15 +1775,15 @@
     function openCppaModal(e) {
         if (e) e.preventDefault();
         clearTimeout(cppaModalTimeout);
-        lastFocusedElement = document.activeElement;
         const modal = document.getElementById('cppaModal');
+        if (modal && !modal.classList.contains('active')) {
+            lastFocusedElement = document.activeElement;
+        }
         if (modal) {
             modal.style.display = 'flex';
             requestAnimationFrame(() => { 
                 modal.classList.add('active'); 
-                updateBodyScroll(); // [FIX 3]
-                
-                // [NEW] Фокус на крестик для доступности
+                updateBodyScroll();
                 const closeBtn = modal.querySelector('.modal-close');
                 if (closeBtn) closeBtn.focus();
             });
@@ -1806,7 +1794,7 @@
         const modal = document.getElementById('cppaModal');
         if (modal) {
             modal.classList.remove('active');
-            updateBodyScroll(); // [FIX 3]
+            updateBodyScroll();
             cppaModalTimeout = setTimeout(() => { modal.style.display = 'none'; }, 300);
         }
         if (lastFocusedElement && typeof lastFocusedElement.focus === 'function') {
@@ -1835,9 +1823,9 @@
             
             requestAnimationFrame(() => {
                 modal.classList.add('active');
-                updateBodyScroll(); // [FIX 3]
+                updateBodyScroll();
                 const nameInput = document.getElementById('leadName');
-                if (nameInput) nameInput.focus(); // В форме заявки фокус на имя
+                if (nameInput) nameInput.focus();
             });
         }
     }
@@ -1850,7 +1838,7 @@
         showFormError('');
         if (modal) {
             modal.classList.remove('active');
-            updateBodyScroll(); // [FIX 3]
+            updateBodyScroll();
             leadModalTimeout = setTimeout(() => {
                 modal.style.display = 'none';
                 if (formContent) formContent.style.display = 'block';
@@ -1937,8 +1925,12 @@
         const tgMatch = str.match(/(?:^|\s)(@[a-zA-Z][a-zA-Z0-9_]{2,31})/);
         if (tgMatch) return tgMatch[1];
 
+        // Распознавание ника без @, если рядом указано "ник", "тг", "телеграм", "max"
+        const explicitNickMatch = str.match(/(?:ник|тг|tg|телеграм|telegram|max|макс)(?:\s+в\s+\S+)?[\s:—\-]+([a-zA-Z][a-zA-Z0-9_]{3,31})\b/i);
+        if (explicitNickMatch) return '@' + explicitNickMatch[1].toLowerCase();
+
         if (allowBareUsername) {
-            const stopWords = /^(osint|hello|privet|telegram|whatsapp|viber|skype|email|audit|price|zoom|teams|spasibo|thank|thanks|admin|support|director|manager|company|office|project|client|business|list|test|please|ok|okay|yes|no|hi|hey|help|info|contact|message|service|services|question|answer|problem|issue|maybe|later|tomorrow|today|wait|stop|start|phone|call|number|name)$/i;
+            const stopWords = /^(osint|hello|privet|telegram|whatsapp|viber|skype|email|audit|price|zoom|teams|spasibo|thank|thanks|admin|support|director|manager|company|office|project|client|business|list|test|please|ok|okay|yes|no|hi|hey|help|info|contact|message|service|services|question|answer|problem|issue|maybe|later|tomorrow|today|wait|stop|start|phone|call|number|name|signal|discord|matrix)$/i;
             const cleanStr = str.trim();
             if (/^[a-zA-Z][a-zA-Z0-9_]{4,31}$/.test(cleanStr) && !stopWords.test(cleanStr)) {
                 return '@' + cleanStr.toLowerCase();
@@ -1958,7 +1950,7 @@
             const timeInput = document.getElementById('formTime');
             if (timeInput && timeInput.value) {
                 const timeSpent = Date.now() - parseInt(timeInput.value, 10);
-                if (timeSpent < 1500) {
+                if (timeSpent < 800) {
                     showFormError("Пожалуйста, проверьте корректность заполнения полей.");
                     return;
                 }
@@ -2031,8 +2023,6 @@
                 }
             } catch (e) {
                 if (typeof ym === 'function') ym(YM_ID, 'reachGoal', 'form_error');
-                
-                // [NEW] Разделяем ошибку таймаута и реальный сбой сети
                 if (e.name === 'AbortError') {
                     showFormError("Сервер не отвечает (превышено время ожидания). Пожалуйста, попробуйте позже или напишите в Telegram.");
                 } else {
@@ -2090,7 +2080,7 @@
         {
             id: "investigation",
             intent: "Служебное расследование / Утечка / Хищение",
-            keywords: ["украл", "краж", "хищен", "утечк", "слив", "конкурент", "откат", "взятк", "недостач", "инсайдер", "шпион", "воров", "ущерб", "расследован", "сговор", "махинац", "крыс", "саботаж", "пропал", "вред"],
+            keywords: ["украл", "краж", "хищен", "утечк", "слив", "конкурент", "откат", "взятк", "недостач", "инсайдер", "шпион", "воров", "ущерб", "расследован", "сговор", "махинац", "крыс", "саботаж", "пропал", "вред", "сб"],
             reply: "Понимаю, ситуация требует полной конфиденциальности и аккуратности. В таких случаях Елена проводит контекстный анализ поведения фигурантов, формирует стратегию очного опроса и помогает локализовать причастных лиц (от 10 000 ₽). Напишите ваш номер для оперативной связи — мы разберем ситуацию.",
             options: [
                 { text: "Написать контакт прямо в чате", action: "ask_contact_inline" },
@@ -2100,7 +2090,7 @@
         {
             id: "screening",
             intent: "Проверка кандидатов и сотрудников",
-            keywords: ["скрининг", "провер", "кандидат", "сотрудник", "найм", "наним", "резюме", "собеседован", "интервью", "лояльн", "риск", "благонадежн", "персонал", "работник", "ваканс", "должност", "главбух", "бухгалтер", "финдир", "закуп", "роп", "директор", "руковод"],
+            keywords: ["скрининг", "провер", "кандидат", "сотрудник", "найм", "наним", "резюме", "собеседован", "интервью", "лояльн", "риск", "благонадежн", "персонал", "работник", "ваканс", "должност", "главбух", "бухгалтер", "финдир", "закуп", "роп", "директор", "руковод", "hr", "сб"],
             reply: "Оценка кандидатов и действующих сотрудников проводится методами профайлинга цифрового следа (от 8 000 ₽) и в формате экспертной консультации или участия в интервью (от 5 000 ₽). Это позволяет выявить скрытые мотивы, факторы риска и реальную лояльность до принятия кадрового решения. Кого планируете оценить?",
             options: [
                 { text: "Кандидата при найме", action: "hiring" },
@@ -2131,7 +2121,7 @@
         {
             id: "training",
             intent: "Обучение, тренинги и выступления",
-            keywords: ["обучен", "тренинг", "семинар", "лекц", "выступлен", "спикер", "курс", "мастер", "научит", "корпоративн", "вебинар"],
+            keywords: ["обучен", "тренинг", "семинар", "лекц", "выступлен", "спикер", "курс", "мастер", "научит", "корпоративн", "вебинар", "hr", "сб"],
             reply: "Елена (кандидат психологических наук, преподаватель ВУЗа) проводит корпоративное обучение, практикумы и мастер-классы для HR-специалистов, руководителей и служб безопасности по поведенческому анализу, проведению интервью и оценке кадровых рисков. Программа всегда адаптируется под специфику вашей компании.",
             options: [
                 { text: "Обсудить программу обучения", action: "ask_contact_inline" },
@@ -2178,7 +2168,7 @@
             id: "legal",
             intent: "Договор, оплата и юридические вопросы",
             isMeta: true,
-            keywords: ["договор", "юрлиц", "ооо", "ип", "счет", "чек", "нпд", "документ", "оплат", "безнал", "закон", "согласи", "конфиденц", "самозанят", "акт", "нда", "nda"],
+            keywords: ["договор", "юрлиц", "ооо", "ип", "счет", "чек", "нпд", "ндс", "документ", "оплат", "безнал", "закон", "согласи", "конфиденц", "самозанят", "акт", "нда", "nda"],
             shortAddon: "📄 <b>По документам и 152-ФЗ:</b> работа ведется официально (договор, чеки НПД, закрывающие документы для юрлиц, NDA) и строго в правовом поле.",
             reply: "Все мероприятия полностью легальны и строго конфиденциальны (аналитика открытых данных и очные опросы проводятся в рамках 152-ФЗ, при необходимости подписывается NDA). Елена работает с физлицами и юрлицами (ООО, ИП), предоставляет договор, чеки НПД и закрывающие документы.",
             options: [
@@ -2225,19 +2215,21 @@
             html: chatBody.innerHTML,
             lastTopic: lastTopic,
             expectedAction: expectedAction,
+            contextHintShown: contextHintShown,
+            unreadCount: unreadCount,
             timestamp: Date.now()
         };
-        try { sessionStorage.setItem('eg_chat_state', JSON.stringify(state)); } catch(e) { console.debug(e); }
+        try { sessionStorage.setItem('eg_chat_state_v3', JSON.stringify(state)); } catch(e) { console.debug(e); }
     }
 
     function loadChatState() {
         try {
-            const saved = sessionStorage.getItem('eg_chat_state');
+            const saved = sessionStorage.getItem('eg_chat_state_v3');
             if (saved) {
                 const state = JSON.parse(saved);
                 if (state.html) {
                     if (Date.now() - (state.timestamp || 0) > 30 * 60 * 1000) {
-                        sessionStorage.removeItem('eg_chat_state');
+                        sessionStorage.removeItem('eg_chat_state_v3');
                         return false;
                     }
 
@@ -2247,6 +2239,8 @@
                     chatBody.innerHTML = state.html;
                     lastTopic = state.lastTopic || "Консультация в чате";
                     expectedAction = state.expectedAction || null;
+                    contextHintShown = !!state.contextHintShown;
+                    unreadCount = state.unreadCount || 0;
                     chatInitialized = true;
                     isBotResponding = false;
                     const typingInd = document.getElementById('typingIndicator');
@@ -2260,8 +2254,14 @@
                     const chatWindowEl = document.getElementById('chatWindow');
                     let alreadyOpened = false;
                     try { alreadyOpened = sessionStorage.getItem('eg_chat_opened') === '1'; } catch(e) {}
+                    
+                    const badge = document.getElementById('chatUnreadBadge');
                     if (chatWindowEl && chatWindowEl.style.display !== 'flex' && !alreadyOpened) {
-                        incrementUnread();
+                        if (unreadCount === 0) incrementUnread();
+                        else if (badge) {
+                            badge.textContent = unreadCount > 9 ? '9+' : unreadCount;
+                            badge.style.display = 'flex';
+                        }
                     }
                     return true;
                 }
@@ -2322,19 +2322,30 @@
         const rawWords = text.toLowerCase().split(/[^a-zа-яё0-9_]+/).filter(Boolean);
         const scored = [];
         let greetingMatch = null;
+        const shortExactKeywords = new Set(["ип", "ооо", "сб", "hr", "ндс", "нда", "nda"]);
 
         for (const item of knowledgeBase) {
             let score = 0;
             for (const rawW of rawWords) {
+                if (shortExactKeywords.has(rawW) && item.keywords.includes(rawW)) {
+                    score += 4;
+                    continue;
+                }
+
                 const w = normalizeWordForBot(rawW);
                 if (w.length < 3) continue;
 
                 let wordMaxScore = 0;
                 for (const kw of item.keywords) {
+                    if (shortExactKeywords.has(kw)) continue;
                     const normKw = normalizeWordForBot(kw);
                     let currentScore = 0;
 
-                    if (w.startsWith(normKw) || normKw.startsWith(w)) {
+                    if (item.isGreeting) {
+                        if (w === normKw || (normKw.length >= 5 && w.startsWith(normKw))) {
+                            currentScore = 4;
+                        }
+                    } else if (w.startsWith(normKw) || normKw.startsWith(w)) {
                         currentScore = normKw === 'провер' ? 3 : (normKw.length >= 5 ? 5 : 4);
                     } else {
                         const targetLen = normKw.length;
@@ -2453,6 +2464,8 @@
                     { text: "Узнать стоимость и условия", action: "price_btn" }
                 ]);
                 saveChatState();
+            } else {
+                saveChatState();
             }
         }
     }
@@ -2483,7 +2496,6 @@
                 <div class="typing-dot"></div><div class="typing-dot"></div><div class="typing-dot"></div>
             </div>
         `;
-        saveChatState();
 
         const chatWindowEl = document.getElementById('chatWindow');
         let alreadyOpened = false;
@@ -2491,6 +2503,7 @@
         if (chatWindowEl && chatWindowEl.style.display !== 'flex' && !alreadyOpened) {
             incrementUnread();
         }
+        saveChatState();
 
         const myResetSession = chatSessionId;
         setTimeout(() => {
@@ -2590,13 +2603,11 @@
         const lowerMsg = message.toLowerCase();
         const words = lowerMsg.replace(/ё/g, 'е').split(/[^a-zа-я0-9_]+/).filter(Boolean);
 
+        const hasNegationOrQuestion = message.includes('?') || /\b(не|нет|пока|позже|сначала)\b/i.test(lowerMsg);
         const agreementWords = ["да", "давай", "давайте", "окей", "ок", "хорошо", "согласен", "согласна", "конечно", "хочу", "готов", "готова"];
-        const isAffirmative = words.some(w => {
+        const isAffirmative = !hasNegationOrQuestion && words.length <= 4 && words.some(w => {
             const bw = normalizeWordForBot(w);
-            return agreementWords.some(aw => {
-                if (aw.length <= 3) return bw === aw;
-                return bw.startsWith(aw);
-            });
+            return agreementWords.includes(bw);
         });
 
         const bestMatch = matchKnowledgeIntent(message);
@@ -2899,507 +2910,5 @@
         });
     }
 </script>
-<!-- ============================================================
-     НОВЫЙ ЧАТ «ИРИНА». Старый .chat-widget скрывается автоматически.
-     Конфликтов с существующим JS нет: свои ID, свои классы (egc-).
-     ============================================================ -->
-<style>
-  /* Скрываем старый чат (двойная страховка — CSS + JS ниже) */
-  .chat-widget{ display:none !important; }
-
-  /* ---------- Контейнер ---------- */
-  .egc-widget{ position:fixed; bottom:30px; right:30px; z-index:1500; font-family:'Inter',sans-serif; }
-  .egc-btn{
-    position:relative; width:60px; height:60px; border-radius:50%;
-    background:#0077ff; color:#fff; border:none; cursor:pointer;
-    display:flex; align-items:center; justify-content:center;
-    box-shadow:0 8px 25px rgba(0,119,255,.4); transition:transform .3s, box-shadow .3s;
-  }
-  .egc-btn:hover{ transform:scale(1.1); box-shadow:0 10px 30px rgba(0,119,255,.6); }
-  .egc-btn svg{ width:28px; height:28px; fill:currentColor; }
-  .egc-badge{
-    display:none; position:absolute; top:-2px; right:-2px;
-    min-width:22px; height:22px; padding:0 6px; box-sizing:border-box;
-    background:#ff3b30; color:#fff; font-size:12px; font-weight:800;
-    border-radius:11px; align-items:center; justify-content:center;
-    border:2px solid #fff; box-shadow:0 2px 5px rgba(0,0,0,.2);
-    animation:egc-pop .3s cubic-bezier(.175,.885,.32,1.275);
-  }
-  .egc-badge.show{ display:flex; }
-  .egc-window{
-    display:none; position:absolute; bottom:75px; right:0;
-    width:360px; max-height:calc(100vh - 120px);
-    background:#fff; border-radius:12px;
-    box-shadow:0 15px 40px rgba(0,0,0,.18);
-    border:1px solid #e2e8f0; overflow:hidden; flex-direction:column;
-  }
-  .egc-window.open{ display:flex; }
-  .egc-header{
-    background:#0077ff; color:#fff; padding:14px 18px;
-    display:flex; align-items:center; justify-content:space-between; flex-shrink:0;
-  }
-  .egc-header-info{ display:flex; align-items:center; gap:12px; }
-  .egc-avatar{
-    width:40px; height:40px; border-radius:50%;
-    background:#e0f2fe; color:#0077ff; display:flex;
-    align-items:center; justify-content:center;
-    border:2px solid #fff; font-weight:800; font-size:18px; flex-shrink:0;
-  }
-  .egc-header-text h4{ margin:0; font-size:1rem; font-weight:700; }
-  .egc-header-text span{ font-size:.75rem; color:rgba(255,255,255,.85); display:flex; align-items:center; gap:5px; }
-  .egc-status-dot{ width:8px; height:8px; background:#4ade80; border-radius:50%; display:inline-block; }
-  .egc-actions{ display:flex; gap:6px; align-items:center; }
-  .egc-icon-btn{
-    background:none; border:none; color:#fff; font-size:22px;
-    cursor:pointer; opacity:.8; padding:4px 6px; line-height:1;
-    border-radius:4px; transition:opacity .2s, background .2s;
-  }
-  .egc-icon-btn:hover{ opacity:1; background:rgba(255,255,255,.15); }
-  .egc-icon-btn svg{ fill:currentColor; display:block; }
-  .egc-body{
-    flex:1 1 auto; min-height:280px; max-height:400px;
-    padding:18px; overflow-y:auto; background:#f8fafc;
-    display:flex; flex-direction:column; gap:10px;
-  }
-  .egc-body::-webkit-scrollbar{ width:6px; }
-  .egc-body::-webkit-scrollbar-thumb{ background:#cbd5e0; border-radius:3px; }
-  .egc-msg{
-    max-width:85%; padding:11px 15px; border-radius:12px;
-    font-size:.9rem; line-height:1.45; white-space:pre-line;
-    word-wrap:break-word; animation:egc-fade .25s ease;
-  }
-  .egc-msg-bot{
-    background:#fff; color:#2d3748; align-self:flex-start;
-    border-bottom-left-radius:3px; border:1px solid #e2e8f0;
-    box-shadow:0 2px 5px rgba(0,0,0,.04);
-  }
-  .egc-msg-user{ background:#0077ff; color:#fff; align-self:flex-end; border-bottom-right-radius:3px; }
-  .egc-typing{
-    display:none; gap:4px; padding:12px 16px; background:#fff;
-    border-radius:12px; border-bottom-left-radius:3px;
-    align-self:flex-start; border:1px solid #e2e8f0;
-    box-shadow:0 2px 5px rgba(0,0,0,.04);
-  }
-  .egc-typing.show{ display:flex; }
-  .egc-dot{ width:6px; height:6px; background:#cbd5e0; border-radius:50%; animation:egc-typing 1.4s infinite; }
-  .egc-dot:nth-child(2){ animation-delay:.2s; }
-  .egc-dot:nth-child(3){ animation-delay:.4s; }
-  .egc-quick{ display:flex; flex-wrap:wrap; gap:8px; align-self:flex-start; max-width:100%; margin-top:2px; }
-  .egc-quick-btn{
-    background:#fff; border:1px solid #0077ff; color:#0077ff;
-    font-size:.8rem; font-weight:600; padding:7px 13px;
-    border-radius:16px; cursor:pointer; font-family:inherit;
-    transition:background .15s, color .15s, transform .15s;
-  }
-  .egc-quick-btn:hover{ background:#0077ff; color:#fff; transform:translateY(-1px); }
-  .egc-input{
-    display:flex; gap:8px; padding:12px 14px;
-    background:#fff; border-top:1px solid #e2e8f0; flex-shrink:0;
-  }
-  .egc-input input{
-    flex:1; border:1px solid #cbd5e0; border-radius:20px;
-    padding:10px 15px; outline:none; font-size:.9rem;
-    font-family:inherit; transition:border-color .2s;
-  }
-  .egc-input input:focus{ border-color:#0077ff; }
-  .egc-input input:disabled{ background:#f1f5f9; cursor:not-allowed; }
-  .egc-input button{
-    background:#0077ff; color:#fff; border:none;
-    padding:10px 18px; border-radius:20px; cursor:pointer;
-    font-weight:600; font-size:.9rem; font-family:inherit;
-    transition:background .2s, opacity .2s;
-  }
-  .egc-input button:hover:not(:disabled){ background:#0066dd; }
-  .egc-input button:disabled{ opacity:.5; cursor:not-allowed; }
-  .egc-legal{ text-align:center; font-size:.65rem; color:#a0aec0; padding:0 14px 10px; background:#fff; }
-  .egc-legal a{ color:#0077ff; text-decoration:none; }
-  .egc-legal a:hover{ text-decoration:underline; }
-  @keyframes egc-fade{ from{opacity:0;transform:translateY(6px);} to{opacity:1;transform:translateY(0);} }
-  @keyframes egc-pop{ from{transform:scale(0);opacity:0;} to{transform:scale(1);opacity:1;} }
-  @keyframes egc-typing{ 0%,100%{transform:translateY(0);opacity:.5;} 50%{transform:translateY(-4px);opacity:1;} }
-  @media (max-width:600px){
-    .egc-widget{ bottom:20px; right:20px; }
-    .egc-window{ width:calc(100vw - 24px); right:-10px; bottom:72px; max-height:calc(100vh - 100px); }
-    .egc-body{ max-height:calc(100vh - 280px); }
-  }
-  @media (prefers-reduced-motion:reduce){
-    .egc-msg,.egc-badge,.egc-dot{ animation:none !important; }
-    .egc-btn,.egc-quick-btn{ transition:none !important; }
-  }
-</style>
-
-<div class="egc-widget" id="egcWidget">
-  <button class="egc-btn" id="egcToggle" type="button"
-          aria-label="Открыть чат" aria-expanded="false" aria-controls="egcWindow">
-    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2z"/></svg>
-    <span class="egc-badge" id="egcBadge" aria-hidden="true">0</span>
-  </button>
-  <div class="egc-window" id="egcWindow" role="dialog" aria-label="Чат-консультант" aria-modal="false">
-    <div class="egc-header">
-      <div class="egc-header-info">
-        <div class="egc-avatar" aria-hidden="true">И</div>
-        <div class="egc-header-text">
-          <h4>Консультант Ирина</h4>
-          <span><span class="egc-status-dot"></span> Виртуальный помощник</span>
-        </div>
-      </div>
-      <div class="egc-actions">
-        <button class="egc-icon-btn" id="egcReset" type="button" title="Начать заново" aria-label="Начать диалог заново">
-          <svg viewBox="0 0 24 24" width="20" height="20"><path d="M12.5 3C17.15 3 21 6.85 21 11.5S17.15 20 12.5 20 4 16.15 4 11.5H2l3.85-3.85L9.7 11.5H7.5c0 2.76 2.24 5 5 5s5-2.24 5-5-2.24-5-5-5c-1.25 0-2.4.47-3.3 1.25L7.75 6.3C9.07 4.88 10.7 4 12.5 3z"/></svg>
-        </button>
-        <button class="egc-icon-btn" id="egcClose" type="button" title="Закрыть" aria-label="Закрыть чат">&times;</button>
-      </div>
-    </div>
-    <div class="egc-body" id="egcBody" role="log" aria-live="polite">
-      <div class="egc-typing" id="egcTyping" aria-hidden="true">
-        <span class="egc-dot"></span><span class="egc-dot"></span><span class="egc-dot"></span>
-      </div>
-    </div>
-    <div class="egc-input">
-      <input type="text" id="egcInput" placeholder="Напишите сообщение…"
-             aria-label="Сообщение" maxlength="500" enterkeyhint="send" autocomplete="off">
-      <button type="button" id="egcSend">Отправить</button>
-    </div>
-    <div class="egc-legal">
-      Виртуальный помощник. <a href="privacy.html" target="_blank" rel="noopener noreferrer">Политика конфиденциальности</a>
-    </div>
-  </div>
-</div>
-
-<script>
-(function(){
-  'use strict';
-
-  // Страховка: скрыть старый чат, если он вдруг отобразится
-  try {
-    var oldWidget = document.querySelector('.chat-widget');
-    if (oldWidget) oldWidget.style.display = 'none';
-  } catch(e){}
-
-  var STORAGE_KEY = 'egc_history_v1';
-  var MAX_HISTORY = 40;
-  var MAX_INPUT   = 500;
-  var TYPING_MIN  = 550;
-  var TYPING_MAX  = 1400;
-  var LINKS = {
-    tg:  'https://t.me/ElenaProprofiler',
-    max: 'https://max.ru/u/f9LHodD0cOIwE5Tk0yqsCdSW7aH2YKheHnM5PcwHgDaWAse8blY_Usz5-7Q'
-  };
-
-  var elToggle = document.getElementById('egcToggle');
-  var elBadge  = document.getElementById('egcBadge');
-  var elWindow = document.getElementById('egcWindow');
-  var elReset  = document.getElementById('egcReset');
-  var elClose  = document.getElementById('egcClose');
-  var elBody   = document.getElementById('egcBody');
-  var elTyping = document.getElementById('egcTyping');
-  var elInput  = document.getElementById('egcInput');
-  var elSend   = document.getElementById('egcSend');
-
-  if (!elToggle || !elWindow || !elBody || !elInput || !elSend){
-    console.warn('[egc] Разметка чата не найдена');
-    return;
-  }
-
-  var state = { open:false, typing:false, greeted:false, failed:0, lastIntentId:null, history:[] };
-
-  function sleep(ms){ return new Promise(function(r){ setTimeout(r, ms); }); }
-  function normalize(text){
-    return String(text||'').toLowerCase().replace(/ё/g,'е')
-      .replace(/[^\wа-я0-9@+\s]/gi,' ').replace(/\s+/g,' ').trim();
-  }
-  function stem(w){
-    if (w.length <= 4) return w;
-    var sfx = ['иями','ями','ами','ов','ев','ах','ях','ий','ый','ой','ая','ое','ые',
-               'ую','юю','им','ем','ом','ам','ум','ия','ие','ии','ей',
-               'а','я','ы','и','о','е','у','ю','ь'];
-    for (var i=0;i<sfx.length;i++){
-      var s = sfx[i];
-      if (w.length - s.length >= 4 && w.slice(-s.length) === s) return w.slice(0,-s.length);
-    }
-    return w;
-  }
-  function lev(a,b){
-    if (Math.abs(a.length-b.length) > 2) return 99;
-    var m=a.length,n=b.length,dp=[],i,j;
-    for (i=0;i<=m;i++) dp[i]=[i];
-    for (j=0;j<=n;j++) dp[0][j]=j;
-    for (i=1;i<=m;i++) for (j=1;j<=n;j++)
-      dp[i][j]=Math.min(dp[i-1][j]+1, dp[i][j-1]+1, dp[i-1][j-1]+(a[i-1]===b[j-1]?0:1));
-    return dp[m][n];
-  }
-
-  var INTENTS = [
-    { id:'greeting', priority:1,
-      keywords:['привет','здравств','добр','hello','hi','хай','приветств','здраст'],
-      answer:'Здравствуйте! Я Ирина, виртуальный консультант Елены Галановой. Подскажу по услугам, ценам и каналам связи. С чего начнём?',
-      quickReplies:['Услуги и цены','Как связаться','Оставить заявку'] },
-    { id:'price', priority:5,
-      keywords:['цена','стоимост','стоит','сколько','прайс','тариф','оплат','расценк','дорог','бюджет','цен'],
-      answer:'Базовые цены:\n• Экспертная консультация — от 5 000 ₽\n• Профайлинг цифрового следа — от 8 000 ₽\n• Сопровождение расследований — от 10 000 ₽\n• Анализ анонимных сообщений — от 15 000 ₽\n\nИтоговая стоимость фиксируется после уточнения задачи. Работаю с физлицами и юрлицами (договор, чеки НПД).',
-      followUp:'Точная цена зависит от объёма. Консультация — 1 сессия; расследование — несколько этапов. Опишите задачу в двух словах — сориентирую по вилке.',
-      quickReplies:['Что входит в консультацию?','Как связаться','Оставить заявку'] },
-    { id:'services', priority:4,
-      keywords:['услуг','сервис','что вы дела','чем помож','направлен','перечень'],
-      answer:'Пять направлений:\n1. Профайлинг цифрового следа\n2. Экспертная консультация\n3. Сопровождение расследований\n4. Анализ анонимных сообщений\n5. Медиация конфликтов\n\nПро что рассказать подробнее?',
-      quickReplies:['Профайлинг цифрового следа','Расследования','Медиация'] },
-    { id:'digital', priority:4,
-      keywords:['цифров','след','osint','соцсет','открыт источник','портрет','скрининг'],
-      answer:'Профайлинг цифрового следа — анализ открытых источников (соцсети, публикации, комментарии) для составления психологического портрета, оценки рисков и прогноза поведения. Только публичные данные. От 8 000 ₽.',
-      quickReplies:['Как связаться','Оставить заявку','Услуги и цены'] },
-    { id:'consult', priority:4,
-      keywords:['консультац','разбор','совет','встреч','созвон','сессия'],
-      answer:'Экспертная консультация — разбор вашей ситуации: кандидат, партнёр, конфликт, скрытые мотивы. Формат — онлайн или офлайн, 1 сессия. От 5 000 ₽.',
-      quickReplies:['Как связаться','Оставить заявку','Услуги и цены'] },
-    { id:'investigation', priority:4,
-      keywords:['расследован','инцидент','хищен','сговор','утечк','кража','воровств','причастн','инсайдер'],
-      answer:'Сопровождение расследований: помощь в раскрытии инцидентов (хищения, сговоры, утечки). Анализ поведенческих профилей фигурантов, стратегия опроса, оценка искренности показаний. От 10 000 ₽. Конфиденциально.',
-      quickReplies:['Как связаться','Оставить заявку','Конфиденциальность'] },
-    { id:'anon', priority:4,
-      keywords:['аноним','донос','угроз','жалоб','компромет','письм','сообщени','автор'],
-      answer:'Анализ анонимных сообщений: психолингвистический разбор текста, определение профиля автора, анализ корпоративного контекста. От 15 000 ₽.',
-      quickReplies:['Как связаться','Оставить заявку','Услуги и цены'] },
-    { id:'mediation', priority:4,
-      keywords:['медиац','конфликт','спор','переговор','посредник','примир'],
-      answer:'Медиация конфликтов — нейтральный посредник помогает сторонам услышать друг друга и прийти к соглашению в деловом споре. От 5 000 ₽.',
-      quickReplies:['Как связаться','Оставить заявку','Услуги и цены'] },
-    { id:'contact', priority:6,
-      keywords:['связат','контакт','написат','телефон','почт','telegram','телеграм','telegramm','max','мессенджер','написать'],
-      answer:'Удобные каналы:\n• Telegram — @ElenaProprofiler\n• MAX — кнопка в шапке сайта\n• Email — кнопка «Почта» в шапке\n• Форма заявки — кнопка «Обсудить задачу» на главной\n\nОтвечаю лично, конфиденциально.',
-      quickReplies:['Telegram','MAX','Почта','Оставить заявку'] },
-    { id:'confidential', priority:4,
-      keywords:['конфиденц','секрет','тайна','nda','не разглаш','анонимн','приватн'],
-      answer:'Все обращения и материалы строго конфиденциальны. По запросу подписываю NDA. Данные не передаются третьим лицам.',
-      quickReplies:['Как связаться','Оставить заявку'] },
-    { id:'legal', priority:4,
-      keywords:['закон','152','фз','право','легальн','согласи','персональн'],
-      answer:'Работаю в правовом поле: очные интервью и опросы — только с добровольного согласия лица (152-ФЗ). Аналитика цифрового следа (OSINT) — исключительно по общедоступным открытым источникам.',
-      quickReplies:['Как связаться','Оставить заявку'] },
-    { id:'payment', priority:4,
-      keywords:['оплат','документ','чек','нпд','договор','счет','счёт','юрлиц','физлиц','реквизит'],
-      answer:'Работаю с физлицами и юрлицами. Плательщик НПД: договор, чеки, закрывающие документы. Реквизиты (ИНН, банк) — по запросу для заключения договора.',
-      quickReplies:['Как связаться','Оставить заявку'] },
-    { id:'about', priority:3,
-      keywords:['опыт','образован','кто вы','о себе','эксперт','галанова','биограф','квалификац','стаж','кейс'],
-      answer:'Елена Галанова — кандидат психологических наук, эксперт-профайлер, преподаватель ВУЗа. 10+ лет в службах экономической безопасности, 700+ расследований и кадровых проверок. Автор готовящейся книги «Почерк лжи».',
-      quickReplies:['Услуги и цены','Как связаться','Оставить заявку'] },
-    { id:'book', priority:3,
-      keywords:['книг','почерк лжи','издан','купить книг','читат'],
-      answer:'Книга «Почерк лжи» — об организационных рисках, контекстном анализе и прогнозировании поведения в корпоративной среде. Сейчас в работе, скоро в продаже. Следите за анонсами в Telegram.',
-      quickReplies:['Telegram','Как связаться'] },
-    { id:'media', priority:3,
-      keywords:['публикац','стать','медиа','блог','executive','psychologies','сми','пресс'],
-      answer:'Публикации и интервью — в разделе «Медиа и Блог» на сайте: Executive.ru, Psychologies, «Управление персоналом». Ссылки кликабельны.',
-      quickReplies:['Как связаться','Оставить заявку'] },
-    { id:'format', priority:3,
-      keywords:['онлайн','офлайн','формат','географ','город','москв','дистанц','удален'],
-      answer:'Формат — онлайн или офлайн, по договорённости. География — Россия и русскоязычные зарубежные компании. Консультации и расследования — дистанционно.',
-      quickReplies:['Как связаться','Оставить заявку'] },
-    { id:'thanks', priority:1,
-      keywords:['спасиб','благодар','спс','пасиб'],
-      answer:'Пожалуйста! Если появятся вопросы — я здесь. Можно также сразу написать Елене в Telegram.',
-      quickReplies:['Telegram','Оставить заявку'] },
-    { id:'bye', priority:1,
-      keywords:['пока','до свидан','всего добр','бай'],
-      answer:'До связи! Берегите себя и свой бизнес.',
-      quickReplies:[] }
-  ];
-
-  var QUICK_ACTIONS = {
-    'telegram':'tg','написать в telegram':'tg',
-    'max':'max','написать в max':'max',
-    'почта':'email','написать на почту':'email',
-    'оставить заявку':'form','заявка':'form'
-  };
-
-  function matchIntent(text){
-    var norm = normalize(text);
-    var raw = norm.split(' ').filter(Boolean);
-    var best = null, bestScore = 0;
-    for (var i=0;i<INTENTS.length;i++){
-      var it = INTENTS[i], score = 0;
-      for (var k=0;k<it.keywords.length;k++){
-        var kw = normalize(it.keywords[k]);
-        var kwStem = stem(kw);
-        if (kw.length>=4 && norm.indexOf(kw)!==-1){ score+=3; continue; }
-        for (var t=0;t<raw.length;t++){
-          var tok = raw[t];
-          if (tok===kw){ score+=3; break; }
-          if (tok.length>=5 && kw.length>=5){
-            if (stem(tok)===kwStem){ score+=2; break; }
-            if (Math.abs(tok.length-kw.length)<=2 && lev(tok,kw)<=1){ score+=1; break; }
-          }
-        }
-      }
-      if (score>0){
-        score += it.priority*0.01;
-        if (score>bestScore){ bestScore=score; best=it; }
-      }
-    }
-    return best;
-  }
-
-  function resolveResponse(text){
-    var m = matchIntent(text);
-    if (!m && state.lastIntentId){
-      var last = null;
-      for (var i=0;i<INTENTS.length;i++) if (INTENTS[i].id===state.lastIntentId){ last=INTENTS[i]; break; }
-      if (last && /\b(подробн|расскаж|а как|еще|ещё|поясн|уточн|детал)\b/i.test(text))
-        return { answer: last.followUp||last.answer, quickReplies: last.quickReplies };
-    }
-    if (m){ state.failed=0; state.lastIntentId=m.id; return { answer:m.answer, quickReplies:m.quickReplies }; }
-    state.failed++; state.lastIntentId=null;
-    if (state.failed>=2) return {
-      answer:'Чтобы не гадать — лучше сразу написать Елене напрямую. Выберите канал, и она ответит лично.',
-      quickReplies:['Telegram','MAX','Почта','Оставить заявку']
-    };
-    return {
-      answer:'Уточните, пожалуйста, вопрос. Я хорошо разбираюсь в темах: услуги и цены, форматы работы, каналы связи, профайлинг цифрового следа, расследования, медиация.',
-      quickReplies:['Услуги и цены','Как связаться','Оставить заявку']
-    };
-  }
-
-  function scrollBottom(){ requestAnimationFrame(function(){ elBody.scrollTop = elBody.scrollHeight; }); }
-  function clearQuickReplies(){
-    var n = elBody.querySelectorAll('.egc-quick');
-    for (var i=0;i<n.length;i++) n[i].parentNode.removeChild(n[i]);
-  }
-  function renderQuickReplies(items){
-    clearQuickReplies();
-    if (!items || !items.length) return;
-    var wrap = document.createElement('div'); wrap.className='egc-quick';
-    items.forEach(function(label){
-      var b = document.createElement('button');
-      b.type='button'; b.className='egc-quick-btn'; b.textContent=label;
-      b.addEventListener('click', function(){ handleUserMessage(label); });
-      wrap.appendChild(b);
-    });
-    elBody.appendChild(wrap); scrollBottom();
-  }
-  function appendMessage(text, role){
-    var el = document.createElement('div');
-    el.className = 'egc-msg ' + (role==='user'?'egc-msg-user':'egc-msg-bot');
-    el.textContent = text;
-    if (elTyping && elTyping.parentNode===elBody) elBody.insertBefore(el, elTyping);
-    else elBody.appendChild(el);
-    state.history.push({ role:role, text:text, ts:Date.now() });
-    if (state.history.length>MAX_HISTORY) state.history.shift();
-    persist(); scrollBottom();
-  }
-  function showTyping(){ if (elTyping) elTyping.classList.add('show'); scrollBottom(); }
-  function hideTyping(){ if (elTyping) elTyping.classList.remove('show'); }
-  function persist(){ try{ sessionStorage.setItem(STORAGE_KEY, JSON.stringify(state.history)); }catch(e){} }
-  function restore(){
-    try{
-      var raw = sessionStorage.getItem(STORAGE_KEY);
-      if (!raw) return false;
-      var arr = JSON.parse(raw);
-      if (!Array.isArray(arr)||!arr.length) return false;
-      arr.forEach(function(m){
-        var el = document.createElement('div');
-        el.className = 'egc-msg ' + (m.role==='user'?'egc-msg-user':'egc-msg-bot');
-        el.textContent = m.text;
-        if (elTyping && elTyping.parentNode===elBody) elBody.insertBefore(el, elTyping);
-        else elBody.appendChild(el);
-      });
-      state.history = arr; state.greeted = true; scrollBottom(); return true;
-    }catch(e){ return false; }
-  }
-  function bumpBadge(){
-    if (!elBadge) return;
-    var c = parseInt(elBadge.textContent,10)||0;
-    elBadge.textContent = String(c+1); elBadge.classList.add('show');
-  }
-  function clearBadge(){
-    if (!elBadge) return;
-    elBadge.textContent = '0'; elBadge.classList.remove('show');
-  }
-  function runAction(a){
-    if (a==='tg') window.open(LINKS.tg,'_blank','noopener');
-    else if (a==='max') window.open(LINKS.max,'_blank','noopener');
-    else if (a==='email'){
-      if (typeof window.openEmail==='function') window.openEmail(new Event('click'));
-      else window.location.href='mailto:info@galanova-elena.ru';
-    } else if (a==='form'){
-      if (typeof window.openModal==='function') window.openModal();
-      else window.open(LINKS.tg,'_blank','noopener');
-    }
-  }
-
-  async function handleUserMessage(raw){
-    var text = String(raw||'').trim();
-    if (!text || state.typing) return;
-    if (text.length > MAX_INPUT){
-      appendMessage('Слишком длинное сообщение — сократите до '+MAX_INPUT+' символов.','bot');
-      return;
-    }
-    var key = normalize(text);
-    if (QUICK_ACTIONS[key]){
-      appendMessage(text,'user'); elInput.value='';
-      state.typing=true; elSend.disabled=true; showTyping();
-      await sleep(400); hideTyping();
-      appendMessage('Открываю канал…','bot');
-      state.typing=false; elSend.disabled=false;
-      runAction(QUICK_ACTIONS[key]);
-      if (!state.open) bumpBadge();
-      return;
-    }
-    appendMessage(text,'user'); elInput.value='';
-    state.typing=true; elSend.disabled=true; elInput.disabled=true; showTyping();
-    var resp = resolveResponse(text);
-    var delay = TYPING_MIN + Math.random()*(TYPING_MAX-TYPING_MIN) + Math.min(resp.answer.length*8, 800);
-    await sleep(delay);
-    hideTyping();
-    appendMessage(resp.answer,'bot');
-    renderQuickReplies(resp.quickReplies);
-    state.typing=false; elSend.disabled=false; elInput.disabled=false; elInput.focus();
-    if (!state.open) bumpBadge();
-  }
-
-  function greet(){
-    state.greeted = true;
-    showTyping();
-    setTimeout(function(){
-      hideTyping();
-      var g=null;
-      for (var i=0;i<INTENTS.length;i++) if (INTENTS[i].id==='greeting'){ g=INTENTS[i]; break; }
-      if (!g) return;
-      appendMessage(g.answer,'bot'); renderQuickReplies(g.quickReplies);
-    }, 700);
-  }
-
-  function resetChat(){
-    var n = elBody.querySelectorAll('.egc-msg, .egc-quick');
-    for (var i=0;i<n.length;i++) n[i].parentNode.removeChild(n[i]);
-    state.history=[]; state.lastIntentId=null; state.failed=0; state.greeted=false; state.typing=false;
-    elSend.disabled=false; elInput.disabled=false;
-    try { sessionStorage.removeItem(STORAGE_KEY); } catch(e){}
-    greet();
-  }
-
-  function openChat(){
-    elWindow.classList.add('open'); elToggle.setAttribute('aria-expanded','true');
-    state.open = true; clearBadge();
-    setTimeout(function(){ if (elInput) elInput.focus(); }, 60);
-    if (!state.greeted && !restore()) greet(); else scrollBottom();
-  }
-  function closeChat(){
-    elWindow.classList.remove('open'); elToggle.setAttribute('aria-expanded','false'); state.open = false;
-  }
-  function toggleChat(){ if (state.open) closeChat(); else openChat(); }
-
-  elToggle.addEventListener('click', toggleChat);
-  elClose.addEventListener('click', closeChat);
-  elReset.addEventListener('click', resetChat);
-  elSend.addEventListener('click', function(){ handleUserMessage(elInput.value); });
-  elInput.addEventListener('keydown', function(e){
-    if (e.key==='Enter' && !e.shiftKey){ e.preventDefault(); handleUserMessage(elInput.value); }
-  });
-  document.addEventListener('keydown', function(e){
-    if (e.key==='Escape' && state.open) closeChat();
-  });
-})();
-</script>
-<!-- ==================== КОНЕЦ НОВОГО ЧАТА ==================== -->
 </body>
 </html>
