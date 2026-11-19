@@ -2,7 +2,7 @@
 <html lang="ru">
 <head>
     <!-- Подтверждение прав в Яндекс Вебмастере -->
-    <meta name="yandex-verification" content="3ce838687ac9171f" />
+    <meta name="yandex-verification" content="3ce838687ac9171f">
 
     <!-- Yandex.Metrika counter -->
     <script>
@@ -15,7 +15,7 @@
 
         ym(113975964, 'init', {ssr:true, webvisor:true, clickmap:true, ecommerce:"dataLayer", referrer: document.referrer, url: location.href, accurateTrackBounce:true, trackLinks:true});
     </script>
-    <noscript><div><img src="https://mc.yandex.ru/watch/113975964" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+    <noscript><div><img src="https://mc.yandex.ru/watch/113975964" style="position:absolute; left:-9999px;" alt=""></div></noscript>
     <!-- /Yandex.Metrika counter -->
 
     <meta charset="UTF-8">
@@ -622,6 +622,16 @@
         .modal-close:hover { color: var(--primary); }
         .modal-box h3 { margin: 0 0 10px 0; font-size: 1.5rem; color: var(--primary); font-family: 'Playfair Display', serif; }
         .modal-box p { margin: 0 0 25px 0; color: var(--text-gray); font-size: 0.95rem; }
+        /* СТИЛИ МОДАЛЬНОГО ОКНА ЦППА */
+        .cppa-modal-box { max-width: 520px; border-top: 4px solid var(--accent); padding: 36px 40px 34px; box-shadow: 0 25px 60px rgba(0,0,0,0.22); }
+        .cppa-modal-head { margin-bottom: 22px; padding-right: 24px; }
+        .cppa-modal-title { display: inline-flex; align-items: center; gap: 10px; margin: 0 0 12px 0 !important; font-size: 2rem !important; font-weight: 700; color: var(--primary); letter-spacing: 1px; position: relative; padding-bottom: 12px; }
+        .cppa-modal-title::after { content: ''; position: absolute; left: 0; bottom: 0; width: 64px; height: 3px; background-color: var(--accent); border-radius: 2px; }
+        .cppa-modal-dot { width: 10px; height: 10px; background-color: var(--accent); border-radius: 50%; flex-shrink: 0; }
+        .cppa-modal-subtitle { font-size: 0.78rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.8px; color: var(--accent); margin: 0 !important; }
+        .cppa-modal-text { font-size: 1rem !important; line-height: 1.7; color: var(--text-dark) !important; text-align: justify; text-justify: inter-word; hyphens: auto; -webkit-hyphens: auto; margin: 0 0 18px 0 !important; }
+        .cppa-modal-text strong { color: var(--primary); font-weight: 700; }
+        .cppa-modal-accent { background: var(--bg-light); border-left: 4px solid var(--accent); border-radius: 0 8px 8px 0; padding: 15px 18px; font-size: 0.96rem !important; line-height: 1.65; color: var(--secondary) !important; text-align: justify; text-justify: inter-word; hyphens: auto; -webkit-hyphens: auto; margin: 0 !important; }
         .form-group { margin-bottom: 20px; }
         .form-group label { display: block; margin-bottom: 8px; font-size: 0.9rem; font-weight: 600; color: var(--primary); }
         .form-group input[type="text"], .form-group textarea { width: 100%; padding: 12px 15px; border: 1px solid #cbd5e0; border-radius: 6px; font-family: inherit; font-size: 1rem; box-sizing: border-box; outline: none; transition: border-color 0.2s; }
@@ -660,8 +670,8 @@
             animation: popIn 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
 
-        .chat-window { display: none; position: absolute; bottom: 75px; right: 0; width: 350px; background: #fff; border-radius: 12px; box-shadow: 0 15px 40px rgba(0,0,0,0.15); overflow: hidden; flex-direction: column; border: 1px solid #e2e8f0; }
-        .chat-header { background: var(--chat-blue); color: #fff; padding: 15px 20px; display: flex; align-items: center; justify-content: space-between; }
+        .chat-window { display: none; position: absolute; bottom: 75px; right: 0; width: 350px; max-height: calc(100vh - 105px); max-height: calc(100dvh - 105px); background: #fff; border-radius: 12px; box-shadow: 0 15px 40px rgba(0,0,0,0.15); overflow: hidden; flex-direction: column; border: 1px solid #e2e8f0; }
+        .chat-header { background: var(--chat-blue); color: #fff; padding: 15px 20px; display: flex; align-items: center; justify-content: space-between; flex-shrink: 0; }
         .chat-header-info { display: flex; align-items: center; gap: 12px; }
         .eg-avatar { width: 40px; height: 40px; border-radius: 50%; background: #e0f2fe; color: var(--chat-blue); display: flex; align-items: center; justify-content: center; border: 2px solid #fff; font-weight: 800; font-size: 18px; flex-shrink: 0; }
         .chat-header-text h4 { margin: 0; font-size: 1rem; }
@@ -670,9 +680,9 @@
         .chat-header-actions { display: flex; align-items: center; gap: 10px; }
         .icon-btn { background: none; border: none; color: #fff; font-size: 22px; cursor: pointer; opacity: 0.8; transition: opacity 0.2s; padding: 0; line-height: 1; }
         .icon-btn:hover { opacity: 1; }
-        .chat-body { height: 350px; padding: 20px; overflow-y: auto; background: #f8fafc; display: flex; flex-direction: column; gap: 12px; }
+        .chat-body { height: 350px; flex: 1 1 auto; min-height: 0; max-height: 350px; padding: 20px; overflow-y: auto; background: #f8fafc; display: flex; flex-direction: column; gap: 12px; }
         .chat-body::before { content: ""; flex: 1 1 auto; }
-        .chat-msg { max-width: 85%; padding: 12px 16px; border-radius: 12px; font-size: 0.9rem; line-height: 1.4; animation: fadeIn 0.3s ease; }
+        .chat-msg { max-width: 85%; padding: 12px 16px; border-radius: 12px; font-size: 0.9rem; line-height: 1.4; animation: fadeIn 0.3s ease; overflow-wrap: anywhere; word-break: break-word; }
         .msg-bot { background: #fff; color: var(--text-dark); align-self: flex-start; border-bottom-left-radius: 2px; box-shadow: 0 2px 5px rgba(0,0,0,0.05); border: 1px solid #e2e8f0;}
         .msg-user { background: var(--chat-blue); color: #fff; align-self: flex-end; border-bottom-right-radius: 2px; }
         .typing-indicator { display: none; gap: 4px; padding: 12px 16px; background: #fff; border-radius: 12px; border-bottom-left-radius: 2px; align-self: flex-start; border: 1px solid #e2e8f0; }
@@ -681,20 +691,20 @@
         .typing-dot:nth-child(2) { animation-delay: 0.2s; }
         .typing-dot:nth-child(3) { animation-delay: 0.4s; }
         
-        .chat-input { display: flex; border-top: 1px solid #e2e8f0; padding: 15px; background: #fff; gap: 10px; border-bottom: none; transition: background-color 0.2s ease; }
-        .chat-input input { flex-grow: 1; border: 1px solid #cbd5e0; border-radius: 20px; padding: 10px 15px; outline: none; font-size: 0.9rem; transition: background-color 0.2s ease; }
-        .chat-input button { background: var(--chat-blue); color: #fff; border: none; padding: 10px 15px; border-radius: 20px; cursor: pointer; font-weight: 600; font-size: 0.9rem; transition: opacity 0.2s ease; }
+        .chat-input { display: flex; align-items: center; border-top: 1px solid #e2e8f0; padding: 15px; background: #fff; gap: 10px; border-bottom: none; transition: background-color 0.2s ease; box-sizing: border-box; flex-shrink: 0; }
+        .chat-input input { flex: 1 1 auto; min-width: 0; width: 100%; border: 1px solid #cbd5e0; border-radius: 20px; padding: 10px 15px; outline: none; font-size: 0.9rem; transition: background-color 0.2s ease; box-sizing: border-box; }
+        .chat-input button { flex-shrink: 0; white-space: nowrap; background: var(--chat-blue); color: #fff; border: none; padding: 10px 15px; border-radius: 20px; cursor: pointer; font-weight: 600; font-size: 0.9rem; transition: opacity 0.2s ease; }
         
         /* СТИЛИ ДЛЯ ЗАБЛОКИРОВАННОГО ИНПУТА */
         .chat-input input:disabled { background-color: #f1f5f9; cursor: not-allowed; color: #a0aec0; }
         .chat-input button:disabled { opacity: 0.5; cursor: not-allowed; }
 
-        .chat-legal { text-align: center; font-size: 0.65rem; color: #a0aec0; padding: 0 15px 10px; background: #fff; }
+        .chat-legal { text-align: center; font-size: 0.65rem; color: #a0aec0; padding: 0 15px 10px; background: #fff; flex-shrink: 0; }
         .chat-legal a { color: var(--chat-blue); text-decoration: none; }
 
         .side-menu-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 2001; opacity: 0; visibility: hidden; transition: opacity 0.3s ease, visibility 0.3s ease; }
         .side-menu-overlay.active { opacity: 1; visibility: visible; }
-        .side-menu { position: fixed; top: 0; right: -350px; width: 300px; height: 100%; background: #ffffff; z-index: 2002; box-shadow: -5px 0 25px rgba(0,0,0,0.1); transition: right 0.4s cubic-bezier(0.77, 0, 0.175, 1), visibility 0.4s; display: flex; flex-direction: column; padding: 30px; visibility: hidden;}
+        .side-menu { position: fixed; top: 0; right: -350px; width: 300px; max-width: 85vw; height: 100%; background: #ffffff; z-index: 2002; box-shadow: -5px 0 25px rgba(0,0,0,0.1); transition: right 0.4s cubic-bezier(0.77, 0, 0.175, 1), visibility 0.4s; display: flex; flex-direction: column; padding: 30px; box-sizing: border-box; visibility: hidden; }
         .side-menu.active { right: 0; visibility: visible;}
         .side-menu-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 40px; }
         .side-menu-logo { font-size: 1.2rem; font-weight: 700; color: var(--primary); }
@@ -742,7 +752,6 @@
         }
 
         @media (max-width: 900px) {
-            .chat-input input { font-size: 16px; }
             .hero-wrapper { padding-top: 95px; padding-bottom: 40px; min-height: auto; }
             .hero-grid { grid-template-columns: 1fr; gap: 30px; }
             .hero-content { text-align: center; }
@@ -751,7 +760,7 @@
             .hero-tags { justify-content: center; } 
             .hero-quote { text-align: left; padding: 16px 20px; }
             .hero-quote cite { text-align: right; }
-            .hero-cta-dropdown { left: 50%; transform: translateX(-50%); }
+            .hero-cta-dropdown { left: 50%; transform: translateX(-50%); animation: none !important; }
             .hero-image-bg { width: 100%; max-width: 340px; height: 420px; margin: 0 auto; } 
             .header-nav { display: none; } 
             .hamburger-btn { display: flex; } 
@@ -767,10 +776,16 @@
             .pub-card { width: 280px; scroll-snap-align: center; }
             .carousel-wrapper-pub { overflow-x: auto; overflow-y: hidden; -webkit-overflow-scrolling: touch; scroll-snap-type: x mandatory; padding-bottom: 20px; scrollbar-width: none; margin-left: -20px; margin-right: -20px; padding-left: 20px; }
             .carousel-wrapper-pub::-webkit-scrollbar { display: none; }
-                        .pub-track { animation: none !important; width: max-content; padding-right: 20px; gap: 15px; }
+            .pub-track { animation: none !important; width: max-content; padding-right: 20px; gap: 15px; }
             .pub-card-clone { display: none !important; }
-            .chat-window { right: -15px; bottom: 75px; width: calc(100vw - 30px); }
+            .chat-window { position: fixed; left: 12px; right: 12px; bottom: 90px; width: auto; max-width: 400px; max-height: calc(100vh - 105px); max-height: calc(100dvh - 105px); margin-left: auto; box-sizing: border-box; }
+            .chat-body { height: auto; flex: 1 1 auto; min-height: 0; max-height: 350px; }
+            .chat-input { padding: 10px 12px; gap: 8px; }
+            .chat-input input { font-size: 16px; padding: 10px 12px; min-width: 0; }
+            .chat-input button { padding: 10px 14px; flex-shrink: 0; }
             .modal-box { max-width: 95%; padding: 30px 20px; }
+            .cppa-modal-box { padding: 28px 22px 26px; }
+            .cppa-modal-title { font-size: 1.65rem !important; }
             .service-modal-box { max-width: 96%; padding: 25px 18px; }
             .service-meta-tags { grid-template-columns: 1fr; }
             .service-modal-grid { grid-template-columns: 1fr; gap: 18px; }
@@ -778,7 +793,8 @@
             .quote-block { padding: 0 20px; }
             .quote-block::before { top: -20px; font-size: 80px; }
             .quote-text { font-size: 1.1rem; }
-            #scrollToTopBtn { bottom: 95px; right: 20px; width: 44px; height: 44px; }
+            .chat-widget { bottom: 20px; right: 20px; }
+            #scrollToTopBtn { bottom: 95px; right: 28px; width: 44px; height: 44px; }
             #scrollToTopBtn svg { width: 20px; height: 20px; }
         }
     
@@ -800,13 +816,6 @@
         .form-error-msg.visible { display: block; }
         .solution-card:focus-visible, .contact-btn:focus-visible, .hero-cta-btn:focus-visible, .header-messenger-btn:focus-visible, .channel-action-btn:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
         .chat-input input:focus-visible, .chat-options-btn:focus-visible { outline: 2px solid var(--chat-blue); outline-offset: 2px; }
-        @media (max-width: 380px) {
-            .header-messenger-btn { padding: 6px 8px; font-size: 0 !important; }
-            .header-messenger-btn svg { margin: 0; width: 18px; height: 18px; }
-            .header-logo { font-size: 1rem; }
-            .max-help-trigger { width: 22px; font-size: 12px; }
-            .max-btn-group { margin-right: 0; }
-        }
         @media (max-width: 600px) {
             .max-tooltip-popup {
                 left: 0;
@@ -817,6 +826,13 @@
                 left: 35px;
                 right: auto;
             }
+        }
+        @media (max-width: 380px) {
+            .header-messenger-btn { padding: 6px 8px; font-size: 0 !important; }
+            .header-messenger-btn svg { margin: 0; width: 18px; height: 18px; }
+            .header-logo { font-size: 1rem; }
+            .max-help-trigger { width: 22px; font-size: 12px; }
+            .max-btn-group { margin-right: 0; }
         }
         @media (prefers-reduced-motion: reduce) {
             *, *::before, *::after {
@@ -945,8 +961,8 @@
 
     <!-- ПЛАВАЮЩАЯ БОКОВАЯ ПАНЕЛЬ С СОЦСЕТЯМИ -->
     <div class="sticky-socials">
-        <a href="https://t.me/ElenaProprofiler" target="_blank" rel="noopener noreferrer" class="social-link social-tg" title="Telegram" aria-label="Telegram" onclick="openMessenger(event, 'tg')"><svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69.01-.03.01-.14-.06-.2-.07-.06-.17-.04-.25-.02-.11.02-1.78 1.14-5.06 3.34-.48.33-.91.49-1.3.48-.43-.01-1.25-.24-1.87-.44-.75-.24-1.35-.37-1.3-.79.03-.22.33-.44.89-.66 3.5-1.53 5.83-2.53 7-3.02 3.33-1.39 4.02-1.63 4.47-1.64.1 0 .32.02.47.14.12.1.15.25.17.33.02.13.04.28.02.4z"/></svg></a>
-        <a href="https://vk.ru/eggroup_consult" target="_blank" rel="noopener noreferrer" class="social-link social-vk" title="ВКонтакте" aria-label="ВКонтакте"><svg viewBox="0 0 24 24"><path d="M15.077 15.078h2.383c.792 0 .991-.65.991-.65s1.428-2.316 2.827-2.614c1.077-.23 1.488.948 2.378.948h2.298s1.396-.134.981-1.014c-.958-2.023-2.721-2.924-2.721-2.924s-1.428-1.127.23-3.136c1.238-1.5 2.14-2.673 2.14-2.673s.36-1.298-1.03-1.298H22.95s-.693-.162-1.396.441c-2.455 2.115-4.48 5.626-4.48 5.626s-.361.614-.856.289c-.663-.441-.531-3.953-.531-3.953s.062-1.28-1.127-1.579c-.613-.153-1.109-.234-2.362-.234-1.686 0-3.109.117-3.993.541-.595.289-.316.893 0 .911 1.055.054 1.83.65 1.83 3.031 0 0-.171 4.504-1.272 5.072-.739.387-2.344-1.849-4.228-5.265 0 0-.379-.812-1.172-.812H.99S-.119 5.485.035 6.432C1.56 16.035 7.42 21.035 13.91 21.035c4.717 0 5.483-1.127 5.483-1.127s.541-.605.541-1.706c0-1.83-.857-2.227-.857-3.124z" transform="scale(0.8) translate(3,3)"/></svg></a>
+        <a href="https://t.me/ElenaProprofiler" target="_blank" rel="noopener noreferrer" class="social-link social-tg" title="Telegram" aria-label="Telegram" onclick="openMessenger(event, 'tg')"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69.01-.03.01-.14-.06-.2-.07-.06-.17-.04-.25-.02-.11.02-1.78 1.14-5.06 3.34-.48.33-.91.49-1.3.48-.43-.01-1.25-.24-1.87-.44-.75-.24-1.35-.37-1.3-.79.03-.22.33-.44.89-.66 3.5-1.53 5.83-2.53 7-3.02 3.33-1.39 4.02-1.63 4.47-1.64.1 0 .32.02.47.14.12.1.15.25.17.33.02.13.04.28.02.4z"/></svg></a>
+        <a href="https://vk.ru/eggroup_consult" target="_blank" rel="noopener noreferrer" class="social-link social-vk" title="ВКонтакте" aria-label="ВКонтакте"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15.077 15.078h2.383c.792 0 .991-.65.991-.65s1.428-2.316 2.827-2.614c1.077-.23 1.488.948 2.378.948h2.298s1.396-.134.981-1.014c-.958-2.023-2.721-2.924-2.721-2.924s-1.428-1.127.23-3.136c1.238-1.5 2.14-2.673 2.14-2.673s.36-1.298-1.03-1.298H22.95s-.693-.162-1.396.441c-2.455 2.115-4.48 5.626-4.48 5.626s-.361.614-.856.289c-.663-.441-.531-3.953-.531-3.953s.062-1.28-1.127-1.579c-.613-.153-1.109-.234-2.362-.234-1.686 0-3.109.117-3.993.541-.595.289-.316.893 0 .911 1.055.054 1.83.65 1.83 3.031 0 0-.171 4.504-1.272 5.072-.739.387-2.344-1.849-4.228-5.265 0 0-.379-.812-1.172-.812H.99S-.119 5.485.035 6.432C1.56 16.035 7.42 21.035 13.91 21.035c4.717 0 5.483-1.127 5.483-1.127s.541-.605.541-1.706c0-1.83-.857-2.227-.857-3.124z" transform="scale(0.8) translate(3,3)"/></svg></a>
         <a href="https://tenchat.ru/5171503" target="_blank" rel="noopener noreferrer" class="social-link social-tc" title="TenChat" aria-label="TenChat"><span class="social-text-icon">TC</span></a>
         <a href="https://vc.ru/id5897131" target="_blank" rel="noopener noreferrer" class="social-link social-vc" title="VC.ru" aria-label="VC.ru"><span class="social-text-icon">vc</span></a>
         <a href="https://www.e-xecutive.ru/users/1916093-elena-galanova" target="_blank" rel="noopener noreferrer" class="social-link social-ex" title="Executive.ru" aria-label="Executive.ru"><span class="social-text-icon">ex</span></a>
@@ -1231,7 +1247,7 @@
             <div class="carousel-wrapper-pub">
                 <div class="pub-track">
                     <div class="pub-card">
-                        <div class="pub-image"><img src="Executive.jpg" alt="Как вычислить инсайдера - статья на Executive.ru" class="pub-img" loading="lazy" width="300" height="160" style="object-fit: contain; background-color: #ffffff; padding: 20px 15px;"></div>
+                        <div class="pub-image"><img src="Executive.jpg" alt="Как вычислить инсайдера - статья на Executive.ru" class="pub-img" loading="lazy" width="300" height="160" style="object-fit: contain; background-color: #ffffff; padding: 20px 15px; box-sizing: border-box;"></div>
                         <div class="pub-content"><span class="pub-tag">Executive.ru</span><h3>Как вычислить и безопасно уволить инсайдера</h3><p>Маркеры токсичного поведения, вычисление корпоративных шпионов и алгоритм расставания без рисков для бизнеса.</p><a href="https://www.e-xecutive.ru/management/itforbusiness/2000619-kak-vychislit-i-bezopasno-uvolit-insaidera" target="_blank" rel="noopener noreferrer" class="pub-link">Читать статью →</a></div>
                     </div>
                     <div class="pub-card">
@@ -1239,7 +1255,7 @@
                         <div class="pub-content"><span class="pub-tag">Psychologies.ru</span><h3>Психология анонимки: вычисляем автора писем по 6 признакам</h3><p>Как проанализировать текст, выявить мотивы и определить, кто именно скрывается за посланием.</p><a href="https://www.psychologies.ru/articles/psikhologiya-anonimki-vychislyaem-avtora-anonimnykh-pisem-po-6-priznakam/" target="_blank" rel="noopener noreferrer" class="pub-link">Читать статью →</a></div>
                     </div>
                     <div class="pub-card">
-                        <div class="pub-image"><img src="UP.jpg" alt="Скилы HR BRAND и маркетинг - Управление персоналом" class="pub-img" loading="lazy" width="300" height="160" style="object-fit: contain; background-color: #f8fafc;"></div>
+                        <div class="pub-image"><img src="UP.jpg" alt="От камер к регламентам — Управление персоналом" class="pub-img" loading="lazy" width="300" height="160" style="object-fit: contain; background-color: #f8fafc;"></div>
                         <div class="pub-content"><span class="pub-tag">Управление персоналом</span><h3>От камер к регламентам: какой контроль работает сегодня, а какой пора отправить в прошлое</h3><p>Современный контроль персонала: от камер и DLP к регламентам и встроенным ограничениям.</p><a href="https://www.top-personal.ru/magazine.html?905" target="_blank" rel="noopener noreferrer" class="pub-link">Читать статью →</a></div>
                     </div>
                     <div class="pub-card">
@@ -1248,7 +1264,7 @@
                     </div>
                     <!-- ДУБЛИКАТ (Автоматически скрывается на мобильных) -->
                     <div class="pub-card pub-card-clone" aria-hidden="true">
-                        <div class="pub-image"><img src="Executive.jpg" alt="Как вычислить инсайдера - статья на Executive.ru" class="pub-img" loading="lazy" width="300" height="160" style="object-fit: contain; background-color: #ffffff; padding: 20px 15px;"></div>
+                        <div class="pub-image"><img src="Executive.jpg" alt="Как вычислить инсайдера - статья на Executive.ru" class="pub-img" loading="lazy" width="300" height="160" style="object-fit: contain; background-color: #ffffff; padding: 20px 15px; box-sizing: border-box;"></div>
                         <div class="pub-content"><span class="pub-tag">Executive.ru</span><h3>Как вычислить и безопасно уволить инсайдера</h3><p>Маркеры токсичного поведения, вычисление корпоративных шпионов и алгоритм расставания без рисков для бизнеса.</p><a href="https://www.e-xecutive.ru/management/itforbusiness/2000619-kak-vychislit-i-bezopasno-uvolit-insaidera" target="_blank" rel="noopener noreferrer" class="pub-link" tabindex="-1">Читать статью →</a></div>
                     </div>
                     <div class="pub-card pub-card-clone" aria-hidden="true">
@@ -1256,7 +1272,7 @@
                         <div class="pub-content"><span class="pub-tag">Psychologies.ru</span><h3>Психология анонимки: вычисляем автора писем по 6 признакам</h3><p>Как проанализировать текст, выявить мотивы и определить, кто именно скрывается за посланием.</p><a href="https://www.psychologies.ru/articles/psikhologiya-anonimki-vychislyaem-avtora-anonimnykh-pisem-po-6-priznakam/" target="_blank" rel="noopener noreferrer" class="pub-link" tabindex="-1">Читать статью →</a></div>
                     </div>
                     <div class="pub-card pub-card-clone" aria-hidden="true">
-                        <div class="pub-image"><img src="UP.jpg" alt="Скилы HR BRAND и маркетинг - Управление персоналом" class="pub-img" loading="lazy" width="300" height="160" style="object-fit: contain; background-color: #f8fafc;"></div>
+                        <div class="pub-image"><img src="UP.jpg" alt="От камер к регламентам — Управление персоналом" class="pub-img" loading="lazy" width="300" height="160" style="object-fit: contain; background-color: #f8fafc;"></div>
                         <div class="pub-content"><span class="pub-tag">Управление персоналом</span><h3>От камер к регламентам: какой контроль работает сегодня, а какой пора отправить в прошлое</h3><p>Современный контроль персонала: от камер и DLP к регламентам и встроенным ограничениям.</p><a href="https://www.top-personal.ru/magazine.html?905" target="_blank" rel="noopener noreferrer" class="pub-link" tabindex="-1">Читать статью →</a></div>
                     </div>
                     <div class="pub-card pub-card-clone" aria-hidden="true">
@@ -1292,15 +1308,19 @@
         </div>
     </footer>
 
-    
     <!-- МОДАЛЬНОЕ ОКНО ЦППА -->
     <div class="modal-overlay" id="cppaModal" onclick="if(event.target === this) closeCppaModal()">
-        <div class="modal-box" role="dialog" aria-modal="true" aria-labelledby="cppaModalTitle">
+        <div class="modal-box cppa-modal-box" role="dialog" aria-modal="true" aria-labelledby="cppaModalTitle">
             <button type="button" class="modal-close" onclick="closeCppaModal()" aria-label="Закрыть окно">&times;</button>
-            <h3 id="cppaModalTitle" style="font-size: 1.8rem; margin-bottom: 15px; color: var(--primary);">ЦППА</h3>
-            <p style="font-size: 1.05rem; line-height: 1.6; color: var(--text-dark);">Центр прикладной поведенческой аналитики (ЦППА) специализируется на комплексном аудите человеческого ресурса и оценке корпоративных рисков. Я выступаю главным методологом и гарантом качества каждого проекта, проводя ключевые профилирования и проверки лично.</p>
+            <div class="cppa-modal-head">
+                <h3 id="cppaModalTitle" class="cppa-modal-title"><span class="cppa-modal-dot" aria-hidden="true"></span>ЦППА</h3>
+                <p class="cppa-modal-subtitle">Центр прикладной поведенческой аналитики</p>
+            </div>
+            <p class="cppa-modal-text"><strong>Центр прикладной поведенческой аналитики (ЦППА)</strong> специализируется на комплексном аудите человеческого ресурса и оценке корпоративных рисков.</p>
+            <p class="cppa-modal-accent">Я выступаю главным методологом и гарантом качества каждого проекта, проводя ключевые профилирования и проверки лично.</p>
         </div>
     </div>
+
     <!-- МОДАЛЬНОЕ ОКНО ДЕТАЛЕЙ УСЛУГИ (ВАРИАНТ А: МЕХАНИКА РАБОТЫ + 3 КАНАЛА СВЯЗИ) -->
     <div class="modal-overlay" id="serviceDetailModal" onclick="if(event.target === this) closeServiceDetail()">
         <div class="service-modal-box" role="dialog" aria-modal="true" aria-labelledby="smTitle">
@@ -1431,7 +1451,7 @@
                 </div>
                 <div class="chat-header-actions">
                     <button type="button" class="icon-btn" onclick="resetChat()" title="Начать заново" aria-label="Начать диалог заново">
-                        <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M12.5 3C17.15 3 21 6.85 21 11.5S17.15 20 12.5 20 4 16.15 4 11.5H2l3.85-3.85L9.7 11.5H7.5c0 2.76 2.24 5 5 5s5-2.24 5-5-2.24-5-5-5c-1.25 0-2.4.47-3.3 1.25L7.75 6.3C9.07 4.88 10.7 4 12.5 3z"/></svg>
+                        <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor" aria-hidden="true"><path d="M12.5 3C17.15 3 21 6.85 21 11.5S17.15 20 12.5 20 4 16.15 4 11.5H2l3.85-3.85L9.7 11.5H7.5c0 2.76 2.24 5 5 5s5-2.24 5-5-2.24-5-5-5c-1.25 0-2.4.47-3.3 1.25L7.75 6.3C9.07 4.88 10.7 4 12.5 3z"/></svg>
                     </button>
                     <button type="button" class="icon-btn" onclick="toggleChat()" title="Закрыть чат" aria-label="Закрыть чат">&times;</button>
                 </div>
@@ -1863,16 +1883,16 @@
             const leadModal = document.getElementById('leadModal');
             const sideMenu = document.getElementById('sideMenu');
 
-            if (chatWindow && chatWindow.style.display === 'flex') {
-                toggleChat();
+            if (sideMenu && sideMenu.classList.contains('active')) {
+                closeMenu();
             } else if (cppaModal && cppaModal.classList.contains('active')) {
                 closeCppaModal();
             } else if (serviceModal && serviceModal.classList.contains('active')) {
                 closeServiceDetail();
             } else if (leadModal && leadModal.classList.contains('active')) {
                 closeModal();
-            } else if (sideMenu && sideMenu.classList.contains('active')) {
-                closeMenu();
+            } else if (chatWindow && chatWindow.style.display === 'flex') {
+                toggleChat();
             }
         }
     });
@@ -1880,6 +1900,16 @@
     function openEmail(e) {
         e.preventDefault();
         closeHeroCta();
+        const trafficSource = getTrafficSource();
+        sendSilentNotification({
+            name: "SYSTEM_NOTIFICATION_EMAIL",
+            contact: "Клиент нажал Почта",
+            message: "Клиент кликнул по кнопке Почта на сайте.",
+            _gotcha: "",
+            _token: SITE_SECURITY_TOKEN,
+            source: trafficSource
+        });
+        if (typeof ym === 'function') ym(YM_ID, 'reachGoal', 'click_email');
         const em = atob('a29tYmluaXJAbWFpbC5ydQ==');
         window.location.href = 'mailto:' + em;
     }
@@ -1904,8 +1934,9 @@
     function extractContact(text, allowBareUsername = false) {
         if (!text) return null;
         const str = String(text).trim();
+        const stopWords = /^(osint|hello|privet|telegram|whatsapp|viber|skype|email|audit|price|zoom|teams|meet|online|chat|max|tg|messenger|desktop|mobile|channel|group|version|web|app|bot|link|account|profile|page|site|website|mail|inbox|work|personal|private|public|official|news|blog|video|audio|voice|calls|text|texts|send|write|reply|check|open|install|download|update|login|sign|code|free|pro|plus|vip|spasibo|thank|thanks|admin|support|director|manager|company|office|project|client|business|list|test|please|ok|okay|yes|no|hi|hey|help|info|contact|message|service|services|question|answer|problem|issue|maybe|later|tomorrow|today|wait|stop|start|phone|call|number|name|signal|discord|matrix)$/i;
 
-        const emailMatch = str.match(/[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}/);
+        const emailMatch = str.match(/[a-zA-Z0-9._%+-]+@[a-zA-Zа-яА-ЯёЁ0-9.-]+\.[a-zA-Zа-яА-ЯёЁ]{2,}/);
         if (emailMatch) return emailMatch[0];
 
         const phoneRegex = /(?:^|[^\d])((?:\+7|7|8)[\s\-()]*[3489]\d{2}[\s\-()]*\d{3}[\s\-]*\d{2}[\s\-]*\d{2}|9\d{2}[\s\-()]*\d{3}[\s\-]*\d{2}[\s\-]*\d{2}|\+\d{1,3}[\s\-()]*\d{2,4}[\s\-()]*\d{3}[\s\-]*\d{2}[\s\-]*\d{2})(?!\d)/g;
@@ -1922,15 +1953,16 @@
         const tgLinkMatch = str.match(/(?:https?:\/\/)?(?:t\.me|telegram\.me)\/([a-zA-Z][a-zA-Z0-9_]{3,31})/i);
         if (tgLinkMatch) return '@' + tgLinkMatch[1];
 
-        const tgMatch = str.match(/(?:^|\s)(@[a-zA-Z][a-zA-Z0-9_]{2,31})/);
+        const tgMatch = str.match(/(?:^|[\s,:;(«"'])(@[a-zA-Z][a-zA-Z0-9_]{2,31})/);
         if (tgMatch) return tgMatch[1];
 
         // Распознавание ника без @, если рядом указано "ник", "тг", "телеграм", "max"
-        const explicitNickMatch = str.match(/(?:ник|тг|tg|телеграм|telegram|max|макс)(?:\s+в\s+\S+)?[\s:—\-]+([a-zA-Z][a-zA-Z0-9_]{3,31})\b/i);
-        if (explicitNickMatch) return '@' + explicitNickMatch[1].toLowerCase();
+        const explicitNickMatch = str.match(/(?:ник|тг|tg|телеграм|telegram|max|макс)(?:\s+в\s+\S+)?[\s:—\-]+([a-zA-Z][a-zA-Z0-9_]{3,31})(?![a-zA-Z0-9_]|[.\-][a-zA-Z0-9])/i);
+        if (explicitNickMatch && !stopWords.test(explicitNickMatch[1])) {
+            return '@' + explicitNickMatch[1].toLowerCase();
+        }
 
         if (allowBareUsername) {
-            const stopWords = /^(osint|hello|privet|telegram|whatsapp|viber|skype|email|audit|price|zoom|teams|spasibo|thank|thanks|admin|support|director|manager|company|office|project|client|business|list|test|please|ok|okay|yes|no|hi|hey|help|info|contact|message|service|services|question|answer|problem|issue|maybe|later|tomorrow|today|wait|stop|start|phone|call|number|name|signal|discord|matrix)$/i;
             const cleanStr = str.trim();
             if (/^[a-zA-Z][a-zA-Z0-9_]{4,31}$/.test(cleanStr) && !stopWords.test(cleanStr)) {
                 return '@' + cleanStr.toLowerCase();
@@ -1962,6 +1994,14 @@
             }
 
             const formData = new FormData(contactForm);
+            const rawName = (formData.get('name') || '').trim();
+            if (!rawName) {
+                showFormError("Пожалуйста, укажите ваше имя.");
+                const nameInput = document.getElementById('leadName');
+                if (nameInput) nameInput.focus();
+                return;
+            }
+
             const rawContact = (formData.get('contact') || '').trim();
             const parsedContact = extractContact(rawContact, true);
 
@@ -1981,9 +2021,9 @@
             const trafficSource = getTrafficSource();
 
             const data = {
-                name: formData.get('name'),
+                name: rawName,
                 contact: parsedContact,
-                message: formData.get('message'),
+                message: (formData.get('message') || '').trim(),
                 _gotcha: honeypotVal,
                 _token: SITE_SECURITY_TOKEN,
                 source: trafficSource
@@ -2045,13 +2085,14 @@
     let chatSessionId = 0;
     let unreadCount = 0;
     let contextHintShown = false;
+    let resetOptionsTimeout = null;
 
     const roleTriggers = [
-        { patterns: ["главбух", "бухгалтер", "финдир", "финанс", "казнач", "экономист"], contextNote: "Финансовые позиции требуют особой проверки на скрытые долговые обязательства, игроманию, манипуляции с отчетностью и конфликт интересов. " },
-        { patterns: ["закуп", "снабж", "тендер", "логист", "склад", "завсклад"], contextNote: "Позиции в закупках и логистике несут повышенные коррупционные и откатные риски, а также риск сговора с поставщиками. " },
-        { patterns: ["роп", "продаж", "коммерч", "маркетолог", "клиент"], contextNote: "При оценке руководителей продаж (РОП) и коммерческих директоров ключевой фокус делается на реальность прошлых кейсов и риск увода клиентской базы к конкурентам. " },
-        { patterns: ["топ", "директор", "руковод", "генеральн", "сео", "ceo", "партнер", "учредит", "совладел"], contextNote: "При оценке руководителей высшего звена и бизнес-партнеров критически важно проанализировать управленческий масштаб, скрытые мотивы и договороспособность в кризисах. " },
-        { patterns: ["айти", "разработ", "программист", "сисадмин", "безопасн", "инженер"], contextNote: "Для специалистов с доступом к IT-инфраструктуре и коммерческой тайне важно заранее исключить риски инсайдерского слива данных и работы на конкурентов. " }
+        { exact: [], prefixes: ["главбух", "бухгалтер", "финдир", "финанс", "казнач", "экономист"], contextNote: "Финансовые позиции требуют особой проверки на скрытые долговые обязательства, игроманию, манипуляции с отчетностью и конфликт интересов. " },
+        { exact: [], prefixes: ["закуп", "снабж", "тендер", "логист", "склад", "завсклад"], contextNote: "Позиции в закупках и логистике несут повышенные коррупционные и откатные риски, а также риск сговора с поставщиками. " },
+        { exact: ["роп", "ропа", "ропу", "ропом", "ропе", "ропов"], prefixes: ["продаж", "коммерч", "маркетолог", "клиент"], contextNote: "При оценке руководителей продаж (РОП) и коммерческих директоров ключевой фокус делается на реальность прошлых кейсов и риск увода клиентской базы к конкурентам. " },
+        { exact: ["топ", "топа", "топу", "топов", "сео", "ceo"], prefixes: ["топменеджер", "директор", "руковод", "генеральн", "партнер", "учредит", "совладел"], contextNote: "При оценке руководителей высшего звена и бизнес-партнеров критически важно проанализировать управленческий масштаб, скрытые мотивы и договороспособность в кризисах. " },
+        { exact: ["айти", "it"], prefixes: ["айтишник", "разработ", "программист", "сисадмин", "безопасн", "инженер"], contextNote: "Для специалистов с доступом к IT-инфраструктуре и коммерческой тайне важно заранее исключить риски инсайдерского слива данных и работы на конкурентов. " }
     ];
 
     const knowledgeBase = [
@@ -2059,7 +2100,8 @@
             id: "pricing",
             intent: "Стоимость и условия",
             isMeta: true,
-            keywords: ["цен", "стоим", "скольк", "прайс", "тариф", "бюджет", "дорог", "расценк", "деньг", "рубл", "предоплат"],
+            expectContact: true,
+            keywords: ["цена", "цены", "цену", "цене", "ценой", "ценам", "ценник", "стоим", "стоит", "скольк", "прайс", "тариф", "бюджет", "дорог", "расценк", "деньг", "денег", "рубл", "предоплат"],
             shortAddon: "💰 <b>По стоимости:</b> экспертная консультация и медиация — от 5 000 ₽, профайлинг цифрового следа — от 8 000 ₽, сопровождение расследований — от 10 000 ₽, анализ анонимных сообщений — от 15 000 ₽.",
             reply: "Базовая стоимость услуг Елены:\n• Экспертная консультация — от 5 000 ₽\n• Медиация конфликтов — от 5 000 ₽\n• Профайлинг цифрового следа — от 8 000 ₽\n• Сопровождение расследований — от 10 000 ₽\n• Анализ анонимных сообщений — от 15 000 ₽.\n\nТочная смета зависит от объема задачи. Напишите ваш телефон или @ник прямо сюда в чат — Елена рассчитает стоимость под ваш кейс.",
             options: [
@@ -2070,6 +2112,7 @@
         {
             id: "anon",
             intent: "Анализ анонимных сообщений",
+            expectContact: true,
             keywords: ["аноним", "угроз", "донос", "шантаж", "письм", "сообщен", "текст", "автор", "кляуз", "жалоб", "компромат", "лингвист", "вброс", "клевет", "отзыв", "вымогат"],
             reply: "По анонимным письмам, вбросам, жалобам и угрозам Елена проводит психолингвистическую экспертизу текста с учетом вашего корпоративного контекста (от 15 000 ₽). Это позволяет определить психотип и ролевой профиль автора, сузить круг подозреваемых и оценить реальность угрозы. Хотите обсудить ваш случай?",
             options: [
@@ -2080,6 +2123,7 @@
         {
             id: "investigation",
             intent: "Служебное расследование / Утечка / Хищение",
+            expectContact: true,
             keywords: ["украл", "краж", "хищен", "утечк", "слив", "конкурент", "откат", "взятк", "недостач", "инсайдер", "шпион", "воров", "ущерб", "расследован", "сговор", "махинац", "крыс", "саботаж", "пропал", "вред", "сб"],
             reply: "Понимаю, ситуация требует полной конфиденциальности и аккуратности. В таких случаях Елена проводит контекстный анализ поведения фигурантов, формирует стратегию очного опроса и помогает локализовать причастных лиц (от 10 000 ₽). Напишите ваш номер для оперативной связи — мы разберем ситуацию.",
             options: [
@@ -2101,7 +2145,7 @@
         {
             id: "digital",
             intent: "Профайлинг цифрового следа / Дистанционная оценка",
-            keywords: ["цифров", "след", "соцсет", "интернет", "профил", "портрет", "дистанцион", "удален", "партнер", "контрагент", "osint", "осинт", "консультац", "биограф", "репутац", "бэкграунд"],
+            keywords: ["профайл", "цифров", "след", "следа", "следу", "следов", "соцсет", "интернет", "профил", "портрет", "дистанцион", "удален", "партнер", "контрагент", "osint", "осинт", "консультац", "биограф", "репутац", "бэкграунд"],
             reply: "Профайлинг цифрового следа (от 8 000 ₽) позволяет дистанционно составить психологический портрет человека и карту его рисков по открытым источникам (OSINT) без очной встречи. А экспертная консультация (от 5 000 ₽) поможет детально разобрать вашу управленческую задачу.",
             options: [
                 { text: "Заказать разбор профиля", action: "ask_contact_inline" },
@@ -2144,7 +2188,8 @@
             id: "timing",
             intent: "Сроки и оперативность",
             isMeta: true,
-            keywords: ["срок", "быстр", "врем", "долг", "срочн", "сегодн", "завтра", "когда", "оператив", "дней", "час"],
+            expectContact: true,
+            keywords: ["срок", "быстр", "врем", "долго", "срочн", "сегодн", "завтра", "когда", "оператив", "дней", "час", "часа", "часов"],
             shortAddon: "⚡ <b>По срокам:</b> подключение к срочным кейсам возможно в день обращения; подготовка аналитического портрета или экспертизы текста занимает в среднем от 1 до 3 рабочих дней.",
             reply: "Елена оперативно подключается к критическим ситуациям (срочные переговоры, инциденты или оценка финального кандидата). Экспертная консультация возможна в день обращения или на следующий день, а подготовка глубокого профиля по цифровому следу или анализ текста занимает в среднем 1–3 рабочих дня. Напишите ваш контакт, чтобы согласовать ближайшее окно!",
             options: [
@@ -2168,7 +2213,7 @@
             id: "legal",
             intent: "Договор, оплата и юридические вопросы",
             isMeta: true,
-            keywords: ["договор", "юрлиц", "ооо", "ип", "счет", "чек", "нпд", "ндс", "документ", "оплат", "безнал", "закон", "согласи", "конфиденц", "самозанят", "акт", "нда", "nda"],
+            keywords: ["договор", "юрлиц", "ооо", "ип", "счет", "чек", "нпд", "ндс", "документ", "оплат", "безнал", "закон", "согласи", "конфиденц", "самозанят", "акт", "акты", "акта", "актов", "нда", "nda"],
             shortAddon: "📄 <b>По документам и 152-ФЗ:</b> работа ведется официально (договор, чеки НПД, закрывающие документы для юрлиц, NDA) и строго в правовом поле.",
             reply: "Все мероприятия полностью легальны и строго конфиденциальны (аналитика открытых данных и очные опросы проводятся в рамках 152-ФЗ, при необходимости подписывается NDA). Елена работает с физлицами и юрлицами (ООО, ИП), предоставляет договор, чеки НПД и закрывающие документы.",
             options: [
@@ -2309,9 +2354,12 @@
     }
 
     function detectRoleNote(text) {
-        const lower = normalizeWordForBot(text);
+        const rawWords = text.toLowerCase().split(/[^a-zа-яё0-9_]+/).filter(Boolean);
+        const normWords = rawWords.map(w => normalizeWordForBot(w));
         for (const rt of roleTriggers) {
-            if (rt.patterns.some(p => lower.includes(p))) {
+            const hasExact = rt.exact.length > 0 && normWords.some(w => rt.exact.includes(w));
+            const hasPrefix = rt.prefixes.length > 0 && normWords.some(w => rt.prefixes.some(p => w.startsWith(p)));
+            if (hasExact || hasPrefix) {
                 return rt.contextNote;
             }
         }
@@ -2322,7 +2370,14 @@
         const rawWords = text.toLowerCase().split(/[^a-zа-яё0-9_]+/).filter(Boolean);
         const scored = [];
         let greetingMatch = null;
-        const shortExactKeywords = new Set(["ип", "ооо", "сб", "hr", "ндс", "нда", "nda"]);
+        const shortExactKeywords = new Set([
+            "ип", "ооо", "сб", "hr", "ндс", "нда", "nda", "спб", "нпд", "цппа",
+            "акт", "акты", "акта", "актов",
+            "час", "часа", "часов",
+            "след", "следа", "следу", "следов",
+            "цена", "цены", "цену", "цене", "ценой", "ценам",
+            "где", "долго", "zoom"
+        ]);
 
         for (const item of knowledgeBase) {
             let score = 0;
@@ -2345,23 +2400,28 @@
                         if (w === normKw || (normKw.length >= 5 && w.startsWith(normKw))) {
                             currentScore = 4;
                         }
-                    } else if (w.startsWith(normKw) || normKw.startsWith(w)) {
+                    } else if (w.startsWith(normKw)) {
                         currentScore = normKw === 'провер' ? 3 : (normKw.length >= 5 ? 5 : 4);
                     } else {
                         const targetLen = normKw.length;
-                        const prefixesToTest = [
-                            w.slice(0, targetLen),
-                            w.slice(0, Math.min(w.length, targetLen + 1)),
-                            w.slice(0, Math.max(3, targetLen - 1))
-                        ];
+                        if (targetLen >= 5 && w.length >= 5 && w.length >= targetLen - 1) {
+                            const allowedErrors = targetLen <= 6 ? 1 : 2;
+                            const prefixesToTest = [
+                                w.slice(0, targetLen),
+                                w.slice(0, Math.min(w.length, targetLen + 1)),
+                                w.slice(0, Math.max(4, targetLen - 1))
+                            ];
 
-                        const allowedErrors = targetLen <= 4 ? 1 : 2;
-                        for (const pref of prefixesToTest) {
-                            if (Math.abs(pref.length - targetLen) <= allowedErrors) {
-                                const dist = getDamerauLevenshteinDistance(pref, normKw);
-                                if (dist <= allowedErrors) {
-                                    currentScore = (allowedErrors - dist + 1) * 2;
-                                    break;
+                            for (const pref of prefixesToTest) {
+                                if (Math.abs(pref.length - targetLen) <= allowedErrors) {
+                                    const dist = getDamerauLevenshteinDistance(pref, normKw);
+                                    if (dist <= allowedErrors) {
+                                        if ((targetLen <= 6 || dist === 2) && pref[0] !== normKw[0]) {
+                                            continue;
+                                        }
+                                        currentScore = dist === 1 ? 3 : 2;
+                                        break;
+                                    }
                                 }
                             }
                         }
@@ -2376,7 +2436,7 @@
 
             if (item.isGreeting) {
                 if (score > 0 && !greetingMatch) greetingMatch = item;
-            } else if (score > 0) {
+            } else if (score >= 3) {
                 scored.push({ item, score });
             }
         }
@@ -2418,7 +2478,8 @@
             intent: secondaryMeta ? (primary.intent + " + " + secondaryMeta.intent) : primary.intent,
             reply: combinedReply,
             options: primary.options,
-            isGreeting: false
+            isGreeting: false,
+            expectContact: Boolean(primary.expectContact)
         };
     }
 
@@ -2454,8 +2515,10 @@
             });
 
             if (!chatInitialized && chatBody) {
-                resetChat();
-            } else if (currentSelectedServiceTitle && !contextHintShown && expectedAction !== 'awaiting_contact') {
+                if (!loadChatState()) {
+                    resetChat();
+                }
+            } else if (!isBotResponding && currentSelectedServiceTitle && !contextHintShown && expectedAction !== 'awaiting_contact' && expectedAction !== 'awaiting_contact_reminded') {
                 contextHintShown = true;
                 lastTopic = currentSelectedServiceTitle;
                 appendMessage(`Вижу, вы изучали услугу <b>«${currentSelectedServiceTitle}»</b>. Могу сориентировать по срокам, формату работы или сразу передать ваш контакт Елене для обсуждения задачи!`, 'bot');
@@ -2471,11 +2534,14 @@
     }
 
     function resetChat() {
+        clearTimeout(resetOptionsTimeout);
         chatSessionId++;
         const chatBody = document.getElementById('chatBody');
         if (!chatBody) return;
         chatInitialized = true;
         isBotResponding = false;
+        lastTopic = "Консультация в чате";
+        currentSelectedServiceTitle = "";
         expectedAction = null;
         contextHintShown = false;
         clearUnread();
@@ -2506,7 +2572,7 @@
         saveChatState();
 
         const myResetSession = chatSessionId;
-        setTimeout(() => {
+        resetOptionsTimeout = setTimeout(() => {
             if (myResetSession !== chatSessionId) return;
             showOptions([
                 { text: "Проверка кандидата / Скрининг", action: "hiring" },
@@ -2559,6 +2625,7 @@
         const message = chatInput.value.trim();
         if (message === '') return;
 
+        clearTimeout(resetOptionsTimeout);
         const oldOptions = document.querySelectorAll('.chat-options');
         oldOptions.forEach(opt => opt.remove());
 
@@ -2568,7 +2635,7 @@
         showTypingIndicator();
         const mySession = chatSessionId;
 
-        const extractedContact = extractContact(message, expectedAction === 'awaiting_contact');
+        const extractedContact = extractContact(message, expectedAction === 'awaiting_contact' || expectedAction === 'awaiting_contact_reminded');
 
         if (extractedContact) {
             const bestMatch = matchKnowledgeIntent(message);
@@ -2603,7 +2670,8 @@
         const lowerMsg = message.toLowerCase();
         const words = lowerMsg.replace(/ё/g, 'е').split(/[^a-zа-я0-9_]+/).filter(Boolean);
 
-        const hasNegationOrQuestion = message.includes('?') || /\b(не|нет|пока|позже|сначала)\b/i.test(lowerMsg);
+        const negWords = new Set(["не", "нет", "пока", "позже", "сначала"]);
+        const hasNegationOrQuestion = message.includes('?') || words.some(w => negWords.has(w));
         const agreementWords = ["да", "давай", "давайте", "окей", "ок", "хорошо", "согласен", "согласна", "конечно", "хочу", "готов", "готова"];
         const isAffirmative = !hasNegationOrQuestion && words.length <= 4 && words.some(w => {
             const bw = normalizeWordForBot(w);
@@ -2611,19 +2679,66 @@
         });
 
         const bestMatch = matchKnowledgeIntent(message);
-        if (expectedAction === 'awaiting_contact' && isAffirmative && (!bestMatch || bestMatch.isGreeting)) {
+        if ((expectedAction === 'awaiting_contact' || expectedAction === 'awaiting_contact_reminded') && isAffirmative && (!bestMatch || bestMatch.isGreeting)) {
+            const isReminder = expectedAction === 'awaiting_contact_reminded';
+            expectedAction = isReminder ? null : 'awaiting_contact_reminded';
+            const replyText = isReminder
+                ? "Просто отправьте ваш номер телефона, Email или @ник в Telegram в следующем сообщении — или нажмите кнопку ниже, чтобы заполнить анкету."
+                : "Отлично! Напишите ваш номер телефона, Email или @ник в Telegram прямо сюда, и я сразу передам вашу заявку Елене.";
             setTimeout(() => {
                 if (mySession !== chatSessionId) return;
                 hideTypingIndicator();
                 isBotResponding = false;
-                appendMessage("Отлично! Напишите ваш номер телефона, Email или @ник в Telegram прямо сюда, и я сразу передам вашу заявку Елене.", 'bot');
+                appendMessage(replyText, 'bot');
+                if (isReminder) {
+                    showOptions([
+                        { text: "Открыть анкету заявки", action: "open_form" },
+                        { text: "Вернуться к списку тем", action: "reset" }
+                    ]);
+                }
                 saveChatState();
-            }, getTypingDelay("Отлично! Напишите ваш номер телефона..."));
+            }, getTypingDelay(replyText));
+            return;
+        }
+
+        const isFollowUpMore = (!bestMatch || bestMatch.isGreeting) && words.length <= 6 && /(подробн|детальн|уточн|расскаж|поподробн|что входит|как проходит|как это проходит)/i.test(lowerMsg);
+        if (isFollowUpMore) {
+            const hasSpecificTopic = lastTopic && lastTopic !== "Консультация в чате";
+            const hasShortTopic = hasSpecificTopic && lastTopic.length <= 70;
+            const safeTopic = hasShortTopic
+                ? lastTopic.replace(/[&<>"']/g, ch => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[ch]))
+                : "";
+            const followUpReply = hasShortTopic
+                ? `По теме <b>«${safeTopic}»</b> детали, сроки и формат работы зависят от вводных вашего кейса. Вы можете открыть подробную карточку услуги в разделе «Услуги» на сайте или оставить ваш телефон / @ник прямо здесь — Елена свяжется с вами и подробно разберёт вашу ситуацию.`
+                : (hasSpecificTopic
+                    ? "Детали, сроки и формат работы по вашему запросу зависят от конкретных вводных. Вы можете открыть подробные карточки в разделе «Услуги» на сайте или оставить ваш телефон / @ник прямо здесь — Елена свяжется с вами и подробно разберёт вашу ситуацию."
+                    : "Вы можете открыть подробное описание каждой услуги в разделе «Услуги» на сайте или выбрать интересующую тему ниже — я расскажу детали.");
+            expectedAction = hasSpecificTopic ? 'awaiting_contact' : null;
+            setTimeout(() => {
+                if (mySession !== chatSessionId) return;
+                hideTypingIndicator();
+                isBotResponding = false;
+                appendMessage(followUpReply, 'bot');
+                showOptions(hasSpecificTopic
+                    ? [
+                        { text: "Открыть анкету заявки", action: "open_form" },
+                        { text: "Перейти в MAX / Telegram", action: "contacts" },
+                        { text: "Вернуться к списку тем", action: "reset" }
+                    ]
+                    : [
+                        { text: "Проверка кандидата / Скрининг", action: "hiring" },
+                        { text: "Служебное расследование", action: "investigation" },
+                        { text: "Аудит команды / Цифровой след", action: "audit" },
+                        { text: "Стоимость и документы", action: "price_btn" }
+                    ]
+                );
+                saveChatState();
+            }, getTypingDelay(followUpReply));
             return;
         }
 
         expectedAction = null;
-        if (bestMatch) {
+        if (bestMatch && !bestMatch.isGreeting) {
             lastTopic = bestMatch.intent;
         }
 
@@ -2634,6 +2749,7 @@
             if (bestMatch) {
                 appendMessage(bestMatch.reply, 'bot');
                 if (bestMatch.options) showOptions(bestMatch.options);
+                if (bestMatch.expectContact) expectedAction = 'awaiting_contact';
             } else {
                 lastTopic = message;
 
@@ -2717,6 +2833,7 @@
 
     function handleOptionClick(action, text) {
         if (isBotResponding) return;
+        clearTimeout(resetOptionsTimeout);
         if (typeof ym === 'function') {
             ym(YM_ID, 'reachGoal', 'chat_click_' + action);
         }
@@ -2862,21 +2979,27 @@
 
         if (chatInput) {
             chatInput.disabled = false;
-            if (chatWindow && chatWindow.style.display === 'flex') {
+            const isAnyModalOpen = document.querySelector('.modal-overlay.active') !== null;
+            if (chatWindow && chatWindow.style.display === 'flex' && !isAnyModalOpen && window.innerWidth > 900) {
                 chatInput.focus();
             }
         }
         if (chatSendBtn) chatSendBtn.disabled = false;
     }
 
-    window.addEventListener('load', () => {
+    function initChatOnReady() {
         if (!chatInitialized) {
             const restored = loadChatState();
             if (!restored) {
                 resetChat();
             }
         }
-    });
+    }
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', initChatOnReady);
+    } else {
+        initChatOnReady();
+    }
 
     document.addEventListener('copy', function(e) {
         const activeEl = document.activeElement;
