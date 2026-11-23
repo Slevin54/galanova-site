@@ -950,9 +950,9 @@
             <button class="side-menu-close" type="button" onclick="closeMenu()">&times;</button>
         </div>
         <nav class="side-menu-nav">
-            <a href="#about" onclick="closeMenu()">Обо мне</a>
-            <a href="#solutions" onclick="closeMenu()">Услуги</a>
-            <a href="#publications" onclick="closeMenu()">Медиа и Блог</a>
+            <a href="#about" onclick="navigateFromMenu(event, '#about')">Обо мне</a>
+            <a href="#solutions" onclick="navigateFromMenu(event, '#solutions')">Услуги</a>
+            <a href="#publications" onclick="navigateFromMenu(event, '#publications')">Медиа и Блог</a>
         </nav>
         <div class="side-menu-footer">
             © Елена Галанова<br>Кандидат психологических наук
@@ -1493,6 +1493,103 @@
     let cppaModalTimeout;
     let switchFormTimeout;
 
+    // УПРАВЛЕНИЕ ИСТОРИЕЙ БРАУЗЕРА ДЛЯ ЗАКРЫТИЯ ОКОН СИСТЕМНОЙ КНОПКОЙ "НАЗАД"
+    const overlayHistoryStack = [];
+
+    try {
+        if (window.history && window.history.state && typeof window.history.state.egOverlayDepth === 'number') {
+            window.history.replaceState(null, '');
+        }
+    } catch (err) {
+        console.debug('History init skipped:', err);
+    }
+
+    function pushOverlayHistory(name) {
+        if (overlayHistoryStack.includes(name)) return;
+        overlayHistoryStack.push(name);
+        try {
+            window.history.pushState({ egOverlayDepth: overlayHistoryStack.length, egOverlay: name }, '');
+        } catch (err) {
+            overlayHistoryStack.pop();
+            console.debug('History pushState skipped:', err);
+        }
+    }
+
+    function popOverlayHistory(name) {
+        const idx = overlayHistoryStack.lastIndexOf(name);
+        if (idx === -1) return;
+        overlayHistoryStack.splice(idx, 1);
+        try {
+            if (window.history && window.history.state && typeof window.history.state.egOverlayDepth === 'number' && window.history.state.egOverlayDepth > overlayHistoryStack.length) {
+                window.history.back();
+            }
+        } catch (err) {
+            console.debug('History back skipped:', err);
+        }
+    }
+
+    function replaceOverlayHistory(oldName, newName) {
+        const idx = overlayHistoryStack.lastIndexOf(oldName);
+        if (idx !== -1) {
+            overlayHistoryStack[idx] = newName;
+            try {
+                window.history.replaceState({ egOverlayDepth: overlayHistoryStack.length, egOverlay: overlayHistoryStack[overlayHistoryStack.length - 1] }, '');
+            } catch (err) {
+                console.debug('History replaceState skipped:', err);
+            }
+        } else {
+            pushOverlayHistory(newName);
+        }
+    }
+
+    function replaceOverlayHistoryWithHash(name, hash) {
+        const idx = overlayHistoryStack.lastIndexOf(name);
+        if (idx !== -1) {
+            overlayHistoryStack.splice(idx, 1);
+            const nextState = overlayHistoryStack.length > 0
+                ? { egOverlayDepth: overlayHistoryStack.length, egOverlay: overlayHistoryStack[overlayHistoryStack.length - 1] }
+                : null;
+            try {
+                window.history.replaceState(nextState, '', hash);
+            } catch (err) {
+                console.debug('History replaceState hash skipped:', err);
+                window.location.hash = hash;
+            }
+        } else {
+            try {
+                window.history.replaceState(window.history.state, '', hash);
+            } catch (err) {
+                window.location.hash = hash;
+            }
+        }
+    }
+
+    function closeOverlayByName(name) {
+        if (name === 'service') {
+            closeServiceDetail({ fromHistory: true });
+        } else if (name === 'lead') {
+            closeModal({ fromHistory: true });
+        } else if (name === 'cppa') {
+            closeCppaModal({ fromHistory: true });
+        } else if (name === 'menu') {
+            closeMenu({ fromHistory: true });
+        } else if (name === 'chat') {
+            const chatWindow = document.getElementById('chatWindow');
+            if (chatWindow && chatWindow.style.display === 'flex') {
+                toggleChat({ fromHistory: true });
+            }
+        }
+    }
+
+    window.addEventListener('popstate', function(e) {
+        clearTimeout(switchFormTimeout);
+        const targetDepth = (e.state && typeof e.state.egOverlayDepth === 'number') ? e.state.egOverlayDepth : 0;
+        while (overlayHistoryStack.length > targetDepth) {
+            const topName = overlayHistoryStack.pop();
+            closeOverlayByName(topName);
+        }
+    });
+
     // Управление блокировкой прокрутки (без дергания экрана)
     function updateBodyScroll() {
         const sideMenu = document.getElementById('sideMenu');
@@ -1557,14 +1654,38 @@
     });
 
     function toggleMenu() {
-        document.getElementById('sideMenu').classList.toggle('active');
-        document.getElementById('menuOverlay').classList.toggle('active');
-        updateBodyScroll();
+        const sideMenu = document.getElementById('sideMenu');
+        const menuOverlay = document.getElementById('menuOverlay');
+        if (!sideMenu || !menuOverlay) return;
+        const isOpening = !sideMenu.classList.contains('active');
+        if (isOpening) {
+            sideMenu.classList.add('active');
+            menuOverlay.classList.add('active');
+            updateBodyScroll();
+            pushOverlayHistory('menu');
+        } else {
+            closeMenu();
+        }
     }
-    function closeMenu() {
-        document.getElementById('sideMenu').classList.remove('active');
-        document.getElementById('menuOverlay').classList.remove('active');
+    function closeMenu(opts = {}) {
+        const sideMenu = document.getElementById('sideMenu');
+        const menuOverlay = document.getElementById('menuOverlay');
+        const wasOpen = sideMenu ? sideMenu.classList.contains('active') : false;
+        if (sideMenu) sideMenu.classList.remove('active');
+        if (menuOverlay) menuOverlay.classList.remove('active');
         updateBodyScroll();
+        if (wasOpen && !opts.fromHistory && !opts.skipHistoryBack) {
+            popOverlayHistory('menu');
+        }
+    }
+    function navigateFromMenu(e, hash) {
+        if (e) e.preventDefault();
+        closeMenu({ skipHistoryBack: true });
+        replaceOverlayHistoryWithHash('menu', hash);
+        const target = document.querySelector(hash);
+        if (target) {
+            target.scrollIntoView({ behavior: 'smooth' });
+        }
     }
 
     // КЛАВИАТУРНАЯ ДОСТУПНОСТЬ КАРТОЧЕК УСЛУГ
@@ -1721,6 +1842,7 @@
         const modal = document.getElementById('serviceDetailModal');
         if (modal) {
             modal.style.display = 'flex';
+            pushOverlayHistory('service');
             requestAnimationFrame(() => { 
                 modal.classList.add('active'); 
                 updateBodyScroll();
@@ -1731,12 +1853,16 @@
         if (typeof ym === 'function') ym(YM_ID, 'reachGoal', 'service_modal_open');
     }
 
-    function closeServiceDetail() {
+    function closeServiceDetail(opts = {}) {
         const modal = document.getElementById('serviceDetailModal');
+        const wasOpen = modal ? (modal.classList.contains('active') || modal.style.display === 'flex') : false;
         if (modal) {
             modal.classList.remove('active');
             updateBodyScroll();
             serviceModalTimeout = setTimeout(() => { modal.style.display = 'none'; }, 300);
+        }
+        if (wasOpen && !opts.fromHistory && !opts.keepHistory) {
+            popOverlayHistory('service');
         }
         if (lastFocusedElement && typeof lastFocusedElement.focus === 'function') {
             lastFocusedElement.focus();
@@ -1771,9 +1897,10 @@
     function switchServiceToLeadForm() {
         clearTimeout(switchFormTimeout);
         const selectedTitle = currentSelectedServiceTitle;
-        closeServiceDetail();
+        closeServiceDetail({ keepHistory: true });
+        replaceOverlayHistory('service', 'lead');
         switchFormTimeout = setTimeout(() => {
-            openModal();
+            openModal({ skipHistoryPush: true });
             const taskInput = document.getElementById('leadTask');
             if (taskInput && selectedTitle) {
                 taskInput.value = `Интересует услуга: «${selectedTitle}». `;
@@ -1802,6 +1929,7 @@
         }
         if (modal) {
             modal.style.display = 'flex';
+            pushOverlayHistory('cppa');
             requestAnimationFrame(() => { 
                 modal.classList.add('active'); 
                 updateBodyScroll();
@@ -1811,19 +1939,23 @@
         }
     }
 
-    function closeCppaModal() {
+    function closeCppaModal(opts = {}) {
         const modal = document.getElementById('cppaModal');
+        const wasOpen = modal ? (modal.classList.contains('active') || modal.style.display === 'flex') : false;
         if (modal) {
             modal.classList.remove('active');
             updateBodyScroll();
             cppaModalTimeout = setTimeout(() => { modal.style.display = 'none'; }, 300);
+        }
+        if (wasOpen && !opts.fromHistory) {
+            popOverlayHistory('cppa');
         }
         if (lastFocusedElement && typeof lastFocusedElement.focus === 'function') {
             lastFocusedElement.focus();
         }
     }
 
-    function openModal() {
+    function openModal(opts = {}) {
         clearTimeout(leadModalTimeout);
         const modal = document.getElementById('leadModal');
         
@@ -1839,6 +1971,9 @@
 
         if (modal) {
             modal.style.display = 'flex';
+            if (!opts.skipHistoryPush) {
+                pushOverlayHistory('lead');
+            }
             const timeInput = document.getElementById('formTime');
             if (timeInput) timeInput.value = Date.now();
             
@@ -1851,11 +1986,12 @@
         }
     }
 
-    function closeModal() {
+    function closeModal(opts = {}) {
         const modal = document.getElementById('leadModal');
         const formContent = document.getElementById('formContent');
         const formSuccess = document.getElementById('formSuccess');
         const contactForm = document.getElementById('contactForm');
+        const wasOpen = modal ? (modal.classList.contains('active') || modal.style.display === 'flex') : false;
         showFormError('');
         if (modal) {
             modal.classList.remove('active');
@@ -1866,6 +2002,9 @@
                 if (formSuccess) formSuccess.style.display = 'none';
                 if (contactForm) contactForm.reset();
             }, 300);
+        }
+        if (wasOpen && !opts.fromHistory) {
+            popOverlayHistory('lead');
         }
         if (lastFocusedElement && typeof lastFocusedElement.focus === 'function') {
             lastFocusedElement.focus();
@@ -2526,7 +2665,7 @@
         if (badge) badge.style.display = 'none';
     }
 
-    function toggleChat() {
+    function toggleChat(opts = {}) {
         const chatWindow = document.getElementById('chatWindow');
         const chatBody = document.getElementById('chatBody');
         if (!chatWindow) return;
@@ -2535,6 +2674,7 @@
         chatWindow.style.display = isOpening ? 'flex' : 'none';
 
         if (isOpening) {
+            pushOverlayHistory('chat');
             clearUnread();
             try { sessionStorage.setItem('eg_chat_opened', '1'); } catch(e) { console.debug(e); }
 
@@ -2558,6 +2698,8 @@
             } else {
                 saveChatState();
             }
+        } else if (!opts.fromHistory) {
+            popOverlayHistory('chat');
         }
     }
 
