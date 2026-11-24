@@ -12,6 +12,20 @@
         .subtitle { text-align: center; color: #718096; margin-bottom: 40px; font-size: 1.1rem; }
         h2 { color: #1a252f; font-size: 1.3rem; margin-top: 30px; margin-bottom: 15px; }
         p, li { color: #4a5568; font-size: 1rem; margin-bottom: 15px; }
+        .container > p, .container > ul li {
+            text-align: justify;
+            text-justify: inter-word;
+            hyphens: auto;
+            -webkit-hyphens: auto;
+            -ms-hyphens: auto;
+            overflow-wrap: break-word;
+        }
+        .container > p.no-justify {
+            text-align: left;
+            hyphens: none;
+            -webkit-hyphens: none;
+            -ms-hyphens: none;
+        }
         ul { padding-left: 20px; margin-bottom: 20px; }
         .back-btn { display: inline-block; margin-bottom: 20px; color: #d35400; text-decoration: none; font-weight: 600; font-size: 1rem; }
         .back-btn:hover { text-decoration: underline; }
@@ -25,7 +39,7 @@
         <div class="subtitle">на оказание информационно-консультационных услуг</div>
 
         <h2>1. Общие положения</h2>
-        <p>1.1. Настоящий публичный договор (далее - Оферта) представляет собой официальное предложение Галановой Елены (далее — Исполнитель) и содержит все существенные условия по оказанию информационно-консультационных услуг, описание которых представлено на сайте http://galanova-elena.ru.</p>
+        <p>1.1. Настоящий публичный договор (далее - Оферта) представляет собой официальное предложение Галановой Елены (далее — Исполнитель) и содержит все существенные условия по оказанию информационно-консультационных услуг, описание которых представлено на сайте https://galanova-elena.ru.</p>
         <p>1.2. В соответствии с пунктом 2 статьи 437 Гражданского Кодекса РФ данный документ является публичной офертой. Лицо, совершившее акцепт этой Оферты путем направления заявки и/или оплаты услуг, становится Заказчиком.</p>
         
         <h2>2. Предмет договора</h2>
@@ -56,9 +70,568 @@
         <p>5.3. Все споры и разногласия решаются путем переговоров. Претензионный порядок разрешения споров обязателен.</p>
 
         <h2>6. Контактная информация</h2>
-        <p>Исполнитель: Галанова Елена<br>
-        Сайт: http://galanova-elena.ru<br>
-        Email: kombinir@mail.ru</p>
+        <p class="no-justify">Исполнитель: Галанова Елена<br>
+        Сайт: https://galanova-elena.ru</p>
+        <p>Для направления обращений, вопросов и претензий по настоящему Договору-оферте воспользуйтесь кнопкой ниже:</p>
+        <p class="no-justify">
+            <button type="button" class="eg-legal-btn" onclick="openLegalContactModal('Обращение или претензия по Договору-оферте')">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+                Отправить письмо
+            </button>
+        </p>
     </div>
+
+<!-- МОДАЛЬНОЕ ОКНО ОБРАТНОЙ СВЯЗИ ДЛЯ ЮРИДИЧЕСКИХ ДОКУМЕНТОВ -->
+<style>
+    .eg-legal-btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        background-color: #d35400;
+        color: #ffffff;
+        border: none;
+        border-radius: 6px;
+        padding: 11px 20px;
+        font-family: inherit;
+        font-size: 0.94rem;
+        font-weight: 700;
+        cursor: pointer;
+        margin: 6px 0 12px;
+        box-shadow: 0 4px 12px rgba(211, 84, 0, 0.25);
+        transition: background-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+    }
+    .eg-legal-btn:hover {
+        background-color: #e67e22;
+        transform: translateY(-1px);
+        box-shadow: 0 6px 16px rgba(211, 84, 0, 0.35);
+    }
+    .eg-legal-btn:focus-visible,
+    .eg-legal-submit:focus-visible,
+    .eg-legal-close:focus-visible {
+        outline: 2px solid #d35400;
+        outline-offset: 2px;
+    }
+    .eg-legal-btn svg {
+        width: 17px;
+        height: 17px;
+        fill: currentColor;
+        flex-shrink: 0;
+    }
+    .eg-legal-overlay {
+        display: none;
+        position: fixed;
+        inset: 0;
+        background: rgba(26, 37, 47, 0.82);
+        z-index: 3000;
+        align-items: center;
+        justify-content: center;
+        padding: 16px;
+        box-sizing: border-box;
+        opacity: 0;
+        transition: opacity 0.25s ease;
+    }
+    .eg-legal-overlay.active {
+        opacity: 1;
+    }
+    .eg-legal-box {
+        background: #ffffff;
+        width: 100%;
+        max-width: 480px;
+        border-radius: 12px;
+        border-top: 4px solid #d35400;
+        padding: 32px 34px;
+        position: relative;
+        box-sizing: border-box;
+        max-height: 92vh;
+        overflow-y: auto;
+        box-shadow: 0 25px 60px rgba(0, 0, 0, 0.28);
+        font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+        color: #2d3748;
+        text-align: left;
+        transform: translateY(16px);
+        transition: transform 0.25s ease;
+    }
+    .eg-legal-overlay.active .eg-legal-box {
+        transform: translateY(0);
+    }
+    .eg-legal-close {
+        position: absolute;
+        top: 14px;
+        right: 18px;
+        background: none;
+        border: none;
+        font-size: 28px;
+        line-height: 1;
+        color: #a0aec0;
+        cursor: pointer;
+        padding: 0;
+    }
+    .eg-legal-close:hover {
+        color: #1a252f;
+    }
+    .eg-legal-box h3 {
+        margin: 0 0 8px 0;
+        font-size: 1.45rem;
+        font-weight: 700;
+        color: #1a252f;
+    }
+    .eg-legal-desc {
+        margin: 0 0 20px 0;
+        font-size: 0.9rem;
+        color: #526071;
+        line-height: 1.5;
+    }
+    .eg-legal-field {
+        margin-bottom: 16px;
+    }
+    .eg-legal-field label {
+        display: block;
+        margin-bottom: 6px;
+        font-size: 0.88rem;
+        font-weight: 600;
+        color: #1a252f;
+    }
+    .eg-legal-field input,
+    .eg-legal-field select,
+    .eg-legal-field textarea {
+        width: 100%;
+        padding: 11px 14px;
+        border: 1px solid #cbd5e0;
+        border-radius: 6px;
+        font-family: inherit;
+        font-size: 0.96rem;
+        color: #2d3748;
+        background-color: #ffffff;
+        box-sizing: border-box;
+        outline: none;
+        transition: border-color 0.2s ease;
+    }
+    .eg-legal-field input:focus,
+    .eg-legal-field select:focus,
+    .eg-legal-field textarea:focus {
+        border-color: #d35400;
+    }
+    .eg-legal-field textarea {
+        height: 105px;
+        resize: vertical;
+    }
+    .eg-legal-hp {
+        position: absolute;
+        left: -9999px;
+        width: 1px;
+        height: 1px;
+        overflow: hidden;
+    }
+    .eg-legal-error {
+        display: none;
+        background: #fef2f2;
+        border: 1px solid #fecaca;
+        color: #b91c1c;
+        padding: 10px 14px;
+        border-radius: 6px;
+        font-size: 0.84rem;
+        font-weight: 600;
+        margin-bottom: 14px;
+    }
+    .eg-legal-error.visible {
+        display: block;
+    }
+    .eg-legal-submit {
+        width: 100%;
+        background-color: #d35400;
+        color: #ffffff;
+        border: none;
+        border-radius: 6px;
+        padding: 14px 24px;
+        font-family: inherit;
+        font-size: 1rem;
+        font-weight: 700;
+        cursor: pointer;
+        box-shadow: 0 8px 20px rgba(211, 84, 0, 0.28);
+        transition: background-color 0.2s ease;
+    }
+    .eg-legal-submit:hover {
+        background-color: #e67e22;
+    }
+    .eg-legal-submit:disabled {
+        opacity: 0.7;
+        cursor: not-allowed;
+    }
+    .eg-legal-note {
+        margin: 12px 0 0 0;
+        font-size: 0.76rem;
+        color: #718096;
+        line-height: 1.4;
+        text-align: center;
+    }
+    .eg-legal-success {
+        display: none;
+        text-align: center;
+        padding: 16px 0 6px;
+    }
+    .eg-legal-success h4 {
+        margin: 0 0 10px 0;
+        font-size: 1.35rem;
+        color: #166534;
+    }
+    .eg-legal-receipt {
+        background: #f0fdf4;
+        border: 1px solid #bbf7d0;
+        color: #166534;
+        border-radius: 8px;
+        padding: 10px 14px;
+        font-size: 0.85rem;
+        margin: 14px 0 20px;
+    }
+    @media (max-width: 600px) {
+        .eg-legal-box {
+            padding: 26px 20px;
+        }
+        .eg-legal-field input,
+        .eg-legal-field select,
+        .eg-legal-field textarea {
+            font-size: 16px;
+        }
+    }
+</style>
+
+<div class="eg-legal-overlay" id="egLegalModal" onclick="if (event.target === this) closeLegalContactModal()">
+    <div class="eg-legal-box" role="dialog" aria-modal="true" aria-labelledby="egLegalTitle">
+        <button type="button" class="eg-legal-close" onclick="closeLegalContactModal()" aria-label="Закрыть окно">&times;</button>
+
+        <div id="egLegalFormWrap">
+            <h3 id="egLegalTitle">Отправить письмо</h3>
+            <p class="eg-legal-desc">Заполните форму — ваше письмо будет зарегистрировано и передано Оператору / Исполнителю (Галановой Е.В.).</p>
+
+            <form id="egLegalForm">
+                <input type="hidden" id="egLegalFormTime" value="">
+                <div class="eg-legal-hp" aria-hidden="true">
+                    <label for="egLegalBotCheck">Не заполняйте это поле</label>
+                    <input type="text" id="egLegalBotCheck" name="_gotcha" tabindex="-1" autocomplete="off">
+                </div>
+
+                <div class="eg-legal-field">
+                    <label for="egLegalTopic">Тема письма</label>
+                    <select id="egLegalTopic" name="topic">
+                        <option value="Отзыв согласия на обработку персональных данных">Отзыв согласия на обработку персональных данных</option>
+                        <option value="Разъяснение вопросов по обработке персональных данных">Разъяснение вопросов по обработке персональных данных</option>
+                        <option value="Запрос на уточнение или удаление персональных данных">Запрос на уточнение или удаление персональных данных</option>
+                        <option value="Обращение или претензия по Договору-оферте">Обращение или претензия по Договору-оферте</option>
+                        <option value="Запрос реквизитов или закрывающих документов">Запрос реквизитов или закрывающих документов</option>
+                        <option value="Иной вопрос по документам сайта">Иной вопрос по документам сайта</option>
+                    </select>
+                </div>
+
+                <div class="eg-legal-field">
+                    <label for="egLegalName">Ваше имя (ФИО или наименование организации)</label>
+                    <input type="text" id="egLegalName" name="name" placeholder="Иван Иванов" maxlength="120" autocomplete="name" required>
+                </div>
+
+                <div class="eg-legal-field">
+                    <label for="egLegalContact">Контакт для ответа (Email, телефон или @ник)</label>
+                    <input type="text" id="egLegalContact" name="contact" placeholder="email@example.com, +7 (999) 000-00-00 или @username" maxlength="120" required>
+                </div>
+
+                <div class="eg-legal-field">
+                    <label for="egLegalMessage">Текст письма</label>
+                    <textarea id="egLegalMessage" name="message" placeholder="Опишите суть вашего запроса или обращения..." maxlength="2000" required></textarea>
+                </div>
+
+                <div class="eg-legal-error" id="egLegalError" role="alert"></div>
+
+                <button type="submit" class="eg-legal-submit" id="egLegalSubmitBtn">Отправить письмо</button>
+                <p class="eg-legal-note">Указанные контактные данные используются исключительно для регистрации и направления ответа на ваше обращение.</p>
+            </form>
+        </div>
+
+        <div class="eg-legal-success" id="egLegalSuccess">
+            <h4>Письмо успешно отправлено!</h4>
+            <p style="font-size: 0.92rem; color: #4a5568; margin: 0;">Ваше обращение передано и принято в работу. Ответ будет направлен по указанным вами контактам.</p>
+            <div class="eg-legal-receipt">
+                Дата и время регистрации: <strong id="egLegalTimestamp"></strong>
+            </div>
+            <button type="button" class="eg-legal-submit" onclick="closeLegalContactModal()">Закрыть окно</button>
+        </div>
+    </div>
+</div>
+
+<script>
+(function initLegalContactModal() {
+    const API_URL = "https://functions.yandexcloud.net/d4et6k8nfd7dna181g4v";
+    const SITE_SECURITY_TOKEN = "eg_sec_2026_v1";
+    const RATE_LIMIT_MS = 2 * 60 * 1000;
+    const YM_ID = 113975964;
+
+    let lastFocused = null;
+    let closeTimer = null;
+    let historyPushed = false;
+
+    try {
+        if (window.history && window.history.state && window.history.state.egLegalModalOpen) {
+            window.history.replaceState(null, '');
+        }
+    } catch (e) {}
+
+    function showError(msg) {
+        const box = document.getElementById('egLegalError');
+        if (!box) return;
+        box.textContent = msg || '';
+        box.classList.toggle('visible', Boolean(msg));
+    }
+
+    function extractContact(text) {
+        if (!text) return null;
+        const str = String(text).trim();
+        const stopWords = /^(osint|hello|privet|telegram|whatsapp|viber|skype|email|audit|price|zoom|teams|meet|online|chat|max|tg|messenger|desktop|mobile|web|app|bot|link|account|profile|page|site|website|mail|inbox|work|personal|private|public|official|news|blog|video|audio|voice|calls|text|texts|send|write|reply|check|open|install|download|update|login|sign|code|free|pro|plus|vip|spasibo|thank|thanks|admin|support|director|manager|company|office|project|client|business|list|test|please|ok|okay|yes|no|hi|hey|help|info|contact|message|service|services|question|answer|problem|issue|maybe|later|tomorrow|today|wait|stop|start|phone|call|number|name)$/i;
+
+        const emailMatch = str.match(/[a-zA-Z0-9._%+-]+@[a-zA-Zа-яА-ЯёЁ0-9.-]+\.[a-zA-Zа-яА-ЯёЁ]{2,}/);
+        if (emailMatch) return emailMatch[0];
+
+        const phoneRegex = /(?:^|[^\d])((?:\+7|7|8)[\s\-()]*[3489]\d{2}[\s\-()]*\d{3}[\s\-]*\d{2}[\s\-]*\d{2}|9\d{2}[\s\-()]*\d{3}[\s\-]*\d{2}[\s\-]*\d{2}|\+\d{1,3}[\s\-()]*\d{2,4}[\s\-()]*\d{3}[\s\-]*\d{2}[\s\-]*\d{2})(?!\d)/g;
+        let m;
+        while ((m = phoneRegex.exec(str)) !== null) {
+            const digits = m[1].replace(/\D/g, '');
+            if (digits.length >= 10 && digits.length <= 15 && !/^[78]800/.test(digits)) {
+                return m[1].trim();
+            }
+        }
+
+        const tgLink = str.match(/(?:https?:\/\/)?(?:t\.me|telegram\.me)\/([a-zA-Z][a-zA-Z0-9_]{3,31})/i);
+        if (tgLink) return '@' + tgLink[1];
+
+        const tgNick = str.match(/(?:^|[\s,:;(«"'])(@[a-zA-Z][a-zA-Z0-9_]{2,31})/);
+        if (tgNick) return tgNick[1];
+
+        if (/^[a-zA-Z][a-zA-Z0-9_]{4,31}$/.test(str) && !stopWords.test(str)) {
+            return '@' + str.toLowerCase();
+        }
+        return null;
+    }
+
+    function getSourceInfo() {
+        try {
+            const stored = sessionStorage.getItem('eg_traffic_source');
+            if (stored) {
+                const parsed = JSON.parse(stored);
+                parsed.documentPage = window.location.pathname;
+                return parsed;
+            }
+        } catch (e) {}
+        return { referrerDomain: 'legal_doc', utm_source: '', landingPage: window.location.pathname };
+    }
+
+    window.openLegalContactModal = function(defaultTopic) {
+        clearTimeout(closeTimer);
+        const modal = document.getElementById('egLegalModal');
+        if (!modal) return;
+
+        lastFocused = document.activeElement;
+        showError('');
+
+        const formWrap = document.getElementById('egLegalFormWrap');
+        const successWrap = document.getElementById('egLegalSuccess');
+        const timeInput = document.getElementById('egLegalFormTime');
+        const topicSelect = document.getElementById('egLegalTopic');
+
+        if (formWrap) formWrap.style.display = 'block';
+        if (successWrap) successWrap.style.display = 'none';
+        if (timeInput) timeInput.value = Date.now();
+
+        if (topicSelect && defaultTopic) {
+            for (let i = 0; i < topicSelect.options.length; i++) {
+                if (topicSelect.options[i].value === defaultTopic) {
+                    topicSelect.selectedIndex = i;
+                    break;
+                }
+            }
+        }
+
+        modal.style.display = 'flex';
+        document.body.style.overflow = 'hidden';
+
+        if (!historyPushed) {
+            try {
+                window.history.pushState({ egLegalModalOpen: true }, '');
+                historyPushed = true;
+            } catch (e) {}
+        }
+
+        requestAnimationFrame(() => {
+            modal.classList.add('active');
+            const nameInput = document.getElementById('egLegalName');
+            if (nameInput) nameInput.focus();
+        });
+    };
+
+    window.closeLegalContactModal = function(opts = {}) {
+        clearTimeout(closeTimer);
+        const modal = document.getElementById('egLegalModal');
+        if (!modal) return;
+
+        const wasOpen = modal.classList.contains('active') || modal.style.display === 'flex';
+        showError('');
+        modal.classList.remove('active');
+        document.body.style.overflow = '';
+
+        closeTimer = setTimeout(() => {
+            modal.style.display = 'none';
+            const formWrap = document.getElementById('egLegalFormWrap');
+            const successWrap = document.getElementById('egLegalSuccess');
+            const form = document.getElementById('egLegalForm');
+            if (formWrap) formWrap.style.display = 'block';
+            if (successWrap) successWrap.style.display = 'none';
+            if (form) form.reset();
+        }, 250);
+
+        if (wasOpen && historyPushed && !opts.fromHistory) {
+            historyPushed = false;
+            try {
+                if (window.history.state && window.history.state.egLegalModalOpen) {
+                    window.history.back();
+                }
+            } catch (e) {}
+        } else {
+            historyPushed = false;
+        }
+
+        if (lastFocused && typeof lastFocused.focus === 'function') {
+            lastFocused.focus();
+        }
+    };
+
+    window.addEventListener('popstate', function() {
+        const modal = document.getElementById('egLegalModal');
+        if (modal && (modal.classList.contains('active') || modal.style.display === 'flex')) {
+            historyPushed = false;
+            closeLegalContactModal({ fromHistory: true });
+        }
+    });
+
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') {
+            const modal = document.getElementById('egLegalModal');
+            if (modal && modal.classList.contains('active')) {
+                closeLegalContactModal();
+            }
+        }
+    });
+
+    const form = document.getElementById('egLegalForm');
+    if (form) {
+        form.addEventListener('submit', async function(e) {
+            e.preventDefault();
+            showError('');
+
+            const timeEl = document.getElementById('egLegalFormTime');
+            if (timeEl && timeEl.value && (Date.now() - parseInt(timeEl.value, 10)) < 800) {
+                showError('Пожалуйста, проверьте корректность заполнения полей.');
+                return;
+            }
+
+            try {
+                const lastSent = localStorage.getItem('eg_last_lead_ts');
+                if (lastSent && (Date.now() - parseInt(lastSent, 10)) < RATE_LIMIT_MS) {
+                    showError('Ваше предыдущее обращение уже принято! Повторная отправка доступна через 2 минуты.');
+                    return;
+                }
+            } catch (err) {}
+
+            const nameEl = document.getElementById('egLegalName');
+            const contactEl = document.getElementById('egLegalContact');
+            const topicEl = document.getElementById('egLegalTopic');
+            const messageEl = document.getElementById('egLegalMessage');
+            const botCheckEl = document.getElementById('egLegalBotCheck');
+
+            const rawName = (nameEl ? nameEl.value : '').trim();
+            const rawContact = (contactEl ? contactEl.value : '').trim();
+            const rawTopic = (topicEl ? topicEl.value : '').trim();
+            const rawMessage = (messageEl ? messageEl.value : '').trim();
+            const honeypot = botCheckEl ? botCheckEl.value : '';
+
+            if (!rawName) {
+                showError('Пожалуйста, укажите ваше имя.');
+                if (nameEl) nameEl.focus();
+                return;
+            }
+
+            const parsedContact = extractContact(rawContact);
+            if (!parsedContact) {
+                showError('Укажите корректный Email, телефон (например, +7 999 123-45-67) или @ник в Telegram/MAX.');
+                if (contactEl) contactEl.focus();
+                return;
+            }
+
+            if (!rawMessage) {
+                showError('Пожалуйста, введите текст письма.');
+                if (messageEl) messageEl.focus();
+                return;
+            }
+
+            const btn = document.getElementById('egLegalSubmitBtn');
+            const origText = btn ? btn.textContent : 'Отправить письмо';
+            const controller = new AbortController();
+            const timeoutId = setTimeout(() => controller.abort(), 15000);
+
+            const docName = document.title ? document.title.split('|')[0].trim() : window.location.pathname;
+            const payload = {
+                name: rawName,
+                contact: parsedContact,
+                message: `[Документ: ${docName} | Тема: ${rawTopic}]\n${rawMessage}`,
+                _gotcha: honeypot,
+                _token: SITE_SECURITY_TOKEN,
+                source: getSourceInfo()
+            };
+
+            try {
+                if (btn) {
+                    btn.textContent = 'Отправка...';
+                    btn.disabled = true;
+                }
+
+                const res = await fetch(API_URL, {
+                    method: 'POST',
+                    body: JSON.stringify(payload),
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Accept': 'application/json'
+                    },
+                    signal: controller.signal
+                });
+
+                if (!res.ok) throw new Error('HTTP ' + res.status);
+
+                try { localStorage.setItem('eg_last_lead_ts', Date.now().toString()); } catch (err) {}
+                if (typeof ym === 'function') ym(YM_ID, 'reachGoal', 'form_sent');
+
+                const tsEl = document.getElementById('egLegalTimestamp');
+                if (tsEl) {
+                    tsEl.textContent = new Date().toLocaleString('ru-RU', {
+                        day: '2-digit', month: '2-digit', year: 'numeric',
+                        hour: '2-digit', minute: '2-digit'
+                    });
+                }
+
+                const formWrap = document.getElementById('egLegalFormWrap');
+                const successWrap = document.getElementById('egLegalSuccess');
+                if (formWrap) formWrap.style.display = 'none';
+                if (successWrap) successWrap.style.display = 'block';
+                form.reset();
+            } catch (err) {
+                if (err.name === 'AbortError') {
+                    showError('Сервер не отвечает (превышено время ожидания). Попробуйте повторить отправку через минуту.');
+                } else {
+                    showError('Сбой сети при отправке письма. Проверьте подключение к интернету и попробуйте снова.');
+                }
+            } finally {
+                clearTimeout(timeoutId);
+                if (btn) {
+                    btn.textContent = origText;
+                    btn.disabled = false;
+                }
+            }
+        });
+    }
+})();
+</script>
 </body>
 </html>
