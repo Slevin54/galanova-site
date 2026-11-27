@@ -1,6 +1,9 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <!-- Подтверждение прав в Яндекс Вебмастере -->
     <meta name="yandex-verification" content="3ce838687ac9171f">
 
@@ -17,9 +20,6 @@
     </script>
     <noscript><div><img src="https://mc.yandex.ru/watch/113975964" style="position:absolute; left:-9999px;" alt=""></div></noscript>
     <!-- /Yandex.Metrika counter -->
-
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
     <!-- SEO заголовки -->
     <title>Профайлинг и кадровая безопасность для бизнеса | Елена Галанова</title>
@@ -273,7 +273,7 @@
         }
         .hamburger-btn span { display: block; height: 3px; width: 100%; background-color: var(--primary); border-radius: 2px; transition: 0.3s; }
 
-        .section-title { text-align: center; font-size: 2.2rem; color: var(--primary); margin-bottom: 20px; font-family: 'Playfair Display', serif; }
+        .section-title { text-align: center; font-size: clamp(1.55rem, 4.5vw, 2.2rem); color: var(--primary); margin-bottom: 20px; font-family: 'Playfair Display', serif; line-height: 1.25; }
         .section-subtitle { text-align: center; font-size: 1.1rem; color: var(--text-gray); max-width: 700px; margin: 0 auto 50px auto; }
         
         /* ГЛАВНЫЙ ЭКРАН (ИСПРАВЛЕННАЯ СЕТКА ВНУТРИ КОНТЕЙНЕРА) */
@@ -517,7 +517,7 @@
         .principle-card h3 { font-size: 1.1rem; margin-bottom: 12px; color: var(--accent); font-family: 'Playfair Display', serif; }
         .principle-card p { color: #cbd5e0; font-size: 0.9rem; }
 
-        .about { padding: 100px 0; background-color: #ffffff; scroll-margin-top: 70px; }
+        .about { padding: 100px 0; background-color: #ffffff; }
         .about-grid { display: grid; grid-template-columns: 1fr 1.2fr; gap: 50px; align-items: center; }
         .about-image { display: flex; justify-content: center; }
         .about-image img { width: 100%; max-width: 380px; aspect-ratio: 1 / 1; object-fit: cover; object-position: center 15%; border-radius: 50%; box-shadow: 0 20px 40px rgba(0,0,0,0.1); }
@@ -532,7 +532,7 @@
         .about-list li::before { content: '✓'; position: absolute; left: 0; top: 2px; color: var(--accent); font-weight: 800; font-size: 18px; }
 
         /* УСЛУГИ (СТАТИЧНАЯ СЕТКА: 3 + 2, БЕЗ ДУБЛИРОВАНИЯ ПРАВИЛ) */
-        .solutions { padding: 100px 0 80px 0; background-color: var(--bg-light); scroll-margin-top: 70px; }
+        .solutions { padding: 100px 0 80px 0; background-color: var(--bg-light); }
         .solutions-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; max-width: 1100px; margin: 0 auto; }
         .solutions-grid-bottom { display: grid; grid-template-columns: repeat(2, 1fr); gap: 30px; max-width: 720px; margin: 30px auto 0 auto; }
         .solution-card { cursor: pointer; background: #ffffff; padding: 35px; border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.04); border-top: 4px solid var(--primary); transition: transform 0.3s cubic-bezier(0.25, 0.8, 0.25, 1), box-shadow 0.3s ease, border-top-color 0.3s; display: flex; flex-direction: column; position: relative; z-index: 1; }
@@ -593,10 +593,10 @@
         .payment-note strong { color: #14532d; }
 
         .cta-banner { background-color: var(--primary); padding: 60px 0; text-align: center; background-image: linear-gradient(to right, #1a252f, #2c3e50); color: #fff; }
-        .cta-banner h2 { font-size: 2.2rem; margin: 0 0 15px 0; color: #fff; font-family: 'Playfair Display', serif; }
-        .cta-banner p { font-size: 1.1rem; color: #cbd5e0; max-width: 800px; margin: 0 auto; line-height: 1.6; }
+        .cta-banner h2 { font-size: clamp(1.55rem, 4.5vw, 2.2rem); margin: 0 0 15px 0; color: #fff; font-family: 'Playfair Display', serif; line-height: 1.25; }
+        .cta-banner p { font-size: 1.1rem; color: #cbd5e0; max-width: 800px; margin: 0 auto 26px auto; line-height: 1.6; }
 
-        .publications { padding: 80px 0; background-color: #ffffff; scroll-margin-top: 70px; overflow: hidden; }
+        .publications { padding: 80px 0; background-color: #ffffff; overflow: hidden; }
         .carousel-wrapper-pub { position: relative; width: 100%; overflow: hidden; padding-bottom: 20px; margin-top: 30px; }
         .pub-track { display: flex; gap: 20px; width: max-content; animation: marquee 30s linear infinite; }
         .pub-track:hover { animation-play-state: paused; }
@@ -618,8 +618,9 @@
         .modal-box { background: #fff; width: 100%; max-width: 450px; border-radius: 12px; padding: 40px; position: relative; box-sizing: border-box; transform: translateY(20px); transition: transform 0.3s ease; max-height: 90vh; overflow-y: auto; }
         .modal-overlay.active { opacity: 1; }
         .modal-overlay.active .modal-box { transform: translateY(0); }
-        .modal-close { position: absolute; top: 15px; right: 20px; font-size: 28px; color: #a0aec0; background: none; border: none; cursor: pointer; line-height: 1; padding: 0; }
-        .modal-close:hover { color: var(--primary); }
+        .modal-close { position: absolute; top: 12px; right: 14px; width: 36px; height: 36px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 26px; color: #718096; background: transparent; border: none; cursor: pointer; line-height: 1; padding: 0; transition: color 0.2s, background-color 0.2s; }
+        .modal-close:hover { color: var(--primary); background-color: #f1f5f9; }
+        .service-modal-box .modal-close { position: sticky; top: 0; margin: -18px -22px -18px auto; z-index: 15; background: rgba(255, 255, 255, 0.94); backdrop-filter: blur(4px); box-shadow: 0 2px 8px rgba(0,0,0,0.08); }
         .modal-box h3 { margin: 0 0 10px 0; font-size: 1.5rem; color: var(--primary); font-family: 'Playfair Display', serif; }
         .modal-box p { margin: 0 0 25px 0; color: var(--text-gray); font-size: 0.95rem; }
         /* СТИЛИ МОДАЛЬНОГО ОКНА ЦППА */
@@ -678,8 +679,11 @@
         .chat-header-text span { font-size: 0.75rem; color: rgba(255,255,255,0.8); display: flex; align-items: center; gap: 5px; }
         .status-dot { width: 8px; height: 8px; background-color: #4ade80; border-radius: 50%; }
         .chat-header-actions { display: flex; align-items: center; gap: 10px; }
-        .icon-btn { background: none; border: none; color: #fff; font-size: 22px; cursor: pointer; opacity: 0.8; transition: opacity 0.2s; padding: 0; line-height: 1; }
-        .icon-btn:hover { opacity: 1; }
+        .icon-btn { background: none; border: none; color: #fff; font-size: 22px; cursor: pointer; opacity: 0.85; transition: opacity 0.2s; padding: 0; line-height: 1; min-width: 32px; min-height: 32px; display: inline-flex; align-items: center; justify-content: center; border-radius: 50%; }
+        .icon-btn:hover { opacity: 1; background: rgba(255,255,255,0.14); }
+        .chat-inline-channels { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 10px; }
+        .chat-channel-pill { display: inline-flex; align-items: center; justify-content: center; padding: 7px 14px; border-radius: 18px; font-size: 0.84rem; font-weight: 700; text-decoration: none; color: #fff !important; transition: transform 0.15s ease, opacity 0.15s ease; }
+        .chat-channel-pill:hover { transform: translateY(-1px); opacity: 0.92; }
         .chat-body { height: 350px; flex: 1 1 auto; min-height: 0; max-height: 350px; padding: 20px; overflow-y: auto; background: #f8fafc; display: flex; flex-direction: column; gap: 12px; }
         .chat-body::before { content: ""; flex: 1 1 auto; }
         .chat-msg { max-width: 85%; padding: 12px 16px; border-radius: 12px; font-size: 0.9rem; line-height: 1.4; animation: fadeIn 0.3s ease; overflow-wrap: anywhere; word-break: break-word; }
@@ -787,6 +791,7 @@
             .cppa-modal-box { padding: 28px 22px 26px; }
             .cppa-modal-title { font-size: 1.65rem !important; }
             .service-modal-box { max-width: 96%; padding: 25px 18px; }
+            .service-modal-box .modal-close { margin: -12px -6px -24px auto; }
             .service-meta-tags { grid-template-columns: 1fr; }
             .service-modal-grid { grid-template-columns: 1fr; gap: 18px; }
             .service-channels-btns { grid-template-columns: 1fr; }
@@ -827,10 +832,11 @@
                 right: auto;
             }
         }
-        @media (max-width: 380px) {
-            .header-messenger-btn { padding: 6px 8px; font-size: 0 !important; }
-            .header-messenger-btn svg { margin: 0; width: 18px; height: 18px; }
-            .header-logo { font-size: 1rem; }
+        @media (max-width: 520px) {
+            .header-messengers { flex-wrap: nowrap; gap: 6px; margin-right: 4px; }
+            .header-messenger-btn { padding: 7px 9px; font-size: 0 !important; gap: 0; }
+            .header-messenger-btn svg { margin: 0; width: 17px; height: 17px; }
+            .header-logo { font-size: 1.05rem; gap: 7px; }
             .max-help-trigger { width: 22px; font-size: 12px; }
             .max-btn-group { margin-right: 0; }
         }
@@ -904,11 +910,11 @@
     <!-- ШАПКА САЙТА -->
     <header class="site-header">
         <div class="container header-container">
-            <a href="#" class="header-logo" onclick="openCppaModal(event)">
+            <a href="#" class="header-logo" onclick="openCppaModal(event)" aria-haspopup="dialog" title="О Центре прикладной поведенческой аналитики">
                 <div class="header-logo-dot"></div>
                 ЦППА
             </a>
-            <nav class="header-nav">
+            <nav class="header-nav" aria-label="Основная навигация">
                 <a href="#about">Обо мне</a>
                 <a href="#solutions">Услуги</a>
                 <a href="#publications">Медиа и Блог</a>
@@ -919,8 +925,8 @@
                         <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2C6.48 2 2 6.48 2 12c0 1.7.45 3.31 1.23 4.7L2 22l5.48-1.15C8.89 21.57 10.41 22 12 22c5.52 0 10-4.48 10-10S17.52 2 12 2z"/></svg>
                         MAX
                     </a>
-                    <button type="button" class="max-help-trigger" onclick="toggleMaxTooltip(event)" aria-label="Как работает переход в мессенджер MAX">?</button>
-                    <div class="max-tooltip-popup" role="tooltip">
+                    <button type="button" class="max-help-trigger" onclick="toggleMaxTooltip(event)" aria-label="Как работает переход в мессенджер MAX" aria-describedby="maxTooltipPopup">?</button>
+                    <div class="max-tooltip-popup" id="maxTooltipPopup" role="tooltip">
                         Если у вас установлено приложение <strong>MAX</strong>, диалог откроется автоматически. Если нет — откроется веб-версия (вход по номеру телефона или QR-коду).
                     </div>
                 </div>
@@ -936,7 +942,7 @@
                 </a>
             </div>
             
-            <button class="hamburger-btn" type="button" onclick="toggleMenu()" aria-label="Открыть меню">
+            <button class="hamburger-btn" id="hamburgerBtn" type="button" onclick="toggleMenu()" aria-label="Открыть меню" aria-expanded="false" aria-controls="sideMenu">
                 <span></span><span></span><span></span>
             </button>
         </div>
@@ -944,12 +950,12 @@
 
     <!-- БОКОВОЕ МЕНЮ -->
     <div class="side-menu-overlay" id="menuOverlay" onclick="closeMenu()"></div>
-    <div class="side-menu" id="sideMenu">
+    <div class="side-menu" id="sideMenu" role="dialog" aria-modal="true" aria-label="Меню навигации">
         <div class="side-menu-header">
             <span class="side-menu-logo">Елена Галанова</span>
-            <button class="side-menu-close" type="button" onclick="closeMenu()">&times;</button>
+            <button class="side-menu-close" type="button" onclick="closeMenu()" aria-label="Закрыть меню">&times;</button>
         </div>
-        <nav class="side-menu-nav">
+        <nav class="side-menu-nav" aria-label="Мобильная навигация">
             <a href="#about" onclick="navigateFromMenu(event, '#about')">Обо мне</a>
             <a href="#solutions" onclick="navigateFromMenu(event, '#solutions')">Услуги</a>
             <a href="#publications" onclick="navigateFromMenu(event, '#publications')">Медиа и Блог</a>
@@ -969,6 +975,7 @@
     </div>
 
     <!-- ГЛАВНЫЙ ЭКРАН -->
+    <main id="main">
     <section class="hero-wrapper">
         <div class="container hero-grid">
             <div class="hero-content">
@@ -1225,6 +1232,7 @@
         <div class="container">
             <h2>Не оставляйте риски без внимания</h2>
             <p>Узнайте, как методы профайлинга могут защитить активы вашей компании и укрепить команду. <strong>Любое обращение и дальнейшее сотрудничество строго конфиденциально.</strong></p>
+            <button type="button" class="contact-btn" onclick="openModal()">Обсудить задачу</button>
         </div>
     </section>
 
@@ -1284,11 +1292,13 @@
         </div>
     </section>
 
+    </main>
+
     <!-- Подвал -->
     <footer style="padding: 80px 0 40px;">
         <div class="container">
             <div style="max-width: 600px; margin: 0 auto; text-align: center;">
-                <h2 style="font-size: 2.2rem; margin-bottom: 15px;">Не уверены, какая услуга нужна?</h2>
+                <h2 style="font-size: clamp(1.55rem, 4.5vw, 2.2rem); margin-bottom: 15px; line-height: 1.25;">Не уверены, какая услуга нужна?</h2>
                 <p style="font-size: 1.05rem; color: #cbd5e0; margin: 0 auto 35px auto; line-height: 1.6; max-width: 750px;">
                     Все обращения строго конфиденциальны. Опишите вашу ситуацию, и я предложу вам оптимальный формат сотрудничества.
                 </p>
@@ -1300,7 +1310,7 @@
                         <a href="offer.html" target="_blank" rel="noopener noreferrer" style="color: #cbd5e0; text-decoration: none;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='#cbd5e0'">Договор-оферта</a>
                     </div>
                     <p style="font-size: 0.75rem; color: #8492a6; margin: 0; line-height: 1.7;">
-                        © <span id="currentYear"></span> Елена Галанова. Кандидат психологических наук. Профайлер.<br>
+                        © <span id="currentYear">2026</span> Елена Галанова. Кандидат психологических наук. Профайлер.<br>
                         <span style="color: #64748b; opacity: 0.75; font-size: 0.72rem;">Галанова Елена Владимировна (плательщик НПД). Полные реквизиты (ИНН, банковские данные) и закрывающие документы предоставляются по запросу для заключения договора.</span>
                     </p>
                 </div>
@@ -1396,8 +1406,8 @@
                 <h3 id="leadModalTitle">Обсудить задачу</h3>
                 <p>Оставьте контакты, и я свяжусь с вами для обсуждения деталей аудита или обучения.</p>
                 
-                <form id="contactForm">
-                    <input type="hidden" name="form_time" id="formTime" value="">
+                <form id="contactForm" method="post">
+                    <input type="hidden" id="formTime" value="">
                     <div class="hp-field" aria-hidden="true">
                         <label for="bot-check">Не заполняйте это поле</label>
                         <input type="text" id="bot-check" name="_gotcha" tabindex="-1" autocomplete="off">
@@ -1405,15 +1415,15 @@
 
                     <div class="form-group">
                         <label for="leadName">Ваше имя</label>
-                        <input type="text" name="name" placeholder="Иван Иванов" id="leadName" maxlength="100" autocomplete="name" required>
+                        <input type="text" name="name" class="ym-disable-keys" placeholder="Иван Иванов" id="leadName" maxlength="100" autocomplete="name" required>
                     </div>
                     <div class="form-group">
                         <label for="leadContact">Телефон, Email или @ник в мессенджере</label>
-                        <input type="text" name="contact" placeholder="+7 (999) 000-00-00, email@example.com или @username" id="leadContact" maxlength="100" required>
+                        <input type="text" name="contact" class="ym-disable-keys" placeholder="+7 (999) 000-00-00, email@example.com или @username" id="leadContact" maxlength="100" required>
                     </div>
                     <div class="form-group">
                         <label for="leadTask">Кратко о задаче (необязательно)</label>
-                        <textarea name="message" placeholder="Например: скрининг кандидата на пост РОПа..." id="leadTask" maxlength="1500"></textarea>
+                        <textarea name="message" class="ym-disable-keys" placeholder="Например: скрининг кандидата на пост РОПа..." id="leadTask" maxlength="1500"></textarea>
                     </div>
                     
                     <div class="form-checkbox">
@@ -1427,7 +1437,7 @@
                 </form>
             </div>
             
-            <div class="form-success" id="formSuccess">
+            <div class="form-success" id="formSuccess" role="status" aria-live="polite" tabindex="-1">
                 <h4>Заявка успешно отправлена!</h4>
                 <p style="font-size: 0.95rem; margin-bottom: 15px; color: #4a5568;">Спасибо за обращение. Я свяжусь с вами в ближайшее время по указанным контактам.</p>
                 <button type="button" class="contact-btn full-width" onclick="closeModal()">Закрыть окно</button>
@@ -1459,12 +1469,12 @@
                 </div>
             </div>
             
-            <div class="chat-body" id="chatBody">
+            <div class="chat-body ym-hide-content" id="chatBody" role="log" aria-live="polite" aria-relevant="additions">
                <div class="typing-indicator" id="typingIndicator"><div class="typing-dot"></div><div class="typing-dot"></div><div class="typing-dot"></div></div>
             </div>
             
             <div class="chat-input">
-                <input type="text" id="chatInput" placeholder="Напишите сообщение..." maxlength="500" aria-label="Сообщение консультанту" onkeydown="handleEnter(event)">
+                <input type="text" id="chatInput" class="ym-disable-keys" placeholder="Напишите сообщение..." maxlength="500" aria-label="Сообщение консультанту" onkeydown="handleEnter(event)">
                 <button type="button" id="chatSendBtn" onclick="sendManualMessage()">Отправить</button>
             </div>
             <div class="chat-legal">Отправляя сообщение, вы соглашаетесь с <a href="privacy.html" target="_blank" rel="noopener noreferrer">Политикой конфиденциальности</a></div>
@@ -1487,6 +1497,9 @@
     const SITE_SECURITY_TOKEN = "eg_sec_2026_v1";
     const RATE_LIMIT_MS = 2 * 60 * 1000;
     const YM_ID = 113975964;
+    const CONTACT_EMAIL_B64 = 'a29tYmluaXJAbWFpbC5ydQ==';
+    const MAX_CHAT_URL = 'https://max.ru/u/f9LHodD0cOIwE5Tk0yqsCdSW7aH2YKheHnM5PcwHgDaWAse8blY_Usz5-7Q';
+    const TG_CHAT_URL = 'https://t.me/ElenaProprofiler';
 
     // Глобальные таймеры модалок для предотвращения race condition
     let lastFocusedElement = null;
@@ -1660,9 +1673,11 @@
         const menuOverlay = document.getElementById('menuOverlay');
         if (!sideMenu || !menuOverlay) return;
         const isOpening = !sideMenu.classList.contains('active');
+        const hamburgerBtn = document.getElementById('hamburgerBtn');
         if (isOpening) {
             sideMenu.classList.add('active');
             menuOverlay.classList.add('active');
+            if (hamburgerBtn) hamburgerBtn.setAttribute('aria-expanded', 'true');
             updateBodyScroll();
             pushOverlayHistory('menu');
         } else {
@@ -1672,9 +1687,11 @@
     function closeMenu(opts = {}) {
         const sideMenu = document.getElementById('sideMenu');
         const menuOverlay = document.getElementById('menuOverlay');
+        const hamburgerBtn = document.getElementById('hamburgerBtn');
         const wasOpen = sideMenu ? sideMenu.classList.contains('active') : false;
         if (sideMenu) sideMenu.classList.remove('active');
         if (menuOverlay) menuOverlay.classList.remove('active');
+        if (hamburgerBtn) hamburgerBtn.setAttribute('aria-expanded', 'false');
         updateBodyScroll();
         if (wasOpen && !opts.fromHistory && !opts.skipHistoryBack) {
             popOverlayHistory('menu');
@@ -1888,7 +1905,7 @@
         if (channelType === 'email') {
             e.preventDefault();
             if (typeof ym === 'function') ym(YM_ID, 'reachGoal', 'click_email');
-            const em = atob('a29tYmluaXJAbWFpbC5ydQ==');
+            const em = atob(CONTACT_EMAIL_B64);
             const subject = encodeURIComponent('Запрос по услуге: ' + currentSelectedServiceTitle);
             window.location.href = 'mailto:' + em + '?subject=' + subject;
         } else {
@@ -1992,7 +2009,6 @@
         const modal = document.getElementById('leadModal');
         const formContent = document.getElementById('formContent');
         const formSuccess = document.getElementById('formSuccess');
-        const contactForm = document.getElementById('contactForm');
         const wasOpen = modal ? (modal.classList.contains('active') || modal.style.display === 'flex') : false;
         showFormError('');
         if (modal) {
@@ -2002,7 +2018,6 @@
                 modal.style.display = 'none';
                 if (formContent) formContent.style.display = 'block';
                 if (formSuccess) formSuccess.style.display = 'none';
-                if (contactForm) contactForm.reset();
             }, 300);
         }
         if (wasOpen && !opts.fromHistory) {
@@ -2015,15 +2030,13 @@
 
     document.addEventListener('keydown', function(e) {
         if (e.key === 'Escape') {
-            closeHeroCta();
-            const maxGroup = document.getElementById('maxBtnGroup');
-            if (maxGroup) maxGroup.classList.remove('tooltip-open');
-            
-            const chatWindow = document.getElementById('chatWindow');
+            const sideMenu = document.getElementById('sideMenu');
             const cppaModal = document.getElementById('cppaModal');
             const serviceModal = document.getElementById('serviceDetailModal');
             const leadModal = document.getElementById('leadModal');
-            const sideMenu = document.getElementById('sideMenu');
+            const chatWindow = document.getElementById('chatWindow');
+            const maxGroup = document.getElementById('maxBtnGroup');
+            const heroWrap = document.getElementById('heroCtaWrap');
 
             if (sideMenu && sideMenu.classList.contains('active')) {
                 closeMenu();
@@ -2035,6 +2048,10 @@
                 closeModal();
             } else if (chatWindow && chatWindow.style.display === 'flex') {
                 toggleChat();
+            } else if (maxGroup && maxGroup.classList.contains('tooltip-open')) {
+                maxGroup.classList.remove('tooltip-open');
+            } else if (heroWrap && heroWrap.classList.contains('open')) {
+                closeHeroCta();
             }
         }
     });
@@ -2052,7 +2069,7 @@
             source: trafficSource
         });
         if (typeof ym === 'function') ym(YM_ID, 'reachGoal', 'click_email');
-        const em = atob('a29tYmluaXJAbWFpbC5ydQ==');
+        const em = atob(CONTACT_EMAIL_B64);
         window.location.href = 'mailto:' + em;
     }
 
@@ -2125,13 +2142,14 @@
             if (timeInput && timeInput.value) {
                 const timeSpent = Date.now() - parseInt(timeInput.value, 10);
                 if (timeSpent < 800) {
-                    showFormError("Пожалуйста, проверьте корректность заполнения полей.");
+                    showFormError("Форма отправлена слишком быстро. Пожалуйста, нажмите кнопку ещё раз.");
                     return;
                 }
             }
 
             if (isRateLimited()) {
-                showFormError("Ваша предыдущая заявка уже принята в работу! Повторная отправка доступна через 2 минуты.");
+                const limitMins = Math.max(1, Math.ceil(RATE_LIMIT_MS / 60000));
+                showFormError(`Вы недавно уже отправляли обращение! Повторная отправка доступна через ${limitMins} мин.`);
                 return;
             }
 
@@ -2189,24 +2207,38 @@
                     signal: controller.signal
                 });
 
-                if (response.ok) {
+                let parsedBody = null;
+                try {
+                    const textBody = await response.text();
+                    if (textBody) parsedBody = JSON.parse(textBody);
+                } catch (parseErr) {
+                    parsedBody = null;
+                }
+
+                if (response.ok && (!parsedBody || parsedBody.ok !== false)) {
                     markLeadSent();
                     if (typeof ym === 'function') ym(YM_ID, 'reachGoal', 'form_sent');
                     if (formContent) formContent.style.display = 'none';
                     if (formSuccess) {
                         formSuccess.style.display = 'block';
-                        if (document.activeElement && typeof document.activeElement.blur === 'function') {
-                            document.activeElement.blur();
-                        }
+                        formSuccess.focus();
                     }
                     contactForm.reset();
                 } else {
-                    throw new Error('Ошибка сервера: ' + response.status);
+                    const apiErr = new Error('HTTP_' + response.status);
+                    apiErr.httpStatus = response.status;
+                    throw apiErr;
                 }
             } catch (e) {
                 if (typeof ym === 'function') ym(YM_ID, 'reachGoal', 'form_error');
                 if (e.name === 'AbortError') {
-                    showFormError("Сервер не отвечает (превышено время ожидания). Пожалуйста, попробуйте позже или напишите в Telegram.");
+                    showFormError("Сервер не отвечает (превышено время ожидания). Пожалуйста, попробуйте позже или напишите в MAX / Telegram.");
+                } else if (e.httpStatus === 429) {
+                    showFormError("Слишком много запросов. Подождите пару минут или напишите напрямую в MAX / Telegram.");
+                } else if (e.httpStatus >= 400 && e.httpStatus < 500) {
+                    showFormError("Не удалось принять заявку. Проверьте корректность введённых данных или напишите в MAX / Telegram.");
+                } else if (e.httpStatus >= 500) {
+                    showFormError("Временная ошибка сервера при отправке. Попробуйте позже или напишите напрямую в MAX / Telegram.");
                 } else {
                     showFormError("Сбой сети. Проверьте интернет-соединение или напишите напрямую в MAX / Telegram.");
                 }
@@ -2319,8 +2351,8 @@
             intent: "География и формат работы",
             isMeta: true,
             keywords: ["город", "москв", "спб", "питер", "петербург", "регион", "выезд", "приехат", "очн", "онлайн", "где", "территор", "локац", "страна", "зум", "zoom"],
-            shortAddon: "🌍 <b>По формату и географии:</b> OSINT-профайлинг, экспертиза анонимок и консультации проводятся 100% онлайн по всей России и миру. Для очных расследований и медиации возможен выезд на вашу территорию.",
-            reply: "Аналитика цифрового следа (OSINT), психолингвистическая экспертиза анонимных сообщений и экспертные консультации проводятся 100% онлайн (Москва, Санкт-Петербург, любые регионы РФ и международные запросы). Сопровождение расследований и медиация конфликтов проводятся в очном формате — выезд на территорию заказчика согласуется индивидуально.",
+            shortAddon: "🌍 <b>По формату и географии:</b> OSINT-профайлинг и экспертиза анонимок — 100% онлайн по всей России и миру; экспертные консультации — <b>онлайн (приватная видеосессия) или очно</b>; расследования и медиация — очно с выездом по согласованию.",
+            reply: "Формат зависит от задачи:\n• Профайлинг цифрового следа (OSINT) и анализ анонимных сообщений — 100% онлайн (Москва, Санкт-Петербург, регионы РФ и международные запросы).\n• Экспертная консультация — <b>Онлайн (Приватная видеосессия) или очно</b>.\n• Сопровождение расследований и медиация конфликтов — очный формат (выезд на территорию заказчика обсуждается индивидуально).",
             options: [
                 { text: "Обсудить мою задачу", action: "ask_contact_inline" },
                 { text: "Посмотреть все услуги", action: "reset" }
@@ -2678,6 +2710,7 @@
         if (isOpening) {
             pushOverlayHistory('chat');
             clearUnread();
+            if (typeof ym === 'function') ym(YM_ID, 'reachGoal', 'chat_open');
             try { sessionStorage.setItem('eg_chat_opened', '1'); } catch(e) { console.debug(e); }
 
             requestAnimationFrame(() => {
@@ -2775,15 +2808,26 @@
                 headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
                 signal: controller.signal
             });
-            if (response.ok) {
+            let parsedBody = null;
+            try {
+                const textBody = await response.text();
+                if (textBody) parsedBody = JSON.parse(textBody);
+            } catch (parseErr) {
+                parsedBody = null;
+            }
+            const isOk = response.ok && (!parsedBody || parsedBody.ok !== false);
+            if (isOk) {
                 markLeadSent();
                 if (typeof ym === 'function') {
-                    ym(YM_ID, 'reachGoal', 'form_sent');
+                    ym(YM_ID, 'reachGoal', 'chat_lead_sent');
                 }
+            } else if (typeof ym === 'function') {
+                ym(YM_ID, 'reachGoal', 'chat_lead_error');
             }
-            return response.ok;
+            return isOk;
         } catch (e) {
             console.debug('sendLeadFromChat error:', e);
+            if (typeof ym === 'function') ym(YM_ID, 'reachGoal', 'chat_lead_error');
             return false;
         } finally {
             clearTimeout(timeoutId);
@@ -2854,7 +2898,7 @@
         const bestMatch = matchKnowledgeIntent(message);
         if ((expectedAction === 'awaiting_contact' || expectedAction === 'awaiting_contact_reminded') && isAffirmative && (!bestMatch || bestMatch.isGreeting)) {
             const isReminder = expectedAction === 'awaiting_contact_reminded';
-            expectedAction = isReminder ? null : 'awaiting_contact_reminded';
+            expectedAction = 'awaiting_contact_reminded';
             const replyText = isReminder
                 ? "Просто отправьте ваш номер телефона, Email или @ник в Telegram в следующем сообщении — или нажмите кнопку ниже, чтобы заполнить анкету."
                 : "Отлично! Напишите ваш номер телефона, Email или @ник в Telegram прямо сюда, и я сразу передам вашу заявку Елене.";
@@ -3080,9 +3124,9 @@
             botReply = 'Напишите прямо в строке ввода ниже ваш номер телефона, Email или @ник в Telegram — и я сразу отправлю заявку Елене!';
             expectedAction = 'awaiting_contact';
         } else if (action === 'contacts') {
-            botReply = 'Вы можете написать свой номер телефона прямо мне в чат, заполнить форму или перейти в MAX / Telegram по кнопкам в шапке сайта.';
+            botReply = `Выберите удобный мессенджер для прямого диалога с Еленой, оставьте свой номер прямо здесь в чате или заполните анкету:<div class="chat-inline-channels"><a href="${MAX_CHAT_URL}" target="_blank" rel="noopener noreferrer" class="chat-channel-pill btn-max" onclick="openMessenger(event, 'max')">Написать в MAX</a><a href="${TG_CHAT_URL}" target="_blank" rel="noopener noreferrer" class="chat-channel-pill btn-telegram" onclick="openMessenger(event, 'tg')">Написать в Telegram</a></div>`;
             expectedAction = 'awaiting_contact';
-            nextOptions = [{ text: "Открыть форму", action: "open_form" }];
+            nextOptions = [{ text: "Открыть анкету заявки", action: "open_form" }];
         } else if (action === 'open_form') {
             openModal();
             botReply = 'Я открыла окно заявки. Заполните его или просто напишите свой контакт прямо здесь в чате.';
